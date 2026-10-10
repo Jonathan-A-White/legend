@@ -19,6 +19,8 @@ function item(over: Partial<Item>): Item {
     series: null,
     design: null,
     material: '',
+    inscription: '',
+    funFact: '',
     gradeGuess: null,
     gradeNotes: '',
     notes: '',
