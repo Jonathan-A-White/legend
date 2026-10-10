@@ -12,9 +12,10 @@ and what they choose to share.
 Built: the shell (a bottom bar with Collection, Globe, Quarters, Learn, Settings; reopens where they left), Settings
 (Appearance, Collection, Photos, Tutor, Privacy, About), Home (name and build stamp, `#/`), the Globe (`#/globe`: a globe
 turned with one finger, lit where the items come from; search spins it to a country; Not yet lists the countries with
-nothing yet) and the Country sheet (`#/country/<cc>`: the items from there, the money now and before). Collection, Quarters
-and Learn are placeholders. Planned: the licence gate, the collection and one item, add an item (photograph a coin or a
-note, the photo reader names it, they confirm), search, the Quarters album, the tutor, About (credits, What's new).
+nothing yet) and the Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map
+lit with the quarters they have, a checklist). Collection and Learn are placeholders. Planned: the licence gate, the
+collection and one item, add an item (photograph a coin or a note, the photo reader names it, they confirm), search, the
+tutor, About (credits, What's new).
 
 ## Where things live
 

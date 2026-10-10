@@ -81,3 +81,15 @@ hand-written from public facts: no catalogue (Numista, PCGS, NGC, ucoin, Colnect
 - State quarters with known errors are not listed one by one: key dates points to the Mint, with no values.
 - Grades: a number is looked up with `gradeFor`; the steps' `from`-`to` together cover 1 to 70 exactly once.
 - A new source adds a row here and in `ATTRIBUTION.md` in the same story.
+
+### Matching items to designs (the Quarters screen)
+
+`src/quarters/match.ts` (pure) decides which design an item is. The item must be `country` US with a denomination containing
+"quarter"; case, accents and punctuation are ignored. A programme in `series` ("America the Beautiful quarters, Yosemite",
+"50 State Quarters") narrows the designs, and `year` must equal the design's year when the item has one. Then, in order: (1)
+the `design` field is exactly a design's name ("Yosemite", "Yosemite National Park") or its look: this is the hand override,
+writing the name in the item's design field says what the piece is; (2) the series after the programme words names the design;
+(3) a programme with one design needs no name, or the design text contains the name or look. Two equally good designs, or none,
+is no match: a year or a programme is needed unless the design is exactly a name. "Yosemite National Park" is also "Yosemite"
+(the text from "National" or "(" on is dropped). A place is lit when he has all of its designs in the chosen programme, half
+when some; the American Women, Crossing the Delaware and 2026 designs have no place, so they only count and list.
