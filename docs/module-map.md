@@ -1,7 +1,6 @@
 # Legend module map
 
-A module is a folder under `src/` with one responsibility and one entry file; other modules import the entry, not its
-insides. Two stories should change two modules without touching the same file. Planned folders are made by the story
+A module is a folder under `src/` with one responsibility and one entry file; others import the entry, not its insides. Two stories should change two modules without touching the same file. Planned folders are made by the story
 that needs them, with the entry file named here.
 
 | Module | One responsibility | Entry | Status |
@@ -15,13 +14,13 @@ that needs them, with the entry file named here.
 | data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
 | services | Everything that leaves the phone: grist client, licence, device key, app update | `src/services/appUpdate.ts` | built (`licenceCheck.ts`, `licenceCache.ts`, `deviceKey.ts` for the gate; `itemAnswer.ts` checks the photo reader's answer; grist client planned) |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
-| settings | The registry (a setting is declared once), the rows Settings draws, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
-| nav | Hash routes, the bottom bar, reopen where they left (a trail of 20, Back across a close) | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
-| ui | Shared controls and gestures: scroll guard, build stamp, placeholder, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), both from Lampas | `src/ui/` (one file each) | built |
-| globe | The Globe (`#/globe`) and the Country sheet (`#/country/<cc>`): a d3-geo globe on a 2D canvas. `render.ts` draws a frame on any context (pure; skips a frame that would not change); `controller.ts` is the one requestAnimationFrame loop, the finger (versor drag, inertia, tap to pick) and the idle spin, stopped while the page is hidden; `clock.ts` is its seam on time for tests | `src/globe/index.ts` | built |
-| quarters | The Quarters screen (`#/quarters`): the US map lit by his quarters, the State sheet (`#/quarters?state=OH`), the programme picker with counts, the Checklist, the territory tiles; `match.ts` (pure) says which design an item is, `summary.ts` counts, `topo.ts` draws `states.json` as SVG; rules in `docs/data.md` | `src/quarters/index.ts` | built |
-| collection | The Collection (`#/collection`: count line, search, filters, grid or list) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); the matcher `search.ts` and the pure rules `view.ts` | `src/collection/index.ts` | built |
-| share | Share: a picture of the globe or a card of one item (never notes, tags, values or serial numbers) by `navigator.share`, else Save picture; `text.ts` says what a card may; `docs/privacy.md` | `src/share/index.ts` | built |
+| settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
+| nav | Hash routes, the bottom bar, reopen where they left (a trail of 20) | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
+| ui | Shared controls: scroll guard, build stamp, placeholder, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), both from Lampas | `src/ui/` (one file each) | built |
+| globe | The Globe (`#/globe`) and the Country sheet (`#/country/<cc>`): a d3-geo globe on a 2D canvas. `render.ts` draws a frame on any context (pure; skips an unchanged frame); `controller.ts` is the one requestAnimationFrame loop, the finger (drag, inertia, tap to pick) and the idle spin, stopped while hidden; `clock.ts` is its time seam for tests | `src/globe/index.ts` | built |
+| quarters | The Quarters screen (`#/quarters`): the US map lit by his quarters, the State sheet (`#/quarters?state=OH`), the programme picker, the Checklist, the territory tiles; `match.ts` (pure) says which design an item is, `summary.ts` counts, `topo.ts` draws the map; rules in `docs/data.md` | `src/quarters/index.ts` | built |
+| collection | The Collection (`#/collection`: count line, search, filters, grid or list) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); `search.ts` and `view.ts` are pure | `src/collection/index.ts` | built |
+| share | Share: a picture of the globe or an item card by `navigator.share`, else Save picture; `text.ts` says what a card may say (`docs/privacy.md`) | `src/share/index.ts` | built |
 | learn | Learn (`#/learn`) and `#/learn/grading`, `/mints`, `/years`, `/path`, each ending in Ask the tutor (disabled). Pure rules: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
 
@@ -29,7 +28,7 @@ that needs them, with the entry file named here.
 
 `grinds/<kind>.json` with `.md` instructions, `schemas/<kind>-{input,answer}-<v>.schema.json` and scenarios in
 `grinds/examples/<kind>/` (format: `grinds/examples/README.md`; `mw grist smoke legend` runs them). A grind change updates its
-scenarios; `tests/unit/grind-examples.test.ts` fails when a grind has none.
+scenarios; `tests/unit/grind-examples.test.ts` fails when one has none.
 
 ## Screens
 
@@ -57,6 +56,6 @@ When a story must touch one of these, keep the edit small and at the end of the 
 ## Rules
 
 - UI reaches the store only through a repository; a repository owns its transactions.
-- Anything that leaves the phone lives in `services/` (a shared picture, in `share/`, on a tap); licence and grist client are copied from Lampas.
+- Anything that leaves the phone lives in `services/` (a shared picture, in `share/`, on a tap).
 - A story that changes a source, a screen's purpose or a module boundary updates this file, `docs/overview.md` and
   `ATTRIBUTION.md` in the same story.
