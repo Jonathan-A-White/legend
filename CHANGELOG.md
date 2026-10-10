@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.9
+_2026-10-10_
+- New: The Collection now shows everything you've collected as a photo grid or list, with search, filters for coins, bills and countries, and a page for each item with its photos, facts, notes, edit and remove.
+
 ## 0.1.8
 _2026-10-10_
 - New: The Quarters screen shows a map of the United States lit with the quarters you have, a checklist of every quarter, and what you are still missing for each state.

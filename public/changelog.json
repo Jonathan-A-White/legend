@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.9",
+    "date": "2026-10-10",
+    "story": "mw-fm7wmn.6",
+    "kind": "new",
+    "text": "The Collection now shows everything you've collected as a photo grid or list, with search, filters for coins, bills and countries, and a page for each item with its photos, facts, notes, edit and remove."
+  },
+  {
     "version": "0.1.8",
     "date": "2026-10-10",
     "story": "mw-fm7wmn.10",
