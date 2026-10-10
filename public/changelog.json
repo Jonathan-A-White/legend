@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.8",
+    "date": "2026-10-10",
+    "story": "mw-fm7wmn.10",
+    "kind": "new",
+    "text": "The Quarters screen shows a map of the United States lit with the quarters you have, a checklist of every quarter, and what you are still missing for each state."
+  },
+  {
     "version": "0.1.7",
     "date": "2026-10-10",
     "story": "mw-fm7wmn.9",

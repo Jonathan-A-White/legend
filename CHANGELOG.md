@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.8
+_2026-10-10_
+- New: The Quarters screen shows a map of the United States lit with the quarters you have, a checklist of every quarter, and what you are still missing for each state.
+
 ## 0.1.7
 _2026-10-10_
 - New: The Globe: turn it with a finger to see the countries your coins come from lit in gold, tap a country to see your coins from there and the money it uses now and used before, and see which countries you have nothing from yet.
