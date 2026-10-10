@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.1",
+    "date": "2026-10-10",
+    "story": "mw-fm7wmn.2",
+    "kind": "new",
+    "text": "Legend now has a bottom bar with Collection, Globe, Quarters, Learn and Settings, and a Settings screen where you can change the theme, the text size and more."
+  },
+  {
     "version": "0.1.0",
     "date": "2026-10-10",
     "story": "mw-fm7wmn.1",
