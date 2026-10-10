@@ -77,8 +77,8 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
       await waitFor(() => expect(tiles()).toHaveLength(1));
       expect(tiles()[0]).toHaveTextContent('Dime');
     });
-    And('the count line reads "1 coin · 1 country"', () => {
-      expect(countLine()).toHaveTextContent(/^1 coin · 1 country$/);
+    And('the count line reads "1 coin · 1 country"', async () => {
+      await waitFor(() => expect(countLine()).toHaveTextContent(/^1 coin · 1 country$/));
     });
   });
 

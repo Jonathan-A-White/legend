@@ -406,7 +406,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
       await screen.findByRole('heading', { name: 'Collection' });
       await waitFor(() => expect(screen.getByTestId('count-line')).toHaveTextContent('1 coin'));
       // the other one is still being looked at
-      expect(within(screen.getByRole('region', { name: 'Looking at' })).getAllByRole('link')).toHaveLength(1);
+      await waitFor(() => expect(within(screen.getByRole('region', { name: 'Looking at' })).getAllByRole('link')).toHaveLength(1));
     });
     When('he opens the second and taps Let it go', async () => {
       // let the Back step of the sheet he closed settle before the address is set by hand
