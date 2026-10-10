@@ -9,13 +9,15 @@ and what they choose to share.
 
 ## Screens planned
 
-Home (built: name, version, build time, commit), the licence gate, the collection (list and one item), add an item
-(photograph a coin or a note, the photo reader names it, they confirm), search, the globe of where items come from, the
-tutor (ask about an item), settings, About (credits, What's new).
+Built: the shell (a bottom bar with Collection, Globe, Quarters, Learn, Settings; reopens where they left), Settings
+(Appearance, Collection, Photos, Tutor, Privacy, About), Home (name and build stamp, `#/`). The four other screens are
+placeholders. Planned: the licence gate, the collection and one item, add an item (photograph a coin or a note, the photo
+reader names it, they confirm), search, the globe, the Quarters album, the tutor, About (credits, What's new).
 
 ## Where things live
 
-- `src/` the app, one folder per module: `docs/module-map.md`.
+- `src/` the app, one folder per module: `docs/module-map.md`. Everything is stored in Dexie behind repositories, screens
+  talk through the bus (`docs/events.md`), a setting is one registry entry.
 - `features/*.feature` Gherkin scenarios; `features/steps/` their steps; `tests/unit/` unit tests; `tests/e2e/` Playwright.
 - `public/changelog.json` and `CHANGELOG.md` What's new; `ATTRIBUTION.md` credits every source.
 - `grinds/` the grist definitions and their examples (arrive with the photo reader).

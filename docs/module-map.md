@@ -9,26 +9,30 @@ planned folders are created by the story that needs them, with the entry file na
 | App shell | Start the app: scroll guard, banner, service worker, config | `src/main.tsx`, `src/App.tsx`, `src/config.ts`, `src/sw.ts` | built |
 | Update flow | Banner, waiting build, What's new | `src/UpdateBanner.tsx`, `src/whatsNew/` | built |
 | gate | Hold the app shut until the phone's key holds a licence | `src/gate/Gate.tsx` | planned |
-| data | The local store (Dexie) and pure logic over it | `src/data/db.ts` | built, no stores yet |
-| data/repositories | The only way UI reaches Dexie: one file per table family | `src/data/repositories/index.ts` | built, empty |
+| data | The local store (Dexie v1: items, photos, settings, meta, asks, values, outbox) and its record types | `src/data/db.ts` | built |
+| data/repositories | The only way UI reaches Dexie: one file per family (items, photos, settings, asks, values, outbox), with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | services | Everything that leaves the phone: grist client, licence, device key, app update | `src/services/appUpdate.ts` | built (grist, licence planned) |
-| events | The typed in-app bus screens talk through | `src/events/bus.ts` | planned |
-| settings | The settings registry and the rows Settings draws | `src/settings/registry.ts` | planned |
-| nav | Address, history, back, reopen where they left | `src/nav/route.ts` | planned |
-| ui | Shared controls and gestures: scroll guard, build stamp, sheets | `src/ui/` (one file each) | built |
-| screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` built |
+| events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
+| settings | The registry (a setting is declared once), the rows Settings draws, the screen, theme and text size applied | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
+| nav | Hash routes, the bottom bar, reopen where they left (a trail of 20, Back across a close) | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
+| ui | Shared controls and gestures: scroll guard, build stamp, placeholder | `src/ui/` (one file each) | built |
+| screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home`; placeholders `collection`, `globe`, `quarters`, `learn`, `item`, `country` |
 
 ## Screens
 
-Each screen is a folder `src/screens/<name>/` exporting its component from `index.ts`: `home` (built); planned:
-`collection`, `item`, `add`, `search`, `globe`, `tutor`, `settings`, `about`.
+Each screen is a folder `src/screens/<name>/` exporting its component from `index.ts`. The bottom bar has Collection, Globe,
+Quarters, Learn and Settings (Settings is `src/settings/SettingsScreen.tsx`); `home` is `#/`; `item` (`#/item/<id>`) and
+`country` (`#/country/<cc>`) are reached from them. All but `home` and Settings are placeholders that say what will be there:
+the story that builds one replaces its folder's component. Planned: `add`, `search`, `tutor`, `about`.
 
 **A new screen is a new folder.** Never grow an existing screen's file with another screen's code, and never import
 from inside another module's folder, only its entry.
 
 ## Files every story would collide on
 
-- `src/App.tsx`: the screen switch. Add a screen with one line here, nothing else.
+- `src/App.tsx`: the screen switch. Add a screen with one case here, nothing else.
+- `src/settings/registry.ts`: add a setting as one entry in `SETTINGS`; the screen draws it by its kind. `src/events/bus.ts` and
+  `docs/events.md`: add a kind in both (a test fails if they differ). `src/nav/route.ts`: a new route is a case in `routeOf`.
 - `src/data/db.ts`: the Dexie version list. A change adds a new `this.version(n)`; never edit an old one.
 - `src/data/repositories/index.ts`: a re-export list. Add your names on their own lines.
 - `package.json` and `package-lock.json`: dependencies. Keep a story's changes to its own lines.
