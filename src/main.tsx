@@ -4,10 +4,13 @@ import './index.css';
 import 'bsv-kit/whats-new/styles.css';
 import { registerSW } from 'virtual:pwa-register';
 import { App } from './App';
+import { restoreLastRoute } from './nav/lastRoute';
 import { startAppUpdates } from './services/appUpdate';
 import { installScrollGuard } from './ui/scrollGuard';
 
 installScrollGuard();
+// A bare open reopens where they left off, before the first render reads the address.
+restoreLastRoute();
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

@@ -23,6 +23,43 @@
   --lg-accent-fg: #1a1405;
 }
 
+/* The Theme setting (src/settings/useAppearance.ts): 'light' is a parchment palette; 'system' follows the phone and is dark
+ * when the phone says nothing. The manifest and index.html keep the dark canvas as the launch colour. */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --lg-canvas: #f6f1e4;
+  --lg-surface: #ffffff;
+  --lg-line: #d9d0b8;
+  --lg-ink: #1c241f;
+  --lg-muted: #5b6a61;
+  --lg-accent: #8a6a14;
+  --lg-accent-fg: #ffffff;
+}
+
+@media (prefers-color-scheme: light) {
+  :root[data-theme="system"] {
+    color-scheme: light;
+    --lg-canvas: #f6f1e4;
+    --lg-surface: #ffffff;
+    --lg-line: #d9d0b8;
+    --lg-ink: #1c241f;
+    --lg-muted: #5b6a61;
+    --lg-accent: #8a6a14;
+    --lg-accent-fg: #ffffff;
+  }
+}
+
+/* The Text size setting: every size in the app is rem, so the root size scales all of it. */
+:root[data-text-size="small"] {
+  font-size: 90%;
+}
+:root[data-text-size="large"] {
+  font-size: 112.5%;
+}
+:root[data-text-size="larger"] {
+  font-size: 125%;
+}
+
 /* The page never scrolls (PWA best practices, section 7): html, body and #root are one phone-high box, overflow clip
  * and not hidden, dvh and not vh. A screen scrolls inside its own box. */
 html,
