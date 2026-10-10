@@ -1,5 +1,6 @@
 // src/learn/LearnScreen.tsx: Learn at #/learn: four cards, each a page of its own (#/learn/grading, /mints, /years, /path). Everything
 // on these pages is drawn from the reference data the app ships and his own items; nothing here leaves the phone.
+import { FeedbackButton } from '../feedback';
 import { useAddress } from '../nav/route';
 import { AskTutor } from './AskTutor';
 import { GradingPage } from './GradingPage';
@@ -18,7 +19,10 @@ function LearnHome() {
   return (
     <main className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 pt-[max(env(safe-area-inset-top),1.25rem)] pb-4">
       <header>
-        <h1 className="text-3xl font-semibold tracking-wide text-accent">Learn</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-semibold tracking-wide text-accent">Learn</h1>
+          <FeedbackButton screen="Learn" className="-mr-2" />
+        </div>
         <p className="mt-1 text-lg text-muted">Learn from the coins you have.</p>
       </header>
       <ul className="flex flex-col gap-3">

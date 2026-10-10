@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import type { Item } from '../data/db';
 import { useItems, useThumbs } from '../data/repositories';
+import { FeedbackButton } from '../feedback';
 import { itemHash } from '../nav/route';
 import { CountrySheet } from './CountrySheet';
 import { Thumb } from './Thumb';
@@ -81,7 +82,10 @@ export function CollectionScreen() {
 
   return (
     <main aria-label="Collection" className="flex min-h-0 flex-1 flex-col px-4 pt-[max(env(safe-area-inset-top),1.25rem)]">
-      <h1 className="text-3xl font-semibold tracking-wide text-accent">Collection</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-3xl font-semibold tracking-wide text-accent">Collection</h1>
+        <FeedbackButton screen="Collection" className="-mr-2" />
+      </div>
       <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
         {items ? countLine(shown) : ''}
       </p>

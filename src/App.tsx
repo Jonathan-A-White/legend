@@ -8,11 +8,13 @@ import { BottomBar } from './nav/BottomBar';
 import { countryOf, itemIdOf, routeOf, useAddress } from './nav/route';
 import { useRouteEvents } from './nav/useRouteEvents';
 import { CollectionScreen, ItemView } from './collection';
+import { useSendWaiting } from './feedback';
 import { Home } from './screens/home';
 import { Learn } from './learn';
 import { Quarters } from './quarters';
 import { SettingsScreen } from './settings/SettingsScreen';
 import { useAppearance } from './settings/useAppearance';
+import { useUsageLog } from './tips';
 import { WhatsNewOnUpdate } from './whatsNew/WhatsNewOnUpdate';
 
 function Screen({ hash }: { hash: string }) {
@@ -39,6 +41,8 @@ function Screen({ hash }: { hash: string }) {
 function Shell() {
   const hash = useAddress();
   useRouteEvents();
+  useSendWaiting();
+  useUsageLog();
   return (
     // data-shell: the scroll guard (src/ui/scrollGuard.ts) keeps this box at scrollTop 0
     <div data-shell className="flex h-full flex-col overflow-clip bg-canvas text-ink">

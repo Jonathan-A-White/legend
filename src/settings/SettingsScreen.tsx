@@ -3,6 +3,7 @@
 // its longer help behind a small 'i'. It holds no setting of its own: a tap calls writeSetting, which saves and tells the bus.
 // A new setting is one entry in the registry; a new kind of setting is one entry in CONTROLS (the type checker asks for it).
 import { useId, useState, type ReactNode } from 'react';
+import { TellTheMakerButton } from '../feedback';
 import { BuildVersion } from '../ui/BuildVersion';
 import { writeSetting, type SettingEntry, type SettingKind, type SettingValue } from './registry';
 import { SECTIONS, visibleRows, type InfoRow, type SettingsRow } from './rows';
@@ -159,6 +160,12 @@ function AboutRow({ row }: { row: InfoRow }) {
   return <Row row={row} below={<BuildVersion className="mt-2 !text-left" />} />;
 }
 
+const isInfo = (row: SettingsRow): row is InfoRow => row.kind === 'about' || row.kind === 'tell';
+
+function TellRow({ row }: { row: InfoRow }) {
+  return <Row row={row} below={<TellTheMakerButton screen="Settings" />} />;
+}
+
 export function SettingsScreen() {
   const values = useSettings();
   // Until the values load nothing is drawn: a row that depends on another could flash in and out.
@@ -173,7 +180,7 @@ export function SettingsScreen() {
           <section key={section.id} aria-label={section.title} className="mb-6">
             <h2 className="mb-2 px-1 text-sm font-semibold tracking-widest text-muted uppercase">{section.title}</h2>
             <div className="rounded-2xl border border-line bg-surface">
-              {mine.map((row) => (row.kind === 'about' ? <AboutRow key={row.key} row={row} /> : <SettingRowView key={row.key} row={row} value={values![row.key]} />))}
+              {mine.map((row) => (isInfo(row) ? row.kind === 'about' ? <AboutRow key={row.key} row={row} /> : <TellRow key={row.key} row={row} /> : <SettingRowView key={row.key} row={row} value={values![row.key]} />))}
             </div>
           </section>
         );

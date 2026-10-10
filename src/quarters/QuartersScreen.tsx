@@ -3,6 +3,7 @@
 // territory tile opens its sheet (#/quarters?state=OH). Items are matched to designs in src/quarters/match.ts.
 import { useCallback, useMemo, useRef, useState } from 'react';
 import { useItems } from '../data/repositories';
+import { FeedbackButton } from '../feedback';
 import { navigate, useAddress } from '../nav/route';
 import { Checklist } from './Checklist';
 import { StateSheet } from './StateSheet';
@@ -76,9 +77,12 @@ export function Quarters() {
     <main className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4 pt-[max(env(safe-area-inset-top),1.25rem)] pb-4">
       <div className="flex items-baseline justify-between gap-3">
         <h1 className="text-3xl font-semibold tracking-wide text-accent">Quarters</h1>
-        <p data-testid="programme-count" className="text-lg font-medium tabular-nums">
-          You have {count.have} of {count.total}
-        </p>
+        <div className="flex items-center gap-1">
+          <p data-testid="programme-count" className="text-lg font-medium tabular-nums">
+            You have {count.have} of {count.total}
+          </p>
+          <FeedbackButton screen="Quarters" className="-mr-2" />
+        </div>
       </div>
       <Choice label="Programme" value={programme} options={PROGRAMMES} onPick={setProgramme} />
       <Choice label="View" value={view} options={[...VIEWS]} onPick={setView} />

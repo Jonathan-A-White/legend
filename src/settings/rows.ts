@@ -21,7 +21,7 @@ export const SECTIONS: readonly SettingsSection[] = [
 /** A row that shows something about the app instead of holding a setting. */
 export interface InfoRow {
   key: string;
-  kind: 'about';
+  kind: 'about' | 'tell';
   label: string;
   hint: string;
   help: string;
@@ -42,8 +42,18 @@ const ABOUT: InfoRow = {
   talkable: false,
 };
 
+const TELL: InfoRow = {
+  key: 'tell',
+  kind: 'tell',
+  label: 'Feedback',
+  hint: 'Ask for something to be added, or say what is wrong. The factory reads these.',
+  help: 'Your message goes to the people who make Legend, with the name of the screen and the version of the app. Nothing else leaves the phone, and a screenshot only if you attach one.',
+  section: 'about',
+  talkable: false,
+};
+
 /** Every row of Settings, section by section in the screen's order (within a section, in the order they are declared). */
-export const ROWS: readonly SettingsRow[] = SECTIONS.flatMap((section) => [...SETTINGS, ABOUT].filter((r) => r.section === section.id));
+export const ROWS: readonly SettingsRow[] = SECTIONS.flatMap((section) => [...SETTINGS, ABOUT, TELL].filter((r) => r.section === section.id));
 
 export const rowOf = (key: string): SettingsRow | undefined => ROWS.find((r) => r.key === key);
 

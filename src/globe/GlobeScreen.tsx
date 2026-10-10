@@ -4,8 +4,10 @@
 import { useEffect, useMemo, useRef, useState, type FormEvent, type PointerEvent, type RefObject } from 'react';
 import { useItems } from '../data/repositories';
 import { loadCountries, type Countries } from '../data/world';
+import { FeedbackButton } from '../feedback';
 import { countryHash, navigate, useAddress } from '../nav/route';
 import { ShareButton, shareGlobe } from '../share';
+import { GLOBE_OPENED, HintCard } from '../tips';
 import { GlobeController } from './controller';
 import { centreOf, countryFeatures } from './geo';
 import { NotYet } from './NotYet';
@@ -43,9 +45,13 @@ export function GlobeScreen() {
   return (
     <main className="relative flex min-h-0 flex-1 flex-col">
       <header className="shrink-0 px-5 pt-[max(env(safe-area-inset-top),1.25rem)]">
-        <h1 className="text-3xl font-semibold tracking-wide text-accent">Globe</h1>
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-semibold tracking-wide text-accent">Globe</h1>
+          <FeedbackButton screen="Globe" className="-mr-2" />
+        </div>
         <p className="mt-1 text-base text-muted">Where your coins and notes come from. Turn it with a finger; tap a country.</p>
       </header>
+      <HintCard event={GLOBE_OPENED} className="mx-5 mt-2 shrink-0" />
       {countries.value && items ? (
         <>
           <GlobeCanvas countries={countries.value} lit={lit} covered={notYetOpen} controllerRef={controllerRef} />
