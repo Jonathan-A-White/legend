@@ -3,14 +3,17 @@
 import { db, type OutboxRecord } from '../db';
 
 export async function enqueue(kind: string, payload: unknown): Promise<OutboxRecord> {
-  const record: OutboxRecord = { id: crypto.randomUUID(), kind, payload, createdAt: Date.now() };
-  await db.outbox.add(record);
-  return record;
+  return db.transaction('rw', db.outbox, async () => {
+    const last = await db.outbox.orderBy('seq').last();
+    const record: OutboxRecord = { id: crypto.randomUUID(), kind, payload, createdAt: Date.now(), seq: (last?.seq ?? 0) + 1 };
+    await db.outbox.add(record);
+    return record;
+  });
 }
 
-/** The waiting records, oldest first. */
+/** The waiting records, oldest first: in the order they were queued, even within one millisecond. */
 export async function listOutbox(): Promise<OutboxRecord[]> {
-  return db.outbox.orderBy('createdAt').toArray();
+  return db.outbox.orderBy('seq').toArray();
 }
 
 export async function removeFromOutbox(id: string): Promise<void> {
