@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.10
+_2026-10-10_
+- New: Legend now opens on an Unlock screen until Dad has issued this phone a licence.
+
 ## 0.1.9
 _2026-10-10_
 - New: The Collection now shows everything you've collected as a photo grid or list, with search, filters for coins, bills and countries, and a page for each item with its photos, facts, notes, edit and remove.
