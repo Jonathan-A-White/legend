@@ -1,11 +1,12 @@
 // src/collection/ItemView.tsx: one item at #/item/<id>: both photographs large (a tap zooms), its facts in a clean two-column sheet,
 // the inscription and the fun fact, notes that save as he types, tags, Edit, and Remove as a bar that must be held (an Undo for five
-// seconds). Ask the tutor and Share wait for their stories and say 'soon'.
+// seconds). Share (src/share/) makes a card of its photos and facts; Ask the tutor waits for its story and says 'soon'.
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect, useState, type ReactNode } from 'react';
 import type { Item, Photo } from '../data/db';
 import { getItem, removeItem, restoreItem, usePhotos } from '../data/repositories';
 import { navigate } from '../nav/route';
+import { ShareButton, shareItem } from '../share';
 import { HoldBar } from '../ui/HoldBar';
 import { EditSheet } from './EditSheet';
 import { NotesField } from './NotesField';
@@ -75,7 +76,9 @@ function Facts({ item, reference }: { item: Item; reference: Reference }) {
   );
 }
 
-const soon = 'flex min-h-14 flex-1 items-center justify-center gap-2 rounded-2xl border border-line text-lg font-medium text-muted disabled:cursor-not-allowed disabled:opacity-60';
+const soon = 'flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-line text-lg font-medium text-muted disabled:cursor-not-allowed disabled:opacity-60';
+
+const share = 'flex min-h-14 items-center justify-center rounded-2xl border border-accent text-lg font-semibold text-accent active:bg-surface';
 
 export function ItemView({ id }: { id: string }) {
   // null: there is no such item; undefined: still loading
@@ -187,13 +190,11 @@ export function ItemView({ id }: { id: string }) {
           </ul>
         ) : null}
 
-        <div className="flex gap-3">
-          <button type="button" disabled className={soon} aria-label="Ask the tutor, soon">
+        <div className="flex items-start gap-3">
+          <button type="button" disabled className={`${soon} flex-1`} aria-label="Ask the tutor, soon">
             Ask the tutor <span className="rounded-full border border-line px-2 text-sm">soon</span>
           </button>
-          <button type="button" disabled className={soon} aria-label="Share, soon">
-            Share <span className="rounded-full border border-line px-2 text-sm">soon</span>
-          </button>
+          <ShareButton which="item" make={() => shareItem(id)} className={share} />
         </div>
         <button type="button" onClick={() => setEditing(true)} className="flex min-h-14 w-full items-center justify-center rounded-2xl border border-accent text-lg font-semibold text-accent">
           Edit

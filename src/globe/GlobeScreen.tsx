@@ -5,10 +5,11 @@ import { useEffect, useMemo, useRef, useState, type FormEvent, type PointerEvent
 import { useItems } from '../data/repositories';
 import { loadCountries, type Countries } from '../data/world';
 import { countryHash, navigate, useAddress } from '../nav/route';
+import { ShareButton, shareGlobe } from '../share';
 import { GlobeController } from './controller';
 import { centreOf, countryFeatures } from './geo';
 import { NotYet } from './NotYet';
-import { readPalette } from './palette';
+import { DEFAULT_PALETTE, readPalette } from './palette';
 import type { Rotation } from './render';
 import { useLoaded } from './useLoaded';
 import { view } from './view';
@@ -156,7 +157,7 @@ function GlobeCanvas({ countries, lit, covered, controllerRef }: { countries: Co
   );
 }
 
-/** The search and the Not yet button, at the foot under the thumb. */
+/** The search, then the Not yet and Share buttons, at the foot under the thumb. */
 function Controls({ countries, lit, controllerRef }: { countries: Countries; lit: ReadonlyMap<string, number>; controllerRef: RefObject<GlobeController | null> }) {
   const [query, setQuery] = useState('');
   const input = useRef<HTMLInputElement>(null);
@@ -189,28 +190,36 @@ function Controls({ countries, lit, controllerRef }: { countries: Countries; lit
           ))}
         </ul>
       )}
-      <div className="flex items-center gap-3">
-        <form role="search" onSubmit={submit} className="min-w-0 flex-1">
-          <input
-            ref={input}
-            type="search"
-            aria-label="Find a country"
-            placeholder="Find a country"
-            enterKeyHint="go"
-            autoComplete="off"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="h-12 w-full rounded-full border border-line bg-surface px-5 text-lg text-ink placeholder:text-muted focus:border-accent focus:outline-none"
-          />
-        </form>
+      <form role="search" onSubmit={submit}>
+        <input
+          ref={input}
+          type="search"
+          aria-label="Find a country"
+          placeholder="Find a country"
+          enterKeyHint="go"
+          autoComplete="off"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="h-12 w-full rounded-full border border-line bg-surface px-5 text-lg text-ink placeholder:text-muted focus:border-accent focus:outline-none"
+        />
+      </form>
+      <div className="mt-2 flex items-start gap-3">
         <button
           type="button"
           aria-label={`Not yet: ${lacking} countries`}
           onClick={() => navigate(NOT_YET)}
-          className="flex h-12 shrink-0 items-center gap-2 rounded-full border border-line px-4 text-lg text-ink active:bg-surface"
+          className="flex h-12 min-w-0 flex-1 items-center justify-center gap-2 rounded-full border border-line px-4 text-lg text-ink active:bg-surface"
         >
           Not yet <span className="text-base text-muted">{lacking}</span>
         </button>
+        <ShareButton
+          which="globe"
+          make={() => {
+            const globe = controllerRef.current;
+            return shareGlobe({ features: countryFeatures(countries), lit, rotation: globe?.currentRotation() ?? view.rotation ?? FIRST_VIEW, palette: DEFAULT_PALETTE });
+          }}
+          className="h-12 rounded-full border border-accent px-4 text-lg font-semibold text-accent active:bg-surface"
+        />
       </div>
     </div>
   );
