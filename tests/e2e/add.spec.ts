@@ -2,6 +2,7 @@
 // photos, Name it, back to the viewfinder at once, the answer, the Confirm sheet, and the collection after. Targets are 44 px or more
 // and the page never scrolls.
 import { expect, test, type Page } from '@playwright/test';
+import { fakeCamera } from './camera';
 import { shot } from './shot';
 import { openUnlocked } from './unlocked';
 
@@ -14,37 +15,6 @@ const ANSWER = {
   gradeNotes: 'Light wear on the high points.', notableFeatures: [], confidence: 'high', unreadable: null,
   funFact: 'Until 1964 this quarter was made of silver, which is why many are still saved.',
 };
-
-/** A back camera that films a coin on a table: a canvas stream, in portrait. */
-async function fakeCamera(page: Page): Promise<void> {
-  await page.addInitScript(() => {
-    const canvas = document.createElement('canvas');
-    canvas.width = 720;
-    canvas.height = 1280;
-    const g = canvas.getContext('2d')!;
-    const draw = () => {
-      g.fillStyle = '#3a3128';
-      g.fillRect(0, 0, 720, 1280);
-      const grad = g.createRadialGradient(300, 560, 20, 360, 640, 250);
-      grad.addColorStop(0, '#ffffff');
-      grad.addColorStop(0.4, '#c9ccd1');
-      grad.addColorStop(1, '#5b5f66');
-      g.fillStyle = grad;
-      g.beginPath();
-      g.arc(360, 640, 250, 0, Math.PI * 2);
-      g.fill();
-      g.strokeStyle = 'rgba(0,0,0,.35)';
-      g.lineWidth = 12;
-      g.beginPath();
-      g.arc(360, 640, 205, 0, Math.PI * 2);
-      g.stroke();
-      requestAnimationFrame(draw);
-    };
-    draw();
-    const stream = canvas.captureStream(15);
-    navigator.mediaDevices.getUserMedia = async () => stream;
-  });
-}
 
 /** The factory, injected where bsv-kit/grist would be (docs/testing.md): sends are counted, the answer comes after a moment. */
 async function fakeFactory(page: Page): Promise<void> {

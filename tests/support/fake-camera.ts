@@ -19,6 +19,10 @@ export interface FakeCamera {
   video: { width: number; height: number };
   /** the size createImageBitmap reports for a gallery photo */
   gallery: { width: number; height: number };
+  /** Holds every encode until `release`, as a slow phone does while the camera preview keeps it busy. */
+  hold: () => void;
+  /** Lets the held encodes finish, and the ones after it at once. */
+  release: () => void;
   restore: () => void;
 }
 
@@ -28,6 +32,7 @@ const BYTES_PER_PIXEL = 0.8;
 export function installFakeCamera(size = { width: 1280, height: 720 }): FakeCamera {
   const video = { ...size };
   const encodes: Encode[] = [];
+  let held: (() => void)[] | null = null;
   let stopped = 0;
   const gallery = { width: 4000, height: 3000 };
   const track = { stop: () => void stopped++ };
@@ -47,8 +52,12 @@ export function installFakeCamera(size = { width: 1280, height: 720 }): FakeCame
   HTMLCanvasElement.prototype.getContext = (() => ({ drawImage: () => undefined })) as unknown as typeof HTMLCanvasElement.prototype.getContext;
   HTMLCanvasElement.prototype.toBlob = function (this: HTMLCanvasElement, callback: BlobCallback, type?: string, quality?: number) {
     const size = Math.round(this.width * this.height * (quality ?? 0.92) * BYTES_PER_PIXEL);
-    encodes.push({ width: this.width, height: this.height, type: type ?? 'image/png', quality, size });
-    callback(new NodeBlob([new Uint8Array(size)], { type: type ?? 'image/png' }) as unknown as Blob);
+    const done = () => {
+      encodes.push({ width: this.width, height: this.height, type: type ?? 'image/png', quality, size });
+      callback(new NodeBlob([new Uint8Array(size)], { type: type ?? 'image/png' }) as unknown as Blob);
+    };
+    if (held) held.push(done);
+    else done();
   };
   globalThis.createImageBitmap = (async () => ({ width: gallery.width, height: gallery.height, close: () => undefined })) as unknown as typeof createImageBitmap;
 
@@ -57,6 +66,12 @@ export function installFakeCamera(size = { width: 1280, height: 720 }): FakeCame
     stops: () => stopped,
     video,
     gallery,
+    hold: () => void (held ??= []),
+    release: () => {
+      const waiting = held ?? [];
+      held = null;
+      waiting.forEach((done) => done());
+    },
     restore: () => {
       if (saved.mediaDevices) Object.defineProperty(navigator, 'mediaDevices', saved.mediaDevices);
       else delete (navigator as { mediaDevices?: unknown }).mediaDevices;

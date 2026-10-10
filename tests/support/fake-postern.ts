@@ -45,8 +45,8 @@ export interface FakePostern {
   licensed: boolean;
   /** Make every call fail as an unreachable backend does (fetch rejects with a TypeError). */
   down: boolean;
-  /** Answer the oldest grist not yet answered. */
-  answer(reply: Reply): void;
+  /** Answer the oldest grist not yet answered, or the one sent as `txid`. */
+  answer(reply: Reply, txid?: string): void;
 }
 
 const json = (status: number, body: unknown) =>
@@ -80,8 +80,9 @@ export function makeFakePostern(): FakePostern {
     kindReplies: {},
     licensed: true,
     down: false,
-    answer(reply) {
-      const next = unanswered.shift();
+    answer(reply, txid) {
+      const at = txid === undefined ? 0 : unanswered.findIndex((u) => u.txid === txid);
+      const [next] = at < 0 ? [] : unanswered.splice(at, 1);
       if (!next) throw new Error('no grist is waiting for an answer');
       const plaintext = { re: next.txid, ...reply, grind: { app: 'legend', kind: next.kind, v: '1.0' } };
       const envelope = grist.sealEnvelope(JSON.stringify(plaintext), millBytes, next.from, 1_790_000_000);
@@ -135,8 +136,8 @@ export function makeFakePostern(): FakePostern {
       fake.received.push(opened);
       unanswered.push({ txid, from: pubkey, kind: opened.grist.kind });
       const byKind = fake.kindReplies[opened.grist.kind];
-      if (byKind) fake.answer(byKind);
-      else if (fake.autoReply) fake.answer(fake.autoReply);
+      if (byKind) fake.answer(byKind, txid);
+      else if (fake.autoReply) fake.answer(fake.autoReply, txid);
       return json(201, { txid, seq: records.length });
     }
     if (url.pathname === '/api/messages' && method === 'GET') {
