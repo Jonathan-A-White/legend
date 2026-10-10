@@ -21,3 +21,15 @@ export async function removePhoto(id: string): Promise<void> {
 export function usePhotos(itemId: string): Photo[] | undefined {
   return useLiveQuery(() => listPhotos(itemId), [itemId]);
 }
+
+/** What a list draws of one photo: its side and its small JPEG. */
+export interface Thumb {
+  itemId: string;
+  side: Photo['side'];
+  thumb: Blob;
+}
+
+/** The thumbnail of every photo, kept live: the Collection draws one per item (obverse first). Undefined until it first loads. */
+export function useThumbs(): Thumb[] | undefined {
+  return useLiveQuery(async () => (await db.photos.toArray()).map(({ itemId, side, thumb }) => ({ itemId, side, thumb })), []);
+}

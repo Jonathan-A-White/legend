@@ -26,6 +26,8 @@ export async function addItem(input: NewItem): Promise<Item> {
     series: null,
     design: null,
     material: '',
+    inscription: '',
+    funFact: '',
     gradeGuess: null,
     gradeNotes: '',
     notes: '',
@@ -81,6 +83,12 @@ export async function nameItem(id: string, changes: ItemChanges): Promise<Item> 
 export async function removeItem(id: string): Promise<void> {
   await db.items.update(id, { deletedAt: Date.now() });
   publish({ kind: 'item.removed', id });
+}
+
+/** Puts a removed item back in the collection (Undo). */
+export async function restoreItem(id: string): Promise<void> {
+  await db.items.update(id, { deletedAt: null });
+  publish({ kind: 'item.updated', id });
 }
 
 /** The list, kept live: it re-renders when an item changes. Undefined until it first loads. */

@@ -17,6 +17,7 @@ import {
   nameItem,
   putValue,
   removeItem,
+  restoreItem,
   updateItem,
 } from '../../src/data/repositories';
 import { clearBus, subscribe } from '../../src/events/bus';
@@ -71,6 +72,26 @@ describe('items and photos', () => {
     expect(heard).toEqual([`item.added:${item.id}`, `item.updated:${item.id}`, `item.named:${item.id}`, `item.removed:${item.id}`]);
     expect(named.status).toBe('named');
     expect(named.updatedAt).toBeGreaterThanOrEqual(item.updatedAt);
+  });
+});
+
+describe('restoring a removed item', () => {
+  it('puts it back in the lists and tells the bus', async () => {
+    const heard = vi.fn();
+    const item = await addItem({ kind: 'coin', country: 'US' });
+    await removeItem(item.id);
+    expect(await listItems()).toEqual([]);
+    subscribe('item.updated', heard);
+    await restoreItem(item.id);
+    expect((await listItems()).map((i) => i.id)).toEqual([item.id]);
+    expect((await getItem(item.id))?.deletedAt).toBeNull();
+    expect(heard).toHaveBeenCalledWith({ kind: 'item.updated', id: item.id });
+  });
+
+  it('keeps an inscription and a fun fact with the item', async () => {
+    const item = await addItem({ kind: 'coin', inscription: 'LIBERTY', funFact: 'Struck in silver.' });
+    expect(await getItem(item.id)).toMatchObject({ inscription: 'LIBERTY', funFact: 'Struck in silver.' });
+    expect(await addItem({ kind: 'note' })).toMatchObject({ inscription: '', funFact: '' });
   });
 });
 

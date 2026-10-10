@@ -28,6 +28,10 @@ export interface Item {
   /** 'Yosemite' */
   design: string | null;
   material: string;
+  /** the legend: the words the piece carries ('IN GOD WE TRUST') */
+  inscription: string;
+  /** one thing worth knowing about it, from the photo reader */
+  funFact: string;
   /** Sheldon adjectival grade: 'VF', 'XF' */
   gradeGuess: string | null;
   gradeNotes: string;
