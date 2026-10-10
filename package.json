@@ -17,9 +17,11 @@
     "gate:shots": "npm run build && TZ=UTC playwright test --project=shots",
     "e2e:live": "LEGEND_E2E=live TZ=UTC playwright test --project=live --pass-with-no-tests",
     "icons": "node scripts/make-icons.mjs",
-    "data:build": "tsx scripts/data-build.ts"
+    "data:build": "tsx scripts/data-build.ts",
+    "check:licence": "tsx scripts/check-licence.ts"
   },
   "dependencies": {
+    "@bsv/sdk": "^2.8.11",
     "ajv": "^8.20.0",
     "bsv-kit": "github:Jonathan-A-White/bsv-kit#de98573eee6be41f00c3e8ede40e73f8269c9a80",
     "d3-geo": "^3.1.1",
