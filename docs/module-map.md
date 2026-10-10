@@ -11,12 +11,18 @@ planned folders are created by the story that needs them, with the entry file na
 | gate | Hold the app shut until the phone's key holds a licence | `src/gate/Gate.tsx` | planned |
 | data | The local store (Dexie v1: items, photos, settings, meta, asks, values, outbox) and its record types | `src/data/db.ts` | built |
 | data/repositories | The only way UI reaches Dexie: one file per family (items, photos, settings, asks, values, outbox), with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
-| services | Everything that leaves the phone: grist client, licence, device key, app update | `src/services/appUpdate.ts` | built (grist, licence planned) |
+| services | Everything that leaves the phone: grist client, licence, device key, app update | `src/services/appUpdate.ts` | built (`itemAnswer.ts` checks the photo reader's answer; grist client, licence planned) |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows Settings draws, the screen, theme and text size applied | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left (a trail of 20, Back across a close) | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared controls and gestures: scroll guard, build stamp, placeholder | `src/ui/` (one file each) | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home`; placeholders `collection`, `globe`, `quarters`, `learn`, `item`, `country` |
+
+## Grinds
+
+`grinds/<kind>.json` with `.md` instructions, `schemas/<kind>-{input,answer}-<v>.schema.json` and scenarios in
+`grinds/examples/<kind>/` (format: `grinds/examples/README.md`; `mw grist smoke legend` runs them). A grind change updates its
+scenarios; `tests/unit/grind-examples.test.ts` fails when a grind has none.
 
 ## Screens
 

@@ -20,7 +20,7 @@ reader names it, they confirm), search, the globe, the Quarters album, the tutor
   talk through the bus (`docs/events.md`), a setting is one registry entry.
 - `features/*.feature` Gherkin scenarios; `features/steps/` their steps; `tests/unit/` unit tests; `tests/e2e/` Playwright.
 - `public/changelog.json` and `CHANGELOG.md` What's new; `ATTRIBUTION.md` credits every source.
-- `grinds/` the grist definitions and their examples (arrive with the photo reader).
+- `grinds/` the grist definitions and their examples (`coin-from-photos`: a photo in, a named item out); `schemas/` their schemas.
 
 ## One-line rules
 
