@@ -19,6 +19,7 @@
     "icons": "node scripts/make-icons.mjs"
   },
   "dependencies": {
+    "ajv": "^8.20.0",
     "bsv-kit": "github:Jonathan-A-White/bsv-kit#de98573eee6be41f00c3e8ede40e73f8269c9a80",
     "dexie": "^4.3.0",
     "dexie-react-hooks": "^4.4.0",
