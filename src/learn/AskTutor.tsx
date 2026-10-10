@@ -1,5 +1,5 @@
-// src/learn/AskTutor.tsx: the end of every Learn page. The tutor's AskBox is another story's (its j1); until it lands this is the same
-// 'soon' button the item view shows, carrying the question for that page in data-prefill so the box can fill itself from it.
+// src/learn/AskTutor.tsx: the end of every Learn page. The tutor's Ask sheet (src/tutor/) opens over an item or a country but is not wired
+// here yet, so this is a 'soon' button carrying the question for that page in data-prefill so the box can fill itself from it.
 export function AskTutor({ prefill }: { prefill: string }) {
   return (
     <section aria-label="Ask the tutor" className="pt-2">

@@ -33,6 +33,9 @@ export const hashFor = (route: Tab | 'home'): string => (route === 'home' ? '#/'
 export const ADD_HASH = '#/add';
 export const itemHash = (id: string): string => `#/item/${id}`;
 export const countryHash = (cc: string): string => `#/country/${cc.toUpperCase()}`;
+/** The address with the tutor's Ask box open over its screen ('#/item/<id>?ask'), and whether an address has it open. */
+export const askHash = (hash: string): string => `${hash.split('?')[0]}?ask`;
+export const isAsking = (hash: string): boolean => hash.split('?')[1] === 'ask';
 
 /** The bottom-bar screen an address belongs to: an item is in the Collection (so is Add, which opens from it), a country on the Globe. */
 export function tabOf(route: Route): Tab | undefined {

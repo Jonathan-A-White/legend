@@ -1,9 +1,11 @@
 // src/globe/CountrySheet.tsx: one country, at #/country/<cc>, opened from the globe: its flag and name, what he has from there
-// (a tap opens the item), or 'Not yet'; and the money there, the currency now and the ones before it, newest first.
+// (a tap opens the item), or 'Not yet'; the money there, the currency now and the ones before it, newest first; and Ask the tutor,
+// which opens the tutor's sheet over it (#/country/<cc>?ask).
 import { useEffect, useMemo } from 'react';
 import { usePhotos, useItems, type Item } from '../data/repositories';
 import { countryName, flagOf, loadCountries, loadCurrencies, type CurrencyRow } from '../data/world';
-import { itemHash } from '../nav/route';
+import { askHash, countryHash, isAsking, itemHash, navigate, useAddress } from '../nav/route';
+import { AskSheet } from '../tutor';
 import { moneyNowAndBefore, yearsOf } from './money';
 import { useLoaded } from './useLoaded';
 
@@ -24,6 +26,7 @@ export function CountrySheet({ code }: { code: string }) {
   const name = countries.value ? countryName(countries.value, code) : code;
   const continent = CONTINENT[countries.value?.names[code]?.continent ?? ''];
   const money = useMemo(() => moneyNowAndBefore(currencies.value?.[code] ?? []), [currencies.value, code]);
+  const asking = isAsking(useAddress());
 
   return (
     <main aria-label={name} className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain bg-canvas px-5 pt-[max(env(safe-area-inset-top),1rem)] pb-8">
@@ -69,6 +72,11 @@ export function CountrySheet({ code }: { code: string }) {
         {money.now.length > 0 && <MoneyList title="Now" rows={money.now} />}
         {money.before.length > 0 && <MoneyList title="Before" rows={money.before} />}
       </section>
+
+      <button type="button" onClick={() => navigate(askHash(countryHash(code)))} className="mt-8 flex min-h-14 w-full shrink-0 items-center justify-center rounded-2xl bg-accent text-lg font-semibold text-accent-fg">
+        Ask the tutor
+      </button>
+      {asking ? <AskSheet about={{ kind: 'country', code, name }} onClose={() => window.history.back()} /> : null}
     </main>
   );
 }

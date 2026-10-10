@@ -1,13 +1,14 @@
 // src/collection/ItemView.tsx: one item at #/item/<id>: both photographs large (a tap zooms), its facts in a clean two-column sheet,
 // the inscription and the fun fact, notes that save as he types, tags, Edit, and Remove as a bar that must be held (an Undo for five
-// seconds). Share (src/share/) makes a card of its photos and facts; Ask the tutor waits for its story and says 'soon'.
+// seconds). Share (src/share/) makes a card of its photos and facts; Ask the tutor opens the tutor's sheet over it (#/item/<id>?ask).
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect, useState, type ReactNode } from 'react';
 import type { Item, Photo } from '../data/db';
 import { getItem, removeItem, restoreItem, usePhotos } from '../data/repositories';
 import { ItemReading } from '../capture';
-import { navigate } from '../nav/route';
+import { askHash, isAsking, itemHash, navigate, useAddress } from '../nav/route';
 import { ShareButton, shareItem } from '../share';
+import { AskSheet } from '../tutor';
 import { HoldBar } from '../ui/HoldBar';
 import { WorthLine } from '../worth';
 import { EditSheet } from './EditSheet';
@@ -78,8 +79,6 @@ function Facts({ item, reference }: { item: Item; reference: Reference }) {
   );
 }
 
-const soon = 'flex min-h-14 items-center justify-center gap-2 rounded-2xl border border-line text-lg font-medium text-muted disabled:cursor-not-allowed disabled:opacity-60';
-
 const share = 'flex min-h-14 items-center justify-center rounded-2xl border border-accent text-lg font-semibold text-accent active:bg-surface';
 
 export function ItemView({ id }: { id: string }) {
@@ -92,6 +91,7 @@ export function ItemView({ id }: { id: string }) {
   const [holding, setHolding] = useState(false);
   const [tapped, setTapped] = useState(false);
   const [removed, setRemoved] = useState(false);
+  const asking = isAsking(useAddress());
 
   // Undo is offered for five seconds, then he is taken back to the Collection.
   useEffect(() => {
@@ -192,8 +192,8 @@ export function ItemView({ id }: { id: string }) {
         ) : null}
 
         <div className="flex items-start gap-3">
-          <button type="button" disabled className={`${soon} flex-1`} aria-label="Ask the tutor, soon">
-            Ask the tutor <span className="rounded-full border border-line px-2 text-sm">soon</span>
+          <button type="button" onClick={() => navigate(askHash(itemHash(id)))} className="flex min-h-14 flex-1 items-center justify-center rounded-2xl bg-accent text-lg font-semibold text-accent-fg">
+            Ask the tutor
           </button>
           <ShareButton which="item" make={() => shareItem(id)} className={share} />
         </div>
@@ -232,6 +232,12 @@ export function ItemView({ id }: { id: string }) {
 
       {zoom ? <PhotoViewer url={zoom.url} label={zoom.label} onClose={() => setZoom(null)} /> : null}
       {editing ? <EditSheet item={item} reference={reference} onClose={() => setEditing(false)} /> : null}
+      {asking ? (
+        <AskSheet
+          about={{ kind: 'item', item, countryName: item.country ? reference.countryName(item.country) : null, mintCity: item.mintMark ? reference.mintCity(item.mintMark, item.country) : null }}
+          onClose={() => window.history.back()}
+        />
+      ) : null}
     </main>
   );
 }
