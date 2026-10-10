@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.15
+_2026-10-10_
+- New: Legend now gives each coin a rough worth, clearly marked as an estimate, and shows a rough worth for your whole collection and, in the store, for a coin you are only looking at.
+
 ## 0.1.14
 _2026-10-10_
 - New: Photograph a coin or a banknote front and back and Legend names it for you to check, or just look at coins without adding them.

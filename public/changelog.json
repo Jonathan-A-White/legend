@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.15",
+    "date": "2026-10-10",
+    "story": "mw-fm7wmn.14",
+    "kind": "new",
+    "text": "Legend now gives each coin a rough worth, clearly marked as an estimate, and shows a rough worth for your whole collection and, in the store, for a coin you are only looking at."
+  },
+  {
     "version": "0.1.14",
     "date": "2026-10-10",
     "story": "mw-fm7wmn.5",
