@@ -37,3 +37,8 @@ export async function listAsks(itemId: string | null): Promise<Ask[]> {
 export function useAsks(itemId: string | null): Ask[] | undefined {
   return useLiveQuery(() => listAsks(itemId), [itemId]);
 }
+
+/** How many questions he has put to the tutor, kept live. Undefined until it first loads. */
+export function useAskCount(): number | undefined {
+  return useLiveQuery(() => db.asks.count(), []);
+}
