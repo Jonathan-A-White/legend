@@ -19,6 +19,9 @@ export interface FieldCheck {
   all?: FieldCheck[];
 }
 
+/** The mill's answer to a forwarding grind (no answer schema of its own): it has mailed the grist to the Mayor. */
+export const FORWARD_ANSWER_SCHEMA: Schema = { type: 'object', properties: { status: { type: 'string', enum: ['sent'] } }, required: ['status'], additionalProperties: false };
+
 /** A check is an object of check names, or a bare value (the field equals it). */
 export type Check = FieldCheck | string | number | boolean | null;
 

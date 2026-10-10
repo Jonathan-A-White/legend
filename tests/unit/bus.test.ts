@@ -14,6 +14,9 @@ const KINDS: Record<AppEvent['kind'], true> = {
   'settings.changed': true,
   'ask.sent': true,
   'ask.answered': true,
+  'feedback.sent': true,
+  'tip.shown': true,
+  'tip.dismissed': true,
 };
 
 describe('the event bus', () => {

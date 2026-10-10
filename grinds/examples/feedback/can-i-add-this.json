@@ -1,0 +1,13 @@
+{
+  "description": "A wish sent from the Collection with Can I add this?: the mill forwards it and answers that it was sent.",
+  "schemaVersion": "1.0",
+  "request": {
+    "kind": "add",
+    "screen": "Collection",
+    "text": "Please add a place to write down where I found a coin.",
+    "app_version": "0.1.11"
+  },
+  "expect": {
+    "status": { "equals": "sent" }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "feedback-input-1.0",
+  "title": "Feedback Request 1.0",
+  "description": "Feedback to the makers from Tell the maker, forwarded to the Mayor: which kind it is, the screen he was on, his words and the build he sent it from. No photo unless he attaches one screenshot.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "screen", "text", "app_version"],
+  "properties": {
+    "kind": {
+      "description": "add is 'Can I add this?' (a wish), wrong is 'Something's wrong' (a fault), other is a note that is neither.",
+      "type": "string",
+      "enum": ["add", "wrong", "other"]
+    },
+    "screen": { "description": "The screen he sent it from: Collection, Globe, Quarters, Learn or Settings.", "type": "string", "minLength": 1, "maxLength": 40 },
+    "text": { "description": "What he wrote, in his words.", "type": "string", "minLength": 1, "maxLength": 1200 },
+    "app_version": { "description": "The Legend build he sent it from.", "type": "string", "minLength": 1, "maxLength": 80 }
+  }
+}

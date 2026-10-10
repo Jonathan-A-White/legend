@@ -107,6 +107,16 @@ export interface OutboxRecord {
   seq: number;
 }
 
+/** How many times they used one part of the app on one day: an event kind ('tip.shown:camera') or 'screen:<route>'. Counts only, never what they typed. */
+export interface UsageRow {
+  /** '2026-10-10|screen:globe' */
+  key: string;
+  /** the local day, 'YYYY-MM-DD' */
+  day: string;
+  name: string;
+  count: number;
+}
+
 export class LegendDb extends Dexie {
   items!: EntityTable<Item, 'id'>;
   photos!: EntityTable<Photo, 'id'>;
@@ -115,6 +125,7 @@ export class LegendDb extends Dexie {
   asks!: EntityTable<Ask, 'id'>;
   values!: EntityTable<ItemValue, 'itemId'>;
   outbox!: EntityTable<OutboxRecord, 'id'>;
+  usage!: EntityTable<UsageRow, 'key'>;
 
   constructor(name = 'legend') {
     super(name);
@@ -143,6 +154,17 @@ export class LegendDb extends Dexie {
         const rows = await tx.table('outbox').orderBy('createdAt').toArray();
         for (const [i, row] of rows.entries()) await tx.table('outbox').update(row.id, { seq: i + 1 });
       });
+    // v3: the usage log (a row per local day and name).
+    this.version(3).stores({
+      items: 'id, kind, country, status, updatedAt, deletedAt',
+      photos: 'id, itemId',
+      settings: 'key',
+      meta: 'key',
+      asks: 'id, itemId, askedAt',
+      values: 'itemId',
+      outbox: 'id, kind, createdAt, seq',
+      usage: 'key, day, name',
+    });
   }
 }
 

@@ -8,6 +8,7 @@ import { extname } from 'node:path';
 import Ajv from 'ajv';
 import {
   CHECKS,
+  FORWARD_ANSWER_SCHEMA,
   asCheck,
   EXAMPLE_PHOTO_MAX_BYTES,
   checkExpect,
@@ -25,7 +26,7 @@ const grindFiles = readdirSync('grinds').filter((f) => f.endsWith('.json'));
 
 describe('the grinds have scenarios', () => {
   it('finds every grind of the rig', () => {
-    expect([...grindFiles].sort()).toEqual(['coin-from-photos.json']);
+    expect([...grindFiles].sort()).toEqual(['coin-from-photos.json', 'feedback.json']);
   });
 
   describe.each(grindFiles)('grinds/%s', (grindFile) => {
@@ -35,10 +36,12 @@ describe('the grinds have scenarios', () => {
     const exampleFiles = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.json')) : [];
     const attachments = grind.attachments as { min: number; max: number; mime: string[]; maxBytes: number };
     const inputSchema = readJson(grind.inputSchema as string);
-    const answerSchema = readJson(grind.answerSchema as string);
+    // A forwarding grind ("forward": "mayor") has no model, no instructions and no answer schema: the mill answers {"status":"sent"}.
+    const forwards = grind.forward === 'mayor';
+    const answerSchema = forwards ? FORWARD_ANSWER_SCHEMA : readJson(grind.answerSchema as string);
 
-    it('names an instructions file and both schemas that exist', () => {
-      for (const key of ['instructions', 'inputSchema', 'answerSchema']) {
+    it('names the instructions and schemas it needs, and they exist', () => {
+      for (const key of forwards ? ['inputSchema'] : ['instructions', 'inputSchema', 'answerSchema']) {
         expect(existsSync(grind[key] as string), `${key}: ${String(grind[key])}`).toBe(true);
       }
     });
@@ -49,7 +52,7 @@ describe('the grinds have scenarios', () => {
 
     it.each(exampleFiles)('%s is a sound scenario', (file) => {
       const example = readJson(`${dir}/${file}`) as unknown as GrindExample;
-      expect(Object.keys(example).sort(), 'the keys').toEqual(['description', 'expect', 'photos', 'request', 'schemaVersion']);
+      expect(Object.keys(example).sort(), 'the keys').toEqual(example.photos ? ['description', 'expect', 'photos', 'request', 'schemaVersion'] : ['description', 'expect', 'request', 'schemaVersion']);
       expect(typeof example.description === 'string' && example.description.length > 0, 'description').toBe(true);
       expect(grind.versions, "schemaVersion is one of the grind's versions").toContain(example.schemaVersion);
 
@@ -60,7 +63,7 @@ describe('the grinds have scenarios', () => {
       const photos = example.photos ?? [];
       expect(photos.length, 'files named').toBeGreaterThanOrEqual(attachments.min);
       expect(photos.length, 'files named').toBeLessThanOrEqual(attachments.max);
-      expect(example.request.sides, 'one side named per photo').toHaveLength(photos.length);
+      if (!forwards) expect(example.request.sides, 'one side named per photo').toHaveLength(photos.length);
       for (const name of photos) {
         const path = `${dir}/${name}`;
         expect(existsSync(path), `${path} exists`).toBe(true);

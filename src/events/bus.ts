@@ -18,26 +18,40 @@ export type AppEvent =
   | { kind: 'settings.changed'; key: string; value: string | number | boolean; previous: string | number | boolean }
   /** a question was sent to the tutor; `itemId` is null for a question about the app */
   | { kind: 'ask.sent'; id: string; itemId: string | null }
-  | { kind: 'ask.answered'; id: string; itemId: string | null };
+  | { kind: 'ask.answered'; id: string; itemId: string | null }
+  /** a feedback grist reached the mill; `feedback` is its kind: add, wrong or other (src/feedback/) */
+  | { kind: 'feedback.sent'; feedback: string }
+  /** a one-time tip was drawn / tapped away (src/tips/) */
+  | { kind: 'tip.shown'; id: string }
+  | { kind: 'tip.dismissed'; id: string };
 
 export type EventKind = AppEvent['kind'];
 export type EventOf<K extends EventKind> = Extract<AppEvent, { kind: K }>;
 type Listener<K extends EventKind> = (event: EventOf<K>) => void;
 
 const listeners = new Map<EventKind, Set<Listener<EventKind>>>();
+const everything = new Set<(event: AppEvent) => void>();
 const last = new Map<EventKind, AppEvent>();
 
 /** Tells every listener of `event.kind`, in the order they subscribed, and keeps it as the latest of its kind. A listener
  * that throws is logged and the others still hear the event. */
 export function publish(event: AppEvent): void {
   last.set(event.kind, event);
-  for (const listener of [...(listeners.get(event.kind) ?? [])]) {
+  const heard = [...(listeners.get(event.kind) ?? []), ...everything] as ((event: AppEvent) => void)[];
+  for (const listener of heard) {
     try {
-      listener(event as never);
+      listener(event);
     } catch (error) {
       console.error(`event listener for ${event.kind} threw`, error);
     }
   }
+}
+
+/** Calls `listener` on every later event of every kind (the usage log counts them); returns the unsubscribe. */
+export function subscribeAll(listener: (event: AppEvent) => void): () => void {
+  const entry = (event: AppEvent) => listener(event);
+  everything.add(entry);
+  return () => void everything.delete(entry);
 }
 
 /** Calls `listener` on each later event of `kind`; returns the unsubscribe. It is not called with an event published
@@ -59,6 +73,7 @@ export function latest<K extends EventKind>(kind: K): EventOf<K> | undefined {
 /** Forgets every listener and every kept event: for tests. */
 export function clearBus(): void {
   listeners.clear();
+  everything.clear();
   last.clear();
 }
 

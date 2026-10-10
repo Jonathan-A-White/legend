@@ -28,3 +28,6 @@ useLatest('route.changed');                      // React: the last one, re-rend
 | `settings.changed` | `{ key, value, previous }` | `writeSetting` in `src/settings/registry.ts`: Settings and the tutor both write through it | nobody yet (the theme and text size are read live) |
 | `ask.sent` | `{ id, itemId }`; `itemId` is null for a question about the app | `addAsk` in `src/data/repositories/asks.ts` | nobody yet |
 | `ask.answered` | `{ id, itemId }` | `answerAsk` (asks.ts) | nobody yet |
+| `feedback.sent` | `{ feedback }`: add, wrong or other | `submitFeedback` in `src/services/feedback.ts`, once the mill has the grist | nobody yet |
+| `tip.shown` | `{ id }`: camera, globe or tutor | `HintCard` in `src/tips/` | the usage log (`subscribeAll`) |
+| `tip.dismissed` | `{ id }` | `HintCard` (the tap on Got it) | the usage log |

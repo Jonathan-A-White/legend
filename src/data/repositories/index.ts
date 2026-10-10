@@ -11,3 +11,5 @@ export type { NewAsk } from './asks';
 export { putValue, getValue, useValue } from './values';
 export { enqueue, listOutbox, removeFromOutbox } from './outbox';
 export type { Item, ItemKind, ItemStatus, Confidence, Photo, PhotoSide, Ask, SettingsChange, ItemValue, OutboxRecord, StoredValue } from '../db';
+export { dayOf, listUsage, recordUsage } from './usage';
+export type { UsageRow } from './usage';

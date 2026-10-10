@@ -1,0 +1,14 @@
+{
+  "grind": 1,
+  "app": "legend",
+  "kind": "feedback",
+  "versions": ["1.0"],
+  "forward": "mayor",
+  "inputSchema": "schemas/feedback-input-1.0.schema.json",
+  "attachments": {
+    "min": 0,
+    "max": 1,
+    "mime": ["image/jpeg", "image/png", "image/webp"],
+    "maxBytes": 8388608
+  }
+}
