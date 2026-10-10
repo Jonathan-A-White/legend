@@ -14,6 +14,9 @@ licence and what we changed. Credit is owed whether or not a licence asks for it
 - **[React](https://react.dev)**, MIT. **[Dexie](https://dexie.org)**, Apache-2.0. **[Vite](https://vite.dev)**, MIT, with
   **[vite-plugin-pwa](https://vite-pwa-org.netlify.app)**, MIT, and **[Workbox](https://developer.chrome.com/docs/workbox)**,
   MIT. **[Tailwind CSS](https://tailwindcss.com)**, MIT. **[Ajv](https://ajv.js.org)**, MIT, checks the photo reader's answer against its schema. Used as published; changes: none.
+- **[d3-geo](https://d3js.org/d3-geo)** and **[topojson-client](https://github.com/topojson/topojson-client)** by Mike
+  Bostock, ISC: the Globe's projection, paths, graticule and picking, and the country shapes unpacked from TopoJSON. Used as
+  published; changes: none.
 - Tests: **[Vitest](https://vitest.dev)**, **[vitest-cucumber](https://github.com/amiceli/vitest-cucumber)**,
   **[Testing Library](https://testing-library.com)** and **[Playwright](https://playwright.dev)**. Not shipped in the app.
 
@@ -50,4 +53,6 @@ Nothing from Numista, PCGS, NGC, ucoin or Colnect is copied in.
 
 - **Lampas**, the Governor's Koine Greek reader: the licence gate, the update flow, the build stamp and the way the
   code is cut into modules are taken from it.
+- Mike Bostock's [versor dragging](https://observablehq.com/@d3/versor-dragging) (ISC): the Globe turns under the finger
+  with a quaternion, as there; `src/globe/drag.ts` is that code, rewritten in TypeScript.
 - The owner's PWA best practices, which every screen follows.

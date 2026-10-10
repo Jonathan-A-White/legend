@@ -17,7 +17,8 @@ planned folders are created by the story that needs them, with the entry file na
 | settings | The registry (a setting is declared once), the rows Settings draws, the screen, theme and text size applied | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left (a trail of 20, Back across a close) | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared controls and gestures: scroll guard, build stamp, placeholder | `src/ui/` (one file each) | built |
-| screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home`; placeholders `collection`, `globe`, `quarters`, `learn`, `item`, `country` |
+| globe | The Globe (`#/globe`) and the Country sheet (`#/country/<cc>`): a d3-geo globe on a 2D canvas. `render.ts` draws a frame on any context (pure; skips a frame that would not change); `controller.ts` is the one requestAnimationFrame loop, the finger (versor drag, inertia, tap to pick) and the idle spin, stopped while the page is hidden; `clock.ts` is its seam on time for tests | `src/globe/index.ts` | built |
+| screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home`; placeholders `collection`, `quarters`, `learn`, `item` |
 
 ## Grinds
 
@@ -28,9 +29,9 @@ scenarios; `tests/unit/grind-examples.test.ts` fails when a grind has none.
 ## Screens
 
 Each screen is a folder `src/screens/<name>/` exporting its component from `index.ts`. The bottom bar has Collection, Globe,
-Quarters, Learn and Settings (Settings is `src/settings/SettingsScreen.tsx`); `home` is `#/`; `item` (`#/item/<id>`) and
-`country` (`#/country/<cc>`) are reached from them. All but `home` and Settings are placeholders that say what will be there:
-the story that builds one replaces its folder's component. Planned: `add`, `search`, `tutor`, `about`.
+Quarters, Learn and Settings (Settings is `src/settings/SettingsScreen.tsx`, the Globe and the Country sheet are `src/globe/`);
+`home` is `#/`; `item` (`#/item/<id>`) and `country` (`#/country/<cc>`) are reached from them. The rest are placeholders that
+say what will be there: the story that builds one replaces its folder's component. Planned: `add`, `search`, `tutor`, `about`.
 
 **A new screen is a new folder.** Never grow an existing screen's file with another screen's code, and never import
 from inside another module's folder, only its entry.
