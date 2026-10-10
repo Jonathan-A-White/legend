@@ -10,6 +10,14 @@ export async function getValue(itemId: string): Promise<ItemValue | undefined> {
   return db.values.get(itemId);
 }
 
+export async function listValues(): Promise<ItemValue[]> {
+  return db.values.toArray();
+}
+
+export function useValues(): ItemValue[] | undefined {
+  return useLiveQuery(listValues, []);
+}
+
 export function useValue(itemId: string): ItemValue | undefined {
   return useLiveQuery(() => getValue(itemId), [itemId]);
 }

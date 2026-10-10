@@ -287,8 +287,9 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     });
     Then('it waits on the same txid without sending again and the item is named', async () => {
       await waitFor(async () => expect(await onlyItem()).toMatchObject({ status: 'named', reading: null, year: 1944 }));
-      expect(factory.awaited).toEqual(['direct:before']);
-      expect(factory.sent).toHaveLength(0);
+      // the photo reader is not asked again; the value of the named coin is asked on its own grist
+      expect(factory.awaited.filter((txid) => txid === 'direct:before')).toEqual(['direct:before']);
+      expect(factory.sentOf('coin-from-photos')).toHaveLength(0);
     });
   });
 

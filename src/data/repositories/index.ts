@@ -8,7 +8,7 @@ export { getStoredSetting, getStoredSettings, putStoredSetting } from './setting
 export { getMeta, putMeta, useMetaFlag } from './meta';
 export { addAsk, answerAsk, listAsks, useAsks, useAskCount } from './asks';
 export type { NewAsk } from './asks';
-export { putValue, getValue, useValue } from './values';
+export { putValue, getValue, listValues, useValue, useValues } from './values';
 export { enqueue, listOutbox, removeFromOutbox } from './outbox';
 export type { Item, ItemKind, ItemStatus, Reading, ReadingState, Confidence, Photo, PhotoSide, Ask, SettingsChange, ItemValue, OutboxRecord, StoredValue } from '../db';
 export { dayOf, listUsage, recordUsage } from './usage';

@@ -22,7 +22,10 @@ export interface NameInput {
 }
 
 export interface NameRequest {
-  input: NameInput;
+  /** the photo reader's input, or another grind's when `grind` names it */
+  input: object;
+  /** the grind to run it under; the photo reader when left out (the value grind goes through the same queue, src/services/value.ts) */
+  grind?: { kind: string; v: string };
   photos: grist.Photo[];
   /** so the backend stores a retried send once */
   clientId: string;
@@ -59,7 +62,7 @@ export function setGristPort(port: GristPort | null): void {
 export function makeNameClient(key: Uint8Array, port: GristPort = grist, baseUrl: string = POSTERN_DOOR): NameClient {
   const d = new door.Door({ baseUrl, key });
   return {
-    send: (request) => port.sendGrist({ door: d, key, app: NAME_APP, kind: NAME_KIND, v: NAME_VERSION, input: request.input, photos: request.photos, clientId: request.clientId }),
+    send: (request) => port.sendGrist({ door: d, key, app: NAME_APP, kind: request.grind?.kind ?? NAME_KIND, v: request.grind?.v ?? NAME_VERSION, input: request.input, photos: request.photos, clientId: request.clientId }),
     awaitAnswer: (txid, signal) => port.awaitAnswer(txid, { door: d, key, intervalMs: NAME_POLL_MS, signal }),
   };
 }

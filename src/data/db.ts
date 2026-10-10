@@ -113,6 +113,10 @@ export interface ItemValue {
   asOf: number;
   basis: string;
   source: string;
+  /** the item's year and grade guess when this was asked, so a change to either asks again; a value without them is asked again */
+  forYear?: number | null;
+  forGrade?: string | null;
+  confidence?: Confidence;
 }
 
 /** A record waiting to be sent (feedback, and later others); it stays until a send succeeds. */
