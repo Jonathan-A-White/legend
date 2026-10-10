@@ -8,6 +8,7 @@ import { Blob as NodeBlob } from 'node:buffer';
 import { afterAll, expect, vi } from 'vitest';
 import { loadFeature, describeFeature } from '@amiceli/vitest-cucumber';
 import { App } from '../../src/App';
+import { openGate } from '../../tests/support/open-gate';
 import { db } from '../../src/data/db';
 import { addItem, addPhoto } from '../../src/data/repositories';
 import { forgetWorldData } from '../../src/data/world';
@@ -86,7 +87,7 @@ async function hasGermanyAndUs(): Promise<void> {
 
 async function openGlobe(): Promise<void> {
   window.history.replaceState(null, '', '/#/globe');
-  render(<App />);
+  render(<App gate={openGate} />);
   await waitFor(() => {
     clock.advance(16);
     expect(globe().dataset.rotation).toBeTruthy();

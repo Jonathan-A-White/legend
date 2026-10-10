@@ -6,6 +6,7 @@ import userEvent from '@testing-library/user-event';
 import { afterAll, beforeAll, expect, vi } from 'vitest';
 import { loadFeature, describeFeature } from '@amiceli/vitest-cucumber';
 import { App } from '../../src/App';
+import { openGate } from '../../tests/support/open-gate';
 import { db } from '../../src/data/db';
 import { addItem, getItem } from '../../src/data/repositories';
 import { clearBus } from '../../src/events/bus';
@@ -30,7 +31,7 @@ const countLine = () => screen.getByTestId('count-line');
 const open = async (hash: string) => {
   cleanup();
   window.history.replaceState(null, '', `/${hash}`);
-  render(<App />);
+  render(<App gate={openGate} />);
   await screen.findByRole('main');
 };
 /** The press of a finger on a hold bar, as the browser sends it. */

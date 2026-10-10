@@ -2,6 +2,7 @@
 // opens its sheet, the territory tiles are tappable, the page does not scroll. Writes shots/quarters.png and shots/state.png.
 import { expect, test, type Page } from '@playwright/test';
 import { shot } from './shot';
+import { openUnlocked } from './unlocked';
 
 const quarter = { kind: 'coin', country: 'US', currency: 'USD', denomination: 'Quarter dollar', faceValue: 0.25, status: 'confirmed', mintMark: null, material: '', gradeGuess: null, gradeNotes: '', notes: '', tags: [], confidence: null, deletedAt: null };
 
@@ -25,6 +26,7 @@ const OWNED: [number, string, string][] = [
 
 /** Writes the seeded items into the app's own IndexedDB (database 'legend', store 'items'). */
 async function seed(page: Page): Promise<void> {
+  await openUnlocked(page);
   await page.goto('/#/settings');
   await page.evaluate(
     async ({ rows, base }) => {

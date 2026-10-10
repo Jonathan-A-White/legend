@@ -2,6 +2,7 @@
 // so there is something to look at): the count line, search, filters, no page scroll, large targets, the viewer, and a hold to remove.
 import { expect, test, type Page } from '@playwright/test';
 import { shot } from './shot';
+import { openUnlocked } from './unlocked';
 
 // the app's own look, dark and green-black, whatever the browser prefers
 test.use({ colorScheme: 'dark' });
@@ -34,6 +35,7 @@ const SEEDS: Seed[] = [
 
 /** Opens the app's own database, fills it, and leaves the page at `hash`. */
 async function seed(page: Page, hash: string): Promise<void> {
+  await openUnlocked(page);
   await page.goto('/#/collection');
   await page.getByRole('heading', { name: 'Collection' }).waitFor();
   await page.evaluate(async (seeds) => {

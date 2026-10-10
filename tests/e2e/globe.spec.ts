@@ -4,6 +4,7 @@
 // the same drag on a CPU slowed four times is reported, not asserted, as a stand-in for an old phone. Then the shots.
 import { expect, test, type Page } from '@playwright/test';
 import { shot } from './shot';
+import { openUnlocked } from './unlocked';
 
 test.use({ hasTouch: true });
 
@@ -20,6 +21,7 @@ const COLLECTION = [
 ] as const;
 
 async function seed(page: Page): Promise<void> {
+  await openUnlocked(page);
   await page.goto('/#/globe');
   await expect(page.getByRole('img', { name: /^The globe/ })).toBeVisible();
   await page.evaluate(async (collection) => {
