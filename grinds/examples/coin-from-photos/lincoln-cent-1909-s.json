@@ -1,0 +1,15 @@
+{
+  "description": "Both sides of a 1909-S Lincoln cent, date and mint mark plain: name the cent, the year and the S, with high confidence.",
+  "schemaVersion": "1.0",
+  "request": { "kind": "coin", "hint": null, "sides": ["obverse", "reverse"] },
+  "photos": ["lincoln-1909s-obverse.jpg", "lincoln-1909s-reverse.jpg"],
+  "expect": {
+    "kind": { "equals": "coin" },
+    "country": { "equals": "US" },
+    "currency": { "equals": "USD" },
+    "denomination": { "matches": "[Cc][Ee][Nn][Tt]" },
+    "year": { "equals": 1909 },
+    "mintMark": { "equals": "S" },
+    "confidence": { "oneOf": ["high", "medium"] }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "description": "The collector says coin but the photo is a banknote: the photo decides, so the answer's kind is note.",
+  "schemaVersion": "1.0",
+  "request": { "kind": "coin", "hint": null, "sides": ["front"] },
+  "photos": ["canada-1935-one-dollar-note.jpg"],
+  "expect": {
+    "kind": { "equals": "note" },
+    "country": { "equals": "CA" }
+  }
+}

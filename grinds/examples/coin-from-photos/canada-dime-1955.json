@@ -1,0 +1,13 @@
+{
+  "description": "A Canadian silver dime of 1955, both sides in one photo: it is not a United States coin, so name Canada, the dime and the year.",
+  "schemaVersion": "1.0",
+  "request": { "kind": "coin", "hint": "Both sides of the coin are in this one photo.", "sides": ["other"] },
+  "photos": ["canada-dime-1955.jpg"],
+  "expect": {
+    "kind": { "equals": "coin" },
+    "country": { "equals": "CA" },
+    "currency": { "equals": "CAD" },
+    "denomination": { "matches": "10|[Tt][Ee][Nn]|[Dd][Ii][Mm][Ee]" },
+    "year": { "equals": 1955 }
+  }
+}

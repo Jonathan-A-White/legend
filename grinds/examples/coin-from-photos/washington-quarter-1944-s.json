@@ -1,0 +1,15 @@
+{
+  "description": "A 1944-S Washington quarter with a readable date and an S mint mark on the reverse: read both from the two sides.",
+  "schemaVersion": "1.0",
+  "request": { "kind": "coin", "hint": null, "sides": ["obverse", "reverse"] },
+  "photos": ["washington-quarter-1944s-obverse.jpg", "washington-quarter-1944s-reverse.jpg"],
+  "expect": {
+    "kind": { "equals": "coin" },
+    "country": { "equals": "US" },
+    "currency": { "equals": "USD" },
+    "denomination": { "matches": "[Qq][Uu][Aa][Rr][Tt][Ee][Rr]" },
+    "faceValue": { "equals": 0.25 },
+    "year": { "equals": 1944 },
+    "mintMark": { "equals": "S" }
+  }
+}
