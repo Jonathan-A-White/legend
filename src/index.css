@@ -10,6 +10,8 @@
   --color-muted: var(--lg-muted);
   --color-accent: var(--lg-accent);
   --color-accent-fg: var(--lg-accent-fg);
+  --color-bad: var(--lg-bad);
+  --color-bad-fg: var(--lg-bad-fg);
 }
 
 :root {
@@ -21,6 +23,8 @@
   --lg-muted: #95ab9f;
   --lg-accent: #d9b45a;
   --lg-accent-fg: #1a1405;
+  --lg-bad: #e0806f;
+  --lg-bad-fg: #1f0b07;
 }
 
 /* The Theme setting (src/settings/useAppearance.ts): 'light' is a parchment palette; 'system' follows the phone and is dark
@@ -34,6 +38,8 @@
   --lg-muted: #5b6a61;
   --lg-accent: #8a6a14;
   --lg-accent-fg: #ffffff;
+  --lg-bad: #a63d2f;
+  --lg-bad-fg: #ffffff;
 }
 
 @media (prefers-color-scheme: light) {
@@ -46,6 +52,8 @@
     --lg-muted: #5b6a61;
     --lg-accent: #8a6a14;
     --lg-accent-fg: #ffffff;
+    --lg-bad: #a63d2f;
+    --lg-bad-fg: #ffffff;
   }
 }
 
