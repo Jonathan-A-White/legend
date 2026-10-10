@@ -12,23 +12,24 @@ that needs them, with the entry file named here.
 | data/world | The world's countries (TopoJSON, names, flags) and each country's currencies by date, loaded from files that ship in `public/data/world/` (built by `npm run data:build`; `docs/data.md`) | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: one file per family (items, photos, settings, meta, asks, values, outbox), with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
-| services | Everything that leaves the phone: grist client, licence, device key, app update | `src/services/appUpdate.ts` | built (`licenceCheck.ts`, `licenceCache.ts`, `deviceKey.ts` for the gate; `itemAnswer.ts` checks the photo reader's answer; grist client planned) |
+| services | Everything that leaves the phone: grist client (`grist.ts` `askGrind`), `feedback.ts`, licence, device key, app update | `src/services/appUpdate.ts` | built (`licenceCheck.ts`, `licenceCache.ts`, `deviceKey.ts` for the gate; `itemAnswer.ts` checks the photo reader's answer) |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left (a trail of 20) | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared controls: scroll guard, build stamp, placeholder, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), both from Lampas | `src/ui/` (one file each) | built |
-| globe | The Globe (`#/globe`) and the Country sheet (`#/country/<cc>`): a d3-geo globe on a 2D canvas. `render.ts` draws a frame on any context (pure; skips an unchanged frame); `controller.ts` is the one requestAnimationFrame loop, the finger (drag, inertia, tap to pick) and the idle spin, stopped while hidden; `clock.ts` is its time seam for tests | `src/globe/index.ts` | built |
-| quarters | The Quarters screen (`#/quarters`): the US map lit by his quarters, the State sheet (`#/quarters?state=OH`), the programme picker, the Checklist, the territory tiles; `match.ts` (pure) says which design an item is, `summary.ts` counts, `topo.ts` draws the map; rules in `docs/data.md` | `src/quarters/index.ts` | built |
+| globe | The Globe (`#/globe`) and the Country sheet (`#/country/<cc>`): a d3-geo globe on a 2D canvas. `render.ts` draws a frame (pure); `controller.ts` is the one requestAnimationFrame loop, the finger and the idle spin; `clock.ts` is its time seam | `src/globe/index.ts` | built |
+| quarters | The Quarters screen (`#/quarters`): the US map lit by his quarters, the State sheet (`#/quarters?state=OH`), the Checklist, the territory tiles; `match.ts` (pure) says which design an item is, `summary.ts` counts, `topo.ts` draws the map; rules in `docs/data.md` | `src/quarters/index.ts` | built |
 | collection | The Collection (`#/collection`: count line, search, filters, grid or list) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); `search.ts` and `view.ts` are pure | `src/collection/index.ts` | built |
 | share | Share: a picture of the globe or an item card by `navigator.share`, else Save picture; `text.ts` says what a card may say (`docs/privacy.md`) | `src/share/index.ts` | built |
 | learn | Learn (`#/learn`) and `#/learn/grading`, `/mints`, `/years`, `/path`, each ending in Ask the tutor (disabled). Pure rules: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
+| feedback | Tell the maker: `FeedbackButton` and `TellTheMakerButton` (Settings) open `FeedbackSheet`; `outbox.ts` queues and sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
+| tips | One-time `HintCard` tips (`hints.ts`; camera and tutor cards wait for their screens) and the usage log (`usageLog.ts`, counts only) | `src/tips/index.ts` | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
 
 ## Grinds
 
-`grinds/<kind>.json` with `.md` instructions, `schemas/<kind>-{input,answer}-<v>.schema.json` and scenarios in
-`grinds/examples/<kind>/` (format: `grinds/examples/README.md`; `mw grist smoke legend` runs them). A grind change updates its
-scenarios; `tests/unit/grind-examples.test.ts` fails when one has none.
+`grinds/<kind>.json` with `.md` instructions (a forwarding grind such as `feedback` has none), `schemas/<kind>-{input,answer}-<v>.schema.json` and scenarios in
+`grinds/examples/<kind>/` (`grinds/examples/README.md`; `mw grist smoke legend` runs them). A grind change updates its scenarios.
 
 ## Screens
 
