@@ -80,7 +80,7 @@ describe('the tutor’s door', () => {
     expect(applied).toEqual([]);
     expect(refused).toHaveLength(5);
     expect(refused[0]).toMatch(/Sharing/);
-    expect((await currentSettings()).sharing).toBe(false);
+    expect((await currentSettings()).sharing).toBe(true);
   });
 
   it('applyChanges takes no list that is not a list', async () => {
@@ -101,6 +101,18 @@ describe('the tutor’s door', () => {
   it('marks which settings the tutor may change', () => {
     expect(settingOf('theme')?.talkable).toBe(true);
     expect(settingOf('sharing')?.talkable).toBe(false);
+  });
+});
+
+describe('Sharing and Your name', () => {
+  it('Sharing is on until he turns it off, and the name starts empty and takes a short text', async () => {
+    const now = await currentSettings();
+    expect([now.sharing, now.ownerName]).toEqual([true, '']);
+    await writeSetting('ownerName', 'Paul');
+    expect((await currentSettings()).ownerName).toBe('Paul');
+    await expect(writeSetting('ownerName', 'x'.repeat(31))).rejects.toThrow(/Your name/);
+    await expect(writeSetting('ownerName', 5)).rejects.toThrow(/Your name/);
+    expect((await currentSettings()).ownerName).toBe('Paul');
   });
 });
 

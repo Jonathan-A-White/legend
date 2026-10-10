@@ -95,7 +95,7 @@ describeFeature(
         expect(result.refused).toHaveLength(1);
         const now = await currentSettings();
         expect(now.theme).toBe('light');
-        expect(now.sharing).toBe(false);
+        expect(now.sharing).toBe(true);
       });
     });
   },

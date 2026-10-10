@@ -35,7 +35,8 @@ interface Declared {
 export type SettingEntry =
   | (Declared & { kind: 'switch'; default: boolean })
   | (Declared & { kind: 'choice'; default: string; options: readonly { value: string; label: string }[] })
-  | (Declared & { kind: 'number'; default: number; min: number; max: number; step: number; unit: string });
+  | (Declared & { kind: 'number'; default: number; min: number; max: number; step: number; unit: string })
+  | (Declared & { kind: 'text'; default: string; maxLength: number; placeholder: string });
 
 export type SettingKind = SettingEntry['kind'];
 
@@ -153,12 +154,25 @@ export const SETTINGS: readonly SettingEntry[] = [
   {
     key: 'sharing',
     kind: 'switch',
-    default: false,
+    default: true,
     label: 'Sharing',
-    hint: 'Allow sharing an item with someone you choose.',
-    help: 'Nothing leaves the phone unless you send it or share it. With sharing off, no Share button appears. Only you can turn this on; the tutor cannot.',
+    hint: 'Show Share buttons for a picture of your globe or of one item.',
+    help: 'Nothing leaves the phone unless you send it or share it. A shared picture holds photos and facts, never notes, tags or serial numbers. Off, no Share button appears. Only you can change this; the tutor cannot.',
     section: 'privacy',
     talkable: false,
+  },
+  {
+    key: 'ownerName',
+    kind: 'text',
+    default: '',
+    maxLength: 30,
+    placeholder: 'My',
+    label: 'Your name',
+    hint: "Put on a shared globe picture: \"Paul's coins come from 12 countries\".",
+    help: 'Left empty, a shared picture says "My coins come from 12 countries". The name is only written on the picture when you share it.',
+    section: 'privacy',
+    talkable: false,
+    dependsOn: { key: 'sharing', equals: true },
   },
 ];
 
@@ -173,6 +187,8 @@ function allowed(entry: SettingEntry, value: unknown): SettingValue | undefined 
       return typeof value === 'string' && entry.options.some((o) => o.value === value) ? value : undefined;
     case 'number':
       return typeof value === 'number' && Number.isFinite(value) && value >= entry.min && value <= entry.max ? value : undefined;
+    case 'text':
+      return typeof value === 'string' && value.length <= entry.maxLength ? value : undefined;
   }
 }
 

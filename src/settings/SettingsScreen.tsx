@@ -1,5 +1,5 @@
 // src/settings/SettingsScreen.tsx: the Settings screen. It draws the rows src/settings/rows.ts lists, section by section as
-// cards, each row by its kind (a switch, a choice, a number, or the About row), with the registry's one-line hint under it and
+// cards, each row by its kind (a switch, a choice, a number, a text, or the About row), with the registry's one-line hint under it and
 // its longer help behind a small 'i'. It holds no setting of its own: a tap calls writeSetting, which saves and tells the bus.
 // A new setting is one entry in the registry; a new kind of setting is one entry in CONTROLS (the type checker asks for it).
 import { useId, useState, type ReactNode } from 'react';
@@ -120,11 +120,32 @@ function NumberControl({ row, value }: Held<Extract<SettingEntry, { kind: 'numbe
   );
 }
 
+function TextControl({ row, value }: Held<Extract<SettingEntry, { kind: 'text' }>>) {
+  // What he types stays on screen as he types it; the saved value catches up.
+  const [draft, setDraft] = useState(String(value));
+  return (
+    <input
+      type="text"
+      aria-label={row.label}
+      placeholder={row.placeholder}
+      maxLength={row.maxLength}
+      autoComplete="off"
+      value={draft}
+      onChange={(e) => {
+        setDraft(e.target.value);
+        save(row.key, e.target.value);
+      }}
+      className="mt-2 h-12 w-full rounded-xl border border-line bg-canvas px-4 text-lg text-ink placeholder:text-muted focus:border-accent focus:outline-none"
+    />
+  );
+}
+
 /** How each kind of row is drawn. `Record` over the kinds: a new kind is a compile error until it has a control here. */
 const CONTROLS: Record<SettingKind, (props: { row: never; value: SettingValue }) => ReactNode> = {
   switch: SwitchControl as never,
   choice: ChoiceControl as never,
   number: NumberControl as never,
+  text: TextControl as never,
 };
 
 /** Where the control sits: a switch sits beside the name, the others under the hint. */
