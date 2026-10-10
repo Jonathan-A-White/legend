@@ -36,7 +36,7 @@ await expect(page.getByTestId('device-key')).toHaveText(SEED_PUBLIC_KEY);
 `SEED_PRIVATE_KEY` is 1 and `SEED_PUBLIC_KEY` is `0279be66…1798`, the well-known generator point.
 
 A live spec (`tests/e2e/<name>-live.spec.ts`, which runs against the deployed app) that needs the real reader seeds a key
-whose licence is on testnet, through the same seam, and lets the real lookup run.
+whose licence is on testnet, through the same seam, and lets the real lookup run (`openLive` in `tests/e2e/live.ts`; CLAUDE.md, Live tests).
 
 ### Seeding a key in a Gherkin step
 

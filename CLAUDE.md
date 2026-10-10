@@ -35,7 +35,7 @@ npm run test:bdd     # vitest run, features/steps only
 npm run typecheck    # tsc -b --noEmit, strict
 npm run lint         # eslint, no explicit any
 npm run shots        # Playwright at 390x844 against `vite preview` of dist/ (build first, or npm run gate:shots); writes shots/<name>.png
-npm run e2e:live     # live specs (tests/e2e/*-live.spec.ts) against the DEPLOYED app; none yet; not in the gate
+npm run e2e:live     # live specs (tests/e2e/*-live.spec.ts: photo-live, ask-live) against the DEPLOYED app; not in the gate; see Live tests
 npm run data:build   # rebuild public/data/world/*.json from data/raw and data/snapshots (docs/data.md); a second run changes nothing
 npm run icons        # re-render public/icon-192.png and icon-512.png from public/icon.svg
 npm run grind:build  # write the talkable settings into grinds/legend-ask.md and its answer schema (after a registry change)
@@ -53,6 +53,14 @@ npm run grind:build  # write the talkable settings into grinds/legend-ask.md and
   `shot(page, name)`. Service workers are blocked in e2e.
 - esbuild refuses to run inside jsdom: a test needing a real build runs `node node_modules/vite/bin/vite.js build --outDir <tmp>`
   in a child process (`features/steps/install.steps.tsx`).
+
+## Live tests
+
+`npm run e2e:live` runs the `live` Playwright project: `photo-live` (Add with the example quarter's two photos, expects US and a
+quarter) and `ask-live` (asks where the mint mark is). They use the real licence gate, Postern and the mill, so they spend fuel,
+prove a landing only after the deploy (the grist door's CORS allows only https://legend.allmymind.org; `LEGEND_LIVE_URL`
+overrides the origin), and need a key with a Legend licence: `LEGEND_TEST_KEY` or `~/.config/mw/legend-test.env`. No key: SKIP,
+exit 0. An unlicensed key fails on Unlock, saying so. The chromium and shots projects ignore them. Never print the key.
 
 ## Docs stay true
 

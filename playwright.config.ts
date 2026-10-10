@@ -10,8 +10,7 @@ const LIVE_SPEC = '**/*-live.spec.ts';
 
 // The live project drives the DEPLOYED app (the grist door's CORS allows only https://legend.allmymind.org), so a
 // localhost preview could never reach it. `npm run e2e:live` sets LEGEND_E2E=live, and then no preview server is
-// started (and nothing is built). No live spec exists yet: a story that talks to the real backend adds
-// tests/e2e/<name>-live.spec.ts and nothing else in this file.
+// started (and nothing is built). A spec that talks to the real backend is tests/e2e/<name>-live.spec.ts (tests/e2e/live.ts).
 const LIVE_BASE_URL = process.env.LEGEND_LIVE_URL || 'https://legend.allmymind.org';
 const LIVE_RUN = process.env.LEGEND_E2E === 'live';
 
@@ -46,7 +45,7 @@ export default defineConfig({
       },
     },
     // `npm run e2e:live` (--project=live): the specs (tests/e2e/*-live.spec.ts) that talk to the real backend, through the
-    // deployed app. It is in neither the gate nor `npm run shots`. With no live spec yet `npm run e2e:live` finds nothing and passes.
+    // deployed app. It is in neither the gate nor `npm run shots`.
     {
       name: 'live',
       testMatch: LIVE_SPEC,
