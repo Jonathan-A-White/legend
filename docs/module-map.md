@@ -9,20 +9,20 @@ that needs them, with the entry file named here.
 | Update flow | Banner, waiting build, What's new | `src/UpdateBanner.tsx`, `src/whatsNew/` | built |
 | gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell in `App.tsx`, `Unlock` is what it shows meanwhile | `src/gate/index.ts` | built |
 | data | The local store (Dexie v2: items, photos, settings, meta, asks, values, outbox) and its record types | `src/data/db.ts` | built |
-| data/world | The world's countries (TopoJSON, names, flags) and each country's currencies by date, loaded from files that ship in `public/data/world/` (built by `npm run data:build`; `docs/data.md`) | `src/data/world.ts` | built |
-| data/repositories | The only way UI reaches Dexie: one file per family (items, photos, settings, meta, asks, values, outbox), with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
+| data/world | The world's countries (TopoJSON, names, flags) and their currencies by date, shipped in `public/data/world/` (`npm run data:build`; `docs/data.md`) | `src/data/world.ts` | built |
+| data/repositories | The only way UI reaches Dexie: a file per family (items, photos, settings, meta, asks, values, outbox), with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
-| services | Everything that leaves the phone: grist client (`grist.ts` `askGrind`), `feedback.ts`, licence, device key, app update | `src/services/appUpdate.ts` | built (`licenceCheck.ts`, `licenceCache.ts`, `deviceKey.ts` for the gate; `itemAnswer.ts` checks the photo reader's answer) |
+| services | Everything that leaves the phone: grist client, `feedback.ts`, licence, device key, app update | `src/services/appUpdate.ts` | built (`licenceCheck.ts`, `licenceCache.ts`, `deviceKey.ts` for the gate; `itemAnswer.ts` checks the photo reader's answer) |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left (a trail of 20) | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared controls: scroll guard, build stamp, placeholder, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), both from Lampas | `src/ui/` (one file each) | built |
-| globe | The Globe (`#/globe`) and the Country sheet (`#/country/<cc>`): a d3-geo globe on a 2D canvas. `render.ts` draws a frame (pure); `controller.ts` is the one requestAnimationFrame loop, the finger and the idle spin; `clock.ts` is its time seam | `src/globe/index.ts` | built |
-| quarters | The Quarters screen (`#/quarters`): the US map lit by his quarters, the State sheet (`#/quarters?state=OH`), the Checklist, the territory tiles; `match.ts` (pure) says which design an item is, `summary.ts` counts, `topo.ts` draws the map; rules in `docs/data.md` | `src/quarters/index.ts` | built |
+| globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): a d3-geo globe on a 2D canvas. `render.ts` draws a frame (pure); `controller.ts` is the one requestAnimationFrame loop, the finger and the idle spin; `clock.ts` is its clock seam | `src/globe/index.ts` | built |
+| quarters | The Quarters screen (`#/quarters`): the US map lit by his quarters, the State sheet (`#/quarters?state=OH`), the Checklist, the territory tiles; `match.ts` (pure) says which design an item is, `summary.ts` counts, `topo.ts` draws; rules: `docs/data.md` | `src/quarters/index.ts` | built |
 | collection | The Collection (`#/collection`: count line, search, filters, grid or list) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); `search.ts` and `view.ts` are pure | `src/collection/index.ts` | built |
-| share | Share: a picture of the globe or an item card by `navigator.share`, else Save picture; `text.ts` says what a card may say (`docs/privacy.md`) | `src/share/index.ts` | built |
-| learn | Learn (`#/learn`) and `#/learn/grading`, `/mints`, `/years`, `/path`, each ending in Ask the tutor (disabled). Pure rules: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
-| feedback | Tell the maker: `FeedbackButton` and `TellTheMakerButton` (Settings) open `FeedbackSheet`; `outbox.ts` queues and sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
+| share | Share: a picture of the globe or an item card, else Save picture; `text.ts` says what a card may say | `src/share/index.ts` | built |
+| learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`), each ending in Ask the tutor (disabled). Pure rules: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
+| feedback | Tell the maker: `FeedbackButton` and `TellTheMakerButton` (Settings) open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
 | tips | One-time `HintCard` tips (`hints.ts`; camera and tutor cards wait for their screens) and the usage log (`usageLog.ts`, counts only) | `src/tips/index.ts` | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
 
@@ -34,10 +34,8 @@ that needs them, with the entry file named here.
 ## Screens
 
 Each screen is a folder `src/screens/<name>/` exporting its component from `index.ts`. The bottom bar has Collection, Globe,
-Quarters, Learn and Settings (Settings is `src/settings/SettingsScreen.tsx`, the Globe and the Country sheet are `src/globe/`,
-Quarters is `src/quarters/`); `home` is `#/`; `item` (`#/item/<id>`, in `src/collection/`) and `country` (`#/country/<cc>`) are
-reached from them. The Collection and item view are `src/collection/`, Learn `src/learn/`. Planned: `add`, `search`, `tutor`,
-`about`.
+Quarters, Learn and Settings (`src/settings/SettingsScreen.tsx`); `home` is `#/`; `item` (`#/item/<id>`) and `country`
+(`#/country/<cc>`) are reached from them. Those screens live in their module folders above. Planned: `add`, `search`, `tutor`, `about`.
 
 **A new screen is a new folder.** Never grow an existing screen's file with another screen's code, and never import
 from inside another module's folder, only its entry.
