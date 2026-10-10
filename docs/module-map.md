@@ -1,17 +1,17 @@
 # Legend module map
 
-A module is a folder under `src/` with one responsibility and one entry file; others import the entry, not its insides. Two stories should change two modules without touching the same file.
+A module is a folder under `src/` with one responsibility and one entry file; others import the entry, not its insides.
 
 | Module | One responsibility | Entry | Status |
 |---|---|---|---|
 | App shell | Start the app: scroll guard, banner, service worker, config | `src/main.tsx`, `src/App.tsx`, `src/config.ts`, `src/sw.ts` | built |
 | Update flow | Banner, waiting build, What's new | `src/UpdateBanner.tsx`, `src/whatsNew/` | built |
-| gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell, `Unlock` shows meanwhile | `src/gate/index.ts` | built |
-| data | The local store (Dexie v2: items, photos, settings, meta, asks, values, outbox) and its record types; an item carries `reading` while at the factory | `src/data/db.ts` | built |
+| gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell | `src/gate/index.ts` | built |
+| data | The local store (Dexie v3: items, photos, settings, meta, asks, values, outbox, usage) and its record types | `src/data/db.ts` | built |
 | data/world | The world's countries (TopoJSON, names, flags) and their currencies by date, shipped in `public/data/world/` (`docs/data.md`) | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
-| services | Everything that leaves the phone: grist client, `feedback.ts`, licence, device key, app update; the photo reader: `nameItem.ts` (seam `setGristPort`), `nameQueue.ts` (one send at a time, resumed on open from `item.reading`), `itemAnswer.ts` checks an answer | `src/services/appUpdate.ts` | built |
+| services | Everything that leaves the phone: grist client, `feedback.ts`, licence, device key, app update; the photo reader: `nameItem.ts` (seam `setGristPort`), `nameQueue.ts` (one send at a time, resumed on open from `item.reading`; also asks each named item's value), `itemAnswer.ts` checks an answer, `value.ts` the item-value grind's rules | `src/services/appUpdate.ts` | built |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
@@ -24,6 +24,7 @@ A module is a folder under `src/` with one responsibility and one entry file; ot
 | feedback | Tell the maker: `FeedbackButton` and `TellTheMakerButton` (Settings) open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
 | tips | One-time `HintCard` tips (`hints.ts`) and the usage log (`usageLog.ts`, counts only) | `src/tips/index.ts` | built |
 | capture | Add (`#/add`): viewfinder (`CaptureScreen`, `useCamera`), `captureStill` (1600 px, under 1 MB, upright, 320 px thumb), `startItem` (Name it: item and photos, then the queue), Confirm sheet, `useNameQueue` (App starts it) | `src/capture/index.ts` | built |
+| worth | A rough worth, never a price: `WorthLine` (an item; why opens the basis), `RoughWorth` (the Collection's sum), `format.ts`; Show values hides it | `src/worth/index.ts` | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
 
 ## Grinds
@@ -35,7 +36,7 @@ A module is a folder under `src/` with one responsibility and one entry file; ot
 
 Each screen is a folder `src/screens/<name>/` exporting its component from `index.ts`. The bottom bar has Collection, Globe,
 Quarters, Learn and Settings (`src/settings/SettingsScreen.tsx`); `home` is `#/`; `item` (`#/item/<id>`) and `country`
-(`#/country/<cc>`) are reached from them. Those screens live in their module folders above. `add` (`#/add`, `src/capture/`) opens over the bar. Planned: `search`, `tutor`, `about`.
+(`#/country/<cc>`) are reached from them. Those live in their module folders above; `add` (`#/add`, `src/capture/`) opens over the bar. Planned: `search`, `tutor`, `about`.
 
 **A new screen is a new folder.** Never grow an existing screen's file with another screen's code, and never import
 from inside another module's folder, only its entry.
@@ -50,11 +51,8 @@ from inside another module's folder, only its entry.
 - `package.json` and `package-lock.json`: dependencies. Keep a story's changes to its own lines.
 - `ATTRIBUTION.md`, `CHANGELOG.md`, `public/changelog.json`: credits and What's new (`mw next` writes the changelog).
 
-When a story must touch one of these, keep the edit small and at the end of the list.
-
 ## Rules
 
 - UI reaches the store only through a repository; a repository owns its transactions.
 - Anything that leaves the phone lives in `services/` (a shared picture, in `share/`).
-- A story that changes a source, a screen's purpose or a module boundary updates this file, `docs/overview.md` and
-  `ATTRIBUTION.md` in the same story.
+- A change to a source, a screen's purpose or a module boundary updates this file, `docs/overview.md` and `ATTRIBUTION.md`.

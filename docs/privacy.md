@@ -8,6 +8,9 @@ Nothing is sent anywhere unless he asks for it, and only these things ever leave
 - **Grist he sends.** Asking the tutor a question or having a coin read from its photos (as those screens are built) sends
   that one request to the factory's mill (grist, through `src/services/`): the question or the photos it is about. It goes
   when he taps Ask or Add, never in the background.
+- **A rough worth.** Once an item is named, its facts and grade guess (never its photos, notes or tags) go to the mill to ask
+  what it might roughly be worth, once, and again after 30 days or when its grade guess or year changes (`src/services/value.ts`).
+  A coin he is only looking at asks at once. Turning Show values off in Settings, Collection, stops the asking and hides the figures.
 - **A picture he shares.** The Share button on the globe and on an item makes one JPEG on the phone and hands it to the phone's
   own share sheet (`navigator.share`), and he chooses who gets it. A phone with no share sheet shows a Save picture link instead
   and nothing is sent. Only a tap on Share does this (`src/share/`).

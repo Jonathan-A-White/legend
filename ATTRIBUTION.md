@@ -68,6 +68,12 @@ The world data in `public/data/world/` (built by `npm run data:build`; `docs/dat
 
 Nothing from Numista, PCGS, NGC, ucoin or Colnect is copied in.
 
+## Worth
+
+Legend ships no price data and copies none: those catalogues forbid it. The rough worth on an item is a range the factory's
+model gives from the item's facts and grade guess (`grinds/item-value.json`), labelled a rough estimate for learning and never a
+price, kept with its date and asked for again after 30 days.
+
 ## Ideas
 
 - **Lampas**, the Governor's Koine Greek reader: the licence gate, the update flow, the build stamp and the way the

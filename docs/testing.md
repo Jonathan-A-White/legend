@@ -58,7 +58,7 @@ transactions it reads.
 The photo reader is bsv-kit's `sendGrist` and `awaitAnswer`; a test puts its own in their place, so nothing touches the network:
 
 - **Feature steps** call `setGristPort(port)` (`src/services/nameItem.ts`) with `tests/support/fake-grist.ts`'s `fakeGrist().port`: every send is
-  remembered with its params, `onSend` and `onAnswer` say what happens next, and `nameQueue.configure({ backoffBaseMs })` shortens the retry.
+  remembered with its params, `onSend` and `onAnswer` say what happens next, `sentOf(kind)` lists the sends of one grind (a named item also sends an `item-value`), `onAnswer` is told what was sent under the txid, and `nameQueue.configure({ backoffBaseMs })` shortens the retry.
 - **Playwright specs** set `window.__legendGrist` in an init script to an object with the same two functions (`tests/e2e/add.spec.ts`).
 - **The camera**: jsdom has none, so `tests/support/fake-camera.ts` gives `getUserMedia` a stream, the video a size and a canvas whose
   encoded size follows its pixels and quality (so the 1 MB limit really bites). In Chromium a spec replaces `navigator.mediaDevices.getUserMedia`
