@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.19
+_2026-10-10_
+- New: Wish list: keep a coin you saw at the store with its price, save up for it, and move it into your collection with 'Got it!'.
+
 ## 0.1.17
 _2026-10-10_
 - Fixed: Unlock answers in a few seconds, not tens of seconds, on a phone that has no licence yet.
