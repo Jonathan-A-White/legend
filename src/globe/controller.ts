@@ -103,6 +103,11 @@ export class GlobeController {
     this.ask();
   }
 
+  /** Where the globe faces now, for a picture of it. */
+  currentRotation(): Rotation {
+    return this.rotation;
+  }
+
   /** Turns the globe to face a country and outlines it. */
   turnTo(code: string): void {
     const country = this.scene.features.find((c) => c.id === code);

@@ -5,6 +5,7 @@ export type { NewItem, ItemChanges, ItemFilter } from './items';
 export { addPhoto, listPhotos, removePhoto, usePhotos, useThumbs } from './photos';
 export type { NewPhoto, Thumb } from './photos';
 export { getStoredSetting, getStoredSettings, putStoredSetting } from './settings';
+export { getMeta, putMeta, useMetaFlag } from './meta';
 export { addAsk, answerAsk, listAsks, useAsks } from './asks';
 export type { NewAsk } from './asks';
 export { putValue, getValue, useValue } from './values';
