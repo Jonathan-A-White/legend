@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.24",
+    "date": "2026-10-10",
+    "story": "mw-fm7wmn.26",
+    "kind": "new",
+    "text": "The key on Unlock shows zeros with a slash, so a 0 is never read as an o."
+  },
+  {
     "version": "0.1.23",
     "date": "2026-10-10",
     "story": "mw-fm7wmn.27",

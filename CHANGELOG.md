@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.24
+_2026-10-10_
+- New: The key on Unlock shows zeros with a slash, so a 0 is never read as an o.
+
 ## 0.1.23
 _2026-10-10_
 - Fixed: Add a pile of coins fast: photograph front and back, Name it, and go straight on; each fills itself in as Legend names it.
