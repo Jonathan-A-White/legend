@@ -40,7 +40,7 @@ describeFeature(feature, ({ Scenario }) => {
       expect(window.location.hash).toBe('#/globe');
     });
 
-    And('the Globe screen says what will be there', () => {
+    And('the Globe screen says what it shows', () => {
       expect(screen.getByRole('heading', { name: 'Globe' })).toBeInTheDocument();
       expect(screen.getByText(/where your coins and notes come from/i)).toBeInTheDocument();
     });
