@@ -27,9 +27,11 @@ async function fakeTutor(page: Page): Promise<void> {
     w.__legendGrist = {
       sendGrist: async (p: { kind: string; attachments?: unknown[]; input: unknown }) => {
         w.__sent.push({ kind: p.kind, files: p.attachments?.length ?? 0, input: p.input });
-        return 'direct:e2e-ask';
+        return `direct:e2e-${p.kind}`;
       },
       awaitAnswer: async (txid: string) => {
+        // a named item's rough worth is asked on open: refused, so only the tutor answers
+        if (txid === 'direct:e2e-item-value') return { re: txid, status: 'refused', reason: 'not in this test', grind: { app: 'legend', kind: 'item-value', v: '1.0' } };
         await new Promise((r) => setTimeout(r, 800));
         return { re: txid, status: 'answered', answer, grind: { app: 'legend', kind: 'legend-ask', v: '1.0' } };
       },
@@ -95,7 +97,7 @@ test('a question about his quarter is answered under the box on a phone', async 
 
   const answers = sheet.getByRole('list', { name: 'Answers' });
   await expect(answers.locator('strong', { hasText: 'Extremely Fine (XF)' })).toBeVisible();
-  const sent = await page.evaluate(() => (window as unknown as { __sent: { kind: string; files: number; input: { question: string; sides: string[] } }[] }).__sent);
+  const sent = (await page.evaluate(() => (window as unknown as { __sent: { kind: string; files: number; input: { question: string; sides: string[] } }[] }).__sent)).filter((g) => g.kind === 'legend-ask');
   expect(sent).toHaveLength(1);
   expect(sent[0]).toMatchObject({ kind: 'legend-ask', files: 2, input: { question: 'How do I grade this one?', sides: ['obverse', 'reverse'] } });
 

@@ -59,6 +59,8 @@ async function fresh(): Promise<void> {
   window.localStorage.setItem(DEVICE_KEY_STORAGE_KEY, PHONE_KEY);
   gristTimings.pollMs = 20;
   fake = makeFakePostern();
+  // a named item's rough worth is asked on open: refused at once, so the oldest grist waiting is always the tutor's
+  fake.kindReplies['item-value'] = { status: 'refused', reason: 'not in this test' };
   const world = serveGlobeWorld();
   vi.stubGlobal('fetch', (input: RequestInfo | URL, init?: RequestInit) => (String(input).startsWith(POSTERN_ORIGIN) ? fake.fetch(input, init) : world(input, init)));
   await usageWritesSettled();
