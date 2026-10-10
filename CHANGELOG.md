@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.21
+_2026-10-10_
+- New: Unlock shows this phone's key as a QR code for Dad's Postern to scan.
+
 ## 0.1.19
 _2026-10-10_
 - New: Wish list: keep a coin you saw at the store with its price, save up for it, and move it into your collection with 'Got it!'.
