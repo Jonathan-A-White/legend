@@ -9,7 +9,7 @@ import { Collection } from './screens/collection';
 import { Home } from './screens/home';
 import { Item } from './screens/item';
 import { Learn } from './screens/learn';
-import { Quarters } from './screens/quarters';
+import { Quarters } from './quarters';
 import { SettingsScreen } from './settings/SettingsScreen';
 import { useAppearance } from './settings/useAppearance';
 import { WhatsNewOnUpdate } from './whatsNew/WhatsNewOnUpdate';
