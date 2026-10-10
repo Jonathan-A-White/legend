@@ -191,7 +191,10 @@ export function CaptureScreen() {
         </div>
       </div>
 
-      {sheetItem ? <ConfirmSheet item={sheetItem} onClose={() => setChecking(null)} onLetGo={(id) => (setChecking(null), toast.show(id))} /> : null}
+      {sheetItem ? <ConfirmSheet item={sheetItem} onClose={() => setChecking(null)} onLetGo={(id) => {
+            setChecking(null);
+            toast.show(id);
+          }} /> : null}
     </main>
   );
 }
