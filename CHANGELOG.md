@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.16
+_2026-10-10_
+- New: Ask the tutor about any of your coins or a country, and it answers from that coin; it can suggest a setting, which changes only if you tap Apply.
+
 ## 0.1.15
 _2026-10-10_
 - New: Legend now gives each coin a rough worth, clearly marked as an estimate, and shows a rough worth for your whole collection and, in the store, for a coin you are only looking at.
