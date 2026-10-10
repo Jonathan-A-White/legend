@@ -6,6 +6,7 @@ import { door } from 'bsv-kit/bsv';
 import { grist } from 'bsv-kit/grist';
 import { POSTERN_DOOR } from '../config';
 import { getDeviceKeyBytes } from './deviceKey';
+import { currentGristPort, type GristPort } from './grist';
 
 /** The app, kind and version the mill runs the grind under. */
 export const NAME_APP = 'legend';
@@ -39,25 +40,7 @@ export interface NameClient {
   awaitAnswer(txid: string, signal: AbortSignal): Promise<grist.GristAnswer>;
 }
 
-/** The two calls of bsv-kit/grist the client makes: the module itself, or a test's stand-in. */
-export interface GristPort {
-  sendGrist: typeof grist.sendGrist;
-  awaitAnswer: typeof grist.awaitAnswer;
-}
-
-declare global {
-  interface Window {
-    /** A test's stand-in for bsv-kit/grist (docs/testing.md); a Playwright spec sets it before the app starts. */
-    __legendGrist?: GristPort;
-  }
-}
-
-let override: GristPort | null = null;
-
-/** Puts a test's stand-in in place of bsv-kit/grist (null puts the real one back). */
-export function setGristPort(port: GristPort | null): void {
-  override = port;
-}
+export { setGristPort, type GristPort } from './grist';
 
 export function makeNameClient(key: Uint8Array, port: GristPort = grist, baseUrl: string = POSTERN_DOOR): NameClient {
   const d = new door.Door({ baseUrl, key });
@@ -70,7 +53,7 @@ export function makeNameClient(key: Uint8Array, port: GristPort = grist, baseUrl
 /** The client over this phone's device key, or null when there is no usable key. */
 export function currentNameClient(): NameClient | null {
   try {
-    return makeNameClient(getDeviceKeyBytes(), override ?? (typeof window === 'undefined' ? undefined : window.__legendGrist) ?? grist);
+    return makeNameClient(getDeviceKeyBytes(), currentGristPort());
   } catch {
     return null;
   }

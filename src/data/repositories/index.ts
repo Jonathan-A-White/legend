@@ -6,10 +6,10 @@ export { addPhoto, listPhotos, removePhoto, usePhotos, useThumbs } from './photo
 export type { NewPhoto, Thumb } from './photos';
 export { getStoredSetting, getStoredSettings, putStoredSetting } from './settings';
 export { getMeta, putMeta, useMetaFlag } from './meta';
-export { addAsk, answerAsk, listAsks, useAsks, useAskCount } from './asks';
-export type { NewAsk } from './asks';
+export { addAsk, answerAsk, decideSuggestion, listAsks, listAsksIn, removeAsk, useAsks, useAskCount } from './asks';
+export type { AnswerMore, NewAsk } from './asks';
 export { putValue, getValue, listValues, useValue, useValues } from './values';
 export { enqueue, listOutbox, removeFromOutbox } from './outbox';
-export type { Item, ItemKind, ItemStatus, Reading, ReadingState, Confidence, Photo, PhotoSide, Ask, SettingsChange, ItemValue, OutboxRecord, StoredValue } from '../db';
+export type { Item, ItemKind, ItemStatus, Reading, ReadingState, Confidence, Photo, PhotoSide, Ask, SettingsChange, SuggestedSetting, ItemValue, OutboxRecord, StoredValue } from '../db';
 export { dayOf, listUsage, recordUsage } from './usage';
 export type { UsageRow } from './usage';

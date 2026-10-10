@@ -16,6 +16,29 @@ export const gristTimings = {
   deadlineMs: 180_000,
 };
 
+/** The two calls of bsv-kit/grist a client makes: the module itself, or a test's stand-in. */
+export interface GristPort {
+  sendGrist: typeof grist.sendGrist;
+  awaitAnswer: typeof grist.awaitAnswer;
+}
+
+declare global {
+  interface Window {
+    /** A test's stand-in for bsv-kit/grist (docs/testing.md); a Playwright spec sets it before the app starts. */
+    __legendGrist?: GristPort;
+  }
+}
+
+let override: GristPort | null = null;
+
+/** Puts a test's stand-in in place of bsv-kit/grist (null puts the real one back). */
+export function setGristPort(port: GristPort | null): void {
+  override = port;
+}
+
+/** bsv-kit/grist, or the stand-in a test put in its place. */
+export const currentGristPort = (): GristPort => override ?? (typeof window === 'undefined' ? undefined : window.__legendGrist) ?? grist;
+
 /** Why a grist did not come back with an answer. */
 export type GristFailure = 'no-licence' | 'unreachable' | 'not-sent' | 'no-answer';
 
@@ -54,6 +77,8 @@ export interface AskOptions {
   /** Files sent with the grist, as the grind's `attachments` allow. */
   files?: grist.GristFile[];
   baseUrl?: string;
+  /** bsv-kit/grist's two calls; the tutor passes currentGristPort() so a test can answer it */
+  port?: GristPort;
 }
 
 /**
@@ -62,16 +87,16 @@ export interface AskOptions {
  * failed, or answered in a shape this app cannot use, or took past the deadline).
  */
 export async function askGrind<Answer>(kind: string, request: object, isAnswer: (value: unknown) => value is Answer, options: AskOptions): Promise<Answer> {
-  const { key } = options;
+  const { key, port = grist } = options;
   const d = new door.Door({ baseUrl: options.baseUrl ?? POSTERN_DOOR, key });
   const deadline = new AbortController();
   const stop = (): void => deadline.abort();
   options.signal?.addEventListener('abort', stop, { once: true });
   const timer = setTimeout(stop, gristTimings.deadlineMs);
   try {
-    const txid = await grist.sendGrist({ door: d, key, app: GRIST_APP, kind, v: options.version, input: request, photos: [], attachments: options.files });
+    const txid = await port.sendGrist({ door: d, key, app: GRIST_APP, kind, v: options.version, input: request, photos: [], attachments: options.files });
     options.onSent?.();
-    const reply = await grist.awaitAnswer(txid, { door: d, key, intervalMs: gristTimings.pollMs, signal: deadline.signal });
+    const reply = await port.awaitAnswer(txid, { door: d, key, intervalMs: gristTimings.pollMs, signal: deadline.signal });
     if (reply.status !== 'answered') {
       throw new GristError('no-answer', reply.reason ? `The mill could not answer: ${reply.reason}` : 'The mill could not answer.');
     }

@@ -91,6 +91,14 @@ export interface SettingsChange {
   to: StoredValue;
 }
 
+/** A setting the tutor suggested with an answer, and what he did with it: null until he taps Apply or Not now. */
+export interface SuggestedSetting {
+  key: string;
+  value: StoredValue;
+  why: string;
+  decision: 'applied' | 'declined' | null;
+}
+
 export interface Ask {
   id: string;
   /** the item the question was about, or null when it was about the app */
@@ -102,6 +110,12 @@ export interface Ask {
   askedAt: number;
   answeredAt: number | null;
   settingsChanges: SettingsChange[];
+  /** the tutor's: questions he might ask next */
+  followUps?: string[];
+  /** the tutor's: settings it suggested, each applied only on his tap */
+  suggestions?: SuggestedSetting[];
+  /** the tutor's: one topic worth learning next */
+  teachMore?: { topic: string; why: string } | null;
 }
 
 /** What an item is worth: a range with its basis and where the figure came from. */
