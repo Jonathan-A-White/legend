@@ -3,6 +3,7 @@
 // key's, counts only a mint the issuer signed, and ends a licence on the issuer's signed revoke (Postern's W record).
 import { licence } from 'bsv-kit/bsv';
 import { CHAIN, COLLECTION, ISSUER } from '../config';
+import { storeTxCache } from './txCache';
 
 export type LicenceStatus = licence.LicenceStatus;
 
@@ -14,6 +15,8 @@ export interface CheckOptions {
   collection?: string;
   chain?: 'testnet' | 'mainnet';
   reader?: licence.ChainReader;
+  /** Where the transactions a check reads are kept between checks; defaults to the app's store when there is one. */
+  txCache?: licence.TransactionCache;
 }
 
 /** Throws when the chain cannot be reached, or when no issuer is set. */
@@ -24,5 +27,7 @@ export async function fetchLicenceStatus(publicKeyHex: string, options: CheckOpt
   if ((options.chain ?? CHAIN) !== 'testnet') throw new LicenceConfigError('Only the testnet chain is wired in bsv-kit so far.');
 
   const reader = options.reader ?? new licence.WhatsOnChainReader();
-  return licence.licenceStatus(publicKeyHex, options.collection ?? COLLECTION, { issuer, reader });
+  // A script outside a browser (npm run check:licence) has no store, and reads everything each time.
+  const txCache = options.txCache ?? (typeof indexedDB === 'undefined' ? undefined : storeTxCache());
+  return licence.licenceStatus(publicKeyHex, options.collection ?? COLLECTION, { issuer, reader, txCache });
 }
