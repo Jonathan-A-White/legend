@@ -1,0 +1,125 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "coin-from-photos-answer-1.0",
+  "title": "Coin From Photos answer 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind",
+    "country",
+    "countryName",
+    "currency",
+    "denomination",
+    "faceValue",
+    "year",
+    "yearRange",
+    "mintMark",
+    "series",
+    "design",
+    "material",
+    "diameterMm",
+    "inscription",
+    "gradeGuess",
+    "gradeNotes",
+    "notableFeatures",
+    "confidence",
+    "unreadable",
+    "funFact"
+  ],
+  "properties": {
+    "kind": {
+      "enum": ["coin", "note", "unknown"]
+    },
+    "country": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Z]{2}$"
+    },
+    "countryName": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "currency": {
+      "type": ["string", "null"],
+      "pattern": "^[A-Z]{3}$"
+    },
+    "denomination": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 80
+    },
+    "faceValue": {
+      "type": ["number", "null"],
+      "minimum": 0
+    },
+    "year": {
+      "type": ["integer", "null"],
+      "minimum": -1000,
+      "maximum": 2200
+    },
+    "yearRange": {
+      "type": ["array", "null"],
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {
+        "type": "integer",
+        "minimum": -1000,
+        "maximum": 2200
+      }
+    },
+    "mintMark": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 12
+    },
+    "series": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "design": {
+      "type": "string",
+      "maxLength": 400
+    },
+    "material": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "diameterMm": {
+      "type": ["number", "null"],
+      "exclusiveMinimum": 0
+    },
+    "inscription": {
+      "type": "string",
+      "maxLength": 400
+    },
+    "gradeGuess": {
+      "enum": ["P", "FR", "AG", "G", "VG", "F", "VF", "XF", "AU", "MS", null]
+    },
+    "gradeNotes": {
+      "type": "string",
+      "maxLength": 400
+    },
+    "notableFeatures": {
+      "type": "array",
+      "maxItems": 8,
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 120
+      }
+    },
+    "confidence": {
+      "enum": ["high", "medium", "low"]
+    },
+    "unreadable": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 200
+    },
+    "funFact": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 300
+    }
+  }
+}
