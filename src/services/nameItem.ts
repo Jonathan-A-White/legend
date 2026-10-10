@@ -1,12 +1,13 @@
 // src/services/nameItem.ts: the photo reader, sent as a grist through Postern (bsv-kit/grist) and answered by the coin-from-photos
 // grind (grinds/coin-from-photos.json). All the wire work is bsv-kit's: the door signs every call with the device key, sendGrist
-// uploads the photos and posts the request, awaitAnswer pages for the reply. The queue that decides when (nameQueue.ts) uses this.
+// uploads the photos and posts the request (on the send worker, sendOffThread.ts), awaitAnswer pages for the reply. The queue that decides when (nameQueue.ts) uses this.
 // Shaped after Lampas's askGrind (src/services/tutor.ts) and TradeTracker's lookup-client.
 import { door } from 'bsv-kit/bsv';
 import { grist } from 'bsv-kit/grist';
 import { POSTERN_DOOR } from '../config';
 import { getDeviceKeyBytes } from './deviceKey';
 import { currentGristPort, type GristPort } from './grist';
+import { sendOffThread } from './sendOffThread';
 
 /** The app, kind and version the mill runs the grind under. */
 export const NAME_APP = 'legend';
@@ -45,7 +46,12 @@ export { setGristPort, type GristPort } from './grist';
 export function makeNameClient(key: Uint8Array, port: GristPort = grist, baseUrl: string = POSTERN_DOOR): NameClient {
   const d = new door.Door({ baseUrl, key });
   return {
-    send: (request) => port.sendGrist({ door: d, key, app: NAME_APP, kind: request.grind?.kind ?? NAME_KIND, v: request.grind?.v ?? NAME_VERSION, input: request.input, photos: request.photos, clientId: request.clientId }),
+    send: (request) => {
+      const job = { app: NAME_APP, kind: request.grind?.kind ?? NAME_KIND, v: request.grind?.v ?? NAME_VERSION, input: request.input, photos: request.photos, clientId: request.clientId };
+      const here = () => port.sendGrist({ door: d, key, ...job });
+      // bsv-kit's own send seals and signs the photos for a second and more: on the send worker, so the viewfinder never stalls
+      return port === grist ? sendOffThread({ ...job, baseUrl, key }, here) : here();
+    },
     awaitAnswer: (txid, signal) => port.awaitAnswer(txid, { door: d, key, intervalMs: NAME_POLL_MS, signal }),
   };
 }
