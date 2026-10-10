@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.14
+_2026-10-10_
+- New: Photograph a coin or a banknote front and back and Legend names it for you to check, or just look at coins without adding them.
+
 ## 0.1.13
 _2026-10-10_
 - New: You can tell the maker what you would like added or what is wrong, from the small "…" on each screen or from Settings, and the Globe now shows a one-time tip.
