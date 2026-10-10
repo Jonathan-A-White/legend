@@ -1,0 +1,50 @@
+@import "tailwindcss";
+
+/* Design tokens: every colour the app uses is one of these. A deep green-black canvas, parchment text, a coin-gold accent.
+ * --lg-canvas is also the manifest's theme and background colour (pwa-manifest.ts) and index.html's theme-color meta. */
+@theme inline {
+  --color-canvas: var(--lg-canvas);
+  --color-surface: var(--lg-surface);
+  --color-line: var(--lg-line);
+  --color-ink: var(--lg-ink);
+  --color-muted: var(--lg-muted);
+  --color-accent: var(--lg-accent);
+  --color-accent-fg: var(--lg-accent-fg);
+}
+
+:root {
+  color-scheme: dark;
+  --lg-canvas: #07130f;
+  --lg-surface: #0d211a;
+  --lg-line: #1d3a2e;
+  --lg-ink: #e9efe9;
+  --lg-muted: #95ab9f;
+  --lg-accent: #d9b45a;
+  --lg-accent-fg: #1a1405;
+}
+
+/* The page never scrolls (PWA best practices, section 7): html, body and #root are one phone-high box, overflow clip
+ * and not hidden, dvh and not vh. A screen scrolls inside its own box. */
+html,
+body,
+#root {
+  height: 100dvh;
+  margin: 0;
+  overflow: clip;
+  overscroll-behavior: none;
+  background: var(--lg-canvas);
+}
+
+/* No double-tap zoom and no 300 ms tap delay (section 6); the viewport meta forbids pinch zoom. */
+html {
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  color: var(--lg-ink);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+}
