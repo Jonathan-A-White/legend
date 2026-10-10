@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.23
+_2026-10-10_
+- Fixed: Add a pile of coins fast: photograph front and back, Name it, and go straight on; each fills itself in as Legend names it.
+
 ## 0.1.21
 _2026-10-10_
 - New: Unlock shows this phone's key as a QR code for Dad's Postern to scan.
