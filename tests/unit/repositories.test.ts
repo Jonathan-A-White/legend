@@ -104,4 +104,26 @@ describe('asks, values and the outbox', () => {
     await enqueue('feedback', { text: 'two' });
     expect((await listOutbox()).map((r) => (r.payload as { text: string }).text)).toEqual(['one', 'two']);
   });
+
+  it('keeps insertion order for records queued in the same millisecond', async () => {
+    vi.spyOn(Date, 'now').mockReturnValue(1_700_000_000_000);
+    try {
+      const texts = Array.from({ length: 50 }, (_, i) => `record ${i}`);
+      for (const text of texts) await enqueue('feedback', { text });
+      expect((await listOutbox()).map((r) => (r.payload as { text: string }).text)).toEqual(texts);
+    } finally {
+      vi.restoreAllMocks();
+    }
+  });
+
+  it('keeps insertion order when records are queued at once', async () => {
+    vi.spyOn(Date, 'now').mockReturnValue(1_700_000_000_000);
+    try {
+      const texts = Array.from({ length: 50 }, (_, i) => `record ${i}`);
+      await Promise.all(texts.map((text) => enqueue('feedback', { text })));
+      expect((await listOutbox()).map((r) => (r.payload as { text: string }).text)).toEqual(texts);
+    } finally {
+      vi.restoreAllMocks();
+    }
+  });
 });
