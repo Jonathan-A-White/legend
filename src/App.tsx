@@ -1,12 +1,11 @@
 // src/App.tsx: the shell every screen sits in: the Update banner over the current screen, the bottom bar under it, and the
 // What's new sheet that shows once after an update. The screen switch below is the one place a new screen is added: one line.
 import { UpdateBanner } from './UpdateBanner';
+import { CountrySheet, GlobeScreen } from './globe';
 import { BottomBar } from './nav/BottomBar';
 import { countryOf, itemIdOf, routeOf, useAddress } from './nav/route';
 import { useRouteEvents } from './nav/useRouteEvents';
 import { Collection } from './screens/collection';
-import { Country } from './screens/country';
-import { Globe } from './screens/globe';
 import { Home } from './screens/home';
 import { Item } from './screens/item';
 import { Learn } from './screens/learn';
@@ -20,7 +19,7 @@ function Screen({ hash }: { hash: string }) {
     case 'collection':
       return <Collection />;
     case 'globe':
-      return <Globe />;
+      return <GlobeScreen />;
     case 'quarters':
       return <Quarters />;
     case 'learn':
@@ -30,7 +29,7 @@ function Screen({ hash }: { hash: string }) {
     case 'item':
       return <Item id={itemIdOf(hash)!} />;
     case 'country':
-      return <Country code={countryOf(hash)!} />;
+      return <CountrySheet code={countryOf(hash)!} />;
     case 'home':
       return <Home />;
   }

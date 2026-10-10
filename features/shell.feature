@@ -7,4 +7,4 @@ Feature: The shell
     And Collection is the active one
     When they tap Globe
     Then Globe is the active one
-    And the Globe screen says what will be there
+    And the Globe screen says what it shows
