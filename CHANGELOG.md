@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.11
+_2026-10-10_
+- New: You can now share a picture of your globe or a card of one coin or note from the Share button, and only that picture leaves the phone.
+
 ## 0.1.10
 _2026-10-10_
 - New: Legend now opens on an Unlock screen until Dad has issued this phone a licence.
