@@ -166,7 +166,7 @@ describeFeature(feature, ({ Scenario }) => {
     });
     Then('that coin opens', async () => {
       expect(window.location.hash).toBe(`#/item/${firstCoin}`);
-      expect(await screen.findByRole('heading', { name: 'Item' })).toBeInTheDocument();
+      expect(await screen.findByRole('main', { name: 'Item' })).toBeInTheDocument();
     });
   });
 
