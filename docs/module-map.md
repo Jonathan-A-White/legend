@@ -9,7 +9,7 @@ planned folders are created by the story that needs them, with the entry file na
 | App shell | Start the app: scroll guard, banner, service worker, config | `src/main.tsx`, `src/App.tsx`, `src/config.ts`, `src/sw.ts` | built |
 | Update flow | Banner, waiting build, What's new | `src/UpdateBanner.tsx`, `src/whatsNew/` | built |
 | gate | Hold the app shut until the phone's key holds a licence | `src/gate/Gate.tsx` | planned |
-| data | The local store (Dexie v1: items, photos, settings, meta, asks, values, outbox) and its record types | `src/data/db.ts` | built |
+| data | The local store (Dexie v2: items, photos, settings, meta, asks, values, outbox) and its record types | `src/data/db.ts` | built |
 | data/world | The world's countries (TopoJSON, names, flags) and each country's currencies by date, loaded from files that ship in `public/data/world/` (built by `npm run data:build`; `docs/data.md`) | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: one file per family (items, photos, settings, asks, values, outbox), with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | services | Everything that leaves the phone: grist client, licence, device key, app update | `src/services/appUpdate.ts` | built (`itemAnswer.ts` checks the photo reader's answer; grist client, licence planned) |

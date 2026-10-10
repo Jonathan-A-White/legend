@@ -99,6 +99,8 @@ export interface OutboxRecord {
   kind: string;
   payload: unknown;
   createdAt: number;
+  /** insertion order: createdAt is milliseconds, so records queued together tie on it */
+  seq: number;
 }
 
 export class LegendDb extends Dexie {
@@ -122,6 +124,21 @@ export class LegendDb extends Dexie {
       values: 'itemId',
       outbox: 'id, kind, createdAt',
     });
+    // v2: the outbox gains a seq index (insertion order); existing rows get one in createdAt order.
+    this.version(2)
+      .stores({
+        items: 'id, kind, country, status, updatedAt, deletedAt',
+        photos: 'id, itemId',
+        settings: 'key',
+        meta: 'key',
+        asks: 'id, itemId, askedAt',
+        values: 'itemId',
+        outbox: 'id, kind, createdAt, seq',
+      })
+      .upgrade(async (tx) => {
+        const rows = await tx.table('outbox').orderBy('createdAt').toArray();
+        for (const [i, row] of rows.entries()) await tx.table('outbox').update(row.id, { seq: i + 1 });
+      });
   }
 }
 
