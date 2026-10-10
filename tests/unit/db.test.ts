@@ -1,4 +1,4 @@
-// The local store: Dexie v3 with the eight stores the app is built on (src/data/db.ts).
+// The local store: Dexie v4 with the nine stores the app is built on (src/data/db.ts).
 import { afterAll, describe, expect, it } from 'vitest';
 import Dexie from 'dexie';
 import { LegendDb } from '../../src/data/db';
@@ -7,10 +7,10 @@ const test = new LegendDb('legend-db-test');
 afterAll(() => test.close());
 
 describe('the local store', () => {
-  it('opens at version 3 and lists the eight stores', async () => {
+  it('opens at version 4 and lists the nine stores', async () => {
     await test.open();
-    expect(test.verno).toBe(3);
-    expect(test.tables.map((t) => t.name).sort()).toEqual(['asks', 'items', 'meta', 'outbox', 'photos', 'settings', 'usage', 'values']);
+    expect(test.verno).toBe(4);
+    expect(test.tables.map((t) => t.name).sort()).toEqual(['asks', 'items', 'meta', 'outbox', 'photos', 'savings', 'settings', 'usage', 'values']);
   });
 
   it('keys each store as the repositories expect', async () => {

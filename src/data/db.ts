@@ -5,8 +5,9 @@
 import Dexie, { type EntityTable } from 'dexie';
 
 export type ItemKind = 'coin' | 'note';
-/** 'considering' is an item he is only looking at (Just looking): named like the rest, but not in the collection or its counts until he adds it. */
-export type ItemStatus = 'pending' | 'named' | 'confirmed' | 'considering';
+/** 'considering' is an item he is only looking at (Just looking): named like the rest, but not in the collection or its counts until he adds it.
+ * 'wished' is a coin he wants and has not bought (it carries an askingPrice): on the Wish list, never in the collection or its counts. */
+export type ItemStatus = 'pending' | 'named' | 'confirmed' | 'considering' | 'wished';
 /** Where an item stands with the photo reader: 'waiting' to be sent, 'sent' (the grist's txid is kept) and waiting for the answer, or 'failed' (the words say why). */
 export type ReadingState = 'waiting' | 'sent' | 'failed';
 export type Confidence = 'high' | 'medium' | 'low';
@@ -57,6 +58,12 @@ export interface Item {
   confidence: Confidence | null;
   /** present from Name it until the photo reader's answer is kept */
   reading?: Reading | null;
+  /** a wished coin's price at the store (US dollars), where he saw it (his words) and when he wished for it */
+  askingPrice?: number | null;
+  store?: string | null;
+  wishedAt?: number | null;
+  /** what he paid, set by Got it! on a wished coin */
+  pricePaid?: number | null;
   createdAt: number;
   updatedAt: number;
   /** set when removed; a removed item is kept so a mistake can be undone */
@@ -153,6 +160,16 @@ export interface UsageRow {
   count: number;
 }
 
+/** A tally of money put aside for a wished coin. No money moves anywhere: it is a number he types. */
+export interface Saving {
+  id: string;
+  itemId: string;
+  /** US dollars, above zero */
+  amount: number;
+  at: number;
+  note: string;
+}
+
 export class LegendDb extends Dexie {
   items!: EntityTable<Item, 'id'>;
   photos!: EntityTable<Photo, 'id'>;
@@ -162,6 +179,7 @@ export class LegendDb extends Dexie {
   values!: EntityTable<ItemValue, 'itemId'>;
   outbox!: EntityTable<OutboxRecord, 'id'>;
   usage!: EntityTable<UsageRow, 'key'>;
+  savings!: EntityTable<Saving, 'id'>;
 
   constructor(name = 'legend') {
     super(name);
@@ -200,6 +218,18 @@ export class LegendDb extends Dexie {
       values: 'itemId',
       outbox: 'id, kind, createdAt, seq',
       usage: 'key, day, name',
+    });
+    // v4: the savings tally for the Wish list.
+    this.version(4).stores({
+      items: 'id, kind, country, status, updatedAt, deletedAt',
+      photos: 'id, itemId',
+      settings: 'key',
+      meta: 'key',
+      asks: 'id, itemId, askedAt',
+      values: 'itemId',
+      outbox: 'id, kind, createdAt, seq',
+      usage: 'key, day, name',
+      savings: 'id, itemId, at',
     });
   }
 }
