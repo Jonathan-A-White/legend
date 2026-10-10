@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.12
+_2026-10-10_
+- New: Learn now teaches grading, mint marks and special years using the coins you have, and Your path shows what you have learned and what to try next.
+
 ## 0.1.11
 _2026-10-10_
 - New: You can now share a picture of your globe or a card of one coin or note from the Share button, and only that picture leaves the phone.
