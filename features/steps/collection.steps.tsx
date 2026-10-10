@@ -120,9 +120,10 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
   Scenario('the Item view shows both photos and every fact and a note is saved as typed', ({ Given, When, Then, And }) => {
     Given('a collection of 3 coins and 1 bill from 3 countries', aCollection);
     When('he opens the United States quarter', openTheQuarter);
-    Then('both photos are shown', () => {
-      expect(screen.getByRole('img', { name: /Obverse/ })).toBeInTheDocument();
-      expect(screen.getByRole('img', { name: /Reverse/ })).toBeInTheDocument();
+    Then('both photos are shown', async () => {
+      // The photos arrive from the store a moment after the heading: wait for them instead of reading at once.
+      expect(await screen.findByRole('img', { name: /Obverse/ })).toBeInTheDocument();
+      expect(await screen.findByRole('img', { name: /Reverse/ })).toBeInTheDocument();
     });
     And('the facts are shown: country, denomination, year, mint, series, design, grade guess marked as a guess, the inscription and the fun fact', async () => {
       const facts = await screen.findByRole('region', { name: 'Facts' });
