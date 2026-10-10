@@ -17,10 +17,11 @@ planned folders are created by the story that needs them, with the entry file na
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows Settings draws, the screen, theme and text size applied | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left (a trail of 20, Back across a close) | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
-| ui | Shared controls and gestures: scroll guard, build stamp, placeholder | `src/ui/` (one file each) | built |
+| ui | Shared controls and gestures: scroll guard, build stamp, placeholder, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), both from Lampas | `src/ui/` (one file each) | built |
 | globe | The Globe (`#/globe`) and the Country sheet (`#/country/<cc>`): a d3-geo globe on a 2D canvas. `render.ts` draws a frame on any context (pure; skips a frame that would not change); `controller.ts` is the one requestAnimationFrame loop, the finger (versor drag, inertia, tap to pick) and the idle spin, stopped while the page is hidden; `clock.ts` is its seam on time for tests | `src/globe/index.ts` | built |
 | quarters | The Quarters screen (`#/quarters`): the US map lit by his quarters, the State sheet (`#/quarters?state=OH`), the programme picker with counts, the Checklist, the territory tiles; `match.ts` (pure) says which design an item is, `summary.ts` counts, `topo.ts` draws `states.json` as SVG; rules in `docs/data.md` | `src/quarters/index.ts` | built |
-| screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home`; placeholders `collection`, `learn`, `item` |
+| collection | The Collection (`#/collection`: count line, search, filters, grid or list) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); the matcher `search.ts` and the pure rules `view.ts` | `src/collection/index.ts` | built |
+| screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home`; placeholder `learn` |
 
 ## Grinds
 
@@ -32,9 +33,10 @@ scenarios; `tests/unit/grind-examples.test.ts` fails when a grind has none.
 
 Each screen is a folder `src/screens/<name>/` exporting its component from `index.ts`. The bottom bar has Collection, Globe,
 Quarters, Learn and Settings (Settings is `src/settings/SettingsScreen.tsx`, the Globe and the Country sheet are `src/globe/`,
-Quarters is `src/quarters/`); `home` is `#/`; `item` (`#/item/<id>`) and `country` (`#/country/<cc>`) are reached from them.
-The rest are placeholders that say what will be there: the story that builds one replaces its folder's component. Planned:
-`add`, `search`, `tutor`, `about`.
+Quarters is `src/quarters/`); `home` is `#/`; `item` (`#/item/<id>`, in `src/collection/`) and `country` (`#/country/<cc>`) are
+reached from them. Learn is a placeholder that says what will be there: the story that builds one replaces its folder's
+component. The Collection and its item view are `src/collection/`, not a `screens/` folder. Planned: `add`, `search`, `tutor`,
+`about`.
 
 **A new screen is a new folder.** Never grow an existing screen's file with another screen's code, and never import
 from inside another module's folder, only its entry.
