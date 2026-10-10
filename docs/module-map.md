@@ -12,6 +12,7 @@ planned folders are created by the story that needs them, with the entry file na
 | data | The local store (Dexie v1: items, photos, settings, meta, asks, values, outbox) and its record types | `src/data/db.ts` | built |
 | data/world | The world's countries (TopoJSON, names, flags) and each country's currencies by date, loaded from files that ship in `public/data/world/` (built by `npm run data:build`; `docs/data.md`) | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: one file per family (items, photos, settings, asks, values, outbox), with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
+| data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
 | services | Everything that leaves the phone: grist client, licence, device key, app update | `src/services/appUpdate.ts` | built (`itemAnswer.ts` checks the photo reader's answer; grist client, licence planned) |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows Settings draws, the screen, theme and text size applied | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |

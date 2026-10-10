@@ -1,0 +1,272 @@
+[
+ {
+  "code": "PO-1",
+  "name": "Poor",
+  "from": 1,
+  "to": 1,
+  "summary": "Barely a coin. It is only just recognisable as one of its kind.",
+  "cent": "Worn nearly flat. You can tell it is a cent by size and colour, and perhaps make out a rough head. The date may be gone.",
+  "quarter": "Worn nearly flat. The size and silver edge say quarter, the face is a smooth blob, and the date may be missing."
+ },
+ {
+  "code": "FR-2",
+  "name": "Fair",
+  "from": 2,
+  "to": 2,
+  "summary": "Worn almost smooth, but a little more of the design survives.",
+  "cent": "Lincoln is a shape with no detail. The rim is worn down into the lettering, and the date might still be readable.",
+  "quarter": "Washington is a vague outline and the eagle is a lump. Some letters around the edge are still there."
+ },
+ {
+  "code": "AG-3",
+  "name": "About Good",
+  "from": 3,
+  "to": 3,
+  "summary": "Heavily worn, but the main outline is clear and the date can be read.",
+  "cent": "Lincoln's head is an outline with no hair or ear detail. The date shows. Most of the lettering is flat against the rim.",
+  "quarter": "Washington's head is an outline with no hair. The eagle is a rough shape. The date and a few letters can be read."
+ },
+ {
+  "code": "G-4",
+  "name": "Good",
+  "from": 4,
+  "to": 5,
+  "summary": "Very worn, with the main outline plain and the rim merging into the lettering.",
+  "cent": "Lincoln's head and shoulders are an outline with a hint of hair. The date is clear. On the back, the Lincoln Memorial is a flat block.",
+  "quarter": "The portrait is an outline with a smooth face. The eagle on the back is a rough shape, and the wreath is a line."
+ },
+ {
+  "code": "G-6",
+  "name": "Good",
+  "from": 6,
+  "to": 7,
+  "summary": "A little more detail than Good. The rim is clearer and the letters are separate again.",
+  "cent": "The rim is complete. Lincoln's ear is a smudge and the letters are all there, though weak. The columns on the back are not yet separate.",
+  "quarter": "The rim stands apart from the lettering. Hair is faintly shown above the ear, and the eagle's shape is better but has no feathers."
+ },
+ {
+  "code": "VG-8",
+  "name": "Very Good",
+  "from": 8,
+  "to": 9,
+  "summary": "Worn, but the main parts of the design are clear and some detail shows.",
+  "cent": "Lincoln's hair and beard show as lumps, with the ear faint. On the back, the pillars of the Memorial begin to show.",
+  "quarter": "The hair has some lines, and the cheek is smooth. The eagle shows a few lines of wings, and the wreath leaves are partly visible."
+ },
+ {
+  "code": "VG-10",
+  "name": "Very Good",
+  "from": 10,
+  "to": 11,
+  "summary": "Worn but nicely readable, with more detail than a Very Good 8.",
+  "cent": "The beard and hair have clearer lines. Most of the Memorial's columns show, though the steps are flat.",
+  "quarter": "Some hair lines show above the ear and the eagle has a few separate feathers. Most of the wreath is visible."
+ },
+ {
+  "code": "F-12",
+  "name": "Fine",
+  "from": 12,
+  "to": 14,
+  "summary": "Moderately worn, with all the main features clear and the high points flat.",
+  "cent": "Lincoln's hair, ear and bow tie are clear with some detail. The Memorial's columns are clear and the steps are starting to show.",
+  "quarter": "The hair has lines, and the eagle has most of its wing feathers. The cheek and the ribbon behind the neck are worn flat."
+ },
+ {
+  "code": "F-15",
+  "name": "Fine",
+  "from": 15,
+  "to": 19,
+  "summary": "A clear, honest circulated coin, with most detail present even if worn at the high points.",
+  "cent": "The cheekbone and jaw are smooth, but hair and beard lines are mostly clear. The steps of the Memorial can be counted.",
+  "quarter": "The hair above the ear is mostly clear. The eagle's breast feathers are partly gone, and the wreath is well defined."
+ },
+ {
+  "code": "VF-20",
+  "name": "Very Fine",
+  "from": 20,
+  "to": 24,
+  "summary": "Light-to-moderate wear. All the major details are clear, with wear on the highest points.",
+  "cent": "The hair is well defined, but the cheek, jaw and ear are flat. The Memorial's columns and steps are visible.",
+  "quarter": "Most hair lines are clear and the cheek is worn. The eagle shows most of its feathers, with the breast and legs worn."
+ },
+ {
+  "code": "VF-25",
+  "name": "Very Fine",
+  "from": 25,
+  "to": 29,
+  "summary": "Light wear on the high points, with sharp detail elsewhere.",
+  "cent": "Hair detail stays strong with just the top of the head and cheek worn. The Memorial's columns are clear.",
+  "quarter": "The hair above the ear is clear, with wear on the top of the head. The eagle's breast feathers show well."
+ },
+ {
+  "code": "VF-30",
+  "name": "Very Fine",
+  "from": 30,
+  "to": 34,
+  "summary": "Light wear, usually on a few high points, with most detail sharp.",
+  "cent": "Most hair and beard lines are sharp. The cheek and jaw show smooth wear.",
+  "quarter": "The hair is sharp, with a worn spot at the cheek. The eagle's feathers are mostly sharp, with the tops of the legs worn."
+ },
+ {
+  "code": "VF-35",
+  "name": "Very Fine",
+  "from": 35,
+  "to": 39,
+  "summary": "Only light wear on the very highest points. A good-looking coin.",
+  "cent": "The coin looks bright and detailed. The cheekbone and hair above the ear show light wear and very little else is worn.",
+  "quarter": "The portrait shows just a touch of wear on the cheek and the hair. The eagle's breast has all its feathers with slight flatness."
+ },
+ {
+  "code": "XF-40",
+  "name": "Extremely Fine",
+  "from": 40,
+  "to": 44,
+  "summary": "Lightly worn, with sharp detail everywhere and a little flatness on the highest points.",
+  "cent": "Hair, beard and ear are sharp. Only the cheek, jaw and top of the hair are lightly worn. Some mint shine may still sit in the recesses.",
+  "quarter": "The hair and the eagle are sharp, with light wear at the cheek, the hair above the ear and the tops of the eagle's legs."
+ },
+ {
+  "code": "XF-45",
+  "name": "Extremely Fine",
+  "from": 45,
+  "to": 49,
+  "summary": "Very light wear on only the highest points, with some original shine remaining.",
+  "cent": "Wear shows only on the cheek and top of the head, with a bit of the original colour or shine in the protected areas.",
+  "quarter": "A trace of wear on the cheek, the hair and the eagle's breast. Mint shine fills the recesses."
+ },
+ {
+  "code": "AU-50",
+  "name": "About Uncirculated",
+  "from": 50,
+  "to": 52,
+  "summary": "Just a trace of wear on the highest points; most of the original shine is still there.",
+  "cent": "Friction on the cheek and hair, with luster over most of the surface. The wear is easy to see only when you tilt it in the light.",
+  "quarter": "Wear on the cheek, hair and the eagle's breast, no deeper than a light rub. Most of the shine remains."
+ },
+ {
+  "code": "AU-53",
+  "name": "About Uncirculated",
+  "from": 53,
+  "to": 54,
+  "summary": "A little less wear than an AU-50, with more shine.",
+  "cent": "Slight wear on the highest points, but more than half the original luster remains and the colour is bright.",
+  "quarter": "Slight friction on the cheek and the eagle's breast. More than half of the luster is still in place."
+ },
+ {
+  "code": "AU-55",
+  "name": "About Uncirculated",
+  "from": 55,
+  "to": 57,
+  "summary": "Slight wear that is hard to find, with most of the luster intact.",
+  "cent": "Only a hint of wear on the cheek and hair. Luster covers most of the surface, with a few rub marks.",
+  "quarter": "Wear is hard to see on the cheek and the eagle. Luster is full, with one or two small marks."
+ },
+ {
+  "code": "AU-58",
+  "name": "About Uncirculated",
+  "from": 58,
+  "to": 59,
+  "summary": "Barely touched. It looks new unless you hunt for wear.",
+  "cent": "Looks like a new coin with the barest friction on the very highest point of the cheek. Full luster.",
+  "quarter": "Looks new, with a hint of friction on the cheek or the eagle's breast. Full luster."
+ },
+ {
+  "code": "MS-60",
+  "name": "Mint State",
+  "from": 60,
+  "to": 60,
+  "summary": "Never circulated, but weak. It may be dull, scratched or heavily marked from bags.",
+  "cent": "No wear, but it may have many scratches, spots or a dull surface. Lots of marks, possibly a bad strike.",
+  "quarter": "No wear on the high points, but the surface has many scratches and dents from other coins. It may be dull."
+ },
+ {
+  "code": "MS-61",
+  "name": "Mint State",
+  "from": 61,
+  "to": 61,
+  "summary": "Uncirculated, with many marks, but a little better than 60.",
+  "cent": "No wear, but with many marks and a dull or uneven look.",
+  "quarter": "No wear. Several marks on the cheek and face, though it is clearly new."
+ },
+ {
+  "code": "MS-62",
+  "name": "Mint State",
+  "from": 62,
+  "to": 62,
+  "summary": "Uncirculated, with a number of marks and a mostly decent shine.",
+  "cent": "No wear. Many small marks are easy to spot, and the shine may be uneven.",
+  "quarter": "No wear. A number of marks are easy to see, but the shine is fairly good."
+ },
+ {
+  "code": "MS-63",
+  "name": "Mint State",
+  "from": 63,
+  "to": 63,
+  "summary": "Uncirculated, with some marks and an acceptable shine and strike.",
+  "cent": "No wear. Several small marks, none large, and good shine. The colour may be red-brown or brown.",
+  "quarter": "No wear and good shine. Several small marks, probably a few on the face, and none that are large."
+ },
+ {
+  "code": "MS-64",
+  "name": "Mint State",
+  "from": 64,
+  "to": 64,
+  "summary": "Uncirculated with a handful of small marks and a good strike.",
+  "cent": "No wear. A few small marks away from the focal point, a clean look, and good colour.",
+  "quarter": "No wear. A few small marks, none on the face or in the open fields, and a sharp strike."
+ },
+ {
+  "code": "MS-65",
+  "name": "Mint State",
+  "from": 65,
+  "to": 65,
+  "summary": "A fine, sharp coin with a lively shine and just a few tiny marks.",
+  "cent": "Full shine and a sharp strike with only a couple of small, hard-to-see marks. Bright red colour is common here.",
+  "quarter": "Strong, lively shine and a sharp strike with only a couple of small marks, none on the face."
+ },
+ {
+  "code": "MS-66",
+  "name": "Mint State",
+  "from": 66,
+  "to": 66,
+  "summary": "A very fine coin with a strong shine and only tiny, scattered marks.",
+  "cent": "Excellent shine and strike with only minor flaws. Very few marks, even under a glass.",
+  "quarter": "Excellent shine, a sharp strike and only minor marks, none in the main design."
+ },
+ {
+  "code": "MS-67",
+  "name": "Mint State",
+  "from": 67,
+  "to": 67,
+  "summary": "Superb. Almost no marks, a brilliant shine and a sharp strike.",
+  "cent": "Brilliant and clean. It takes a glass to find any marks at all.",
+  "quarter": "Brilliant, with almost no marks and a sharp strike. You need a glass to find anything."
+ },
+ {
+  "code": "MS-68",
+  "name": "Mint State",
+  "from": 68,
+  "to": 68,
+  "summary": "Nearly flawless, with a tiny flaw at most.",
+  "cent": "Flawless to the eye with a very tiny flaw if any, and a perfect strike.",
+  "quarter": "Flawless to the eye with an extraordinary strike and shine."
+ },
+ {
+  "code": "MS-69",
+  "name": "Mint State",
+  "from": 69,
+  "to": 69,
+  "summary": "Almost perfect. Even under a glass you may find only one tiny flaw.",
+  "cent": "Extremely rare and nearly perfect. A glass will find one tiny flaw at most.",
+  "quarter": "Nearly perfect. A glass will show at most one tiny flaw."
+ },
+ {
+  "code": "MS-70",
+  "name": "Mint State",
+  "from": 70,
+  "to": 70,
+  "summary": "Perfect in every way a grader can check: no flaw even under a glass.",
+  "cent": "Perfect. No marks, a full strike, great shine and colour. Seen under magnification, there is nothing wrong.",
+  "quarter": "Perfect. No marks, full strike, great shine. Nothing wrong under magnification."
+ }
+]

@@ -1,0 +1,173 @@
+{
+ "mints": [
+  {
+   "mark": "P",
+   "city": "Philadelphia",
+   "state": "Pennsylvania",
+   "years": [
+    {
+     "from": 1793,
+     "to": null
+    }
+   ],
+   "struck": "Everything: the first and the main US mint.",
+   "note": "Philadelphia coins carried no mark for most of history. P appears on the 1942-1945 war nickels, then on nickels, dimes and quarters from 1980, and on cents from 2017."
+  },
+  {
+   "mark": "D",
+   "city": "Denver",
+   "state": "Colorado",
+   "years": [
+    {
+     "from": 1906,
+     "to": null
+    }
+   ],
+   "struck": "Coins for circulation, and collector sets.",
+   "note": "The Denver mint opened in 1906. Its D appears on cents from 1911."
+  },
+  {
+   "mark": "S",
+   "city": "San Francisco",
+   "state": "California",
+   "years": [
+    {
+     "from": 1854,
+     "to": 1955
+    },
+    {
+     "from": 1968,
+     "to": null
+    }
+   ],
+   "struck": "Coins for circulation until 1974, and since then proof coins for collectors.",
+   "note": "No mint marks were used from 1965 to 1967, so no S from those years. Today the S marks proof coins."
+  },
+  {
+   "mark": "W",
+   "city": "West Point",
+   "state": "New York",
+   "years": [
+    {
+     "from": 1974,
+     "to": null
+    }
+   ],
+   "struck": "Gold and silver bullion coins, commemoratives and some collector coins; a few circulating coins.",
+   "note": "West Point has been a full mint since 1988. Its W is a rare find in change: the 2019 quarter with a W is an example."
+  },
+  {
+   "mark": "CC",
+   "city": "Carson City",
+   "state": "Nevada",
+   "years": [
+    {
+     "from": 1870,
+     "to": 1893
+    }
+   ],
+   "struck": "Silver and gold coins from the Comstock silver mines.",
+   "note": "Short-lived and small, so a CC coin is prized by collectors. It struck silver and gold only, never cents or nickels."
+  },
+  {
+   "mark": "O",
+   "city": "New Orleans",
+   "state": "Louisiana",
+   "years": [
+    {
+     "from": 1838,
+     "to": 1861
+    },
+    {
+     "from": 1879,
+     "to": 1909
+    }
+   ],
+   "struck": "Gold and silver coins, including many Morgan silver dollars.",
+   "note": "It closed in 1861 when the Civil War began, and reopened in 1879. You will not find an O on a coin in your pocket today."
+  },
+  {
+   "mark": "C",
+   "city": "Charlotte",
+   "state": "North Carolina",
+   "years": [
+    {
+     "from": 1838,
+     "to": 1861
+    }
+   ],
+   "struck": "Gold coins only.",
+   "note": "Struck from local gold. It closed in 1861."
+  },
+  {
+   "mark": "D",
+   "city": "Dahlonega",
+   "state": "Georgia",
+   "years": [
+    {
+     "from": 1838,
+     "to": 1861
+    }
+   ],
+   "struck": "Gold coins only.",
+   "note": "Another branch of the 1830s gold rush, in Georgia. Its D is not Denver's: look at the date to tell them apart."
+  }
+ ],
+ "placement": [
+  {
+   "series": "Lincoln cent",
+   "eras": [
+    {
+     "from": 1909,
+     "to": null,
+     "where": "On the front, under the date. A cent with no mark came from Philadelphia until 2017."
+    }
+   ]
+  },
+  {
+   "series": "Jefferson nickel",
+   "eras": [
+    {
+     "from": 1938,
+     "to": 1964,
+     "where": "On the back, to the right of the Monticello building. The 1942-1945 war nickels have a large mark above the dome instead."
+    },
+    {
+     "from": 1968,
+     "to": null,
+     "where": "On the front, near the date. No marks were used in 1965, 1966 and 1967."
+    }
+   ]
+  },
+  {
+   "series": "Roosevelt dime",
+   "eras": [
+    {
+     "from": 1946,
+     "to": 1964,
+     "where": "On the back, to the left of the bottom of the torch."
+    },
+    {
+     "from": 1968,
+     "to": null,
+     "where": "On the front, above the date. No marks were used in 1965, 1966 and 1967."
+    }
+   ]
+  },
+  {
+   "series": "Washington quarter",
+   "eras": [
+    {
+     "from": 1932,
+     "to": 1964,
+     "where": "On the back, under the wreath."
+    },
+    {
+     "from": 1968,
+     "to": null,
+     "where": "On the front, to the right of the portrait, under the words IN GOD WE TRUST. No marks were used in 1965, 1966 and 1967."
+    }
+   ]
+  }
+ ]
+}

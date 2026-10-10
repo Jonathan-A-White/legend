@@ -31,6 +31,24 @@ not shipped in the app) are from Wikimedia Commons, each scaled down and saved a
 
 Each photo's page is linked in `grinds/examples/README.md`.
 
+The US reference data in `public/data/us/` (the facts and the lists are written by hand; see `docs/data.md`):
+
+- **Quarter designs** (`quarters.json`): the lists and release order were taken from Wikipedia's tables ([50 State Quarters](https://en.wikipedia.org/wiki/50_State_Quarters),
+  [America the Beautiful quarters](https://en.wikipedia.org/wiki/America_the_Beautiful_quarters),
+  [American Women quarters](https://en.wikipedia.org/wiki/American_Women_quarters),
+  [Semiquincentennial coinage](https://en.wikipedia.org/wiki/United_States_Semiquincentennial_coinage)), text
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0), and are the programmes the
+  [US Mint](https://www.usmint.gov/coins/coin-programs) publishes. Names, years and order are facts; each design line is
+  our own short sentence, and we added the state and territory codes.
+- **Mint marks** (`mints.json`): Wikipedia's [Mint mark](https://en.wikipedia.org/wiki/Mint_mark) (CC BY-SA 4.0), with the US Mint's
+  [mint marks page](https://www.usmint.gov/learn/collecting-basics/mint-marks) as the reference. Facts; our own words.
+- **Sheldon grades** (`grades.json`): the 1-to-70 scale was devised by William Sheldon (1949). The step names are the common
+  ones; every description is written for Legend and not taken from a grading service.
+- **Key dates** (`key-dates.json`): common knowledge of the hobby, with no prices and no mintage figures. Our own words.
+- **States map** (`states.json`): **[us-atlas](https://github.com/topojson/us-atlas)** by Mike Bostock, ISC, from US Census
+  Bureau cartographic boundaries (public domain), the `states-albers-10m` file. Changes: the national outline removed, and
+  each state's two-letter code added in place of its FIPS id. Alaska and Hawaii are the file's own insets.
+
 The world data in `public/data/world/` (built by `npm run data:build`; `docs/data.md` says how):
 
 - **[Natural Earth](https://www.naturalearthdata.com)** 110m country shapes, public domain, as repackaged by

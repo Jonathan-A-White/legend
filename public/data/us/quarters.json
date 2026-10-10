@@ -1,0 +1,1934 @@
+[
+ {
+  "program": "state",
+  "year": 1999,
+  "order": 1,
+  "name": "Delaware",
+  "jurisdiction": "DE",
+  "design": "Caesar Rodney on horseback",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 1999,
+  "order": 2,
+  "name": "Pennsylvania",
+  "jurisdiction": "PA",
+  "design": "The Commonwealth statue, the state outline and a keystone",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 1999,
+  "order": 3,
+  "name": "New Jersey",
+  "jurisdiction": "NJ",
+  "design": "Washington crossing the Delaware River",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 1999,
+  "order": 4,
+  "name": "Georgia",
+  "jurisdiction": "GA",
+  "design": "A peach, live oak sprigs and the state outline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 1999,
+  "order": 5,
+  "name": "Connecticut",
+  "jurisdiction": "CT",
+  "design": "The Charter Oak",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2000,
+  "order": 6,
+  "name": "Massachusetts",
+  "jurisdiction": "MA",
+  "design": "The Minute Man statue and the state outline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2000,
+  "order": 7,
+  "name": "Maryland",
+  "jurisdiction": "MD",
+  "design": "The State House dome and white oak clusters",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2000,
+  "order": 8,
+  "name": "South Carolina",
+  "jurisdiction": "SC",
+  "design": "A Carolina wren, yellow jessamine, a palmetto tree and the state outline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2000,
+  "order": 9,
+  "name": "New Hampshire",
+  "jurisdiction": "NH",
+  "design": "The Old Man of the Mountain and nine stars",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2000,
+  "order": 10,
+  "name": "Virginia",
+  "jurisdiction": "VA",
+  "design": "The ships Susan Constant, Godspeed and Discovery, for Jamestown 1607-2007",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2001,
+  "order": 11,
+  "name": "New York",
+  "jurisdiction": "NY",
+  "design": "The Statue of Liberty and the state outline with the Hudson River and Erie Canal",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2001,
+  "order": 12,
+  "name": "North Carolina",
+  "jurisdiction": "NC",
+  "design": "The Wright Flyer, for the first powered flight",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2001,
+  "order": 13,
+  "name": "Rhode Island",
+  "jurisdiction": "RI",
+  "design": "The yacht Reliance on Narragansett Bay and the Newport Bridge",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2001,
+  "order": 14,
+  "name": "Vermont",
+  "jurisdiction": "VT",
+  "design": "Maple trees with sap buckets and Camel's Hump mountain",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2001,
+  "order": 15,
+  "name": "Kentucky",
+  "jurisdiction": "KY",
+  "design": "A thoroughbred racehorse and the Federal Hill mansion",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2002,
+  "order": 16,
+  "name": "Tennessee",
+  "jurisdiction": "TN",
+  "design": "A fiddle, a trumpet, a guitar and a musical score",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2002,
+  "order": 17,
+  "name": "Ohio",
+  "jurisdiction": "OH",
+  "design": "An astronaut, the Wright Flyer III and the state outline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2002,
+  "order": 18,
+  "name": "Louisiana",
+  "jurisdiction": "LA",
+  "design": "A brown pelican, a trumpet and the outline of the Louisiana Purchase",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2002,
+  "order": 19,
+  "name": "Indiana",
+  "jurisdiction": "IN",
+  "design": "An IndyCar racing car and the state outline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2002,
+  "order": 20,
+  "name": "Mississippi",
+  "jurisdiction": "MS",
+  "design": "Two magnolia blossoms",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2003,
+  "order": 21,
+  "name": "Illinois",
+  "jurisdiction": "IL",
+  "design": "Young Abraham Lincoln, a farm scene and the Chicago skyline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2003,
+  "order": 22,
+  "name": "Alabama",
+  "jurisdiction": "AL",
+  "design": "Helen Keller, a longleaf pine, magnolia blossoms and her name in Braille",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2003,
+  "order": 23,
+  "name": "Maine",
+  "jurisdiction": "ME",
+  "design": "Pemaquid Point Lighthouse and the schooner Victory Chimes",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2003,
+  "order": 24,
+  "name": "Missouri",
+  "jurisdiction": "MO",
+  "design": "The Gateway Arch and Lewis and Clark on the Missouri River",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2003,
+  "order": 25,
+  "name": "Arkansas",
+  "jurisdiction": "AR",
+  "design": "A diamond, rice stalks and a mallard flying over a lake",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2004,
+  "order": 26,
+  "name": "Michigan",
+  "jurisdiction": "MI",
+  "design": "The state outline and the Great Lakes",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2004,
+  "order": 27,
+  "name": "Florida",
+  "jurisdiction": "FL",
+  "design": "A Spanish galleon, a sabal palm and a space shuttle",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2004,
+  "order": 28,
+  "name": "Texas",
+  "jurisdiction": "TX",
+  "design": "The state outline, a star and a lariat",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2004,
+  "order": 29,
+  "name": "Iowa",
+  "jurisdiction": "IA",
+  "design": "A schoolhouse with students planting a tree, after Grant Wood's Arbor Day",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2004,
+  "order": 30,
+  "name": "Wisconsin",
+  "jurisdiction": "WI",
+  "design": "A cow's head, a wheel of cheese and an ear of corn",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2005,
+  "order": 31,
+  "name": "California",
+  "jurisdiction": "CA",
+  "design": "John Muir, a California condor and Half Dome",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2005,
+  "order": 32,
+  "name": "Minnesota",
+  "jurisdiction": "MN",
+  "design": "A common loon, a fishing scene and the state outline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2005,
+  "order": 33,
+  "name": "Oregon",
+  "jurisdiction": "OR",
+  "design": "Crater Lake and Wizard Island",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2005,
+  "order": 34,
+  "name": "Kansas",
+  "jurisdiction": "KS",
+  "design": "An American bison and sunflowers",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2005,
+  "order": 35,
+  "name": "West Virginia",
+  "jurisdiction": "WV",
+  "design": "The New River Gorge Bridge",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2006,
+  "order": 36,
+  "name": "Nevada",
+  "jurisdiction": "NV",
+  "design": "Wild mustangs, mountains, a rising sun and sagebrush",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2006,
+  "order": 37,
+  "name": "Nebraska",
+  "jurisdiction": "NE",
+  "design": "Chimney Rock and a Conestoga wagon",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2006,
+  "order": 38,
+  "name": "Colorado",
+  "jurisdiction": "CO",
+  "design": "Longs Peak and the Colorado skyline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2006,
+  "order": 39,
+  "name": "North Dakota",
+  "jurisdiction": "ND",
+  "design": "An American bison on the badlands",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2006,
+  "order": 40,
+  "name": "South Dakota",
+  "jurisdiction": "SD",
+  "design": "Mount Rushmore, a ring-necked pheasant and wheat",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2007,
+  "order": 41,
+  "name": "Montana",
+  "jurisdiction": "MT",
+  "design": "A bison skull, mountains and the Missouri River",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2007,
+  "order": 42,
+  "name": "Washington",
+  "jurisdiction": "WA",
+  "design": "A salmon leaping in front of Mount Rainier",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2007,
+  "order": 43,
+  "name": "Idaho",
+  "jurisdiction": "ID",
+  "design": "A peregrine falcon and the state outline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2007,
+  "order": 44,
+  "name": "Wyoming",
+  "jurisdiction": "WY",
+  "design": "A bucking horse and rider",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2007,
+  "order": 45,
+  "name": "Utah",
+  "jurisdiction": "UT",
+  "design": "The golden spike and two locomotives meeting",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2008,
+  "order": 46,
+  "name": "Oklahoma",
+  "jurisdiction": "OK",
+  "design": "A scissor-tailed flycatcher and Indian blanket wildflowers",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2008,
+  "order": 47,
+  "name": "New Mexico",
+  "jurisdiction": "NM",
+  "design": "The Zia sun symbol on the state outline",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2008,
+  "order": 48,
+  "name": "Arizona",
+  "jurisdiction": "AZ",
+  "design": "The Grand Canyon and a saguaro cactus",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2008,
+  "order": 49,
+  "name": "Alaska",
+  "jurisdiction": "AK",
+  "design": "A grizzly bear with a salmon and the North Star",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "state",
+  "year": 2008,
+  "order": 50,
+  "name": "Hawaii",
+  "jurisdiction": "HI",
+  "design": "The statue of Kamehameha I and the Hawaiian Islands",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "dc-territories",
+  "year": 2009,
+  "order": 1,
+  "name": "District of Columbia",
+  "jurisdiction": "DC",
+  "design": "Duke Ellington at the piano",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "dc-territories",
+  "year": 2009,
+  "order": 2,
+  "name": "Puerto Rico",
+  "jurisdiction": "PR",
+  "design": "A sentry box at El Morro fortress and a hibiscus",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "dc-territories",
+  "year": 2009,
+  "order": 3,
+  "name": "Guam",
+  "jurisdiction": "GU",
+  "design": "The island outline, a latte stone and a proa canoe",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "dc-territories",
+  "year": 2009,
+  "order": 4,
+  "name": "American Samoa",
+  "jurisdiction": "AS",
+  "design": "A fitafita guard, an ava bowl, a war club and a staff",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "dc-territories",
+  "year": 2009,
+  "order": 5,
+  "name": "U.S. Virgin Islands",
+  "jurisdiction": "VI",
+  "design": "A brown booby, a bananaquit and yellow cedar flowers",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "dc-territories",
+  "year": 2009,
+  "order": 6,
+  "name": "Northern Mariana Islands",
+  "jurisdiction": "MP",
+  "design": "A Mariana fruit dove, a latte stone and a canoe",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2010,
+  "order": 1,
+  "name": "Hot Springs National Park",
+  "jurisdiction": "AR",
+  "design": "The park headquarters building with a thermal fountain in front",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2010,
+  "order": 2,
+  "name": "Yellowstone National Park",
+  "jurisdiction": "WY",
+  "design": "A bison beside the Old Faithful geyser",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2010,
+  "order": 3,
+  "name": "Yosemite National Park",
+  "jurisdiction": "CA",
+  "design": "El Capitan",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2010,
+  "order": 4,
+  "name": "Grand Canyon National Park",
+  "jurisdiction": "AZ",
+  "design": "Marble Canyon",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2010,
+  "order": 5,
+  "name": "Mount Hood National Forest",
+  "jurisdiction": "OR",
+  "design": "Lost Lake with Mount Hood beyond",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2011,
+  "order": 6,
+  "name": "Gettysburg National Military Park",
+  "jurisdiction": "PA",
+  "design": "The 72nd Pennsylvania Infantry monument",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2011,
+  "order": 7,
+  "name": "Glacier National Park",
+  "jurisdiction": "MT",
+  "design": "A mountain goat with Reynolds Mountain beyond",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2011,
+  "order": 8,
+  "name": "Olympic National Park",
+  "jurisdiction": "WA",
+  "design": "A Roosevelt elk at the Hoh River with Mount Olympus beyond",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2011,
+  "order": 9,
+  "name": "Vicksburg National Military Park",
+  "jurisdiction": "MS",
+  "design": "The ironclad USS Cairo on the Yazoo River",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2011,
+  "order": 10,
+  "name": "Chickasaw National Recreation Area",
+  "jurisdiction": "OK",
+  "design": "The Lincoln Bridge",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2012,
+  "order": 11,
+  "name": "El Yunque National Forest",
+  "jurisdiction": "PR",
+  "design": "A Puerto Rican amazon parrot and a common coqui frog",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2012,
+  "order": 12,
+  "name": "Chaco Culture National Historical Park",
+  "jurisdiction": "NM",
+  "design": "Two elevated kivas of the Chetro Ketl complex",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2012,
+  "order": 13,
+  "name": "Acadia National Park",
+  "jurisdiction": "ME",
+  "design": "Bass Harbor Head Lighthouse",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2012,
+  "order": 14,
+  "name": "Hawaiʻi Volcanoes National Park",
+  "jurisdiction": "HI",
+  "design": "The Kīlauea volcano",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2012,
+  "order": 15,
+  "name": "Denali National Park and Preserve",
+  "jurisdiction": "AK",
+  "design": "A Dall sheep with Denali behind",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2013,
+  "order": 16,
+  "name": "White Mountain National Forest",
+  "jurisdiction": "NH",
+  "design": "Mount Chocorua with birch trees in front",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2013,
+  "order": 17,
+  "name": "Perry's Victory and International Peace Memorial",
+  "jurisdiction": "OH",
+  "design": "The statue of Oliver Hazard Perry and the memorial column",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2013,
+  "order": 18,
+  "name": "Great Basin National Park",
+  "jurisdiction": "NV",
+  "design": "A bristlecone pine",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2013,
+  "order": 19,
+  "name": "Fort McHenry National Monument",
+  "jurisdiction": "MD",
+  "design": "Fort McHenry under bombardment",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2013,
+  "order": 20,
+  "name": "Mount Rushmore National Memorial",
+  "jurisdiction": "SD",
+  "design": "Workers carving the mountain",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2014,
+  "order": 21,
+  "name": "Great Smoky Mountains National Park",
+  "jurisdiction": "TN",
+  "design": "A log cabin in the forest with a hawk overhead",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2014,
+  "order": 22,
+  "name": "Shenandoah National Park",
+  "jurisdiction": "VA",
+  "design": "A hiker at the Stony Man summit",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2014,
+  "order": 23,
+  "name": "Arches National Park",
+  "jurisdiction": "UT",
+  "design": "Delicate Arch with the La Sal Mountains beyond",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2014,
+  "order": 24,
+  "name": "Great Sand Dunes National Park and Preserve",
+  "jurisdiction": "CO",
+  "design": "A father and son by a creek, with dunes and mountains behind",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2014,
+  "order": 25,
+  "name": "Everglades National Park",
+  "jurisdiction": "FL",
+  "design": "An anhinga on a willow and a roseate spoonbill wading",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2015,
+  "order": 26,
+  "name": "Homestead National Historical Park",
+  "jurisdiction": "NE",
+  "design": "A log cabin, two ears of corn and a water pump",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2015,
+  "order": 27,
+  "name": "Kisatchie National Forest",
+  "jurisdiction": "LA",
+  "design": "A wild turkey in flight over bluestem grass, with longleaf pines behind",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2015,
+  "order": 28,
+  "name": "Blue Ridge Parkway",
+  "jurisdiction": "NC",
+  "design": "A stretch of the parkway with flowering dogwood in front",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2015,
+  "order": 29,
+  "name": "Bombay Hook National Wildlife Refuge",
+  "jurisdiction": "DE",
+  "design": "A great blue heron and a great egret in a salt marsh",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2015,
+  "order": 30,
+  "name": "Saratoga National Historical Park",
+  "jurisdiction": "NY",
+  "design": "General Burgoyne surrendering his sword to General Gates",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2016,
+  "order": 31,
+  "name": "Shawnee National Forest",
+  "jurisdiction": "IL",
+  "design": "Camel Rock with a red-tailed hawk overhead",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2016,
+  "order": 32,
+  "name": "Cumberland Gap National Historical Park",
+  "jurisdiction": "KY",
+  "design": "A frontiersman looking over the Cumberland Mountains",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2016,
+  "order": 33,
+  "name": "Harpers Ferry National Historical Park",
+  "jurisdiction": "WV",
+  "design": "John Brown's Fort",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2016,
+  "order": 34,
+  "name": "Theodore Roosevelt National Park",
+  "jurisdiction": "ND",
+  "design": "Theodore Roosevelt on horseback near the Little Missouri River",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2016,
+  "order": 35,
+  "name": "Fort Moultrie (Fort Sumter National Monument)",
+  "jurisdiction": "SC",
+  "design": "William Jasper returning the flag to the ramparts of Fort Moultrie",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2017,
+  "order": 36,
+  "name": "Effigy Mounds National Monument",
+  "jurisdiction": "IA",
+  "design": "An aerial view of the Marching Bear mounds",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2017,
+  "order": 37,
+  "name": "Frederick Douglass National Historic Site",
+  "jurisdiction": "DC",
+  "design": "Frederick Douglass at his writing desk with his home behind",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2017,
+  "order": 38,
+  "name": "Ozark National Scenic Riverways",
+  "jurisdiction": "MO",
+  "design": "Alley Mill",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2017,
+  "order": 39,
+  "name": "Ellis Island (Statue of Liberty National Monument)",
+  "jurisdiction": "NJ",
+  "design": "An immigrant family approaching Ellis Island",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2017,
+  "order": 40,
+  "name": "George Rogers Clark National Historical Park",
+  "jurisdiction": "IN",
+  "design": "George Rogers Clark leading his men through flooded plains toward Fort Sackville",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2018,
+  "order": 41,
+  "name": "Pictured Rocks National Lakeshore",
+  "jurisdiction": "MI",
+  "design": "Chapel Rock beside a white pine",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2018,
+  "order": 42,
+  "name": "Apostle Islands National Lakeshore",
+  "jurisdiction": "WI",
+  "design": "Sea caves and the lighthouse on Devils Island, with a kayaker",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2018,
+  "order": 43,
+  "name": "Voyageurs National Park",
+  "jurisdiction": "MN",
+  "design": "A common loon with a rock cliff behind",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2018,
+  "order": 44,
+  "name": "Cumberland Island National Seashore",
+  "jurisdiction": "GA",
+  "design": "A snowy egret with a salt marsh behind",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2018,
+  "order": 45,
+  "name": "Block Island National Wildlife Refuge",
+  "jurisdiction": "RI",
+  "design": "A black-crowned night heron over Cow Cove, with the North Lighthouse behind",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2019,
+  "order": 46,
+  "name": "Lowell National Historical Park",
+  "jurisdiction": "MA",
+  "design": "A mill girl at a power loom with a clock tower beyond the window",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2019,
+  "order": 47,
+  "name": "American Memorial Park",
+  "jurisdiction": "MP",
+  "design": "A young Chamorro woman at the Flag Circle and Court of Honor",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2019,
+  "order": 48,
+  "name": "War in the Pacific National Historical Park",
+  "jurisdiction": "GU",
+  "design": "American forces coming ashore in the Second Battle of Guam",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2019,
+  "order": 49,
+  "name": "San Antonio Missions National Historical Park",
+  "jurisdiction": "TX",
+  "design": "Mission symbols in a cross: arches, a bell, a lion, waves and wheat",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2019,
+  "order": 50,
+  "name": "Frank Church-River of No Return Wilderness",
+  "jurisdiction": "ID",
+  "design": "A drift boat on the Salmon River",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2020,
+  "order": 51,
+  "name": "National Park of American Samoa",
+  "jurisdiction": "AS",
+  "design": "A Samoa flying fox mother and pup",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2020,
+  "order": 52,
+  "name": "Weir Farm National Historical Park",
+  "jurisdiction": "CT",
+  "design": "An artist painting outdoors",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2020,
+  "order": 53,
+  "name": "Salt River Bay National Historical Park and Ecological Preserve",
+  "jurisdiction": "VI",
+  "design": "A young red mangrove",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2020,
+  "order": 54,
+  "name": "Marsh-Billings-Rockefeller National Historical Park",
+  "jurisdiction": "VT",
+  "design": "A young girl planting a Norway spruce seedling",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2020,
+  "order": 55,
+  "name": "Tallgrass Prairie National Preserve",
+  "jurisdiction": "KS",
+  "design": "A regal fritillary butterfly in big bluestem grass",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "america-the-beautiful",
+  "year": 2021,
+  "order": 56,
+  "name": "Tuskegee Airmen National Historic Site",
+  "jurisdiction": "AL",
+  "design": "A Tuskegee Airman suiting up, with two P-51 Mustangs overhead",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "washington-crossing",
+  "year": 2021,
+  "order": 1,
+  "name": "Washington Crossing the Delaware",
+  "jurisdiction": null,
+  "design": "Washington and his troops crossing the Delaware River, after the 1776 painting",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": "A one-year reverse for 2021; the obverse is the usual Washington."
+ },
+ {
+  "program": "american-women",
+  "year": 2022,
+  "order": 1,
+  "name": "Maya Angelou",
+  "jurisdiction": null,
+  "design": "Angelou with arms outstretched before a bird in flight and a sunrise",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2022,
+  "order": 2,
+  "name": "Sally Ride",
+  "jurisdiction": null,
+  "design": "Ride beside a Space Shuttle window with Earth behind",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2022,
+  "order": 3,
+  "name": "Wilma Mankiller",
+  "jurisdiction": null,
+  "design": "Mankiller in a shawl beside the Cherokee Nation seven-pointed star",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2022,
+  "order": 4,
+  "name": "Nina Otero-Warren",
+  "jurisdiction": null,
+  "design": "Three yucca flowers and the words \"Voto para la mujer\"",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2022,
+  "order": 5,
+  "name": "Anna May Wong",
+  "jurisdiction": null,
+  "design": "Wong framed by marquee lights",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2023,
+  "order": 6,
+  "name": "Bessie Coleman",
+  "jurisdiction": null,
+  "design": "Coleman in a flying helmet looking toward a biplane",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2023,
+  "order": 7,
+  "name": "Edith Kanakaʻole",
+  "jurisdiction": null,
+  "design": "Her hair and lei blending into a Hawaiian landscape",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2023,
+  "order": 8,
+  "name": "Eleanor Roosevelt",
+  "jurisdiction": null,
+  "design": "Roosevelt beside the scales of justice and a globe",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2023,
+  "order": 9,
+  "name": "Jovita Idar",
+  "jurisdiction": null,
+  "design": "Idar with clasped hands, her figure made from the words of her newspapers",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2023,
+  "order": 10,
+  "name": "Maria Tallchief",
+  "jurisdiction": null,
+  "design": "Tallchief in a spotlit ballet pose with her Osage name",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2024,
+  "order": 11,
+  "name": "Pauli Murray",
+  "jurisdiction": null,
+  "design": "Murray's portrait inside the word HOPE",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2024,
+  "order": 12,
+  "name": "Patsy Mink",
+  "jurisdiction": null,
+  "design": "Mink outside the Capitol holding a copy of Title IX",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2024,
+  "order": 13,
+  "name": "Mary Edwards Walker",
+  "jurisdiction": null,
+  "design": "Walker wearing her Medal of Honor",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2024,
+  "order": 14,
+  "name": "Celia Cruz",
+  "jurisdiction": null,
+  "design": "Cruz performing with a microphone beside the word AZÚCAR",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2024,
+  "order": 15,
+  "name": "Zitkala-Ša",
+  "jurisdiction": null,
+  "design": "Zitkala-Ša holding a book, with a sun and a red cardinal",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2025,
+  "order": 16,
+  "name": "Ida B. Wells",
+  "jurisdiction": null,
+  "design": "Wells with her work as journalist, suffragist and civil rights activist named below",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2025,
+  "order": 17,
+  "name": "Juliette Gordon Low",
+  "jurisdiction": null,
+  "design": "Low beside the Girl Scout trefoil",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2025,
+  "order": 18,
+  "name": "Vera Rubin",
+  "jurisdiction": null,
+  "design": "A profile of Rubin against a dark matter background",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2025,
+  "order": 19,
+  "name": "Stacey Milbern",
+  "jurisdiction": null,
+  "design": "Milbern in a wheelchair beside the words Disability Justice",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "american-women",
+  "year": 2025,
+  "order": 20,
+  "name": "Althea Gibson",
+  "jurisdiction": null,
+  "design": "Gibson holding a tennis racket beside the words Trailblazing Champion",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "semiquincentennial",
+  "year": 2026,
+  "order": 1,
+  "name": "Mayflower Compact",
+  "jurisdiction": null,
+  "design": "The Mayflower under sail",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "semiquincentennial",
+  "year": 2026,
+  "order": 2,
+  "name": "American Revolutionary War",
+  "jurisdiction": null,
+  "design": "A Continental Army soldier looking over the Valley Forge camp",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "semiquincentennial",
+  "year": 2026,
+  "order": 3,
+  "name": "Declaration of Independence",
+  "jurisdiction": null,
+  "design": "The Liberty Bell tolling",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "semiquincentennial",
+  "year": 2026,
+  "order": 4,
+  "name": "U.S. Constitution",
+  "jurisdiction": null,
+  "design": "The steeple of Independence Hall with its clock at 2:50",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": null
+ },
+ {
+  "program": "semiquincentennial",
+  "year": 2026,
+  "order": 5,
+  "name": "Gettysburg Address",
+  "jurisdiction": null,
+  "design": "Two hands clasped, with the words \"a new nation conceived in liberty\"",
+  "mintMarks": [
+   "P",
+   "D",
+   "S"
+  ],
+  "notes": "Scheduled for release on 21 October 2026."
+ }
+]

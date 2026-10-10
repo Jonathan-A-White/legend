@@ -19,6 +19,7 @@ reader names it, they confirm), search, the globe, the Quarters album, the tutor
 - `src/` the app, one folder per module: `docs/module-map.md`. Everything is stored in Dexie behind repositories, screens
   talk through the bus (`docs/events.md`), a setting is one registry entry.
 - `features/*.feature` Gherkin scenarios; `features/steps/` their steps; `tests/unit/` unit tests; `tests/e2e/` Playwright.
+- `public/data/us/` the US reference data (138 quarter designs, mints, Sheldon grades, key dates, a states map), loaded by `src/data/us.ts`; sources and licences in `docs/data.md`.
 - `public/changelog.json` and `CHANGELOG.md` What's new; `ATTRIBUTION.md` credits every source.
 - `docs/data.md` the world data (`npm run data:build`: countries and currencies, sources and licences); `public/data/world/`.
 - `grinds/` the grist definitions and their examples (`coin-from-photos`: a photo in, a named item out); `schemas/` their schemas.

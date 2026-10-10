@@ -1,0 +1,155 @@
+[
+ {
+  "series": "Lincoln cent",
+  "years": "1909-",
+  "entries": [
+   {
+    "year": 1909,
+    "mintMark": "S",
+    "name": "1909-S VDB",
+    "why": "The first Lincoln cent has the designer's initials V.D.B. on the back. They were removed after complaints, so the few cents made in San Francisco with them are the favourite of the series."
+   },
+   {
+    "year": 1914,
+    "mintMark": "D",
+    "name": "1914-D",
+    "why": "Denver made very few cents this year, and most were used up long ago, so a nice one is hard to find."
+   },
+   {
+    "year": 1922,
+    "mintMark": null,
+    "name": "1922 plain (no D)",
+    "why": "All 1922 cents came from Denver, but some dies were so worn that the D vanished. A 1922 with no mark is one of those."
+   },
+   {
+    "year": 1931,
+    "mintMark": "S",
+    "name": "1931-S",
+    "why": "San Francisco struck very few cents during the early Depression, which makes this date the scarce one of its decade."
+   },
+   {
+    "year": 1955,
+    "mintMark": null,
+    "name": "1955 doubled die",
+    "why": "A die error doubled the date and the lettering, so they look blurred as if printed twice. You can see it without a magnifier."
+   }
+  ]
+ },
+ {
+  "series": "Jefferson nickel",
+  "years": "1938-",
+  "entries": [
+   {
+    "year": 1938,
+    "mintMark": "D",
+    "name": "1938-D",
+    "why": "The first year of the design, and the Denver mint made fewer than the others."
+   },
+   {
+    "year": 1938,
+    "mintMark": "S",
+    "name": "1938-S",
+    "why": "Also a first-year coin, made in San Francisco in smaller numbers than the Philadelphia one."
+   },
+   {
+    "year": 1939,
+    "mintMark": "D",
+    "name": "1939-D",
+    "why": "Denver made very few nickels this year, and it is the hard one of the early set."
+   },
+   {
+    "year": 1939,
+    "mintMark": "S",
+    "name": "1939-S",
+    "why": "A smaller run from San Francisco, so a bit scarce in nice condition."
+   },
+   {
+    "year": 1950,
+    "mintMark": "D",
+    "name": "1950-D",
+    "why": "The fewest nickels of any year in the series, so many collectors fill this gap last."
+   },
+   {
+    "year": 1942,
+    "yearTo": 1945,
+    "mintMark": null,
+    "name": "1942-1945 war nickels",
+    "why": "To save nickel for the war, these were made with silver and manganese. A big mint mark sits over the dome on the back, so you can spot them."
+   }
+  ]
+ },
+ {
+  "series": "Roosevelt dime",
+  "years": "1946-",
+  "entries": [
+   {
+    "year": 1946,
+    "yearTo": 1964,
+    "mintMark": null,
+    "name": "1946-1964 silver dimes",
+    "why": "Until 1964 these dimes were 90% silver, so they weigh and ring differently from later dimes."
+   },
+   {
+    "year": 1949,
+    "mintMark": "S",
+    "name": "1949-S",
+    "why": "San Francisco made fewer dimes this year than any other date in the silver run."
+   },
+   {
+    "year": 1965,
+    "mintMark": null,
+    "name": "1965: the change to copper-nickel",
+    "why": "Silver became too costly, so dimes became copper-nickel with a copper core. You can see the copper stripe on the edge."
+   },
+   {
+    "year": 1982,
+    "mintMark": null,
+    "name": "1982 no P",
+    "why": "Philadelphia began putting P on dimes in 1980, but a number of 1982 dimes left without one by mistake."
+   },
+   {
+    "year": 1996,
+    "mintMark": "W",
+    "name": "1996-W",
+    "why": "West Point made this dime only for special sets, so one found in change would be a surprise."
+   }
+  ]
+ },
+ {
+  "series": "Washington quarter",
+  "years": "1932-",
+  "entries": [
+   {
+    "year": 1932,
+    "mintMark": "D",
+    "name": "1932-D",
+    "why": "The first year of the series, and Denver made very few. It is the key date of the series."
+   },
+   {
+    "year": 1932,
+    "mintMark": "S",
+    "name": "1932-S",
+    "why": "San Francisco's first-year quarter also had a very small run, the other key date."
+   },
+   {
+    "year": 1964,
+    "mintMark": null,
+    "name": "1964: the last silver quarter",
+    "why": "After 1964 quarters were no longer silver, so any quarter dated 1964 or earlier is worth a closer look."
+   },
+   {
+    "year": 1976,
+    "mintMark": null,
+    "name": "1776-1976 bicentennial",
+    "why": "For the 200th birthday of the country, quarters were struck with a drummer boy on the back and a double date. A fun one to find in change."
+   },
+   {
+    "year": 1999,
+    "yearTo": 2008,
+    "mintMark": null,
+    "name": "1999-2008 state quarters, known errors",
+    "why": "Some state quarters have known mistakes, such as an extra leaf or missing letters. See the Mint for the list; this app gives no values."
+   }
+  ]
+ }
+]
