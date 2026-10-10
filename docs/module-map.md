@@ -22,7 +22,8 @@ that needs them, with the entry file named here.
 | quarters | The Quarters screen (`#/quarters`): the US map lit by his quarters, the State sheet (`#/quarters?state=OH`), the programme picker with counts, the Checklist, the territory tiles; `match.ts` (pure) says which design an item is, `summary.ts` counts, `topo.ts` draws `states.json` as SVG; rules in `docs/data.md` | `src/quarters/index.ts` | built |
 | collection | The Collection (`#/collection`: count line, search, filters, grid or list) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); the matcher `search.ts` and the pure rules `view.ts` | `src/collection/index.ts` | built |
 | share | Share: a picture of the globe or a card of one item (never notes, tags, values or serial numbers) by `navigator.share`, else Save picture; `text.ts` says what a card may; `docs/privacy.md` | `src/share/index.ts` | built |
-| screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home`; placeholder `learn` |
+| learn | Learn (`#/learn`) and `#/learn/grading`, `/mints`, `/years`, `/path`, each ending in Ask the tutor (disabled). Pure rules: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
+| screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
 
 ## Grinds
 
@@ -35,7 +36,7 @@ scenarios; `tests/unit/grind-examples.test.ts` fails when a grind has none.
 Each screen is a folder `src/screens/<name>/` exporting its component from `index.ts`. The bottom bar has Collection, Globe,
 Quarters, Learn and Settings (Settings is `src/settings/SettingsScreen.tsx`, the Globe and the Country sheet are `src/globe/`,
 Quarters is `src/quarters/`); `home` is `#/`; `item` (`#/item/<id>`, in `src/collection/`) and `country` (`#/country/<cc>`) are
-reached from them. Learn is a placeholder: its story replaces the component. Planned: `add`, `search`, `tutor`,
+reached from them. The Collection and item view are `src/collection/`, Learn `src/learn/`. Planned: `add`, `search`, `tutor`,
 `about`.
 
 **A new screen is a new folder.** Never grow an existing screen's file with another screen's code, and never import

@@ -14,7 +14,7 @@ Built: the licence gate (Unlock until the phone's key holds a `legend` licence; 
 filters, grid or list) and one item (photos, facts, notes, Edit, hold to Remove), the Globe (`#/globe`: a globe turned with one
 finger, lit where the items come from; search spins it to a country; Not yet lists the countries with nothing yet) and the
 Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map lit with the quarters they
-have, a checklist), Share (a picture of the globe, a card of one item). Learn is a placeholder. Planned: add an item (photograph a coin or a note, the photo
+have, a checklist), Share (a picture of the globe, a card of one item). Learn (grading on his coins, mint marks, special years, Your path). Planned: add an item (photograph a coin or a note, the photo
 reader names it, they confirm), search, the tutor, About (credits, What's new).
 
 ## Where things live

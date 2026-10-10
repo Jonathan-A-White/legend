@@ -93,3 +93,16 @@ writing the name in the item's design field says what the piece is; (2) the seri
 is no match: a year or a programme is needed unless the design is exactly a name. "Yosemite National Park" is also "Yosemite"
 (the text from "National" or "(" on is dropped). A place is lit when he has all of its designs in the chosen programme, half
 when some; the American Women, Crossing the Delaware and 2026 designs have no place, so they only count and list.
+
+### Learn (`src/learn/`)
+
+Every Learn page reads the files above and his own items; nothing leaves the phone. Rules, all pure and tested:
+
+- Grading: `bandsOf` groups the 30 steps into bands (MS to PO). A coin's `gradeGuess` sits at its step when it names one ('VF-30',
+  'MS65') or on its band when it does not ('VF'); 'EF' is XF and 'P' is PO. The walk's three answers give a band (`walkBand`) and
+  only Keep writes it to the item.
+- Mints: a US coin is under the mint with its mark; where two share a mark (D) the year picks one (Denver 1906-, Dahlonega 1838-1861).
+- Special years: a coin's series is found from its series text, else its denomination. It matches a key date by series and year, by mint
+  mark where the date names one, and with no mark where the date is plain or a doubled die; those say to look closely.
+- Your path: levels start at counts Grading 0/5/20 (items with a gradeGuess), Mints 0/3/8 (distinct US marks), World 1/5/15/30
+  (countries), Quarters 0/10/30/60 (designs matched), Looking 0/5/20 (items tagged `considered`), Tutor 0/3/10 (asks).
