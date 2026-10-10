@@ -24,6 +24,7 @@ describe('routes', () => {
     for (const page of ['grading', 'mints', 'years', 'path']) expect(routeOf(`#/learn/${page}`)).toBe('learn');
     expect(routeOf('#/learn/nothing')).toBe('home');
     expect(routeOf('#/settings')).toBe('settings');
+    expect(routeOf('#/wishlist')).toBe('wishlist');
     expect(routeOf('#/item/abc-123')).toBe('item');
     expect(itemIdOf('#/item/abc-123')).toBe('abc-123');
     expect(routeOf('#/country/us')).toBe('country');

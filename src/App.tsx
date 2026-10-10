@@ -16,6 +16,7 @@ import { Quarters } from './quarters';
 import { SettingsScreen } from './settings/SettingsScreen';
 import { useAppearance } from './settings/useAppearance';
 import { useUsageLog } from './tips';
+import { WishListScreen } from './wishlist';
 import { WhatsNewOnUpdate } from './whatsNew/WhatsNewOnUpdate';
 
 function Screen({ hash }: { hash: string }) {
@@ -36,6 +37,8 @@ function Screen({ hash }: { hash: string }) {
       return <CountrySheet code={countryOf(hash)!} />;
     case 'add':
       return <CaptureScreen />;
+    case 'wishlist':
+      return <WishListScreen />;
     case 'home':
       return <Home />;
   }

@@ -21,7 +21,7 @@ export function ItemReading({ item, onLetGo }: { item: Item; onLetGo: () => void
     );
   }
   if (reading || item.status === 'pending') return <p className={card}>At the factory: Legend is still reading this one.</p>;
-  if (item.status === 'confirmed') return null;
+  if (item.status === 'confirmed' || item.status === 'wished') return null;
   return (
     <>
       <div className={card}>

@@ -12,8 +12,8 @@ export type ItemChanges = Partial<Omit<Item, 'id' | 'createdAt' | 'updatedAt' | 
 export interface ItemFilter {
   country?: string;
   kind?: ItemKind;
-  /** 'collected' (the default) leaves out what he is only looking at, so no count includes it; 'looking' is only those; 'all' both */
-  scope?: 'collected' | 'looking' | 'all';
+  /** 'collected' (the default) leaves out what he is only looking at or has wished for, so no count includes it; 'looking' and 'wished' are only those; 'all' every one */
+  scope?: 'collected' | 'looking' | 'wished' | 'all';
 }
 
 // An item's createdAt is its place in the queue to the photo reader, so two added in the same millisecond still differ.
@@ -70,8 +70,12 @@ export async function getItem(id: string): Promise<Item | undefined> {
   return db.items.get(id);
 }
 
-const inScope = (item: Item, scope: ItemFilter['scope'] = 'collected'): boolean =>
-  scope === 'all' || (scope === 'looking') === (item.status === 'considering');
+const inScope = (item: Item, scope: ItemFilter['scope'] = 'collected'): boolean => {
+  if (scope === 'all') return true;
+  if (scope === 'looking') return item.status === 'considering';
+  if (scope === 'wished') return item.status === 'wished';
+  return item.status !== 'considering' && item.status !== 'wished';
+};
 
 /** The items that are not removed, newest change first, narrowed by country and kind (and, by default, not the ones he is only looking at). */
 export async function listItems(filter: ItemFilter = {}): Promise<Item[]> {
@@ -99,10 +103,21 @@ export async function updateItem(id: string, changes: ItemChanges): Promise<Item
 
 /** Gives an item what the photo reader or the collector named, and marks it named (an item he is only looking at stays so). The trip to the reader is over. */
 export async function nameItem(id: string, changes: ItemChanges): Promise<Item> {
-  const status = (await db.items.get(id))?.status === 'considering' ? 'considering' : 'named';
+  const was = (await db.items.get(id))?.status;
+  const status = was === 'considering' || was === 'wished' ? was : 'named';
   const item = await change(id, { ...changes, status, reading: null });
   publish({ kind: 'item.named', id });
   return item;
+}
+
+/** Keeps a coin he is looking at as wished, with the price at the store (US dollars) and, if he said it, the store's name. */
+export async function wishFor(id: string, askingPrice: number, store: string): Promise<Item> {
+  return updateItem(id, { status: 'wished', askingPrice, store: store.trim() || null, wishedAt: Date.now() });
+}
+
+/** Moves a wished coin into the collection (confirmed, its photos kept) with what he paid. */
+export async function gotIt(id: string, pricePaid: number): Promise<Item> {
+  return updateItem(id, { status: 'confirmed', pricePaid });
 }
 
 /** Records where an item stands with the photo reader (null when it is over). */

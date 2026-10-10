@@ -30,6 +30,8 @@ Nothing is sent anywhere unless he asks for it, and only these things ever leave
 
 - His notes, tags, estimates of worth, wear notes, the fun fact, and any text that looks like a serial number (a run of eight
   or more digits): a card never carries them (`src/share/text.ts` leaves them out, and a test fails if one gets in).
+- The Wish list: a wished coin's asking price, store and savings stay on the phone (no card or picture carries them, and a
+  wished coin is not in the globe's count). Nothing is sent for them but the rough worth the factory is asked for.
 - The collection as a whole, the photos he did not share, and what he searched for or looked at.
 - Anything at all while **Sharing** is off in Settings, Privacy: no Share button is drawn then. The tutor cannot turn Sharing
   on; only he can.

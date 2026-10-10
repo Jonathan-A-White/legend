@@ -7,7 +7,7 @@ const titleOf = (item: Item): string => [item.year, item.denomination].filter(Bo
 export function Tray({ items, onCheck, onRetry }: { items: readonly Item[]; onCheck: (id: string) => void; onRetry: (id: string) => void }) {
   const atFactory = items.filter((i) => i.reading && i.reading.state !== 'failed').length;
   const failed = items.filter((i) => i.reading?.state === 'failed');
-  const ready = items.filter((i) => !i.reading && i.status !== 'confirmed' && i.status !== 'pending');
+  const ready = items.filter((i) => !i.reading && i.status !== 'confirmed' && i.status !== 'pending' && i.status !== 'wished');
   if (atFactory === 0 && failed.length === 0 && ready.length === 0) return null;
   return (
     <div className="space-y-2 px-4">

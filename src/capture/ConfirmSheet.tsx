@@ -1,12 +1,13 @@
 // src/capture/ConfirmSheet.tsx: the photo reader's answer for him to check, in large type: country with its flag, denomination, year,
 // mint mark, series and design, the grade (marked as a guess), the inscription and the fun fact. "That's right" confirms it; "Not
-// quite" opens every field to change and then confirms. An item he is only looking at offers "Add it" and "Let it go" instead.
+// quite" opens every field to change and then confirms. An item he is only looking at offers "Add it", "Wish for it" (the asking price, src/wishlist/) and "Let it go" instead.
 import { useEffect, useState, type ReactNode } from 'react';
 import type { Item } from '../data/db';
 import { GRADES } from '../data/grades';
 import { removeItem, updateItem, usePhotos, type ItemChanges } from '../data/repositories';
 import { useSheetBack } from '../ui/sheetBack';
 import { WorthLine } from '../worth';
+import { WishSheet } from '../wishlist';
 import { useObjectUrl } from '../ui/useObjectUrl';
 import { useCountries } from './useCountries';
 
@@ -55,6 +56,7 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
   const photos = usePhotos(item.id);
   const looking = item.status === 'considering';
   const [editing, setEditing] = useState(false);
+  const [wishing, setWishing] = useState(false);
   const [busy, setBusy] = useState(false);
   const [country, setCountry] = useState(item.country ?? '');
   const [denomination, setDenomination] = useState(item.denomination);
@@ -92,6 +94,8 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
     onLetGo(item.id);
     await removeItem(item.id);
   };
+
+  if (wishing) return <WishSheet item={item} onBack={() => setWishing(false)} onClose={onClose} />;
 
   return (
     <div role="dialog" aria-modal="true" aria-label="Confirm" className="fixed inset-0 z-40 flex flex-col bg-canvas">
@@ -207,6 +211,11 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
             <button type="button" disabled={busy} onClick={() => confirm()} className={`${big} bg-accent text-accent-fg`}>
               {looking ? 'Add it' : "That's right"}
             </button>
+            {looking ? (
+              <button type="button" disabled={busy} onClick={() => setWishing(true)} className={`${big} border border-accent text-accent`}>
+                Wish for it
+              </button>
+            ) : null}
             <div className="flex gap-2">
               <button type="button" disabled={busy} onClick={() => setEditing(true)} className={`${big} border border-accent text-accent`}>
                 Not quite

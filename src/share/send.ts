@@ -46,6 +46,7 @@ export async function shareGlobe(input: GlobeShareInput): Promise<Shared> {
 export async function shareItem(id: string): Promise<Shared> {
   const item = await getItem(id);
   if (!item) throw new Error('This item is not in your collection.');
+  if (item.status === 'wished') throw new Error('A coin on your Wish list stays on this phone.');
   const [countries, mints, photos] = await Promise.all([loadCountries(), loadMints().catch(() => []), listPhotos(id)]);
   const facts = cardFacts(item, {
     countryName: (cc) => countryName(countries, cc),
