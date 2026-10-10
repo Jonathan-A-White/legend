@@ -5,11 +5,27 @@
 import Dexie, { type EntityTable } from 'dexie';
 
 export type ItemKind = 'coin' | 'note';
-export type ItemStatus = 'pending' | 'named' | 'confirmed';
+/** 'considering' is an item he is only looking at (Just looking): named like the rest, but not in the collection or its counts until he adds it. */
+export type ItemStatus = 'pending' | 'named' | 'confirmed' | 'considering';
+/** Where an item stands with the photo reader: 'waiting' to be sent, 'sent' (the grist's txid is kept) and waiting for the answer, or 'failed' (the words say why). */
+export type ReadingState = 'waiting' | 'sent' | 'failed';
 export type Confidence = 'high' | 'medium' | 'low';
 export type PhotoSide = 'obverse' | 'reverse' | 'other';
 /** A value a setting can hold (src/settings/registry.ts). */
 export type StoredValue = string | number | boolean;
+
+/** An item's trip to the photo reader; kept on the item so a closed app resumes where it stopped, and cleared once it is named. */
+export interface Reading {
+  state: ReadingState;
+  /** the grist's id once it is sent */
+  txid: string | null;
+  /** when it was sent (ms), so a wait that runs too long can be given up */
+  sentAt: number | null;
+  /** what the backend dedupes a retried send by; a Try again makes a new one */
+  sendId: string;
+  /** plain words for the collector when the state is 'failed' */
+  message: string | null;
+}
 
 export interface Item {
   id: string;
@@ -39,6 +55,8 @@ export interface Item {
   tags: string[];
   status: ItemStatus;
   confidence: Confidence | null;
+  /** present from Name it until the photo reader's answer is kept */
+  reading?: Reading | null;
   createdAt: number;
   updatedAt: number;
   /** set when removed; a removed item is kept so a mistake can be undone */
