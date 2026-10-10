@@ -8,6 +8,7 @@ import { extname } from 'node:path';
 import Ajv from 'ajv';
 import {
   CHECKS,
+  asCheck,
   EXAMPLE_PHOTO_MAX_BYTES,
   checkExpect,
   expectProblems,
@@ -78,12 +79,48 @@ describe('the grinds have scenarios', () => {
       .map((f) => readJson(`${dir}/${f}`) as unknown as GrindExample);
     expect(examples.length, 'at least four scenarios').toBeGreaterThanOrEqual(4);
     // An example names a denomination by a pattern; try it on the words a reader would write.
-    const reads = (e: GrindExample, words: string) => new RegExp(e.expect.denomination?.matches ?? '$^').test(words);
-    const country = (e: GrindExample) => e.expect.country?.equals;
-    expect(examples.some((e) => e.expect.kind?.equals === 'note')).toBe(true);
-    expect(examples.some((e) => e.expect.kind?.equals === 'coin' && country(e) !== 'US')).toBe(true);
+    const field = (e: GrindExample, name: string) => (name in e.expect ? asCheck(e.expect[name]) : {});
+    const reads = (e: GrindExample, words: string) => new RegExp(field(e, 'denomination').matches ?? '$^').test(words);
+    const country = (e: GrindExample) => field(e, 'country').equals;
+    expect(examples.some((e) => field(e, 'kind').equals === 'note')).toBe(true);
+    expect(examples.some((e) => field(e, 'kind').equals === 'coin' && country(e) !== 'US')).toBe(true);
     expect(examples.some((e) => country(e) === 'US' && reads(e, 'one cent'))).toBe(true);
-    expect(examples.some((e) => country(e) === 'US' && reads(e, 'quarter dollar') && e.expect.year?.equals !== undefined)).toBe(true);
+    expect(examples.some((e) => country(e) === 'US' && reads(e, 'quarter dollar') && field(e, 'year').equals !== undefined)).toBe(true);
+  });
+});
+
+// The names `mw grist smoke` knows (millwright application/gristsmokecheck.go); it refuses any other key in a check.
+const SMOKE_CHECK_NAMES = ['equals', 'is_null', 'one_of', 'contains', 'matches', 'present', 'all'];
+
+// The keys a check object holds, found by reading the JSON, however deep an `all` nests them.
+const checkKeys = (check: unknown): string[] => {
+  if (typeof check !== 'object' || check === null || Array.isArray(check)) return [];
+  const own = check as Record<string, unknown>;
+  const inner = Array.isArray(own.all) ? own.all.flatMap(checkKeys) : [];
+  return [...Object.keys(own), ...inner];
+};
+
+describe('the scenarios use the names mw grist smoke checks', () => {
+  const found = readdirSync('grinds/examples', { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).flatMap((kind) =>
+    readdirSync(`grinds/examples/${kind}`)
+      .filter((f) => f.endsWith('.json'))
+      .map((f) => `grinds/examples/${kind}/${f}`),
+  );
+
+  it('finds the scenarios', () => {
+    expect(found.length).toBeGreaterThanOrEqual(5);
+  });
+
+  it.each(found)('%s names only checks the smoke knows', (path) => {
+    const example = readJson(path) as unknown as GrindExample;
+    for (const [field, check] of Object.entries(example.expect)) {
+      const unknown = checkKeys(check).filter((key) => !SMOKE_CHECK_NAMES.includes(key));
+      expect(unknown, `${path}: expect "${field}" uses names the smoke refuses (use ${SMOKE_CHECK_NAMES.join(', ')})`).toEqual([]);
+    }
+  });
+
+  it('refuses the camelCase names the README once taught', () => {
+    expect(checkKeys({ oneOf: ['high'], isNull: true }).filter((k) => !SMOKE_CHECK_NAMES.includes(k))).toEqual(['oneOf', 'isNull']);
   });
 });
 
@@ -99,17 +136,17 @@ describe('the scenario checks', () => {
   };
 
   it('knows every check the README names', () => {
-    expect(CHECKS).toEqual(['equals', 'isNull', 'oneOf', 'contains', 'matches', 'present']);
+    expect(CHECKS).toEqual(SMOKE_CHECK_NAMES);
   });
 
   it('accepts a sound expect, including a branch of anyOf and a null in an enum', () => {
-    expect(expectProblems({ price: { isNull: true }, level: { oneOf: ['low', 'high'] }, grade: { isNull: true } }, schema)).toEqual([]);
+    expect(expectProblems({ price: { is_null: true }, level: { one_of: ['low', 'high'] }, grade: { is_null: true } }, schema)).toEqual([]);
   });
 
   it.each([
     ['a field the answer lacks', { cost: { present: true } }, 'cost: not a field of the answer schema'],
     ['a value the schema never allows', { level: { equals: 'middling' } }, 'level: equals "middling" is never a valid answer'],
-    ['null where it is never null', { level: { isNull: true } }, 'level: is never null in the answer schema'],
+    ['null where it is never null', { level: { is_null: true } }, 'level: is never null in the answer schema'],
     ['an unknown check', { level: { startsWith: 'l' } }, 'level: unknown check "startsWith"'],
     ['contains on a number', { price: { contains: 'x' } }, 'price: contains needs a string field'],
     ['no checks at all', {}, 'expect: has no checks'],
@@ -117,10 +154,24 @@ describe('the scenario checks', () => {
     expect(expectProblems(block, schema)).toContain(problem);
   });
 
+  it('reads a bare value as equals and an all list as checks that must each hold', () => {
+    expect(expectProblems({ level: 'low', note: { all: [{ matches: 'Seen' }, { contains: 'tag' }] } }, schema)).toEqual([]);
+    expect(expectProblems({ note: { all: [{ one_of: [1] }, { startsWith: 'S' }] } }, schema)).toEqual([
+      'note: one_of 1 is never a valid answer',
+      'note: unknown check "startsWith"',
+    ]);
+    const answer = { level: 'low', note: 'Seen on the tag.' };
+    expect(checkExpect({ level: 'low', note: { all: [{ matches: 'Seen' }, { contains: 'tag' }] } }, answer)).toEqual([]);
+    expect(checkExpect({ level: 'high', note: { all: [{ matches: 'Seen' }, { contains: 'shelf' }] } }, answer)).toEqual([
+      'level: expected "high", got "low"',
+      'note: expected to contain "shelf", got "Seen on the tag."',
+    ]);
+  });
+
   it('checkExpect names the field, what was wanted and what came', () => {
     const answer = { price: 4.99, level: 'low', note: 'Seen on the tag.' };
-    expect(checkExpect({ price: { equals: 4.99 }, level: { oneOf: ['low'] }, note: { contains: 'tag', matches: '^Seen' }, gone: { present: false } }, answer)).toEqual([]);
-    expect(checkExpect({ price: { isNull: true }, level: { equals: 'high' }, note: { contains: 'shelf' }, gone: { present: true } }, answer)).toEqual([
+    expect(checkExpect({ price: { equals: 4.99 }, level: { one_of: ['low'] }, note: { contains: 'tag', matches: '^Seen' }, gone: { present: false } }, answer)).toEqual([]);
+    expect(checkExpect({ price: { is_null: true }, level: { equals: 'high' }, note: { contains: 'shelf' }, gone: { present: true } }, answer)).toEqual([
       'price: expected null, got 4.99',
       'level: expected "high", got "low"',
       'note: expected to contain "shelf", got "Seen on the tag."',
