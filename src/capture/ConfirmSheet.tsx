@@ -6,6 +6,7 @@ import type { Item } from '../data/db';
 import { GRADES } from '../data/grades';
 import { removeItem, updateItem, usePhotos, type ItemChanges } from '../data/repositories';
 import { useSheetBack } from '../ui/sheetBack';
+import { WorthLine } from '../worth';
 import { useObjectUrl } from '../ui/useObjectUrl';
 import { useCountries } from './useCountries';
 
@@ -107,6 +108,22 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
           <Side blob={photos?.find((p) => p.side === 'reverse')?.blob} label="Back" />
         </div>
 
+        {!editing && looking ? (
+          <section aria-label="Is it a good one?" className="rounded-2xl border border-accent/40 bg-accent/10 px-4 py-3">
+            <h3 className="text-xl font-semibold text-accent">Is it a good one?</h3>
+            <p className="mt-1 text-2xl text-ink">
+              {item.gradeGuess ? (
+                <>
+                  <span>{item.gradeGuess}</span> · <em className="text-muted not-italic">guess</em>
+                </>
+              ) : (
+                <span className="text-muted">No grade guess</span>
+              )}
+            </p>
+            {item.gradeNotes ? <p className="mt-1 text-lg text-ink">{item.gradeNotes}</p> : null}
+            <WorthLine itemId={item.id} className="mt-2" />
+          </section>
+        ) : null}
         {editing ? (
           <form
             className="flex flex-col gap-4"
@@ -162,7 +179,7 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
             {item.mintMark ? <Row label="Mint mark">{item.mintMark}</Row> : null}
             {item.series ? <Row label="Series">{item.series}</Row> : null}
             {item.design ? <Row label="Design">{item.design}</Row> : null}
-            {item.gradeGuess ? (
+            {item.gradeGuess && !looking ? (
               <Row label="Grade">
                 <span>{item.gradeGuess}</span> · <em className="text-muted not-italic">guess</em>
               </Row>
@@ -171,6 +188,8 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
             {item.funFact ? <Row label="Fun fact">{item.funFact}</Row> : null}
           </dl>
         )}
+
+        {!editing && !looking ? <WorthLine itemId={item.id} /> : null}
       </div>
 
       <div className="flex shrink-0 flex-col gap-2 border-t border-line px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]">

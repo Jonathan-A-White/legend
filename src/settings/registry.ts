@@ -97,7 +97,7 @@ export const SETTINGS: readonly SettingEntry[] = [
     default: true,
     label: 'Show values',
     hint: 'Show what an item is worth beside it.',
-    help: 'Worth is an estimate with the figures behind it. Turn this off to see the collection without any prices.',
+    help: 'Worth is an estimate with the figures behind it. Turn this off to see the collection without any prices; Legend then stops asking for them.',
     section: 'collection',
     talkable: true,
   },

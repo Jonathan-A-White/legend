@@ -9,6 +9,7 @@ import { ItemReading } from '../capture';
 import { navigate } from '../nav/route';
 import { ShareButton, shareItem } from '../share';
 import { HoldBar } from '../ui/HoldBar';
+import { WorthLine } from '../worth';
 import { EditSheet } from './EditSheet';
 import { NotesField } from './NotesField';
 import { PhotoViewer } from './PhotoViewer';
@@ -163,6 +164,7 @@ export function ItemView({ id }: { id: string }) {
         </div>
 
         <Facts item={item} reference={reference} />
+        <WorthLine itemId={item.id} />
 
         {item.inscription ? (
           <section aria-label="Inscription">

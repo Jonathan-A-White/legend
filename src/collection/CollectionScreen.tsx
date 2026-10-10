@@ -5,6 +5,7 @@ import type { Item } from '../data/db';
 import { useItems, useThumbs } from '../data/repositories';
 import { FeedbackButton } from '../feedback';
 import { ADD_HASH, itemHash } from '../nav/route';
+import { RoughWorth } from '../worth';
 import { CountrySheet } from './CountrySheet';
 import { Thumb } from './Thumb';
 import { pickThumb, type ThumbPhoto } from './thumbs';
@@ -112,6 +113,7 @@ export function CollectionScreen() {
       <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
         {items ? countLine(shown) : ''}
       </p>
+      <RoughWorth items={items} />
 
       <input
         type="search"
