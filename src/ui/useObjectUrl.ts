@@ -1,4 +1,4 @@
-// src/collection/useObjectUrl.ts: an address the browser can draw a stored photo from. One address is made per photo however many
+// src/ui/useObjectUrl.ts: an address the browser can draw a stored photo from. One address is made per photo however many
 // places draw it, and let go a few seconds after the last one stops (so React's double mount in development never meets a revoked
 // address). Undefined when there is no photo.
 import { useEffect } from 'react';

@@ -7,6 +7,7 @@ import { CountrySheet, GlobeScreen } from './globe';
 import { BottomBar } from './nav/BottomBar';
 import { countryOf, itemIdOf, routeOf, useAddress } from './nav/route';
 import { useRouteEvents } from './nav/useRouteEvents';
+import { CaptureScreen, useNameQueue } from './capture';
 import { CollectionScreen, ItemView } from './collection';
 import { useSendWaiting } from './feedback';
 import { Home } from './screens/home';
@@ -33,6 +34,8 @@ function Screen({ hash }: { hash: string }) {
       return <ItemView id={itemIdOf(hash)!} />;
     case 'country':
       return <CountrySheet code={countryOf(hash)!} />;
+    case 'add':
+      return <CaptureScreen />;
     case 'home':
       return <Home />;
   }
@@ -43,6 +46,8 @@ function Shell() {
   useRouteEvents();
   useSendWaiting();
   useUsageLog();
+  // The queue of photos for the factory runs for as long as the shell is up, which is only once the gate is open.
+  useNameQueue();
   return (
     // data-shell: the scroll guard (src/ui/scrollGuard.ts) keeps this box at scrollTop 0
     <div data-shell className="flex h-full flex-col overflow-clip bg-canvas text-ink">

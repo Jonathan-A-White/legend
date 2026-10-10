@@ -5,13 +5,14 @@ import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect, useState, type ReactNode } from 'react';
 import type { Item, Photo } from '../data/db';
 import { getItem, removeItem, restoreItem, usePhotos } from '../data/repositories';
+import { ItemReading } from '../capture';
 import { navigate } from '../nav/route';
 import { ShareButton, shareItem } from '../share';
 import { HoldBar } from '../ui/HoldBar';
 import { EditSheet } from './EditSheet';
 import { NotesField } from './NotesField';
 import { PhotoViewer } from './PhotoViewer';
-import { useObjectUrl } from './useObjectUrl';
+import { useObjectUrl } from '../ui/useObjectUrl';
 import { useReference, type Reference } from './useReference';
 
 /** How long Undo is offered after Remove. */
@@ -117,7 +118,7 @@ export function ItemView({ id }: { id: string }) {
     return (
       <main aria-label="Item" className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
         <p role="status" className="text-2xl font-semibold text-ink">
-          Removed from your collection
+          {item.status === 'considering' ? 'Let go' : 'Removed from your collection'}
         </p>
         <button
           type="button"
@@ -154,9 +155,7 @@ export function ItemView({ id }: { id: string }) {
           ) : null}
         </header>
 
-        {item.status === 'pending' ? (
-          <p className="rounded-xl bg-accent/15 px-4 py-3 text-lg font-medium text-accent">At the factory: Legend is still reading this one.</p>
-        ) : null}
+        <ItemReading item={item} onLetGo={() => setRemoved(true)} />
 
         <div className="grid grid-cols-2 gap-3">
           <PhotoCard photo={photo('obverse')} side="Obverse" title={title} onZoom={(url, label) => setZoom({ url, label })} />

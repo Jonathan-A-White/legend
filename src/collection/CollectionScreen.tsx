@@ -3,8 +3,12 @@
 import { useMemo, useState } from 'react';
 import type { Item } from '../data/db';
 import { useItems, useThumbs } from '../data/repositories';
+<<<<<<< HEAD
 import { FeedbackButton } from '../feedback';
 import { itemHash } from '../nav/route';
+=======
+import { ADD_HASH, itemHash } from '../nav/route';
+>>>>>>> 8a7df62 (Add from the camera or Just looking: viewfinder, Name it into the queue, tray, Confirm sheet, Looking at strip, round Add button; feature and phone-width spec)
 import { CountrySheet } from './CountrySheet';
 import { Thumb } from './Thumb';
 import { pickThumb, type ThumbPhoto } from './thumbs';
@@ -65,8 +69,31 @@ function ListRow({ item, thumbs, ref_ }: { item: Item; thumbs: readonly ThumbPho
   );
 }
 
+/** The coins and bills he is only looking at (Just looking), above the collection and outside its counts. */
+function LookingAt({ items, thumbs, ref_ }: { items: readonly Item[]; thumbs: readonly ThumbPhoto[] | undefined; ref_: Reference }) {
+  if (items.length === 0) return null;
+  return (
+    <section aria-label="Looking at" className="mt-3">
+      <h2 className="text-lg font-semibold text-ink">Looking at</h2>
+      <ul className="-mx-4 mt-1 flex gap-3 overflow-x-auto px-4 pb-1">
+        {items.map((item) => (
+          <li key={item.id} className="w-28 shrink-0">
+            <a href={itemHash(item.id)} className="block rounded-2xl active:opacity-80">
+              <Thumb item={item} blob={pickThumb(thumbs, item.id)} />
+              <div className="px-1 pt-1">
+                <Caption item={item} ref_={ref_} />
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 export function CollectionScreen() {
   const items = useItems();
+  const looking = useItems({ scope: 'looking' });
   const thumbs = useThumbs();
   const ref_ = useReference();
   const [query, setQuery] = useState('');
@@ -81,11 +108,16 @@ export function CollectionScreen() {
   const narrowed = query.trim() !== '' || kind !== 'all' || country !== null;
 
   return (
+<<<<<<< HEAD
     <main aria-label="Collection" className="flex min-h-0 flex-1 flex-col px-4 pt-[max(env(safe-area-inset-top),1.25rem)]">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold tracking-wide text-accent">Collection</h1>
         <FeedbackButton screen="Collection" className="-mr-2" />
       </div>
+=======
+    <main aria-label="Collection" className="relative flex min-h-0 flex-1 flex-col px-4 pt-[max(env(safe-area-inset-top),1.25rem)]">
+      <h1 className="text-3xl font-semibold tracking-wide text-accent">Collection</h1>
+>>>>>>> 8a7df62 (Add from the camera or Just looking: viewfinder, Name it into the queue, tray, Confirm sheet, Looking at strip, round Add button; feature and phone-width spec)
       <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
         {items ? countLine(shown) : ''}
       </p>
@@ -103,6 +135,8 @@ export function CollectionScreen() {
         enterKeyHint="search"
         className="mt-3 min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-lg text-ink placeholder:text-muted"
       />
+
+      <LookingAt items={looking ?? []} thumbs={thumbs} ref_={ref_} />
 
       <div className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1" role="radiogroup" aria-label="Show">
         {KINDS.map((k) => (
@@ -164,6 +198,9 @@ export function CollectionScreen() {
           <section className="flex h-full flex-col items-center justify-center px-6 text-center">
             <p className="text-2xl font-semibold text-ink">Nothing collected yet</p>
             <p className="mt-2 max-w-prose text-lg text-muted">Tap the camera button to photograph a coin or a banknote. Legend names it, and it joins your collection here.</p>
+            <a href={ADD_HASH} className="mt-5 flex min-h-14 items-center rounded-2xl bg-accent px-8 text-xl font-semibold text-accent-fg">
+              Add your first one
+            </a>
           </section>
         ) : items && shown.length === 0 ? (
           <section className="flex flex-col items-center px-6 pt-10 text-center">
@@ -191,6 +228,17 @@ export function CollectionScreen() {
           </ul>
         )}
       </div>
+
+      <a
+        href={ADD_HASH}
+        aria-label="Add a coin or bill"
+        className="absolute right-4 bottom-4 flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-fg shadow-lg active:opacity-80"
+      >
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+          <path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3V19H4V8.5Z" />
+          <circle cx="12" cy="13.5" r="3.4" />
+        </svg>
+      </a>
 
       {picking ? (
         <CountrySheet
