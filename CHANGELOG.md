@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.13
+_2026-10-10_
+- New: You can tell the maker what you would like added or what is wrong, from the small "…" on each screen or from Settings, and the Globe now shows a one-time tip.
+
 ## 0.1.12
 _2026-10-10_
 - New: Learn now teaches grading, mint marks and special years using the coins you have, and Your path shows what you have learned and what to try next.
