@@ -6,21 +6,21 @@ A module is a folder under `src/` with one responsibility and one entry file; ot
 |---|---|---|---|
 | App shell | Start the app: scroll guard, banner, service worker, config | `src/main.tsx`, `src/App.tsx`, `src/config.ts`, `src/sw.ts` | built |
 | Update flow | Banner, waiting build, What's new | `src/UpdateBanner.tsx`, `src/whatsNew/` | built |
-| gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell in `App.tsx`, `Unlock` is what it shows meanwhile | `src/gate/index.ts` | built |
+| gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell, `Unlock` shows meanwhile | `src/gate/index.ts` | built |
 | data | The local store (Dexie v2: items, photos, settings, meta, asks, values, outbox) and its record types; an item carries `reading` while at the factory | `src/data/db.ts` | built |
-| data/world | The world's countries (TopoJSON, names, flags) and their currencies by date, shipped in `public/data/world/` (`npm run data:build`; `docs/data.md`) | `src/data/world.ts` | built |
-| data/repositories | The only way UI reaches Dexie: a file per family (items, photos, settings, meta, asks, values, outbox), with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
+| data/world | The world's countries (TopoJSON, names, flags) and their currencies by date, shipped in `public/data/world/` (`docs/data.md`) | `src/data/world.ts` | built |
+| data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
 | services | Everything that leaves the phone: grist client, `feedback.ts`, licence, device key, app update; the photo reader: `nameItem.ts` (seam `setGristPort`), `nameQueue.ts` (one send at a time, resumed on open from `item.reading`), `itemAnswer.ts` checks an answer | `src/services/appUpdate.ts` | built |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
-| nav | Hash routes, the bottom bar, reopen where they left (a trail of 20) | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
+| nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared controls: scroll guard, build stamp, placeholder, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), `useObjectUrl` | `src/ui/` (one file each) | built |
 | globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): a 2D canvas globe. `render.ts` draws a frame (pure); `controller.ts` is the one animation loop; `clock.ts` its clock seam | `src/globe/index.ts` | built |
 | quarters | The Quarters screen (`#/quarters`): the US map lit by his quarters, State sheet, Checklist, territory tiles; `match.ts` (pure) says which design an item is, `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
-| collection | The Collection (`#/collection`: count line, search, filters, Looking at, grid or list) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); `search.ts` and `view.ts` are pure | `src/collection/index.ts` | built |
+| collection | The Collection (`#/collection`: count line, search, filters, Looking at, grid or list) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
 | share | Share: a picture of the globe or an item card, else Save picture; `text.ts` says what a card may say | `src/share/index.ts` | built |
-| learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`), each ending in Ask the tutor (disabled). Pure rules: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
+| learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`), each ending in Ask the tutor (disabled); pure: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
 | feedback | Tell the maker: `FeedbackButton` and `TellTheMakerButton` (Settings) open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
 | tips | One-time `HintCard` tips (`hints.ts`) and the usage log (`usageLog.ts`, counts only) | `src/tips/index.ts` | built |
 | capture | Add (`#/add`): viewfinder (`CaptureScreen`, `useCamera`), `captureStill` (1600 px, under 1 MB, upright, 320 px thumb), `startItem` (Name it: item and photos, then the queue), Confirm sheet, `useNameQueue` (App starts it) | `src/capture/index.ts` | built |
