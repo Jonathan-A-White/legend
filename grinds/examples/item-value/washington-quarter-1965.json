@@ -1,0 +1,26 @@
+{
+  "description": "A circulated 1965 clad Washington quarter in about Very Fine: worth about face value, so a low under one dollar and a high under five.",
+  "schemaVersion": "1.0",
+  "request": {
+    "kind": "coin",
+    "country": "US",
+    "currency": "USD",
+    "denomination": "Quarter dollar",
+    "faceValue": 0.25,
+    "year": 1965,
+    "mintMark": null,
+    "series": "Washington quarter",
+    "design": "Washington portrait on the front, an eagle with spread wings on the back",
+    "material": "copper-nickel clad",
+    "gradeGuess": "VF",
+    "gradeNotes": "Even wear on the high points of the hair, a guess from the photo.",
+    "today": "2026-10-10"
+  },
+  "expect": {
+    "currency": "USD",
+    "low": { "one_of": [0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9, 0.95] },
+    "high": { "one_of": [0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.6, 0.7, 0.75, 0.8, 0.9, 1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 3, 3.5, 4, 4.5] },
+    "basis": { "matches": "face|circulated|common" },
+    "asOf": "2026-10-10"
+  }
+}

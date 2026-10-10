@@ -36,6 +36,10 @@ scenario's shape without a network, and fails when a grind has no scenario.
   - `present`: `true` the field is in the answer, `false` it is left out
   - `all`: a list of checks of these same names, each of which must hold too (for a field that must show several things)
 
+The checks cannot compare numbers (no "under" or "above"), so a range a scenario wants ("low under 1", "high under 5") is a
+`one_of` list of the figures that satisfy it (`item-value/`). A grind that takes no photo (`attachments.max` 0) has scenarios
+with no `photos` and a request with no `sides`.
+
 Every `expect` path must be a field of the grind's answer schema, and every `equals` or `one_of` value must be one the schema
 allows.
 

@@ -1,0 +1,17 @@
+{
+  "grind": 1,
+  "app": "legend",
+  "kind": "item-value",
+  "versions": ["1.0"],
+  "model": "sonnet",
+  "effort": "low",
+  "instructions": "grinds/item-value.md",
+  "inputSchema": "schemas/item-value-input-1.0.schema.json",
+  "answerSchema": "schemas/item-value-answer-1.0.schema.json",
+  "attachments": {
+    "min": 0,
+    "max": 0,
+    "mime": [],
+    "maxBytes": 0
+  }
+}

@@ -26,7 +26,7 @@ const grindFiles = readdirSync('grinds').filter((f) => f.endsWith('.json'));
 
 describe('the grinds have scenarios', () => {
   it('finds every grind of the rig', () => {
-    expect([...grindFiles].sort()).toEqual(['coin-from-photos.json', 'feedback.json']);
+    expect([...grindFiles].sort()).toEqual(['coin-from-photos.json', 'feedback.json', 'item-value.json']);
   });
 
   describe.each(grindFiles)('grinds/%s', (grindFile) => {
@@ -63,7 +63,7 @@ describe('the grinds have scenarios', () => {
       const photos = example.photos ?? [];
       expect(photos.length, 'files named').toBeGreaterThanOrEqual(attachments.min);
       expect(photos.length, 'files named').toBeLessThanOrEqual(attachments.max);
-      if (!forwards) expect(example.request.sides, 'one side named per photo').toHaveLength(photos.length);
+      if (!forwards && attachments.max > 0) expect(example.request.sides, 'one side named per photo').toHaveLength(photos.length);
       for (const name of photos) {
         const path = `${dir}/${name}`;
         expect(existsSync(path), `${path} exists`).toBe(true);
