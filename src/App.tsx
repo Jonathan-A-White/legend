@@ -5,9 +5,8 @@ import { CountrySheet, GlobeScreen } from './globe';
 import { BottomBar } from './nav/BottomBar';
 import { countryOf, itemIdOf, routeOf, useAddress } from './nav/route';
 import { useRouteEvents } from './nav/useRouteEvents';
-import { Collection } from './screens/collection';
+import { CollectionScreen, ItemView } from './collection';
 import { Home } from './screens/home';
-import { Item } from './screens/item';
 import { Learn } from './screens/learn';
 import { Quarters } from './quarters';
 import { SettingsScreen } from './settings/SettingsScreen';
@@ -17,7 +16,7 @@ import { WhatsNewOnUpdate } from './whatsNew/WhatsNewOnUpdate';
 function Screen({ hash }: { hash: string }) {
   switch (routeOf(hash)) {
     case 'collection':
-      return <Collection />;
+      return <CollectionScreen />;
     case 'globe':
       return <GlobeScreen />;
     case 'quarters':
@@ -27,7 +26,7 @@ function Screen({ hash }: { hash: string }) {
     case 'settings':
       return <SettingsScreen />;
     case 'item':
-      return <Item id={itemIdOf(hash)!} />;
+      return <ItemView id={itemIdOf(hash)!} />;
     case 'country':
       return <CountrySheet code={countryOf(hash)!} />;
     case 'home':
