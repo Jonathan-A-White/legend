@@ -2,8 +2,10 @@
 // page does not scroll, a choice taps through, and the screen survives a reload on the same place.
 import { expect, test } from '@playwright/test';
 import { shot } from './shot';
+import { openUnlocked } from './unlocked';
 
 test('Settings sits above a bottom bar of five large targets, and a choice sticks', async ({ page }) => {
+  await openUnlocked(page);
   await page.goto('/#/settings');
   await expect(page.getByRole('heading', { name: 'Settings' })).toBeVisible();
 
@@ -31,6 +33,7 @@ test('Settings sits above a bottom bar of five large targets, and a choice stick
 });
 
 test('a bare open reopens the screen they left', async ({ page }) => {
+  await openUnlocked(page);
   await page.goto('/#/globe');
   await expect(page.getByRole('heading', { name: 'Globe' })).toBeVisible();
   await page.goto('/');

@@ -9,18 +9,19 @@ and what they choose to share.
 
 ## Screens planned
 
-Built: the shell (a bottom bar with Collection, Globe, Quarters, Learn, Settings; reopens where they left), Settings
+Built: the licence gate (Unlock until the phone's key holds a `legend` licence; `docs/testing.md`), the shell (a bottom bar with Collection, Globe, Quarters, Learn, Settings; reopens where they left), Settings
 (Appearance, Collection, Photos, Tutor, Privacy, About), Home (name and build stamp, `#/`), the Collection (count line, search,
 filters, grid or list) and one item (photos, facts, notes, Edit, hold to Remove), the Globe (`#/globe`: a globe turned with one
 finger, lit where the items come from; search spins it to a country; Not yet lists the countries with nothing yet) and the
 Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map lit with the quarters they
-have, a checklist). Learn is a placeholder. Planned: the licence gate, add an item (photograph a coin or a note, the photo
+have, a checklist). Learn is a placeholder. Planned: add an item (photograph a coin or a note, the photo
 reader names it, they confirm), search, the tutor, About (credits, What's new).
 
 ## Where things live
 
 - `src/` the app, one folder per module: `docs/module-map.md`. Everything is stored in Dexie behind repositories, screens
   talk through the bus (`docs/events.md`), a setting is one registry entry.
+- `docs/testing.md` how tests get past the licence gate (the device key seam).
 - `features/*.feature` Gherkin scenarios; `features/steps/` their steps; `tests/unit/` unit tests; `tests/e2e/` Playwright.
 - `public/data/us/` the US reference data (138 quarter designs, mints, Sheldon grades, key dates, a states map), loaded by `src/data/us.ts`; sources and licences in `docs/data.md`.
 - `public/changelog.json` and `CHANGELOG.md` What's new; `ATTRIBUTION.md` credits every source.
