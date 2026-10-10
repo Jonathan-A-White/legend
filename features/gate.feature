@@ -19,6 +19,12 @@ Feature: The licence gate
     Then he sees the Unlock screen
     And the Unlock screen shows the device key as a QR code
 
+  Scenario: The key text shows zeros with a slash so a 0 is never read as an o
+    Given the chain says this phone's key has no licence
+    When Legend is opened
+    Then he sees the Unlock screen
+    And the device key text is set in a monospace face with slashed zeros
+
   Scenario: A licence held by the issuer opens the app
     Given the issuer minted a licence to this phone's key on a stub chain
     When Legend is opened

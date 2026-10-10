@@ -60,7 +60,7 @@ export function Unlock({ locked, publicKeyHex, onCheckAgain }: Props) {
         <section aria-label="This phone’s key" className="flex w-full max-w-sm flex-col gap-2">
           <p className="text-sm text-muted">This phone’s key</p>
           <KeyQr text={publicKeyHex} label="This phone’s key as a QR code" />
-          <p data-testid="device-key" className="select-all break-all rounded-xl border border-line bg-surface p-3 font-mono text-base">
+          <p data-testid="device-key" className="select-all break-all rounded-xl border border-line bg-surface p-3 font-mono slashed-zero text-base">
             {publicKeyHex}
           </p>
           <button
