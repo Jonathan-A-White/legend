@@ -1,0 +1,62 @@
+{
+  "description": "On Japan's sheet he asks what money Japan used before: the answer names the yen and what came before it.",
+  "schemaVersion": "1.0",
+  "request": {
+    "question": "What money did they use before?",
+    "sides": [],
+    "context": {
+      "screen": "country",
+      "item": null,
+      "country": {
+        "code": "JP",
+        "name": "Japan"
+      },
+      "collectionSummary": {
+        "items": 4,
+        "coins": 3,
+        "notes": 1,
+        "countries": [
+          {
+            "code": "US",
+            "coins": 3,
+            "notes": 0
+          },
+          {
+            "code": "JP",
+            "coins": 0,
+            "notes": 1
+          }
+        ]
+      }
+    },
+    "settings": {
+      "theme": "system",
+      "textSize": "normal",
+      "defaultKind": "coin",
+      "showValues": true,
+      "keepOriginals": false,
+      "sizeCap": 1600,
+      "tutorVoice": false,
+      "answerLength": "medium"
+    },
+    "history": []
+  },
+  "expect": {
+    "answer": {
+      "all": [
+        {
+          "matches": "[Yy]en"
+        },
+        {
+          "matches": "([Mm]on\\b|[Rr]y[oō]|[Kk]oban|[Ss]en\\b|[Mm]eiji|1871)"
+        }
+      ]
+    },
+    "followUps": {
+      "present": true
+    },
+    "teachMore": {
+      "present": true
+    }
+  }
+}

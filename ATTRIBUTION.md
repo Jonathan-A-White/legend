@@ -23,7 +23,7 @@ licence and what we changed. Credit is owed whether or not a licence asks for it
 
 ## Data
 
-The photo reader's test pictures (`grinds/examples/coin-from-photos/`, used by `mw grist smoke legend` and the unit tests,
+The photo reader's and the tutor's test pictures (`grinds/examples/coin-from-photos/`, the quarter again in `grinds/examples/legend-ask/`, used by `mw grist smoke legend` and the unit tests,
 not shipped in the app) are from Wikimedia Commons, each scaled down and saved as a JPEG, nothing else changed:
 
 - 1909-S VDB Lincoln cent, obverse and reverse: image by Lost Dutchman Rare Coins, coin design by Victor David Brenner.

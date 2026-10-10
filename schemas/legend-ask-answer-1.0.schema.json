@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "legend-ask-answer-1.0",
+  "title": "Legend Ask answer 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["answer", "followUps", "settingsChanges", "teachMore"],
+  "properties": {
+    "answer": {
+      "description": "The answer, in Markdown: under 180 words unless he asked for more.",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 2400
+    },
+    "followUps": {
+      "description": "Up to three short questions he might ask next, in his own voice.",
+      "type": "array",
+      "maxItems": 3,
+      "items": { "type": "string", "minLength": 1, "maxLength": 120 }
+    },
+    "settingsChanges": {
+      "description": "Settings you suggest he change, each with why in one short sentence. Shown to him as a card with Apply and Not now: nothing changes unless he taps Apply. Only the keys and values the instructions list; empty when there is nothing to suggest.",
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "value", "why"],
+            "properties": {
+              "key": { "const": "theme" },
+              "value": { "type": "string", "enum": ["system", "light", "dark"] },
+              "why": { "type": "string", "minLength": 1, "maxLength": 200 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "value", "why"],
+            "properties": {
+              "key": { "const": "textSize" },
+              "value": { "type": "string", "enum": ["small", "normal", "large", "larger"] },
+              "why": { "type": "string", "minLength": 1, "maxLength": 200 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "value", "why"],
+            "properties": {
+              "key": { "const": "defaultKind" },
+              "value": { "type": "string", "enum": ["coin", "note"] },
+              "why": { "type": "string", "minLength": 1, "maxLength": 200 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "value", "why"],
+            "properties": {
+              "key": { "const": "showValues" },
+              "value": { "type": "boolean" },
+              "why": { "type": "string", "minLength": 1, "maxLength": 200 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "value", "why"],
+            "properties": {
+              "key": { "const": "keepOriginals" },
+              "value": { "type": "boolean" },
+              "why": { "type": "string", "minLength": 1, "maxLength": 200 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "value", "why"],
+            "properties": {
+              "key": { "const": "sizeCap" },
+              "value": { "type": "number", "minimum": 800, "maximum": 3200 },
+              "why": { "type": "string", "minLength": 1, "maxLength": 200 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "value", "why"],
+            "properties": {
+              "key": { "const": "tutorVoice" },
+              "value": { "type": "boolean" },
+              "why": { "type": "string", "minLength": 1, "maxLength": 200 }
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["key", "value", "why"],
+            "properties": {
+              "key": { "const": "answerLength" },
+              "value": { "type": "string", "enum": ["short", "medium", "long"] },
+              "why": { "type": "string", "minLength": 1, "maxLength": 200 }
+            }
+          }
+        ]
+      }
+    },
+    "teachMore": {
+      "description": "One topic worth learning next from this coin, and why; null when there is none.",
+      "anyOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["topic", "why"],
+          "properties": { "topic": { "type": "string", "minLength": 1, "maxLength": 80 }, "why": { "type": "string", "minLength": 1, "maxLength": 200 } }
+        }
+      ]
+    }
+  }
+}

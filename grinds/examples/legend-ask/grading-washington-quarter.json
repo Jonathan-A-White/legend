@@ -1,0 +1,87 @@
+{
+  "description": "He asks how to grade his 1944-S Washington quarter, with both photos: the answer teaches grading from this coin's own high points and wear.",
+  "schemaVersion": "1.0",
+  "request": {
+    "question": "How do I grade this one?",
+    "sides": [
+      "obverse",
+      "reverse"
+    ],
+    "context": {
+      "screen": "item",
+      "item": {
+        "kind": "coin",
+        "country": "US",
+        "countryName": "United States",
+        "currency": "USD",
+        "denomination": "Quarter dollar",
+        "faceValue": 0.25,
+        "year": 1944,
+        "mintMark": "S",
+        "mintCity": "San Francisco",
+        "series": "Washington quarter",
+        "design": "George Washington on the front; an eagle with spread wings on the back",
+        "material": "90% silver, 10% copper",
+        "inscription": "LIBERTY IN GOD WE TRUST 1944 UNITED STATES OF AMERICA E PLURIBUS UNUM QUARTER DOLLAR",
+        "gradeGuess": "XF",
+        "gradeNotes": "Light wear on the hair and the eagle's breast; a guess from the photo.",
+        "funFact": "Until 1964 the quarter was 90% silver.",
+        "confirmed": true
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      },
+      "collectionSummary": {
+        "items": 3,
+        "coins": 3,
+        "notes": 0,
+        "countries": [
+          {
+            "code": "US",
+            "coins": 2,
+            "notes": 0
+          },
+          {
+            "code": "CA",
+            "coins": 1,
+            "notes": 0
+          }
+        ]
+      }
+    },
+    "settings": {
+      "theme": "system",
+      "textSize": "normal",
+      "defaultKind": "coin",
+      "showValues": true,
+      "keepOriginals": false,
+      "sizeCap": 1600,
+      "tutorVoice": false,
+      "answerLength": "medium"
+    },
+    "history": []
+  },
+  "photos": [
+    "washington-quarter-1944s-obverse.jpg",
+    "washington-quarter-1944s-reverse.jpg"
+  ],
+  "expect": {
+    "answer": {
+      "all": [
+        {
+          "matches": "[Gg]rad"
+        },
+        {
+          "matches": "([Hh]air|[Cc]heek|[Ee]agle|[Ff]eather|[Hh]igh point)"
+        }
+      ]
+    },
+    "followUps": {
+      "present": true
+    },
+    "settingsChanges": {
+      "equals": []
+    }
+  }
+}

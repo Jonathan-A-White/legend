@@ -57,3 +57,9 @@ under 100 KB, nothing else changed. Credit is also in `ATTRIBUTION.md`.
 | `washington-quarter-1944s-obverse.jpg`, `washington-quarter-1944s-reverse.jpg` | [Washington Quarter Silver 1944S Obverse](https://commons.wikimedia.org/wiki/File:Washington_Quarter_Silver_1944S_Obverse.png) and [Reverse](https://commons.wikimedia.org/wiki/File:Washington_Quarter_Silver_1944S_Reverse.png); image by Brandon Grossardt, coin design by John Flanagan | Public domain |
 | `canada-dime-1955.jpg` | [Canada $0.1 1955](https://commons.wikimedia.org/wiki/File:Canada_$0.1_1955.jpg); photograph by Mister rf, coin design by Emanuel Hahn | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
 | `canada-1935-one-dollar-note.jpg` | [Obverse of $1 banknote, Canada 1935 Series, English version](https://commons.wikimedia.org/wiki/File:Obverse_of_$1_banknote,_Canada_1935_Series,_English_version.jpg); Bank of Canada, from the National Currency Museum. A specimen note: its number A0000003 is the specimen's, not a real note's | Public domain |
+
+## legend-ask: the tutor's scenarios
+
+`grading-washington-quarter.json` asks how to grade the 1944-S Washington quarter and carries its two photos, copies of the
+coin-from-photos files above (same source, same licence); `country-japan.json` asks on Japan's sheet what money came before
+the yen, with no photo. A request carries `sides` for its photos and the talkable settings with their defaults.

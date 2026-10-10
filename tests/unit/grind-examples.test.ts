@@ -26,7 +26,7 @@ const grindFiles = readdirSync('grinds').filter((f) => f.endsWith('.json'));
 
 describe('the grinds have scenarios', () => {
   it('finds every grind of the rig', () => {
-    expect([...grindFiles].sort()).toEqual(['coin-from-photos.json', 'feedback.json', 'item-value.json']);
+    expect([...grindFiles].sort()).toEqual(['coin-from-photos.json', 'feedback.json', 'item-value.json', 'legend-ask.json']);
   });
 
   describe.each(grindFiles)('grinds/%s', (grindFile) => {
@@ -102,6 +102,25 @@ const checkKeys = (check: unknown): string[] => {
   const inner = Array.isArray(own.all) ? own.all.flatMap(checkKeys) : [];
   return [...Object.keys(own), ...inner];
 };
+
+describe('the tutor has its two scenarios', () => {
+  const dir = 'grinds/examples/legend-ask';
+  const examples = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => readJson(`${dir}/${f}`) as unknown as GrindExample) : [];
+  const context = (e: GrindExample) => e.request.context as { screen: string; item: { year: number | null; mintMark: string | null } | null; country: { code: string } | null };
+
+  it('asks how to grade the Washington quarter, with its two photos', () => {
+    const grading = examples.find((e) => context(e).screen === 'item' && /grade/i.test(String(e.request.question)));
+    expect(grading, 'a grading question on an item').toBeDefined();
+    expect(context(grading!).item).toMatchObject({ year: 1944, mintMark: 'S' });
+    expect(grading!.photos).toEqual(['washington-quarter-1944s-obverse.jpg', 'washington-quarter-1944s-reverse.jpg']);
+  });
+
+  it('asks about Japan with no photo', () => {
+    const japan = examples.find((e) => context(e).screen === 'country' && context(e).country?.code === 'JP');
+    expect(japan, 'a country question on Japan').toBeDefined();
+    expect(japan!.photos ?? []).toEqual([]);
+  });
+});
 
 describe('the scenarios use the names mw grist smoke checks', () => {
   const found = readdirSync('grinds/examples', { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).flatMap((kind) =>
