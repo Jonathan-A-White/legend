@@ -4,6 +4,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { expect, test, type Page } from '@playwright/test';
 import { shot } from './shot';
+import { openUnlocked } from './unlocked';
 
 const COLLECTION = [
   ['US', 'Quarter dollar', 1999],
@@ -18,6 +19,7 @@ const COLLECTION = [
 
 /** The phone's share sheet: remembers the one file it was offered. */
 test.beforeEach(async ({ page }) => {
+  await openUnlocked(page);
   await page.addInitScript(() => {
     const w = window as unknown as { __shared?: { file: File; title?: string }[] };
     w.__shared = [];

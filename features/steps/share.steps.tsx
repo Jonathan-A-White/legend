@@ -7,6 +7,7 @@ import { Blob as NodeBlob } from 'node:buffer';
 import { afterAll, beforeAll, expect, vi } from 'vitest';
 import { loadFeature, describeFeature } from '@amiceli/vitest-cucumber';
 import { App } from '../../src/App';
+import { openGate } from '../../tests/support/open-gate';
 import { db } from '../../src/data/db';
 import { addItem, addPhoto } from '../../src/data/repositories';
 import { forgetWorldData } from '../../src/data/world';
@@ -65,7 +66,7 @@ async function startOver(): Promise<void> {
 async function open(hash: string): Promise<void> {
   cleanup();
   window.history.replaceState(null, '', `/${hash}`);
-  render(<App />);
+  render(<App gate={openGate} />);
   await screen.findByRole('main');
   await waitFor(() => {
     act(() => clock.advance(16));
