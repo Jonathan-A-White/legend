@@ -81,10 +81,33 @@ async function encode(source: CanvasImageSource, width: number, height: number, 
   return { blob, thumb, width: kept.width, height: kept.height };
 }
 
+/** The frame a playing video shows now, copied at its own size. One draw, so the shutter is ready again at once; the encoding
+ * (stillFromFrame), which waits on the browser for a second or more on a busy phone, goes on behind it. */
+export function grabFrame(video: HTMLVideoElement): HTMLCanvasElement {
+  const { videoWidth: width, videoHeight: height } = video;
+  if (width === 0 || height === 0) throw new Error('The camera is not ready yet');
+  const frame = document.createElement('canvas');
+  frame.width = width;
+  frame.height = height;
+  const context = frame.getContext('2d');
+  if (!context) throw new Error('The camera gave no picture');
+  context.drawImage(video, 0, 0, width, height);
+  return frame;
+}
+
+/** Encodes a grabbed frame as a still, then lets go of the frame's pixels. */
+export async function stillFromFrame(frame: HTMLCanvasElement, options: StillOptions = {}): Promise<Still> {
+  try {
+    return await encode(frame, frame.width, frame.height, options);
+  } finally {
+    frame.width = 0;
+    frame.height = 0;
+  }
+}
+
 /** Takes a still from a playing video. */
 export async function captureStill(video: HTMLVideoElement, options: StillOptions = {}): Promise<Still> {
-  if (video.videoWidth === 0 || video.videoHeight === 0) throw new Error('The camera is not ready yet');
-  return encode(video, video.videoWidth, video.videoHeight, options);
+  return stillFromFrame(grabFrame(video), options);
 }
 
 /** Turns a photo chosen from the gallery into a still. The bitmap is read the way the camera held the phone (EXIF orientation), so a

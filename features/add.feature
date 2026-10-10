@@ -62,6 +62,12 @@ Feature: Add from the camera, or Just looking
     Then the prompt reads Front again and the shutter is ready
     And the queue says "1 at the factory"
 
+  Scenario: a pile of coins never waits on a photo being kept, so it goes photograph, photograph, Name it, next
+    Given the camera is open on Add and the phone is slow to keep a photo
+    When he taps the shutter twice and Name it without waiting
+    Then each tap took at once: the prompt reads Front again, the shutter is ready and the queue says "1 at the factory"
+    And nothing is stored until the photos are kept, and then the coin is stored with both and sent
+
   Scenario: three items queued are sent one after another and each is named
     Given the camera is open on Add and the factory sends one at a time
     When he names three coins in a row

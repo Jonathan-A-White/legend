@@ -1,9 +1,9 @@
-// src/capture/Preview.tsx: a taken photo's thumbnail in the strip over the viewfinder; tapping it takes that photo (and any after
-// it) away so it can be taken again.
+// src/capture/Preview.tsx: a taken photo's thumbnail in the strip over the viewfinder (blank for the moment the photo is still being
+// kept); tapping it takes that photo (and any after it) away so it can be taken again.
 import { useObjectUrl } from '../ui/useObjectUrl';
 
-export function Preview({ thumb, side, onRetake }: { thumb: Blob; side: 'Front' | 'Back'; onRetake: () => void }) {
-  const url = useObjectUrl(thumb);
+export function Preview({ thumb, side, onRetake }: { thumb: Blob | null; side: 'Front' | 'Back'; onRetake: () => void }) {
+  const url = useObjectUrl(thumb ?? undefined);
   return (
     <button type="button" aria-label={`Retake ${side}`} onClick={onRetake} className="relative h-16 w-16 overflow-hidden rounded-xl border-2 border-white/70 bg-black/40">
       {url ? <img src={url} alt="" draggable={false} className="h-full w-full object-cover" /> : null}

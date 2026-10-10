@@ -1,5 +1,7 @@
 // src/capture/startItem.ts: Name it. The photos and the item are stored first, as one write, and only then is the queue told, so a
-// closed app loses nothing; the item is 'pending' (or 'considering' when he is only looking) with its reading waiting to be sent.
+// closed app loses nothing once it is stored; the item is 'pending' (or 'considering' when he is only looking) with its reading
+// waiting to be sent. Name it does not wait for the photos to be kept (startItemWhenKept): the viewfinder is ready for the next coin
+// at once, and each coin is stored as soon as its photos are, in the order he named them.
 import type { Item, ItemKind } from '../data/db';
 import { addItemWithPhotos } from '../data/repositories';
 import { nameQueue } from '../services/nameQueue';
@@ -16,4 +18,17 @@ export async function startItem(kind: ItemKind, mode: AddMode, shots: readonly S
   );
   nameQueue.kick();
   return item;
+}
+
+let lastStored: Promise<unknown> = Promise.resolve();
+
+/** Name it before the photos are kept: once they are (and every coin named before this one is stored), the item is stored and
+ * queued. Rejects when a photo could not be kept or the store refused, with nothing stored. */
+export function startItemWhenKept(kind: ItemKind, mode: AddMode, shots: readonly Promise<Still>[]): Promise<Item> {
+  const kept = Promise.all(shots);
+  // a photo that fails before the coins ahead are stored is answered below, not lost as unhandled
+  kept.catch(() => undefined);
+  const stored = lastStored.then(() => kept).then((stills) => startItem(kind, mode, stills));
+  lastStored = stored.catch(() => undefined);
+  return stored;
 }

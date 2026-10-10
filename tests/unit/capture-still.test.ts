@@ -1,7 +1,7 @@
 // The capture module's picture rules (src/capture/captureStill.ts): the long side, the size limit, the thumbnail and the photo's own orientation.
 import { Blob as NodeBlob } from 'node:buffer';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { MAX_LONG_SIDE, MAX_STILL_BYTES, THUMB_LONG_SIDE, captureStill, fitWithin, shrinkToLimit, stillFromFile } from '../../src/capture/captureStill';
+import { MAX_LONG_SIDE, MAX_STILL_BYTES, THUMB_LONG_SIDE, captureStill, fitWithin, grabFrame, shrinkToLimit, stillFromFile, stillFromFrame } from '../../src/capture/captureStill';
 import { installFakeCamera, type FakeCamera } from '../support/fake-camera';
 
 let camera: FakeCamera;
@@ -54,10 +54,22 @@ describe('captureStill', () => {
     expect(still.thumb.size).toBeLessThan(still.blob.size);
   });
 
+  it('grabs the frame at the tap without encoding it, and keeps that frame however the camera moves on', async () => {
+    const frame = grabFrame(video());
+    expect(camera.encodes).toHaveLength(0);
+    camera.video.width = 640;
+    camera.video.height = 480;
+    const still = await stillFromFrame(frame);
+    expect({ width: still.width, height: still.height }).toEqual({ width: 1280, height: 720 });
+    // the frame's pixels are let go once it is kept
+    expect({ width: frame.width, height: frame.height }).toEqual({ width: 0, height: 0 });
+  });
+
   it('refuses a camera that has not started', async () => {
     camera.restore();
     camera = installFakeCamera({ width: 0, height: 0 });
     await expect(captureStill(video())).rejects.toThrow('The camera is not ready yet');
+    expect(() => grabFrame(video())).toThrow('The camera is not ready yet');
   });
 });
 

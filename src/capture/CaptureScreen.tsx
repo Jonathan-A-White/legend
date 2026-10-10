@@ -1,18 +1,19 @@
 // src/capture/CaptureScreen.tsx: Add, at #/add. A viewfinder with a guide, 'Front' then 'Back', a shutter, 'Use a photo' for the
-// gallery and 'Name it'. Name it stores the item and its photos and hands the send to the queue (src/services/nameQueue.ts), then the
-// viewfinder is ready for the next one at once, so a visit to a coin shop is photograph, photograph, photograph. A switch says
-// whether it is for the collection or only Just looking. Everything he needs is in reach of the thumb at the bottom.
+// gallery and 'Name it'. No tap waits: the shutter grabs the frame and is ready again at once while the photo is kept behind it, and
+// Name it hands the photos on (startItemWhenKept stores the item once they are kept, then the queue, src/services/nameQueue.ts,
+// sends it), so a pile of coins is photograph, photograph, Name it, next. A switch says whether it is for the collection or only
+// Just looking. Everything he needs is in reach of the thumb at the bottom.
 import { useRef, useState } from 'react';
 import type { ItemKind } from '../data/db';
 import { restoreItem, useItems } from '../data/repositories';
 import { navigate } from '../nav/route';
 import { nameQueue } from '../services/nameQueue';
 import { readSetting } from '../settings/registry';
-import { captureStill, stillFromFile, MAX_LONG_SIDE, type Still, type StillOptions } from './captureStill';
+import { grabFrame, stillFromFile, stillFromFrame, MAX_LONG_SIDE, type Still, type StillOptions } from './captureStill';
 import { ConfirmSheet } from './ConfirmSheet';
 import { Preview } from './Preview';
 import { Tray } from './Tray';
-import { startItem, type AddMode } from './startItem';
+import { startItemWhenKept, type AddMode } from './startItem';
 import { useCamera } from './useCamera';
 import { useUndoToast } from './useUndoToast';
 
@@ -42,52 +43,78 @@ async function stillOptions(): Promise<StillOptions> {
   return { maxLongSide: typeof cap === 'number' ? cap : MAX_LONG_SIDE };
 }
 
+/** A photo taken: kept in the background (`still`), its thumbnail shown once it is. */
+interface Shot {
+  key: number;
+  still: Promise<Still>;
+  thumb: Blob | null;
+}
+
 export function CaptureScreen() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { ready, error } = useCamera(videoRef);
   const [kind, setKind] = useState<ItemKind>('coin');
   const [mode, setMode] = useState<AddMode>('collect');
-  const [shots, setShots] = useState<Still[]>([]);
-  const [busy, setBusy] = useState(false);
+  const [shots, setShots] = useState<Shot[]>([]);
   const [problem, setProblem] = useState<string | null>(null);
   const [made, setMade] = useState<string[]>([]);
+  // coins named whose photos are still being kept, so not stored yet
+  const [keeping, setKeeping] = useState(0);
+  const lastKey = useRef(0);
   const [checking, setChecking] = useState<string | null>(null);
   const toast = useUndoToast();
   const items = useItems({ scope: 'all' });
 
   const mine = (items ?? []).filter((i) => made.includes(i.id)).sort((a, b) => a.createdAt - b.createdAt);
   const sheetItem = checking ? mine.find((i) => i.id === checking) : undefined;
+  // named and stored, but not yet drawn by the live query: still counted at the factory, so the count never blinks
+  const unseen = made.filter((id) => !mine.some((i) => i.id === id)).length;
   const both = shots.length >= SIDES.length;
   const prompt = both ? 'Both sides taken' : SIDES[shots.length];
 
-  const keep = async (make: (options: StillOptions) => Promise<Still>) => {
-    if (busy || both) return;
-    setBusy(true);
+  /** Takes the next side at once and keeps its photo behind it; a photo that cannot be kept is taken away (with any after it). */
+  const take = (make: (options: StillOptions) => Promise<Still>) => {
+    if (both) return;
+    const key = ++lastKey.current;
+    const still = stillOptions().then(make);
+    setShots((s) => (s.length >= SIDES.length ? s : [...s, { key, still, thumb: null }]));
     setProblem(null);
-    try {
-      const still = await make(await stillOptions());
-      setShots((s) => (s.length >= SIDES.length ? s : [...s, still]));
-      navigator.vibrate?.(15);
-    } catch {
-      setProblem('Could not keep that photo. Try again.');
-    } finally {
-      setBusy(false);
-    }
+    navigator.vibrate?.(15);
+    still.then(
+      (kept) => setShots((s) => s.map((shot) => (shot.key === key ? { ...shot, thumb: kept.thumb } : shot))),
+      () => {
+        setShots((s) => (s.some((shot) => shot.key === key) ? s.slice(0, s.findIndex((shot) => shot.key === key)) : s));
+        setProblem('Could not keep that photo. Try again.');
+      },
+    );
   };
 
-  const nameIt = async () => {
-    if (busy || shots.length === 0) return;
-    setBusy(true);
+  const shoot = () => {
+    let frame: HTMLCanvasElement;
     try {
-      const item = await startItem(kind, mode, shots);
-      setMade((m) => [...m, item.id]);
-      setShots([]);
-      setProblem(null);
+      frame = grabFrame(videoRef.current!);
     } catch {
-      setProblem('Could not save that one. Try again.');
-    } finally {
-      setBusy(false);
+      setProblem('Could not keep that photo. Try again.');
+      return;
     }
+    take((options) => stillFromFrame(frame, options));
+  };
+
+  const nameIt = () => {
+    if (shots.length === 0) return;
+    setShots([]);
+    setProblem(null);
+    setKeeping((k) => k + 1);
+    startItemWhenKept(kind, mode, shots.map((shot) => shot.still)).then(
+      (item) => {
+        setMade((m) => [...m, item.id]);
+        setKeeping((k) => k - 1);
+      },
+      () => {
+        setProblem('Could not save that one. Photograph it again.');
+        setKeeping((k) => k - 1);
+      },
+    );
   };
 
   return (
@@ -121,7 +148,7 @@ export function CaptureScreen() {
           </p>
         ) : null}
         <div className="mt-2">
-          <Tray items={mine} onCheck={setChecking} onRetry={(id) => void nameQueue.retry(id)} />
+          <Tray items={mine} keeping={keeping + unseen} onCheck={setChecking} onRetry={(id) => void nameQueue.retry(id)} />
         </div>
         {toast.letGo ? (
           <div role="status" className="mx-4 mt-2 flex items-center justify-between rounded-2xl bg-black/75 p-3 text-base">
@@ -139,7 +166,7 @@ export function CaptureScreen() {
         {shots.length > 0 ? (
           <ul aria-label="Photos taken" className="flex gap-3">
             {shots.map((shot, i) => (
-              <li key={i}>
+              <li key={shot.key}>
                 <Preview thumb={shot.thumb} side={SIDES[i]} onRetake={() => setShots((s) => s.slice(0, i))} />
               </li>
             ))}
@@ -174,18 +201,18 @@ export function CaptureScreen() {
               onChange={(e) => {
                 const file = e.target.files?.[0];
                 e.target.value = '';
-                if (file) void keep((options) => stillFromFile(file, options));
+                if (file) take((options) => stillFromFile(file, options));
               }}
             />
           </label>
           <button
             type="button"
             aria-label="Take photo"
-            disabled={!ready || busy || both}
-            onClick={() => void keep((options) => captureStill(videoRef.current!, options))}
+            disabled={!ready || both}
+            onClick={shoot}
             className="h-[4.5rem] w-[4.5rem] shrink-0 rounded-full border-4 border-white bg-white/90 disabled:opacity-40"
           />
-          <button type="button" disabled={busy || shots.length === 0} onClick={() => void nameIt()} className="min-h-14 flex-1 rounded-2xl bg-accent text-lg font-semibold text-accent-fg disabled:opacity-40">
+          <button type="button" disabled={shots.length === 0} onClick={nameIt} className="min-h-14 flex-1 rounded-2xl bg-accent text-lg font-semibold text-accent-fg disabled:opacity-40">
             Name it
           </button>
         </div>

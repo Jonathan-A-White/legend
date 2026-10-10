@@ -307,6 +307,38 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     });
   });
 
+  Scenario('a pile of coins never waits on a photo being kept, so it goes photograph, photograph, Name it, next', ({ Given, When, Then, And }) => {
+    const prompts: string[] = [];
+    Given('the camera is open on Add and the phone is slow to keep a photo', async () => {
+      await cameraOpen();
+      camera.hold();
+    });
+    When('he taps the shutter twice and Name it without waiting', async () => {
+      // each tap is made only once the screen says it is ready for it, and no encode has finished
+      await userEvent.click(shutter());
+      prompts.push(prompt().textContent ?? '');
+      await userEvent.click(shutter());
+      prompts.push(prompt().textContent ?? '');
+      await userEvent.click(nameIt());
+      prompts.push(prompt().textContent ?? '');
+    });
+    Then('each tap took at once: the prompt reads Front again, the shutter is ready and the queue says "1 at the factory"', async () => {
+      expect(prompts).toEqual(['Back', 'Both sides taken', 'Front']);
+      expect(camera.encodes).toHaveLength(0);
+      expect(shutter()).toBeEnabled();
+      expect(screen.getByText('1 at the factory')).toBeInTheDocument();
+    });
+    And('nothing is stored until the photos are kept, and then the coin is stored with both and sent', async () => {
+      expect(await db.items.count()).toBe(0);
+      camera.release();
+      await waitFor(() => expect(atSend).toHaveLength(1));
+      expect(atSend[0].items).toHaveLength(1);
+      expect(atSend[0].photos.map((p) => p.side).sort()).toEqual(['obverse', 'reverse']);
+      expect(factory.sent[0].photos).toHaveLength(2);
+      expect(screen.getByText('1 at the factory')).toBeInTheDocument();
+    });
+  });
+
   Scenario('three items queued are sent one after another and each is named', ({ Given, When, Then, And }) => {
     const sends: ReturnType<typeof deferred<string>>[] = [];
     Given('the camera is open on Add and the factory sends one at a time', async () => {
