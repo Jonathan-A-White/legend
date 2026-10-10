@@ -9,8 +9,9 @@ licence and what we changed. Credit is owed whether or not a licence asks for it
 ## Libraries
 
 - **[bsv-kit](https://github.com/Jonathan-A-White/bsv-kit)** by Jonathan A. White, MIT. The shared libraries of his phone
-  apps: What's new (the update banner's summary and the sheet shown after an update) now; the licence check, the grist
-  client and one-time tips arrive with their stories. Changes: none.
+  apps: What's new (the update banner's summary and the sheet shown after an update), the licence check and the grist client
+  (Add sends the photos of a coin or a bill to the photo reader through it; they leave the phone only when he taps Name it);
+  one-time tips arrive with their story. Changes: none.
 - **[React](https://react.dev)**, MIT. **[Dexie](https://dexie.org)**, Apache-2.0. **[Vite](https://vite.dev)**, MIT, with
   **[vite-plugin-pwa](https://vite-pwa-org.netlify.app)**, MIT, and **[Workbox](https://developer.chrome.com/docs/workbox)**,
   MIT. **[Tailwind CSS](https://tailwindcss.com)**, MIT. **[Ajv](https://ajv.js.org)**, MIT, checks the photo reader's answer against its schema. Used as published; changes: none.
@@ -73,4 +74,6 @@ Nothing from Numista, PCGS, NGC, ucoin or Colnect is copied in.
   code is cut into modules are taken from it.
 - Mike Bostock's [versor dragging](https://observablehq.com/@d3/versor-dragging) (ISC): the Globe turns under the finger
   with a quaternion, as there; `src/globe/drag.ts` is that code, rewritten in TypeScript.
+- **TradeTracker**, the Governor's shopping app: the camera capture (the 1600 px, under 1 MB still) and the queue of lookups
+  to the factory that Add's photo queue follows.
 - The owner's PWA best practices, which every screen follows.

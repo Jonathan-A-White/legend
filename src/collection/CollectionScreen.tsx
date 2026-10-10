@@ -3,12 +3,8 @@
 import { useMemo, useState } from 'react';
 import type { Item } from '../data/db';
 import { useItems, useThumbs } from '../data/repositories';
-<<<<<<< HEAD
 import { FeedbackButton } from '../feedback';
-import { itemHash } from '../nav/route';
-=======
 import { ADD_HASH, itemHash } from '../nav/route';
->>>>>>> 8a7df62 (Add from the camera or Just looking: viewfinder, Name it into the queue, tray, Confirm sheet, Looking at strip, round Add button; feature and phone-width spec)
 import { CountrySheet } from './CountrySheet';
 import { Thumb } from './Thumb';
 import { pickThumb, type ThumbPhoto } from './thumbs';
@@ -108,16 +104,11 @@ export function CollectionScreen() {
   const narrowed = query.trim() !== '' || kind !== 'all' || country !== null;
 
   return (
-<<<<<<< HEAD
-    <main aria-label="Collection" className="flex min-h-0 flex-1 flex-col px-4 pt-[max(env(safe-area-inset-top),1.25rem)]">
+    <main aria-label="Collection" className="relative flex min-h-0 flex-1 flex-col px-4 pt-[max(env(safe-area-inset-top),1.25rem)]">
       <div className="flex items-center justify-between">
         <h1 className="text-3xl font-semibold tracking-wide text-accent">Collection</h1>
         <FeedbackButton screen="Collection" className="-mr-2" />
       </div>
-=======
-    <main aria-label="Collection" className="relative flex min-h-0 flex-1 flex-col px-4 pt-[max(env(safe-area-inset-top),1.25rem)]">
-      <h1 className="text-3xl font-semibold tracking-wide text-accent">Collection</h1>
->>>>>>> 8a7df62 (Add from the camera or Just looking: viewfinder, Name it into the queue, tray, Confirm sheet, Looking at strip, round Add button; feature and phone-width spec)
       <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
         {items ? countLine(shown) : ''}
       </p>
