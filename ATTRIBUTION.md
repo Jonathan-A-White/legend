@@ -14,7 +14,8 @@ licence and what we changed. Credit is owed whether or not a licence asks for it
   one-time tips arrive with their story. Changes: none.
 - **[React](https://react.dev)**, MIT. **[Dexie](https://dexie.org)**, Apache-2.0. **[Vite](https://vite.dev)**, MIT, with
   **[vite-plugin-pwa](https://vite-pwa-org.netlify.app)**, MIT, and **[Workbox](https://developer.chrome.com/docs/workbox)**,
-  MIT. **[Tailwind CSS](https://tailwindcss.com)**, MIT. **[Ajv](https://ajv.js.org)**, MIT, checks the photo reader's answer against its schema. Used as published; changes: none.
+  MIT. **[Tailwind CSS](https://tailwindcss.com)**, MIT. **[Ajv](https://ajv.js.org)**, MIT, checks the photo reader's answer against its schema.
+  **[qrcode](https://github.com/soldair/node-qrcode)**, MIT, draws this phone's key as the QR code on Unlock. Used as published; changes: none.
 - **[d3-geo](https://d3js.org/d3-geo)** and **[topojson-client](https://github.com/topojson/topojson-client)** by Mike
   Bostock, ISC: the Globe's projection, paths, graticule and picking, and the country shapes unpacked from TopoJSON. Used as
   published; changes: none.

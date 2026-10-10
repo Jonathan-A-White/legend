@@ -13,6 +13,12 @@ Feature: The licence gate
     When he taps Copy
     Then the clipboard holds the device key
 
+  Scenario: The Unlock screen shows the phone's key as a QR code for Postern to scan
+    Given the chain says this phone's key has no licence
+    When Legend is opened
+    Then he sees the Unlock screen
+    And the Unlock screen shows the device key as a QR code
+
   Scenario: A licence held by the issuer opens the app
     Given the issuer minted a licence to this phone's key on a stub chain
     When Legend is opened

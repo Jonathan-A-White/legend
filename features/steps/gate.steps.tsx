@@ -10,6 +10,7 @@ import { App } from '../../src/App';
 import { db } from '../../src/data/db';
 import { DEVICE_KEY_STORAGE_KEY } from '../../src/config';
 import { fetchLicenceStatus } from '../../src/services/licenceCheck';
+import { qrPath } from '../../src/gate/qr';
 import { addMint, addRevoke, HOLDER, ISSUER_PUB, newChain, STRANGER } from '../../tests/support/licence-chain';
 
 afterAll(() => {
@@ -117,6 +118,19 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     });
     Then('the clipboard holds the device key', () => {
       expect(copied).toBe(keyText());
+    });
+  });
+
+  Scenario("The Unlock screen shows the phone's key as a QR code for Postern to scan", ({ Given, When, Then, And }) => {
+    Given("the chain says this phone's key has no licence", () => {
+      answer = { state: 'none', checkedAt: checkedAt() };
+    });
+    When('Legend is opened', open);
+    Then('he sees the Unlock screen', seeUnlock);
+    And('the Unlock screen shows the device key as a QR code', async () => {
+      await waitFor(() => expect(keyText()).toMatch(/^0[23][0-9a-f]{64}$/));
+      const qr = screen.getByRole('img', { name: 'This phone’s key as a QR code' });
+      expect(qr.querySelector('path')?.getAttribute('d')).toBe(qrPath(keyText()).path);
     });
   });
 
