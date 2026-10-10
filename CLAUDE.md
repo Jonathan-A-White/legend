@@ -38,6 +38,7 @@ npm run shots        # Playwright at 390x844 against `vite preview` of dist/ (bu
 npm run e2e:live     # live specs (tests/e2e/*-live.spec.ts) against the DEPLOYED app; none yet; not in the gate
 npm run data:build   # rebuild public/data/world/*.json from data/raw and data/snapshots (docs/data.md); a second run changes nothing
 npm run icons        # re-render public/icon-192.png and icon-512.png from public/icon.svg
+npm run grind:build  # write the talkable settings into grinds/legend-ask.md and its answer schema (after a registry change)
 ```
 
 ## Tests

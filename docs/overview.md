@@ -14,7 +14,7 @@ Built: the licence gate (`docs/testing.md`), the shell (bottom bar; reopens wher
 filters, a Looking at strip) and one item (photos, facts, notes, Edit, hold to Remove), Add (`#/add`: photograph front and back, a background queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Globe (`#/globe`: a globe turned with one
 finger, lit where the items come from; Not yet lists the countries with nothing) and the
 Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map lit with the quarters they
-have, a checklist), Share (a picture of the globe, a card of one item), Tell the maker (feedback, `docs/feedback.md`) and one-time tips. Learn (grading on his coins, mint marks, special years, Your path). Planned: search, the tutor, About (credits, What's new).
+have, a checklist), Share (a picture of the globe, a card of one item), Tell the maker (feedback, `docs/feedback.md`) and one-time tips. Learn (grading on his coins, mint marks, special years, Your path). The tutor (`?ask` on an item or a country: his questions, its answers, settings only on his Apply). Planned: search, About.
 
 ## Where things live
 
@@ -22,10 +22,10 @@ have, a checklist), Share (a picture of the globe, a card of one item), Tell the
   talk through the bus (`docs/events.md`), a setting is one registry entry.
 - `docs/testing.md` how tests get past the licence gate (the device key seam).
 - `features/*.feature` Gherkin scenarios; `features/steps/` their steps; `tests/unit/` unit tests; `tests/e2e/` Playwright.
-- `public/data/us/` the US reference data (138 quarter designs, mints, Sheldon grades, key dates, a states map), loaded by `src/data/us.ts`; sources and licences in `docs/data.md`.
+- `public/data/us/` the US reference data (quarters, mints, grades, key dates, a states map), loaded by `src/data/us.ts`; sources and licences in `docs/data.md`.
 - `public/changelog.json` and `CHANGELOG.md` What's new; `ATTRIBUTION.md` credits every source.
 - `docs/data.md` the world data (`npm run data:build`: countries and currencies, sources and licences); `public/data/world/`.
-- `grinds/` the grist definitions and their examples (`coin-from-photos`, `item-value`); `schemas/` their schemas.
+- `grinds/` the grists and examples (`coin-from-photos`, `item-value`, `legend-ask` the tutor); `schemas/` theirs.
 
 ## One-line rules
 

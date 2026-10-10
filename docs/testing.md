@@ -64,6 +64,13 @@ The photo reader is bsv-kit's `sendGrist` and `awaitAnswer`; a test puts its own
   encoded size follows its pixels and quality (so the 1 MB limit really bites). In Chromium a spec replaces `navigator.mediaDevices.getUserMedia`
   with a canvas's `captureStream()` (`tests/e2e/add.spec.ts`).
 
+## The tutor (Ask)
+
+The tutor goes through the same seam: `askTutor` (`src/services/ask.ts`) sends with `currentGristPort()` (`src/services/grist.ts`, where
+`setGristPort` and `window.__legendGrist` now live), so a Playwright spec answers it by setting `window.__legendGrist`
+(`tests/e2e/ask.spec.ts`). `features/steps/ask.steps.tsx` instead serves a fake Postern (`tests/support/fake-postern.ts`) and answers each
+`legend-ask` grist with `fake.answer(...)` or `fake.kindReplies['legend-ask']`; `fake.down` makes Postern unreachable.
+
 ## Live check (not in the gate)
 
 `npm run check:licence -- <66-hex public key>` asks testnet what the gate would answer for that key (`held`, `revoked`,
