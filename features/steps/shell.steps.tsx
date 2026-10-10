@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { afterAll, expect } from 'vitest';
 import { loadFeature, describeFeature } from '@amiceli/vitest-cucumber';
 import { App } from '../../src/App';
+import { openGate } from '../../tests/support/open-gate';
 
 afterAll(cleanup);
 
@@ -15,10 +16,11 @@ const feature = await loadFeature('features/shell.feature');
 
 describeFeature(feature, ({ Scenario }) => {
   Scenario('The bottom bar shows Collection, Globe, Quarters, Learn and Settings and the tapped one is active', ({ Given, Then, And, When }) => {
-    Given('Legend is open on the Collection', () => {
+    Given('Legend is open on the Collection', async () => {
       cleanup();
       window.history.replaceState(null, '', '/#/collection');
-      render(<App />);
+      render(<App gate={openGate} />);
+      await screen.findByRole('navigation', { name: 'Screens' });
     });
 
     Then('the bottom bar shows Collection, Globe, Quarters, Learn and Settings', () => {

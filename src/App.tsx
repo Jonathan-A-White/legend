@@ -1,5 +1,7 @@
-// src/App.tsx: the shell every screen sits in: the Update banner over the current screen, the bottom bar under it, and the
-// What's new sheet that shows once after an update. The screen switch below is the one place a new screen is added: one line.
+// src/App.tsx: the licence gate around the shell every screen sits in. The shell is the Update banner over the current screen,
+// the bottom bar under it, and the What's new sheet that shows once after an update. The screen switch below is the one place a
+// new screen is added: one line. Until the phone's key holds a licence the gate shows Unlock instead of the shell (src/gate/).
+import { Gate, type GateProps } from './gate';
 import { UpdateBanner } from './UpdateBanner';
 import { CountrySheet, GlobeScreen } from './globe';
 import { BottomBar } from './nav/BottomBar';
@@ -34,10 +36,9 @@ function Screen({ hash }: { hash: string }) {
   }
 }
 
-export function App() {
+function Shell() {
   const hash = useAddress();
   useRouteEvents();
-  useAppearance();
   return (
     // data-shell: the scroll guard (src/ui/scrollGuard.ts) keeps this box at scrollTop 0
     <div data-shell className="flex h-full flex-col overflow-clip bg-canvas text-ink">
@@ -46,5 +47,16 @@ export function App() {
       <BottomBar />
       <WhatsNewOnUpdate />
     </div>
+  );
+}
+
+/** `gate` is for tests: an injected licence check and clock (docs/testing.md). The app itself passes none. */
+export function App({ gate }: { gate?: Omit<GateProps, 'children'> }) {
+  // The theme and text size apply on the Unlock screen too.
+  useAppearance();
+  return (
+    <Gate {...gate}>
+      <Shell />
+    </Gate>
   );
 }
