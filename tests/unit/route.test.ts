@@ -21,6 +21,8 @@ describe('routes', () => {
     expect(routeOf('#/globe')).toBe('globe');
     expect(routeOf('#/quarters')).toBe('quarters');
     expect(routeOf('#/learn')).toBe('learn');
+    for (const page of ['grading', 'mints', 'years', 'path']) expect(routeOf(`#/learn/${page}`)).toBe('learn');
+    expect(routeOf('#/learn/nothing')).toBe('home');
     expect(routeOf('#/settings')).toBe('settings');
     expect(routeOf('#/item/abc-123')).toBe('item');
     expect(itemIdOf('#/item/abc-123')).toBe('abc-123');
@@ -43,7 +45,7 @@ describe('routes', () => {
 });
 
 describe('where he left off', () => {
-  it.each([...KEPT_PATHS, '#/item/abc-123', '#/country/JP'])('reopens %s on a bare open', (hash) => {
+  it.each([...KEPT_PATHS, '#/item/abc-123', '#/country/JP', '#/learn/grading', '#/learn/path'])('reopens %s on a bare open', (hash) => {
     visit(hash);
     expect(isKeptHash(hash)).toBe(true);
     expect(readLastRoute()).toBe(hash);
