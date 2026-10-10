@@ -31,9 +31,20 @@ not shipped in the app) are from Wikimedia Commons, each scaled down and saved a
 
 Each photo's page is linked in `grinds/examples/README.md`.
 
-None else ships yet. Named ahead, for the globe (a later story): **[Natural Earth](https://www.naturalearthdata.com)** map
-data, public domain, and **[world-atlas](https://github.com/topojson/world-atlas)** by Mike Bostock, ISC, which repackages
-it. They will be credited here, with what we changed, in the story that adds them.
+The world data in `public/data/world/` (built by `npm run data:build`; `docs/data.md` says how):
+
+- **[Natural Earth](https://www.naturalearthdata.com)** 110m country shapes, public domain, as repackaged by
+  **[world-atlas](https://github.com/topojson/world-atlas)** by Mike Bostock, ISC. Changes: a country's shape is kept under
+  its ISO alpha-2 code with a name; Somaliland and Northern Cyprus (no ISO code) and the land outline are left out.
+- **[datasets/country-codes](https://github.com/datasets/country-codes)** (ISO 3166-1 and 4217 facts: alpha-2 codes, names,
+  continents, current currency codes) and **[datasets/currency-codes](https://github.com/datasets/currency-codes)** (the ISO 4217
+  code list with withdrawal dates), both under the Public Domain Dedication and License (PDDL). Changes: joined, names
+  tidied (US, UK, the Congos, Bosnia), flags drawn from the codes.
+- **[Wikidata](https://www.wikidata.org)** (CC0): the currencies each country has had, with start and end dates, from the
+  query in `scripts/wikidata-currencies.rq`, kept as a snapshot in `data/snapshots/`. Changes: rows with no code and no end date
+  are dropped; ISO 4217 names replace Wikidata's labels where the code is known.
+
+Nothing from Numista, PCGS, NGC, ucoin or Colnect is copied in.
 
 ## Ideas
 
