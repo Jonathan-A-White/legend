@@ -10,6 +10,7 @@ import { askHash, isAsking, itemHash, navigate, useAddress } from '../nav/route'
 import { ShareButton, shareItem } from '../share';
 import { AskSheet } from '../tutor';
 import { HoldBar } from '../ui/HoldBar';
+import { WishedCard } from '../wishlist';
 import { WorthLine } from '../worth';
 import { EditSheet } from './EditSheet';
 import { NotesField } from './NotesField';
@@ -119,7 +120,7 @@ export function ItemView({ id }: { id: string }) {
     return (
       <main aria-label="Item" className="flex flex-1 flex-col items-center justify-center gap-4 px-6 text-center">
         <p role="status" className="text-2xl font-semibold text-ink">
-          {item.status === 'considering' ? 'Let go' : 'Removed from your collection'}
+          {item.status === 'considering' || item.status === 'wished' ? 'Let go' : 'Removed from your collection'}
         </p>
         <button
           type="button"
@@ -157,6 +158,7 @@ export function ItemView({ id }: { id: string }) {
         </header>
 
         <ItemReading item={item} onLetGo={() => setRemoved(true)} />
+        {item.status === 'wished' ? <WishedCard item={item} /> : null}
 
         <div className="grid grid-cols-2 gap-3">
           <PhotoCard photo={photo('obverse')} side="Obverse" title={title} onZoom={(url, label) => setZoom({ url, label })} />
@@ -195,7 +197,7 @@ export function ItemView({ id }: { id: string }) {
           <button type="button" onClick={() => navigate(askHash(itemHash(id)))} className="flex min-h-14 flex-1 items-center justify-center rounded-2xl bg-accent text-lg font-semibold text-accent-fg">
             Ask the tutor
           </button>
-          <ShareButton which="item" make={() => shareItem(id)} className={share} />
+          {item.status === 'wished' ? null : <ShareButton which="item" make={() => shareItem(id)} className={share} />}
         </div>
         <button type="button" onClick={() => setEditing(true)} className="flex min-h-14 w-full items-center justify-center rounded-2xl border border-accent text-lg font-semibold text-accent">
           Edit

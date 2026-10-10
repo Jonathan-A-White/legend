@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import type { Item } from '../data/db';
 import { useItems, useThumbs } from '../data/repositories';
 import { FeedbackButton } from '../feedback';
-import { ADD_HASH, itemHash } from '../nav/route';
+import { ADD_HASH, WISHLIST_HASH, itemHash } from '../nav/route';
 import { RoughWorth } from '../worth';
 import { CountrySheet } from './CountrySheet';
 import { Thumb } from './Thumb';
@@ -91,6 +91,7 @@ function LookingAt({ items, thumbs, ref_ }: { items: readonly Item[]; thumbs: re
 export function CollectionScreen() {
   const items = useItems();
   const looking = useItems({ scope: 'looking' });
+  const wished = useItems({ scope: 'wished' });
   const thumbs = useThumbs();
   const ref_ = useReference();
   const [query, setQuery] = useState('');
@@ -128,6 +129,11 @@ export function CollectionScreen() {
         enterKeyHint="search"
         className="mt-3 min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-lg text-ink placeholder:text-muted"
       />
+
+      <a href={WISHLIST_HASH} className="mt-3 flex min-h-12 items-center justify-between rounded-xl border border-line px-4 text-lg font-medium text-ink active:opacity-80">
+        <span>Wish list</span>
+        <span className="text-muted">{wished && wished.length > 0 ? `${wished.length} ›` : '›'}</span>
+      </a>
 
       <LookingAt items={looking ?? []} thumbs={thumbs} ref_={ref_} />
 

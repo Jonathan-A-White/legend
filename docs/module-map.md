@@ -1,13 +1,13 @@
 # Legend module map
 
-A module is a folder under `src/` with one responsibility and one entry file; others import the entry, not its insides.
+A module is a folder under `src/` with one responsibility and one entry file; import the entry, not its insides.
 
 | Module | One responsibility | Entry | Status |
 |---|---|---|---|
 | App shell | Start the app: scroll guard, banner, service worker, config | `src/main.tsx`, `src/App.tsx`, `src/config.ts`, `src/sw.ts` | built |
 | Update flow | Banner, waiting build, What's new | `src/UpdateBanner.tsx`, `src/whatsNew/` | built |
 | gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell, `Unlock` shows meanwhile | `src/gate/index.ts` | built |
-| data | The local store (Dexie: items, photos, settings, meta, asks, values, outbox, usage) and its types; an item carries `reading` while at the factory | `src/data/db.ts` | built |
+| data | The local store (Dexie: items, photos, settings, meta, asks, values, outbox, usage, savings) and its types; `reading` while at the factory | `src/data/db.ts` | built |
 | data/world | Countries (TopoJSON, names, flags) and currencies by date, in `public/data/world/` | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
@@ -16,16 +16,17 @@ A module is a folder under `src/` with one responsibility and one entry file; ot
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared controls: scroll guard, build stamp, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), `useObjectUrl` | `src/ui/` (one file each) | built |
-| globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): a canvas globe; `render.ts` draws a frame (pure), `controller.ts` the one loop, `clock.ts` its seam | `src/globe/index.ts` | built |
-| quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist, territories; `match.ts` (pure) names an item's design, `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
+| globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): a canvas globe; `render.ts` draws a frame (pure), `controller.ts` the loop, `clock.ts` its seam | `src/globe/index.ts` | built |
+| quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist; `match.ts` (pure) names an item's design, `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
 | collection | The Collection (`#/collection`: count line, search, filters, Looking at) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
 | share | Share: a globe picture or an item card, else Save picture; `text.ts` says what a card may say | `src/share/index.ts` | built |
-| learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`), each ending in Ask the tutor (disabled); pure: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
-| feedback | Tell the maker: `FeedbackButton` and `TellTheMakerButton` (Settings) open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
-| tips | One-time `HintCard` tips (`hints.ts`) and the usage log (`usageLog.ts`, counts) | `src/tips/index.ts` | built |
-| tutor | The Ask sheet over an item or country (`?ask`): `AskBox`, `suggestions.ts`, answers kept in asks, settings cards; `request.ts` says what goes; `onAnswer` the voice's seam | `src/tutor/index.ts` | built |
-| capture | Add (`#/add`): viewfinder (`CaptureScreen`, `useCamera`), `captureStill` (1600 px, under 1 MB, 320 px thumb), `startItem` (Name it: item and photos, then the queue), Confirm sheet, `useNameQueue` (App starts it) | `src/capture/index.ts` | built |
-| worth | A rough worth, never a price: `WorthLine` (an item; why opens the basis), `RoughWorth` (the Collection's sum), `format.ts`; Show values hides it | `src/worth/index.ts` | built |
+| learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`), each ending in Ask the tutor; pure: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
+| feedback | Tell the maker: `FeedbackButton`, `TellTheMakerButton` open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
+| tips | One-time `HintCard` tips (`hints.ts`), the usage log (`usageLog.ts`) | `src/tips/index.ts` | built |
+| tutor | The Ask sheet over an item or country (`?ask`): `AskBox`, `suggestions.ts`, answers kept in asks, settings cards; `request.ts` says what goes | `src/tutor/index.ts` | built |
+| capture | Add (`#/add`): viewfinder (`CaptureScreen`, `useCamera`), `captureStill` (1600 px, under 1 MB, 320 px thumb), `startItem` (item and photos, then the queue), Confirm sheet, `useNameQueue` | `src/capture/index.ts` | built |
+| worth | A rough worth, never a price: `WorthLine`, `RoughWorth` (the Collection's sum), `format.ts`; Show values hides it | `src/worth/index.ts` | built |
+| wishlist | The Wish list (`#/wishlist`, from the Collection): goal card, wished coins, Got it!, Let it go; `WishSheet` is Wish for it on the Confirm sheet; `tally.ts` (pure) the money | `src/wishlist/index.ts` | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
 
 ## Grinds
@@ -37,9 +38,9 @@ A module is a folder under `src/` with one responsibility and one entry file; ot
 
 Each screen is a folder `src/screens/<name>/` exporting its component from `index.ts`. The bottom bar has Collection, Globe,
 Quarters, Learn and Settings (`src/settings/SettingsScreen.tsx`); `home` is `#/`; `item` (`#/item/<id>`) and `country`
-(`#/country/<cc>`) are reached from them. Those live in their module folders above; `add` (`#/add`, `src/capture/`) opens over the bar. Planned: `search`, `about`.
+(`#/country/<cc>`) are reached from them. Those live in their module folders above; `add` (`#/add`, `src/capture/`) opens over the bar.
 
-**A new screen is a new folder.** Never grow an existing screen's file with another screen's code, and never import
+**A new screen is a new folder.** Never grow a screen's file with another screen's code, and never import
 from inside another module's folder, only its entry.
 
 ## Files every story would collide on
@@ -47,10 +48,10 @@ from inside another module's folder, only its entry.
 - `src/App.tsx`: the screen switch; a screen is one case here.
 - `src/settings/registry.ts`: add a setting as one entry in `SETTINGS`, then `npm run grind:build` (the tutor's list). `src/events/bus.ts` and
   `docs/events.md`: add a kind in both (a test fails if they differ). `src/nav/route.ts`: a new route is a case in `routeOf`.
-- `src/data/db.ts`: a change adds a `this.version(n)`; never edit an old one.
-- `src/data/repositories/index.ts`: a re-export list; add names on their own lines.
-- `package.json`, `package-lock.json`: keep a story's changes to its own lines.
-- `ATTRIBUTION.md`, `CHANGELOG.md`, `public/changelog.json`: credits and What's new (`mw next` writes the changelog).
+- `src/data/db.ts`: a change adds `this.version(n)`, never edits an old one.
+- `src/data/repositories/index.ts`: re-exports; add names on their own lines.
+- `package.json`, `package-lock.json`: keep to your own lines.
+- `ATTRIBUTION.md`, `CHANGELOG.md`, `public/changelog.json`: credits and What's new (`mw next` writes it).
 
 ## Rules
 

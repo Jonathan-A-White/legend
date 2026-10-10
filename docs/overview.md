@@ -10,11 +10,11 @@ and what they choose to share: `docs/privacy.md`.
 ## Screens planned
 
 Built: the licence gate (`docs/testing.md`), the shell (bottom bar; reopens where they left), Settings
-(Appearance, Collection, Photos, Tutor, Privacy, About), Home (name and build stamp, `#/`), the Collection (count line, rough worth, search,
-filters, a Looking at strip) and one item (photos, facts, notes, Edit, hold to Remove), Add (`#/add`: photograph front and back, a background queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Globe (`#/globe`: a globe turned with one
+(Appearance, Collection, Photos, Tutor, Privacy, About), Home (`#/`), the Collection (count line, rough worth, search,
+filters, a Looking at strip) and one item (photos, facts, notes, Edit, hold to Remove), Add (`#/add`: photograph front and back, a queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Wish list (`#/wishlist`: Wish for it at the store's price, a saving goal, Got it!), the Globe (`#/globe`: a globe turned with one
 finger, lit where the items come from; Not yet lists the countries with nothing) and the
 Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map lit with the quarters they
-have, a checklist), Share (a picture of the globe, a card of one item), Tell the maker (feedback, `docs/feedback.md`) and one-time tips. Learn (grading on his coins, mint marks, special years, Your path). The tutor (`?ask` on an item or a country: his questions, its answers, settings only on his Apply). Planned: search, About.
+have, a checklist), Share (a picture of the globe, a card of one item), Tell the maker (`docs/feedback.md`) and one-time tips. Learn (grading, mint marks, special years, Your path). The tutor (`?ask` on an item or a country: his questions, its answers, settings only on his Apply).
 
 ## Where things live
 
