@@ -9,7 +9,7 @@ import { countryOf, itemIdOf, routeOf, useAddress } from './nav/route';
 import { useRouteEvents } from './nav/useRouteEvents';
 import { CollectionScreen, ItemView } from './collection';
 import { Home } from './screens/home';
-import { Learn } from './screens/learn';
+import { Learn } from './learn';
 import { Quarters } from './quarters';
 import { SettingsScreen } from './settings/SettingsScreen';
 import { useAppearance } from './settings/useAppearance';
