@@ -1,0 +1,27 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Raw data downloads (the generated files are committed)
+data/raw
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/shots/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+
+# Claude Code
+.claude/

@@ -1,0 +1,59 @@
+{
+  "name": "legend",
+  "private": true,
+  "license": "MIT",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:bdd": "vitest run features/steps",
+    "typecheck": "tsc -b --noEmit",
+    "lint": "eslint .",
+    "shots": "playwright test --project=shots",
+    "gate:shots": "npm run build && TZ=UTC playwright test --project=shots",
+    "e2e:live": "LEGEND_E2E=live TZ=UTC playwright test --project=live --pass-with-no-tests",
+    "icons": "node scripts/make-icons.mjs"
+  },
+  "dependencies": {
+    "bsv-kit": "github:Jonathan-A-White/bsv-kit#de98573eee6be41f00c3e8ede40e73f8269c9a80",
+    "dexie": "^4.3.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "workbox-precaching": "7.4.1",
+    "workbox-routing": "^7.4.1",
+    "workbox-strategies": "7.4.1"
+  },
+  "devDependencies": {
+    "@amiceli/vitest-cucumber": "7.0.0",
+    "@eslint/js": "^9.39.1",
+    "@playwright/test": "1.63.0",
+    "@tailwindcss/vite": "^4.2.1",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.7",
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.1",
+    "eslint": "^9.39.1",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "fake-indexeddb": "^6.2.5",
+    "globals": "^16.5.0",
+    "jsdom": "^28.1.0",
+    "tailwindcss": "^4.2.1",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.48.0",
+    "vite": "^7.3.1",
+    "vite-plugin-pwa": "^1.3.0",
+    "vitest": "^4.0.18"
+  },
+  "allowScripts": {
+    "github:Jonathan-A-White/bsv-kit#de98573eee6be41f00c3e8ede40e73f8269c9a80": true
+  }
+}
