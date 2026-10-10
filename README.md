@@ -8,4 +8,8 @@ Served at https://legend.allmymind.org. Licence-gated through [bsv-kit](https://
 
 ## Status
 
-Day one: the repository holds this README. The first epic (the walking skeleton, the licence gate, photo-to-item grist, the collection and the demo) is tracked in the millwright factory.
+The walking skeleton: an installable, offline-first PWA shell with the Update banner and What's new, a home screen that names the build, and the docs a Builder reads first (`CLAUDE.md`, `docs/overview.md`, `docs/module-map.md`). The licence gate, photo-to-item grist, the collection and the demo follow; the epic is tracked in the millwright factory.
+
+```bash
+npm ci && npm run dev
+```
