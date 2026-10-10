@@ -10,6 +10,6 @@
     "denomination": { "matches": "[Cc][Ee][Nn][Tt]" },
     "year": { "equals": 1909 },
     "mintMark": { "equals": "S" },
-    "confidence": { "oneOf": ["high", "medium"] }
+    "confidence": { "one_of": ["high", "medium"] }
   }
 }

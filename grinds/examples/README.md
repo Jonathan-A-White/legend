@@ -14,7 +14,7 @@ scenario's shape without a network, and fails when a grind has no scenario.
   "expect": {
     "country": { "equals": "US" },
     "year": { "equals": 1909 },
-    "confidence": { "oneOf": ["high", "medium"] }
+    "confidence": { "one_of": ["high", "medium"] }
   }
 }
 ```
@@ -25,15 +25,18 @@ scenario's shape without a network, and fails when a grind has no scenario.
   names what each photo shows, in the photos' order.
 - `photos`: file names beside the scenario (`.jpg`, `.jpeg` or `.webp`), as many as the grind's `attachments` allow. Public-safe
   only: free to redistribute, no people, no personal data, no real serial numbers, under 200 KB. Scenarios may share a photo.
-- `expect`: answer path (a field name; dots for nested fields) to checks. Every check given for a path must hold:
+- `expect`: answer path (a field name; dots for nested fields) to a check. A check is a bare value (the field equals it) or an
+  object of the names below; `mw grist smoke` refuses any other name, so use these exactly, and `tests/unit/grind-examples.test.ts`
+  fails an example that does not. Every name given for a path must hold:
   - `equals`: the value is exactly this
-  - `isNull`: `true` the value is null, `false` it is not
-  - `oneOf`: the value is one of these
+  - `is_null`: `true` the value is null, `false` it is not
+  - `one_of`: the value is one of these
   - `contains`: a string field includes this text
   - `matches`: a string field matches this regular expression (case classes such as `[Cc]ent`: no inline flags)
   - `present`: `true` the field is in the answer, `false` it is left out
+  - `all`: a list of checks of these same names, each of which must hold too (for a field that must show several things)
 
-Every `expect` path must be a field of the grind's answer schema, and every `equals` or `oneOf` value must be one the schema
+Every `expect` path must be a field of the grind's answer schema, and every `equals` or `one_of` value must be one the schema
 allows.
 
 A story that changes a grind's behaviour updates or adds its scenarios in the same story. A new grind needs at least one
