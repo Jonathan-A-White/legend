@@ -1,0 +1,13 @@
+# Every country with an ISO 3166-1 alpha-2 code, each currency it has had (P38) with the dates Wikidata knows
+# (start P580, end P582), and the currency's ISO 4217 code (P498) when it has one. Wikidata is CC0.
+# scripts/data-build.ts sends this to https://query.wikidata.org/sparql once and commits the answer as
+# data/snapshots/wikidata-currencies.json; after that the build never needs the network for it.
+SELECT ?iso2 ?code ?curLabel ?start ?end WHERE {
+  ?country wdt:P297 ?iso2 .
+  ?country p:P38 ?st .
+  ?st ps:P38 ?cur .
+  OPTIONAL { ?st pq:P580 ?start . }
+  OPTIONAL { ?st pq:P582 ?end . }
+  OPTIONAL { ?cur wdt:P498 ?code . }
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+}
