@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.26",
+    "date": "2026-10-12",
+    "story": "mw-f9fv9f.1",
+    "kind": "new",
+    "text": "You can now keep other pieces such as tokens and medals in your Collection, with a name like \"Subway token\", and find them again with a new Other filter and search."
+  },
+  {
     "version": "0.1.24",
     "date": "2026-10-10",
     "story": "mw-fm7wmn.26",

@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.26
+_2026-10-12_
+- New: You can now keep other pieces such as tokens and medals in your Collection, with a name like "Subway token", and find them again with a new Other filter and search.
+
 ## 0.1.24
 _2026-10-10_
 - New: The key on Unlock shows zeros with a slash, so a 0 is never read as an o.
