@@ -1,5 +1,7 @@
 # Legend
 
+The app's vision: [VISION.md](VISION.md).
+
 A coin and banknote collecting app: photograph a coin or a bill, the factory's grist names it, and it joins a private collection you can search, learn from and show on a globe. Built for Paul; made for any collector.
 
 The legend is the inscription around a coin. This is the inscription around his.

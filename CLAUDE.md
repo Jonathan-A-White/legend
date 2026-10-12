@@ -5,6 +5,8 @@ banknotes, served at https://legend.allmymind.org from the VPS (Vite `base` is `
 `dist/`). There is no GitHub Pages workflow: do not add one, and do not change `.github/workflows/` unless a story says
 so. Never bump `package.json`'s version (`mw next` does). No AI attribution lines in commits.
 
+VISION.md is the Governor's vision for this app: a change that would cross one of its lines stops and says so.
+
 ## Gate command
 
 ```bash
