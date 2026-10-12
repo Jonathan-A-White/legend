@@ -42,12 +42,17 @@ const facts = { kind: 'coin', country: 'US', currency: 'USD', denomination: 'Qua
 function values(low: number, high: number): void {
   factory.onAnswer(async (txid) => answered({ low, high, currency: 'USD', basis: BASIS, confidence: 'medium', asOf: '2026-10-10' }, txid, 'item-value'));
 }
+const TOKEN_BASIS = 'A common transit token is worth a few dollars or less, a rare old one more; this one is often not known.';
+let token: Item;
+async function seedToken(): Promise<void> {
+  token = await addItem({ kind: 'other', subtype: 'Subway token', country: 'US', denomination: 'Fare token', year: 1986, material: 'brass', status: 'confirmed', confidence: 'medium' });
+}
 async function seedQuarter(extra: Partial<Item> = {}): Promise<void> {
   quarter = await addItem({ ...facts, status: 'confirmed', confidence: 'high', ...extra });
   await addPhoto({ itemId: quarter.id, side: 'obverse', blob: bytes(12), thumb: bytes(4), width: 800, height: 800 });
 }
 const valuedAgo = (days: number, low: number, high: number, forGrade: string | null = 'VF') =>
-  putValue({ itemId: quarter.id, low, high, currency: 'USD', asOf: Date.now() - days * DAY, basis: BASIS, source: 'item-value 1.0', forYear: 1964, forGrade, confidence: 'medium' });
+  putValue({ itemId: quarter.id, low, high, currency: 'USD', asOf: Date.now() - days * DAY, basis: BASIS, source: 'item-value 1.1', forYear: 1964, forGrade, confidence: 'medium' });
 
 async function open(hash: string, name: string): Promise<void> {
   cleanup();
@@ -86,7 +91,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     When('he opens the quarter', openQuarter);
     Then("one item-value grist was sent with the quarter's facts", async () => {
       await waitFor(() => expect(valueSends()).toHaveLength(1));
-      expect(valueSends()[0]).toMatchObject({ app: 'legend', kind: 'item-value', v: '1.0', photos: [] });
+      expect(valueSends()[0]).toMatchObject({ app: 'legend', kind: 'item-value', v: '1.1', photos: [] });
       expect(valueSends()[0].input).toMatchObject({ kind: 'coin', denomination: 'Quarter dollar', year: 1964, mintMark: 'D', series: 'Washington quarter', material: '90% silver', gradeGuess: 'VF' });
     });
     And('the quarter says "About $1 to $3 · rough estimate"', async () => {
@@ -144,9 +149,9 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
       await seedQuarter();
       await valuedAgo(1, 1, 3);
       const second = await addItem({ ...facts, status: 'confirmed', year: 1963 });
-      await putValue({ itemId: second.id, low: 2, high: 5, currency: 'USD', asOf: Date.now(), basis: BASIS, source: 'item-value 1.0', forYear: 1963, forGrade: 'VF', confidence: 'medium' });
+      await putValue({ itemId: second.id, low: 2, high: 5, currency: 'USD', asOf: Date.now(), basis: BASIS, source: 'item-value 1.1', forYear: 1963, forGrade: 'VF', confidence: 'medium' });
       const looking = await addItem({ ...facts, status: 'considering', year: 1932 });
-      await putValue({ itemId: looking.id, low: 10, high: 20, currency: 'USD', asOf: Date.now(), basis: BASIS, source: 'item-value 1.0', forYear: 1932, forGrade: 'VF', confidence: 'medium' });
+      await putValue({ itemId: looking.id, low: 10, high: 20, currency: 'USD', asOf: Date.now(), basis: BASIS, source: 'item-value 1.1', forYear: 1932, forGrade: 'VF', confidence: 'medium' });
     });
     When('the Collection opens', openCollection);
     Then('it says "Rough worth: about $3 to $8"', async () => {
@@ -217,6 +222,40 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
       expect(good).toHaveTextContent('VF');
       expect(good).toHaveTextContent('guess');
       expect(good).toHaveTextContent(facts.gradeNotes);
+    });
+  });
+
+  Scenario('An Other piece shows a rough guess', ({ Given, When, Then, And }) => {
+    Given('a confirmed subway token and a factory that values it at 1 to 40 dollars, not sure', async () => {
+      factory.onAnswer(async (txid) => answered({ low: 1, high: 40, currency: 'USD', basis: TOKEN_BASIS, confidence: 'low', asOf: '2026-10-10' }, txid, 'item-value'));
+      await seedToken();
+    });
+    When('he opens the token', () => open(`#/item/${token.id}`, 'Item'));
+    Then('one item-value grist was sent as an Other with the subtype Subway token', async () => {
+      await waitFor(() => expect(valueSends()).toHaveLength(1));
+      expect(valueSends()[0]).toMatchObject({ kind: 'item-value', v: '1.1', photos: [] });
+      expect(valueSends()[0].input).toMatchObject({ kind: 'other', subtype: 'Subway token', denomination: 'Fare token', year: 1986 });
+    });
+    And('the token says "About $1 to $40 · a guess · not counted in the total"', async () => {
+      await waitFor(async () => expect(await worthLine()).toHaveTextContent('About $1 to $40 · a guess · not counted in the total'));
+      expect(await worthLine()).not.toHaveTextContent('rough estimate');
+    });
+    And('why opens the basis the factory gave', async () => {
+      await userEvent.click(within(await worthLine()).getByRole('button', { name: 'why' }));
+      expect(await screen.findByText(TOKEN_BASIS)).toBeInTheDocument();
+    });
+    And('a quarter valued at 1 to 3, a medium-sure medal valued at 2 to 5 and the token valued at 1 to 40, not sure', async () => {
+      await seedQuarter();
+      await valuedAgo(1, 1, 3);
+      const medal = await addItem({ kind: 'other', subtype: 'Medal', denomination: 'Moon landing medal', status: 'confirmed' });
+      const kept = (item: Item, low: number, high: number, confidence: 'low' | 'medium') =>
+        putValue({ itemId: item.id, low, high, currency: 'USD', asOf: Date.now(), basis: TOKEN_BASIS, source: 'item-value 1.1', forYear: item.year, forGrade: null, forSubtype: item.subtype, guess: true, confidence });
+      await kept(medal, 2, 5, 'medium');
+      await kept(token, 1, 40, 'low');
+    });
+    When('the Collection opens', openCollection);
+    Then('it says "Rough worth: about $3 to $8"', async () => {
+      await waitFor(() => expect(screen.getByTestId('rough-worth')).toHaveTextContent('Rough worth: about $3 to $8'));
     });
   });
 });

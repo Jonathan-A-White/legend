@@ -26,6 +26,14 @@ describe('the registry', () => {
     }
   });
 
+  it('offers Other beside Coin and Banknote for what adding starts with, and the tutor may suggest it', async () => {
+    const entry = settingOf('defaultKind');
+    expect(entry?.kind === 'choice' && entry.options.map((o) => [o.value, o.label])).toEqual([['coin', 'Coin'], ['note', 'Banknote'], ['other', 'Other']]);
+    expect(entry?.hint.length).toBeLessThanOrEqual(90);
+    await writeSetting('defaultKind', 'other');
+    expect((await currentSettings()).defaultKind).toBe('other');
+  });
+
   it('reads the default until a value is written', async () => {
     expect((await currentSettings()).theme).toBe('system');
     await writeSetting('theme', 'dark');

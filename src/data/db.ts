@@ -139,6 +139,10 @@ export interface ItemValue {
   /** the item's year and grade guess when this was asked, so a change to either asks again; a value without them is asked again */
   forYear?: number | null;
   forGrade?: string | null;
+  /** an Other piece's subtype when this was asked, so a change to it asks again */
+  forSubtype?: string | null;
+  /** true for an Other piece: the figure is a guess, and is added into the Collection's rough worth only at medium or high confidence */
+  guess?: boolean;
   confidence?: Confidence;
 }
 

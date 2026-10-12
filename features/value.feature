@@ -47,3 +47,15 @@ Feature: Worth
     When he opens it and taps Check it
     Then the Confirm sheet says "About $1 to $3 · rough estimate"
     And under Is it a good one? it shows the VF grade guess and the wear notes
+
+  Scenario: An Other piece shows a rough guess
+    The worth of a token or a medal is a wider guess and often not known. It is asked as an Other with its subtype and shown as a guess.
+    The Collection's rough worth adds it in only when the factory is at least medium sure.
+    Given a confirmed subway token and a factory that values it at 1 to 40 dollars, not sure
+    When he opens the token
+    Then one item-value grist was sent as an Other with the subtype Subway token
+    And the token says "About $1 to $40 · a guess · not counted in the total"
+    And why opens the basis the factory gave
+    And a quarter valued at 1 to 3, a medium-sure medal valued at 2 to 5 and the token valued at 1 to 40, not sure
+    When the Collection opens
+    Then it says "Rough worth: about $3 to $8"

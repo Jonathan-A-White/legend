@@ -1,13 +1,12 @@
 // src/tutor/AskBox.tsx: the field and Ask, the three questions suggested for the screen (a tap asks at once), and what the last question
 // is doing: 'Sending…', 'Waiting for the tutor…', or a failure in plain words with the question back in the field and Try again.
 import { useState } from 'react';
-import { FAILURE_TITLES, MAX_QUESTION_CHARS, type AskContext } from '../services/ask';
-import { SUGGESTIONS } from './suggestions';
+import { FAILURE_TITLES, MAX_QUESTION_CHARS } from '../services/ask';
 import type { AskState } from './useAsk';
 
 const chip = 'min-h-12 rounded-full border border-line bg-surface px-4 py-2 text-left text-base text-ink active:bg-line disabled:opacity-50';
 
-export function AskBox({ screen, state, onAsk }: { screen: AskContext['screen']; state: AskState; onAsk: (question: string) => void }) {
+export function AskBox({ questions, state, onAsk }: { questions: readonly string[]; state: AskState; onAsk: (question: string) => void }) {
   // null: nothing typed since the last send, so a question that failed shows in the field (to send again) and otherwise it is empty
   const [typed, setTyped] = useState<string | null>(null);
   const busy = state.phase === 'sending' || state.phase === 'waiting';
@@ -64,7 +63,7 @@ export function AskBox({ screen, state, onAsk }: { screen: AskContext['screen'];
       ) : null}
 
       <ul aria-label="Suggested questions" className="flex flex-wrap gap-2">
-        {SUGGESTIONS[screen].map((q) => (
+        {questions.map((q) => (
           <li key={q}>
             <button type="button" disabled={busy} onClick={() => send(q)} className={chip}>
               {q}

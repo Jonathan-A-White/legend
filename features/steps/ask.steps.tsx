@@ -42,7 +42,7 @@ afterAll(async () => {
 
 const user = userEvent.setup();
 const PHONE_KEY = '00'.repeat(31) + '02';
-const inputSchema = JSON.parse(readFileSync('schemas/legend-ask-input-1.0.schema.json', 'utf8')) as object;
+const inputSchema = JSON.parse(readFileSync('schemas/legend-ask-input-1.1.schema.json', 'utf8')) as object;
 let fake: FakePostern;
 let quarter: Item;
 
@@ -110,7 +110,7 @@ const tapSuggestion = async (_: unknown, question: string) => {
 const oneAskSent = async () => {
   await waitFor(() => expect(asks()).toHaveLength(1));
   expect(firstAsk().grist.app).toBe('legend');
-  expect(firstAsk().grist.v).toBe('1.0');
+  expect(firstAsk().grist.v).toBe('1.1');
 };
 
 const fitsTheSchema = () => {
@@ -155,6 +155,37 @@ describeFeature(feature, ({ Scenario }) => {
     And('the grist fits the legend-ask input schema', fitsTheSchema);
   });
 
+  Scenario('Ask the tutor about a token', ({ Given, When, And, Then }) => {
+    Given('Legend is open on his subway token behind a fake Postern', async () => {
+      await fresh();
+      const token = await addItem({
+        kind: 'other', subtype: 'Subway token', country: 'US', denomination: 'Fare token', year: 1986, material: 'brass',
+        notes: 'From Grandpa’s drawer', status: 'confirmed', confidence: 'medium',
+      });
+      await openAt(`#/item/${token.id}`);
+      await screen.findByRole('heading', { level: 1, name: /Fare token/ });
+    });
+    When('he taps "Ask the tutor"', tapAskTheTutor);
+    Then('the sheet is named for the Subway token', () => {
+      expect(within(box()).getByText(/About your Subway token/)).toBeInTheDocument();
+    });
+    And('the suggested questions are about the token, not about grading or mint marks', () => {
+      const chips = within(within(box()).getByRole('list', { name: 'Suggested questions' })).getAllByRole('button').map((b) => b.textContent ?? '');
+      expect(chips).toHaveLength(3);
+      expect(chips).toContain('What was this subway token used for?');
+      expect(chips).toContain('Is it rare?');
+      for (const chip of chips) expect(chip).not.toMatch(/grade|mint mark|wear/i);
+    });
+    When('he taps the suggested question {string}', tapSuggestion);
+    Then('the mill received one legend-ask grist for the legend app', oneAskSent);
+    And("the grist names the token's kind other and its subtype", () => {
+      expect(context().item).toMatchObject({ kind: 'other', subtype: 'Subway token', denomination: 'Fare token', year: 1986 });
+      expect(JSON.stringify(firstAsk().input)).not.toContain('Grandpa');
+      expect(context().collectionSummary).toMatchObject({ items: 1, coins: 0, notes: 0, others: 1 });
+    });
+    And('the grist fits the legend-ask input schema', fitsTheSchema);
+  });
+
   Scenario('a country question goes out with the country and the collection summary and no photos', ({ Given, When, And, Then }) => {
     Given("Legend is open on Japan's sheet behind a fake Postern, with two US coins and one Japanese note", async () => {
       await fresh();
@@ -162,6 +193,7 @@ describeFeature(feature, ({ Scenario }) => {
       await seedPhotos(one);
       await addItem({ kind: 'coin', country: 'US', denomination: 'Dime', year: 1955, status: 'confirmed' });
       await addItem({ kind: 'note', country: 'JP', denomination: '1000 yen', year: 2004, status: 'confirmed' });
+      await addItem({ kind: 'other', subtype: 'Medal', country: 'US', denomination: 'Moon landing medal', year: 1970, status: 'confirmed' });
       // only looked at: not in his collection, so not counted
       await addItem({ kind: 'coin', country: 'JP', denomination: '100 yen', year: 1990, status: 'considering' });
       await openAt('#/country/JP');
@@ -174,14 +206,15 @@ describeFeature(feature, ({ Scenario }) => {
       expect(context()).toMatchObject({ screen: 'country', item: null, country: { code: 'JP', name: 'Japan' } });
       expect(window.location.hash).toBe('#/country/JP?ask');
     });
-    And('the grist counts his collection by country and kind', () => {
+    And('the grist counts his collection by country and kind, with others counted apart', () => {
       expect(context().collectionSummary).toEqual({
-        items: 3,
+        items: 4,
         coins: 2,
         notes: 1,
+        others: 1,
         countries: [
-          { code: 'US', coins: 2, notes: 0 },
-          { code: 'JP', coins: 0, notes: 1 },
+          { code: 'US', coins: 2, notes: 0, others: 1 },
+          { code: 'JP', coins: 0, notes: 1, others: 0 },
         ],
       });
     });

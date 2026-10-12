@@ -468,9 +468,11 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     And('he taps Name it', nameOne);
     And('he opens the named piece to check it', openToCheck);
     Then('the grist is sent asking for an Other with its two photos as obverse and reverse', async () => {
-      await waitFor(() => expect(factory.sent).toHaveLength(1));
-      expect(factory.sent[0]).toMatchObject({ kind: 'coin-from-photos', v: '1.1', input: { kind: 'other', hint: null, sides: ['obverse', 'reverse'] } });
-      expect(factory.sent[0].photos).toHaveLength(2);
+      // the named piece is then valued on its own grist (item-value), so look at the photo reader's only
+      await waitFor(() => expect(factory.sentOf('coin-from-photos')).toHaveLength(1));
+      const [sent] = factory.sentOf('coin-from-photos');
+      expect(sent).toMatchObject({ kind: 'coin-from-photos', v: '1.1', input: { kind: 'other', hint: null, sides: ['obverse', 'reverse'] } });
+      expect(sent.photos).toHaveLength(2);
     });
     And('the item is kept as an Other with the subtype Subway token and the country US', async () => {
       expect(await onlyItem()).toMatchObject({ kind: 'other', subtype: 'Subway token', country: 'US', denomination: 'NYC Transit token' });

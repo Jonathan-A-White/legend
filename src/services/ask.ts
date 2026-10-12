@@ -7,7 +7,8 @@ import { getDeviceKeyBytes } from './deviceKey';
 import { askGrind, currentGristPort, GristError, type GristFailure } from './grist';
 
 export const ASK_KIND = 'legend-ask';
-export const ASK_VERSION = '1.0';
+/** Sent at 1.1 (an Other, its subtype and the count of others); the grind still reads 1.0. */
+export const ASK_VERSION = '1.1';
 
 /** The limits of the grind (grinds/legend-ask.json and its schemas). */
 export const MAX_QUESTION_CHARS = 400;
@@ -19,6 +20,8 @@ export const MAX_HISTORY = 3;
 /** The facts of one item the tutor is told: the named fields, never his notes, tags or anything like a serial number. */
 export interface AskItemFacts {
   kind: ItemKind;
+  /** what an Other piece is, in his words ('Subway token'); null for a coin or a banknote */
+  subtype: string | null;
   country: string | null;
   countryName: string | null;
   currency: string | null;
@@ -43,8 +46,9 @@ export interface CollectionSummary {
   items: number;
   coins: number;
   notes: number;
+  others: number;
   /** '?' for items with no country yet */
-  countries: { code: string; coins: number; notes: number }[];
+  countries: { code: string; coins: number; notes: number; others: number }[];
 }
 
 export interface AskContext {
@@ -54,7 +58,7 @@ export interface AskContext {
   collectionSummary: CollectionSummary;
 }
 
-/** What the grind is sent (schemas/legend-ask-input-1.0.schema.json). */
+/** What the grind is sent (schemas/legend-ask-input-1.1.schema.json). */
 export interface LegendAskRequest {
   question: string;
   /** what each attached photo shows, in order */

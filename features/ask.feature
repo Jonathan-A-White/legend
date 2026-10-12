@@ -16,13 +16,24 @@ Feature: The tutor
     And the grist carries every talkable setting and no other
     And the grist fits the legend-ask input schema
 
+  Scenario: Ask the tutor about a token
+    On an Other piece the tutor is told its kind and its subtype, and the questions offered are about the piece itself.
+    Given Legend is open on his subway token behind a fake Postern
+    When he taps "Ask the tutor"
+    Then the sheet is named for the Subway token
+    And the suggested questions are about the token, not about grading or mint marks
+    When he taps the suggested question "What was this subway token used for?"
+    Then the mill received one legend-ask grist for the legend app
+    And the grist names the token's kind other and its subtype
+    And the grist fits the legend-ask input schema
+
   Scenario: a country question goes out with the country and the collection summary and no photos
     Given Legend is open on Japan's sheet behind a fake Postern, with two US coins and one Japanese note
     When he taps "Ask the tutor"
     And he taps the suggested question "What money did they use before?"
     Then the mill received one legend-ask grist for the legend app
     And the grist names Japan and no item
-    And the grist counts his collection by country and kind
+    And the grist counts his collection by country and kind, with others counted apart
     And the grist carries no photo
     And the grist fits the legend-ask input schema
 

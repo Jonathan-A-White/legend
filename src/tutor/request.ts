@@ -32,6 +32,7 @@ const clipOrNull = (text: string | null, max: number): string | null => (text ==
 export function itemFacts(item: Item, countryName: string | null, mintCity: string | null): AskItemFacts {
   return {
     kind: item.kind,
+    subtype: item.kind === 'other' && item.subtype?.trim() ? clip(item.subtype.trim(), 80) : null,
     country: item.country,
     countryName: clipOrNull(countryName, 80),
     currency: item.currency,
@@ -53,17 +54,20 @@ export function itemFacts(item: Item, countryName: string | null, mintCity: stri
 
 /** His collection counted by country and kind, the biggest first. */
 export function summarize(items: Item[]): CollectionSummary {
-  const byCountry = new Map<string, { code: string; coins: number; notes: number }>();
+  const byCountry = new Map<string, { code: string; coins: number; notes: number; others: number }>();
+  const total = { coins: 0, notes: 0, others: 0 };
   for (const item of items) {
     const code = item.country ?? '?';
-    const row = byCountry.get(code) ?? { code, coins: 0, notes: 0 };
-    if (item.kind === 'coin') row.coins += 1;
-    else row.notes += 1;
+    const row = byCountry.get(code) ?? { code, coins: 0, notes: 0, others: 0 };
+    // a kind this build does not know (from a newer app) is counted as a bill, as kindInfo reads it
+    const column = item.kind === 'coin' ? 'coins' : item.kind === 'other' ? 'others' : 'notes';
+    row[column] += 1;
+    total[column] += 1;
     byCountry.set(code, row);
   }
-  const countries = [...byCountry.values()].sort((a, b) => b.coins + b.notes - (a.coins + a.notes) || a.code.localeCompare(b.code));
-  const coins = items.filter((i) => i.kind === 'coin').length;
-  return { items: items.length, coins, notes: items.length - coins, countries };
+  const size = (r: { coins: number; notes: number; others: number }): number => r.coins + r.notes + r.others;
+  const countries = [...byCountry.values()].sort((a, b) => size(b) - size(a) || a.code.localeCompare(b.code));
+  return { items: items.length, ...total, countries };
 }
 
 /** The settings the tutor may suggest a change to, with what each holds now. */

@@ -9,14 +9,19 @@ import { HintCard, TUTOR_OPENED } from '../tips';
 import { AnswerCard } from './AnswerCard';
 import { AskBox } from './AskBox';
 import { askPlace, type AskAbout } from './request';
+import { suggestionsFor, type SuggestionTopic } from './suggestions';
 import { useAsk, type OnAnswer } from './useAsk';
 
 function titleOf(about: AskAbout): string {
   if (about.kind === 'country') return `About ${about.name}`;
   const { item } = about;
-  const name = item.denomination || kindInfo(item.kind).noun;
+  // an Other is named by what he calls it ('Subway token'), a coin or a bill by its denomination
+  const name = (item.kind === 'other' ? item.subtype?.trim() : '') || item.denomination || kindInfo(item.kind).noun;
   return `About your ${name}${item.year !== null ? `, ${item.year}` : ''}`;
 }
+
+const topicOf = (about: AskAbout): SuggestionTopic =>
+  about.kind === 'item' ? { screen: 'item', kind: about.item.kind, subtype: about.item.subtype ?? null } : { screen: 'country', kind: null, subtype: null };
 
 export function AskSheet({ about, onClose, onAnswer }: { about: AskAbout; onClose: () => void; onAnswer?: OnAnswer }) {
   const { state, ask } = useAsk(about, onAnswer);
@@ -51,7 +56,7 @@ export function AskSheet({ about, onClose, onAnswer }: { about: AskAbout; onClos
         </div>
         <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-5 pt-1 pb-[max(env(safe-area-inset-bottom),1.5rem)]">
           <HintCard event={TUTOR_OPENED} />
-          <AskBox screen={about.kind} state={state} onAsk={ask} />
+          <AskBox questions={suggestionsFor(topicOf(about))} state={state} onAsk={ask} />
           {answered.length > 0 ? (
             <ul aria-label="Answers" className="space-y-3">
               {answered.map((a, i) => (

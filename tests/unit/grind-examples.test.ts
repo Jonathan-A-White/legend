@@ -151,6 +151,39 @@ describe('the tutor has its two scenarios', () => {
   });
 });
 
+describe('the appraiser and the tutor have their Other scenarios', () => {
+  const load = (kind: string) => readdirSync(`grinds/examples/${kind}`).filter((f) => f.endsWith('.json')).map((f) => readJson(`grinds/examples/${kind}/${f}`) as unknown as GrindExample);
+
+  it('values a subway token as a guess, and admits when it cannot', () => {
+    const others = load('item-value').filter((e) => e.request.kind === 'other');
+    expect(others.length).toBeGreaterThanOrEqual(2);
+    for (const e of others) {
+      expect(e.schemaVersion).toBe('1.1');
+      expect(typeof e.request.subtype).toBe('string');
+    }
+    const token = others.find((e) => /oken/.test(String(e.request.subtype)));
+    expect(token, 'a token scenario').toBeDefined();
+    expect(asCheck(token!.expect.confidence).one_of).toEqual(['medium', 'low']);
+    expect(others.some((e) => asCheck(e.expect.confidence).equals === 'low'), 'a scenario that is not sure').toBe(true);
+  });
+
+  it('keeps the coin scenarios under 1.0 and still valid there', () => {
+    const coins = load('item-value').filter((e) => e.request.kind === 'coin');
+    expect(coins.length).toBeGreaterThanOrEqual(2);
+    expect(coins.every((e) => e.schemaVersion === '1.0')).toBe(true);
+  });
+
+  it('asks the tutor about a token, with a subtype and the others counted', () => {
+    const asks = load('legend-ask').filter((e) => (e.request.context as { item: { kind: string } | null }).item?.kind === 'other');
+    expect(asks).toHaveLength(1);
+    const { context } = asks[0].request as { context: { item: { subtype: string }; collectionSummary: { others: number } } };
+    expect(asks[0].schemaVersion).toBe('1.1');
+    expect(context.item.subtype).toMatch(/oken/);
+    expect(context.collectionSummary.others).toBeGreaterThan(0);
+    expect(asks[0].photos ?? []).toEqual([]);
+  });
+});
+
 describe('the scenarios use the names mw grist smoke checks', () => {
   const found = readdirSync('grinds/examples', { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).flatMap((kind) =>
     readdirSync(`grinds/examples/${kind}`)

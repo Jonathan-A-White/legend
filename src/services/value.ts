@@ -6,13 +6,16 @@ import answerSchema from '../../schemas/item-value-answer-1.0.schema.json';
 import type { Confidence, Item, ItemValue } from '../data/db';
 
 export const VALUE_KIND = 'item-value';
-export const VALUE_VERSION = '1.0';
+/** Sent at 1.1 (an Other and its subtype); a 1.0 answer is the same shape and is still read. */
+export const VALUE_VERSION = '1.1';
 /** How long a value is kept before it is asked for again. */
 export const VALUE_REFRESH_MS = 30 * 24 * 60 * 60 * 1000;
 
-/** What the grind is sent (schemas/item-value-input-1.0.schema.json). */
+/** What the grind is sent (schemas/item-value-input-1.1.schema.json). */
 export interface ValueInput {
-  kind: 'coin' | 'note';
+  kind: 'coin' | 'note' | 'other';
+  /** what an Other piece is ('Subway token'); null for a coin or a banknote */
+  subtype: string | null;
   country: string | null;
   currency: string | null;
   denomination: string;
@@ -28,7 +31,8 @@ export interface ValueInput {
   today: string;
 }
 
-/** One answer of the grind (schemas/item-value-answer-1.0.schema.json). */
+/** One answer of the grind (schemas/item-value-answer-1.0.schema.json; 1.1 answers the same shape). An Other piece the grind cannot
+ * guess is answered low 0, high 0, low confidence: see `isUnknownWorth`. */
 export interface ValueAnswer {
   low: number;
   high: number;
@@ -45,9 +49,12 @@ export const isoDay = (at: number): string => {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 };
 
+const clipText = (text: string | null | undefined, max: number): string | null => (text?.trim() ? text.trim().slice(0, max) : null);
+
 export function valueInput(item: Item, now: number): ValueInput {
   return {
-    kind: item.kind === 'note' ? 'note' : 'coin', // the grind knows coins and notes only; needsValue never asks about an Other
+    kind: item.kind,
+    subtype: item.kind === 'other' ? clipText(item.subtype, 80) : null,
     country: item.country,
     currency: item.currency,
     denomination: item.denomination,
@@ -64,14 +71,18 @@ export function valueInput(item: Item, now: number): ValueInput {
 }
 
 /** What a value was asked for: if either part of this changes on the item, the old value no longer answers. */
-export const valueKey = (item: Item): string => `${item.year ?? ''}|${item.gradeGuess ?? ''}`;
+export const valueKey = (item: Item): string => `${item.year ?? ''}|${item.gradeGuess ?? ''}|${item.kind === 'other' ? (item.subtype ?? '') : ''}`;
 
 /** True when the item should have a value asked for: it is named (not pending, not at the factory), and it has none, or its value is
- * 30 days old, or its year or grade guess changed since. */
+ * 30 days old, or its year, grade guess or (an Other's) subtype changed since. An Other with neither a subtype nor a denomination
+ * has nothing to go on and is not asked. */
 export function needsValue(item: Item, value: ItemValue | undefined, now: number): boolean {
-  if (item.deletedAt !== null || item.status === 'pending' || item.reading || item.kind === 'other') return false;
+  if (item.deletedAt !== null || item.status === 'pending' || item.reading) return false;
+  const other = item.kind === 'other';
+  if (other && !item.subtype?.trim() && !item.denomination.trim()) return false;
   if (!value) return true;
   if (now - value.asOf >= VALUE_REFRESH_MS) return true;
+  if (other && (value.forSubtype ?? null) !== (item.subtype ?? null)) return true;
   return value.forYear !== item.year || value.forGrade !== item.gradeGuess;
 }
 
@@ -92,6 +103,8 @@ export function valueRecord(item: Item, answer: ValueAnswer, now: number): ItemV
     source: `${VALUE_KIND} ${VALUE_VERSION}`,
     forYear: item.year,
     forGrade: item.gradeGuess,
+    ...(item.kind === 'other' ? { forSubtype: item.subtype ?? null } : {}),
+    guess: item.kind === 'other',
     confidence: answer.confidence,
   };
 }
