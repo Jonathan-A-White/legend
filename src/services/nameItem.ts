@@ -12,13 +12,13 @@ import { sendOffThread } from './sendOffThread';
 /** The app, kind and version the mill runs the grind under. */
 export const NAME_APP = 'legend';
 export const NAME_KIND = 'coin-from-photos';
-export const NAME_VERSION = '1.0';
+export const NAME_VERSION = '1.1';
 /** How often the mill is asked whether it has answered. */
 export const NAME_POLL_MS = 5000;
 
-/** What the grind is sent (schemas/coin-from-photos-input-1.0.schema.json). */
+/** What the grind is sent (schemas/coin-from-photos-input-1.1.schema.json). */
 export interface NameInput {
-  kind: 'coin' | 'note' | 'unknown';
+  kind: 'coin' | 'note' | 'other' | 'unknown';
   hint: string | null;
   sides: ('obverse' | 'reverse' | 'front' | 'back' | 'edge' | 'other')[];
 }

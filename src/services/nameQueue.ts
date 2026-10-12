@@ -22,7 +22,7 @@ export interface NameQueueOptions {
 
 const toPhoto = async (blob: Blob): Promise<grist.Photo> => ({ bytes: new Uint8Array(await blob.arrayBuffer()), mime: blob.type || 'image/jpeg' });
 
-/** The photos of an item in the order they are sent (the front, then the back) and what each shows. */
+/** The photos of an item in the order they are sent (the front, then the back) and what each shows: a note's are front and back, an Other's and a coin's obverse and reverse. */
 function sidesOf(item: Item, photos: Photo[]): { photos: Photo[]; sides: NameInput['sides'] } {
   const ordered = ['obverse', 'reverse', 'other'].flatMap((side) => photos.filter((p) => p.side === side));
   const word = (side: Photo['side']): NameInput['sides'][number] => (item.kind === 'note' ? (side === 'obverse' ? 'front' : side === 'reverse' ? 'back' : 'other') : side);

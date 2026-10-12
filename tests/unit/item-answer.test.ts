@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { parseCoinAnswer, mapAnswerToItem, ANSWER_NOT_IN_SHAPE } from '../../src/services/itemAnswer';
-import { quarterAnswer } from '../support/coin-answers';
+import { parseCoinAnswer, mapAnswerToItem, itemChanges, ANSWER_NOT_IN_SHAPE } from '../../src/services/itemAnswer';
+import { quarterAnswer, quarterAnswer10, tokenAnswer } from '../support/coin-answers';
 
 function mapped(raw: unknown) {
   const parsed = parseCoinAnswer(raw);
@@ -73,6 +73,41 @@ describe('parseCoinAnswer', () => {
 
   it('refuses something that is not an object at all', () => {
     for (const bad of [null, undefined, 'a quarter', 4, []]) expect(parseCoinAnswer(bad).ok).toBe(false);
+  });
+});
+
+describe('an Other piece (coin-from-photos 1.1)', () => {
+  it('validates with a subtype and maps to an item of kind other keeping the subtype and the fun fact', () => {
+    expect(mapped(tokenAnswer())).toMatchObject({ kind: 'other', subtype: 'Subway token', denomination: 'NYC Transit token', faceValue: null, country: 'US', funFact: 'The cut-out Y let the turnstile tell a real token from a coin.' });
+  });
+
+  it('is written on the item: the kind, the subtype and the country', () => {
+    expect(itemChanges(mapped(tokenAnswer()), 'coin')).toMatchObject({ kind: 'other', subtype: 'Subway token', country: 'US', denomination: 'NYC Transit token' });
+  });
+
+  it('writes no subtype on a coin or a note', () => {
+    expect(itemChanges(mapped(quarterAnswer()), 'coin').subtype).toBeNull();
+  });
+
+  it('still accepts a 1.0 coin answer, which has no subtype', () => {
+    expect(mapped(quarterAnswer10())).toMatchObject({ kind: 'coin', subtype: '', denomination: 'quarter dollar' });
+  });
+
+  it('refuses an extra key, and a subtype over 60 characters', () => {
+    expect(parseCoinAnswer({ ...tokenAnswer(), serial: 'A1' })).toEqual({ ok: false, error: ANSWER_NOT_IN_SHAPE });
+    expect(parseCoinAnswer({ ...tokenAnswer(), subtype: 'x'.repeat(60) }).ok).toBe(true);
+    expect(parseCoinAnswer({ ...tokenAnswer(), subtype: 'x'.repeat(61) })).toEqual({ ok: false, error: ANSWER_NOT_IN_SHAPE });
+    expect(parseCoinAnswer({ ...tokenAnswer(), subtype: 4 }).ok).toBe(false);
+  });
+
+  it('refuses a 1.0 answer that says other: only 1.1 knows the kind', () => {
+    expect(parseCoinAnswer({ ...quarterAnswer10(), kind: 'other' }).ok).toBe(false);
+  });
+
+  it('the reader\'s kind wins over the one he chose, and unknown leaves his choice', () => {
+    expect(itemChanges(mapped(tokenAnswer()), 'coin').kind).toBe('other');
+    expect(itemChanges(mapped(quarterAnswer()), 'other').kind).toBe('coin');
+    expect(itemChanges(mapped({ ...tokenAnswer(), kind: 'unknown' }), 'other').kind).toBe('other');
   });
 });
 
