@@ -14,6 +14,8 @@ Nothing is sent anywhere unless he asks for it, and only these things ever leave
 - **A rough worth.** Once an item is named, its facts and grade guess (never its photos, notes or tags) go to the mill to ask
   what it might roughly be worth, once, and again after 30 days or when its grade guess or year changes (`src/services/value.ts`).
   A coin he is only looking at asks at once. Turning Show values off in Settings, Collection, stops the asking and hides the figures.
+- **How rare it is.** For a coin or note Legend's tables do not cover, tapping How rare is it? sends its facts (never photos,
+  notes, tags or grade) to the mill, once per tap (`src/services/rarity.ts`). The estimate is kept on the item.
 - **A picture he shares.** The Share button on the globe and on an item makes one JPEG on the phone and hands it to the phone's
   own share sheet (`navigator.share`), and he chooses who gets it. A phone with no share sheet shows a Save picture link instead
   and nothing is sent. Only a tap on Share does this (`src/share/`).

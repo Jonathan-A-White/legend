@@ -1,7 +1,8 @@
 // src/rarity/RarityLine.tsx: one US coin's rarity as a line in the WorthLine's shape, 'Scarce · 436,800 struck at Denver in 1932 · a key
 // date · why'. Why opens what the number does not say, where the year sits among its series (a sentence and a strip of bars), the key
 // date's reason and the other varieties of that mint and year. A coin the tables cannot place says why in plain words. Nothing for
-// an Other piece, a piece still at the photo reader, or while the tables load.
+// an Other piece, a piece still at the photo reader, or while the tables load. A piece the tables do not cover is TutorRarity's:
+// the tutor's estimate on his tap.
 import { useState } from 'react';
 import type { Item } from '../data/db';
 import { loadKeyDates, loadMintages, loadMints, loadQuarters } from '../data/us';
@@ -10,6 +11,7 @@ import { useLoaded } from '../learn/useLoaded';
 import { matchDesign } from '../quarters/match';
 import { findRow, keyDateFor, noRowReason, placeInSeries, rarityWord, seriesPool, struckSentence, type NoRowReason } from './rarity';
 import { Strip } from './Strip';
+import { TutorRarity } from './TutorRarity';
 
 const HONESTY =
   "Legend's word is about how many the Mint made, which is reported. How many are left, and in what condition, is not known: coins are spent, lost and melted.";
@@ -37,6 +39,14 @@ export function RarityLine({ item, onEdit }: { item: Item; onEdit?: () => void }
 
   if (!found) {
     const reason = noRowReason(table, item);
+    // the tables do not cover it: the tutor may be asked, on his tap
+    if (reason === 'tables') {
+      return (
+        <div data-testid="item-rarity-line" className={text}>
+          <TutorRarity item={item} />
+        </div>
+      );
+    }
     return (
       <div data-testid="item-rarity-line" className={text}>
         <p>

@@ -10,10 +10,10 @@ and what they choose to share: `docs/privacy.md`.
 ## Screens planned
 
 Built: the licence gate (`docs/testing.md`), the shell, Settings, Home (`#/`), the Collection (count line, rough worth, search,
-filters, Looking at) and one item (photos, facts, how rare a US coin is, notes, Edit, hold to Remove), Add (`#/add`: photograph front and back, a queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Wish list (`#/wishlist`: Wish for it at the store's price, a saving goal, Got it!), the Globe (`#/globe`: a globe turned with one
+filters, Looking at) and one item (photos, facts, how rare it is, notes, Edit, hold to Remove), Add (`#/add`: photograph front and back, a queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Wish list (`#/wishlist`: Wish for it at the store's price, a saving goal, Got it!), the Globe (`#/globe`: a globe turned with one
 finger, lit where the items come from; Not yet lists the countries with nothing) and the
 Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map lit with the quarters they
-have, a checklist), Share (a picture of the globe, a card of one item), Tell the maker (`docs/feedback.md`) and one-time tips. Learn (grading, mint marks, special years, Your path). The tutor (`?ask` on an item or a country: his questions, its answers, settings only on his Apply).
+have, a checklist), Share (a picture of the globe, a card of one item), Tell the maker (`docs/feedback.md`), tips. Learn (grading, mint marks, special years, Your path). The tutor (`?ask` on an item or a country: his questions, its answers, settings only on his Apply).
 
 ## Where things live
 
@@ -24,7 +24,7 @@ have, a checklist), Share (a picture of the globe, a card of one item), Tell the
 - `public/data/us/` the US reference data (quarters, mints, grades, key dates, mintages, a states map), loaded by `src/data/us.ts`; sources and licences in `docs/data.md`; `npm run mintages:build` builds the mintages.
 - `public/changelog.json` and `CHANGELOG.md` What's new; `ATTRIBUTION.md` credits every source.
 - `docs/data.md` the world data (`npm run data:build`: countries, currencies, licences); `public/data/world/`.
-- `grinds/` grists and examples (`coin-from-photos` reads a coin, bill or Other; `item-value`, `legend-ask` the tutor: Others too); `schemas/`.
+- `grinds/` grists and examples (`coin-from-photos` reads a coin, bill or Other; `item-value`; `coin-rarity`, an estimate on a tap; `legend-ask` the tutor); `schemas/`.
 
 ## One-line rules
 

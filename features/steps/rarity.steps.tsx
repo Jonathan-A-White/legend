@@ -10,15 +10,26 @@ import { db, type Item } from '../../src/data/db';
 import { addItem } from '../../src/data/repositories';
 import { clearBus } from '../../src/events/bus';
 import { serveReferenceData } from '../../tests/support/collection-fixtures';
+import { setGristPort } from '../../src/services/grist';
+import { answered, fakeGrist, type FakeGrist } from '../../tests/support/fake-grist';
 import { openGate } from '../../tests/support/open-gate';
 
+let online = true;
+vi.spyOn(window.navigator, 'onLine', 'get').mockImplementation(() => online);
 beforeAll(() => {
   serveReferenceData((name, fake) => vi.stubGlobal(name, fake));
 });
 afterAll(() => {
   cleanup();
+  setGristPort(null);
+  vi.restoreAllMocks();
   db.close();
 });
+
+let grist: FakeGrist;
+/** What the tutor answers a coin-rarity grist (the item's other grists are never answered); null: the mill refuses. */
+let tutorSays: Record<string, unknown> | null = null;
+const user = userEvent.setup();
 
 const feature = await loadFeature('features/rarity.feature');
 
@@ -34,12 +45,21 @@ async function openPiece(): Promise<void> {
 }
 const line = () => screen.findByTestId('item-rarity-line');
 const whyBlock = () => screen.findByTestId('item-rarity-why');
+const tapRarity = async () => user.click(await screen.findByRole('button', { name: 'How rare is it?' }));
 const tapWhy = async () => userEvent.click(within(await line()).getByRole('button', { name: 'why' }));
 
 describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) => {
   BeforeEachScenario(async () => {
     cleanup();
     clearBus();
+    online = true;
+    tutorSays = null;
+    grist = fakeGrist();
+    grist.onAnswer(async (txid, sentAs) => {
+      if (sentAs?.kind !== 'coin-rarity') return new Promise(() => undefined);
+      return tutorSays ? answered(tutorSays, txid, 'coin-rarity') : { re: txid, status: 'refused', reason: 'not in this test', grind: { app: 'legend', kind: 'coin-rarity', v: '1.0' } };
+    });
+    setGristPort(grist.port);
     await db.open();
     await Promise.all(db.tables.map((t) => t.clear()));
   });
@@ -97,7 +117,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     });
   });
 
-  Scenario('A Canadian dime is not in the tables yet', ({ Given, When, Then }) => {
+  Scenario('A Canadian dime is not in the tables yet', ({ Given, When, Then, And }) => {
     Given('a Canadian dime from 1955', async () => {
       piece = await addItem({ kind: 'coin', country: 'CA', currency: 'CAD', denomination: 'Dime', faceValue: 0.1, year: 1955, status: 'confirmed' });
     });
@@ -105,6 +125,150 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     Then('the rarity line reads "Not in Legend\'s tables yet"', async () => {
       await waitFor(async () => expect(await line()).toHaveTextContent("Not in Legend's tables yet"));
     });
+    And('the line offers a How rare is it? button', async () => {
+      expect(await screen.findByRole('button', { name: 'How rare is it?' })).toBeEnabled();
+    });
+  });
+
+  const dime = () => addItem({ kind: 'coin', country: 'CA', currency: 'CAD', denomination: 'Dime', faceValue: 0.1, year: 1955, status: 'confirmed' });
+  const estimateAnswer = { word: 'common', struck: 12_000_000, struckIs: 'estimate', reason: 'A busy year at the Royal Canadian Mint.', confidence: 'medium' };
+  const noButton = () => expect(screen.queryByRole('button', { name: 'How rare is it?' })).toBeNull();
+
+  Scenario("The tutor's estimate on a tap", ({ Given, And, When, Then }) => {
+    Given('a Canadian dime from 1955', async () => {
+      piece = await dime();
+    });
+    And('the tutor will answer common, 12,000,000 struck as an estimate, medium', () => {
+      tutorSays = estimateAnswer;
+    });
+    When('he opens the coin', openPiece);
+    And('he taps How rare is it?', tapRarity);
+    Then('the rarity line reads "Common · about 12,000,000 struck, the tutor\'s estimate"', async () => {
+      await waitFor(async () => expect(await line()).toHaveTextContent("Common · about 12,000,000 struck, the tutor's estimate"));
+    });
+    And('one coin-rarity grist was sent', () => {
+      expect(grist.sentOf('coin-rarity')).toHaveLength(1);
+      expect(grist.sentOf('coin-rarity')[0].input).toMatchObject({ kind: 'coin', country: 'CA', denomination: 'Dime', year: 1955 });
+    });
+    When('he taps why on the rarity line', tapWhy);
+    Then("why shows the tutor's reason and that it is an estimate", async () => {
+      expect(await whyBlock()).toHaveTextContent('A busy year at the Royal Canadian Mint.');
+      expect(await whyBlock()).toHaveTextContent("This is the tutor's estimate, not a count from a table.");
+    });
+    When('he opens the coin again', openPiece);
+    Then('the estimate is there without a tap', async () => {
+      await waitFor(async () => expect(await line()).toHaveTextContent("Common · about 12,000,000 struck, the tutor's estimate"));
+    });
+    And('the line offers no button', noButton);
+  });
+
+  Scenario('A low-confidence answer is Not known for sure', ({ Given, And, When, Then }) => {
+    Given('a Canadian dime from 1955', async () => {
+      piece = await dime();
+    });
+    And('the tutor will answer unknown, no number, low', () => {
+      tutorSays = { word: 'unknown', struck: null, struckIs: 'unknown', reason: 'I cannot place this piece.', confidence: 'low' };
+    });
+    When('he opens the coin', openPiece);
+    And('he taps How rare is it?', tapRarity);
+    Then('the rarity line reads "Not known for sure · I cannot place this piece."', async () => {
+      await waitFor(async () => expect(await line()).toHaveTextContent('Not known for sure · I cannot place this piece.'));
+    });
+  });
+
+  Scenario('Editing the year asks again', ({ Given, And, When, Then }) => {
+    Given('a Canadian dime from 1955', async () => {
+      piece = await dime();
+    });
+    And('the tutor will answer common, 12,000,000 struck as an estimate, medium', () => {
+      tutorSays = estimateAnswer;
+    });
+    When('he opens the coin', openPiece);
+    And('he taps How rare is it?', tapRarity);
+    Then('the rarity line reads "Common · about 12,000,000 struck, the tutor\'s estimate"', async () => {
+      await waitFor(async () => expect(await line()).toHaveTextContent("Common · about 12,000,000 struck, the tutor's estimate"));
+    });
+    When('the year is edited to 1956', async () => {
+      await user.click(screen.getByRole('button', { name: 'Edit' }));
+      const sheet = await screen.findByRole('dialog', { name: 'Edit' });
+      const year = within(sheet).getByLabelText('Year');
+      await user.clear(year);
+      await user.type(year, '1956');
+      await user.click(within(sheet).getByRole('button', { name: 'Save' }));
+      await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Edit' })).toBeNull());
+    });
+    Then('the line offers a How rare is it? button', async () => {
+      expect(await screen.findByRole('button', { name: 'How rare is it?' })).toBeEnabled();
+    });
+  });
+
+  Scenario('A failed ask can be tried again', ({ Given, And, When, Then }) => {
+    Given('a Canadian dime from 1955', async () => {
+      piece = await dime();
+    });
+    And('the tutor will not answer', () => {
+      tutorSays = null;
+    });
+    When('he opens the coin', openPiece);
+    And('he taps How rare is it?', tapRarity);
+    Then('the rarity line reads "Could not ask just now"', async () => {
+      await waitFor(async () => expect(await line()).toHaveTextContent('Could not ask just now'));
+    });
+    And('the line offers a How rare is it? button', async () => {
+      expect(await screen.findByRole('button', { name: 'How rare is it?' })).toBeEnabled();
+    });
+  });
+
+  Scenario('The line says Asking while the tutor works', ({ Given, And, When, Then }) => {
+    Given('a Canadian dime from 1955', async () => {
+      piece = await dime();
+    });
+    And('the tutor takes a long time', () => {
+      grist.onAnswer(() => new Promise(() => undefined));
+    });
+    When('he opens the coin', openPiece);
+    And('he taps How rare is it?', tapRarity);
+    Then('the rarity line reads "Asking…"', async () => {
+      await waitFor(async () => expect(await line()).toHaveTextContent('Asking…'));
+      expect(screen.queryByRole('button', { name: 'How rare is it?' })).toBeNull();
+    });
+  });
+
+  Scenario('Offline the tap waits', ({ Given, And, When, Then }) => {
+    Given('a Canadian dime from 1955', async () => {
+      piece = await dime();
+    });
+    And('the phone is offline', () => {
+      online = false;
+    });
+    When('he opens the coin', openPiece);
+    Then('the How rare is it? button is disabled and says when online', async () => {
+      const button = await screen.findByRole('button', { name: 'How rare is it?' });
+      expect(button).toBeDisabled();
+      expect(await line()).toHaveTextContent('when online');
+      expect(grist.sentOf('coin-rarity')).toHaveLength(0);
+    });
+  });
+
+  Scenario('A banknote the tables do not cover can be asked about', ({ Given, When, Then }) => {
+    Given('a Canadian one dollar note from 1935', async () => {
+      piece = await addItem({ kind: 'note', country: 'CA', currency: 'CAD', denomination: 'One dollar', faceValue: 1, year: 1935, status: 'confirmed' });
+    });
+    When('he opens the coin', openPiece);
+    Then('the line offers a How rare is it? button', async () => {
+      expect(await screen.findByRole('button', { name: 'How rare is it?' })).toBeEnabled();
+    });
+  });
+
+  Scenario('A quarter the tables cover never shows the tap', ({ Given, When, Then, And }) => {
+    Given('a 1932 Washington quarter with mint mark D', async () => {
+      piece = await addItem({ ...quarter, year: 1932, mintMark: 'D' });
+    });
+    When('he opens the coin', openPiece);
+    Then('the rarity line reads "Scarce · 436,800 struck at Denver in 1932 · a key date"', async () => {
+      await waitFor(async () => expect(await line()).toHaveTextContent('Scarce · 436,800 struck at Denver in 1932 · a key date'));
+    });
+    And('the line offers no button', noButton);
   });
 
   Scenario('An Other piece has no rarity line', ({ Given, When, Then }) => {
