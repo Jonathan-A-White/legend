@@ -1,7 +1,7 @@
 // src/data/repositories/items.ts: the collection's items. Removing keeps the record (deletedAt), so a mistake can be undone;
 // every list leaves the removed out. Each change tells the bus (docs/events.md).
 import { useLiveQuery } from 'dexie-react-hooks';
-import { db, type Item, type ItemKind, type Photo, type Reading } from '../db';
+import { db, type Item, type ItemKind, type ItemRarity, type Photo, type Reading } from '../db';
 import { publish } from '../../events/bus';
 
 /** What a new item needs: its kind. Everything else starts empty and is filled as it is named. */
@@ -123,6 +123,12 @@ export async function gotIt(id: string, pricePaid: number): Promise<Item> {
 /** Records where an item stands with the photo reader (null when it is over). */
 export async function setReading(id: string, reading: Reading | null): Promise<void> {
   await change(id, { reading });
+  publish({ kind: 'item.updated', id });
+}
+
+/** Keeps the tutor's rarity estimate on an item. It is not an edit by him, so the item's updatedAt stays. */
+export async function setRarity(id: string, rarity: ItemRarity | null): Promise<void> {
+  await db.items.update(id, { rarity });
   publish({ kind: 'item.updated', id });
 }
 

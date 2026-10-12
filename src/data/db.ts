@@ -28,6 +28,21 @@ export interface Reading {
   message: string | null;
 }
 
+/** The tutor's estimate of how rare a coin or note is, kept on the item it was asked for (src/services/rarity.ts). */
+export interface ItemRarity {
+  word: 'very-common' | 'common' | 'less-common' | 'scarce' | 'rare' | 'unknown';
+  /** how many were made; null when the tutor would not say */
+  struck: number | null;
+  /** where `struck` came from: the issuer's reported figure, the tutor's order-of-magnitude estimate, or no number */
+  struckIs: 'reported' | 'estimate' | 'unknown';
+  reason: string;
+  confidence: Confidence;
+  askedAt: number;
+  /** the year and mint mark it was asked for, so an Edit of either offers the tap again */
+  forYear: number | null;
+  forMint: string | null;
+}
+
 export interface Item {
   id: string;
   kind: ItemKind;
@@ -58,6 +73,8 @@ export interface Item {
   tags: string[];
   status: ItemStatus;
   confidence: Confidence | null;
+  /** the tutor's estimate of its rarity, asked on his tap for a piece the tables do not cover */
+  rarity?: ItemRarity | null;
   /** present from Name it until the photo reader's answer is kept */
   reading?: Reading | null;
   /** a wished coin's price at the store (US dollars), where he saw it (his words) and when he wished for it */
