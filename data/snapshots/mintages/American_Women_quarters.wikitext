@@ -1,0 +1,382 @@
+{{Short description|Series of US coins}}
+{{Use mdy dates|date=May 2026}}
+{{use American English|date=December 2025}}
+{{Infobox coin
+|Country = United States
+|Denomination = American Women quarter
+|Value = 25 cents (0.25 US dollars)
+|Mass = 5.67&nbsp;g (standard)<br />6.34&nbsp;g (silver proof) <!--Due to how the mass field works it seems to automatically put another g at the end so we get "6.34 g (silver proof) g"-->
+|Diameter_inch = 0.955
+|Diameter = 24.26
+|Thickness_inch = 0.069
+|Thickness = 1.75
+|Edge = 119 [[reeding|reeds]]
+|Composition = 91.67% [[Copper|Cu]] 8.33% [[Nickel|Ni]] (standard)<br />99.9% [[Silver|Ag]] (silver proof)
+|Years of Minting = 2022–2025
+|Catalog Number =
+|Obverse = [[File:2022 Washington quarter obverse.jpeg|200x200px]]
+|Obverse Design = [[George Washington]]
+|Obverse Designer = [[Laura Gardin Fraser]]
+|Obverse Design Date = 1931
+|Reverse = [[File:American Women quarter 2022 Maya Angelou.jpeg|200x200px]]
+|Reverse Design = Various; up to five designs per year (inaugural design shown)
+|Reverse Designer = Various
+|Reverse Design Date =
+}}
+
+The '''American Women quarters program''' was a series of [[United States commemorative coin|circulating commemorative]] [[Quarter (United States coin)|quarters]] released by the [[United States Mint]]. Minted from 2022 through 2025, they featured designs of notable women in U.S. history, commemorating the centennial of the [[Nineteenth Amendment to the United States Constitution]].<ref name=":0">{{Cite web|title=Circulating Collectible Coin Redesign Act of 2020 signed by president|url=https://www.coinworld.com/news/us-coins/circulating-collectible-coin-redesign-act-of-2020-signed-by-president-trump|access-date=January 16, 2021|website=CoinWorld|language=en}}</ref>
+
+Five designs were issued each year for 20 total designs, with one woman honored on the [[Obverse and reverse|reverse]] of each coin, selected for "contributions to the United States in a wide spectrum of accomplishments and fields, including but not limited to suffrage, civil rights, abolition, government, humanities, science, space, and arts."<ref>{{Cite web|last=Lee|first=Barbara|date=January 13, 2021|title=Text - H.R.1923 - 116th Congress (2019-2020): Circulating Collectible Coin Redesign Act of 2020|url=https://www.congress.gov/bill/116th-congress/house-bill/1923/text/enr|access-date=January 16, 2021|website=congress.gov}}</ref>  Most of the women featured were from [[Race and ethnicity in the United States|ethnic minority groups]].<ref>{{Cite web|url=https://medium.com/@emaline/you-suffered-as-a-woman-and-a-minority-you-oughta-be-on-quarters-3396450e4079|title=You Suffered as a Woman and a Minority? You Oughta be on Quarters.|first=Emaline|last=Foust|date=March 18, 2022}}</ref><ref>{{Cite web|url=https://www.newsclick.in/Rulers-Goddesses-Activists-Portraits-Women-Coins|title=Rulers, Goddesses and Activists: Portraits of Women on Coins|date=January 14, 2022|website=NewsClick}}</ref> The [[Obverse and reverse|obverse]] depicts [[George Washington]], using a design by [[Laura Gardin Fraser]] originally intended for the first Washington quarter in 1932.<ref>{{cite web|title=American Women Quarters Program|date=November 8, 2021|accessdate=November 29, 2021|url=https://www.usmint.gov/learn/coin-and-medal-programs/american-women-quarters|publisher=[[United States Mint]]}}</ref><ref>{{Cite web|first1=Debra|last1=Fischer|first2=Catherine Cortez|last2=Masto|title=American women who shaped history are coming soon to quarters, just like George Washington|url=https://www.usatoday.com/story/opinion/2021/02/14/new-quarters-coin-designs-featuring-american-women-column/4406811001/|access-date=March 13, 2021|website=USA Today|language=en-US}}</ref>
+
+The program was authorized by the Circulating Collectible Coin Redesign Act of 2020, sponsored by Representatives [[Barbara Lee]] and [[Anthony Gonzalez (politician)|Anthony Gonzalez]].<ref>{{Cite web|title=As Part of Women's History Month, Reps. Lee & Gonzalez Lead Bipartisan Effort to Issue Quarters Honoring Prominent American Women {{!}} Barbara Lee - Congresswoman for the 13th District of California|url=https://lee.house.gov/news/press-releases/as-part-of-womens-history-month-reps-lee-and-gonzalez-lead-bipartisan-effort-to-issue-quarters-honoring-prominent-american-women|access-date=January 16, 2021|website=lee.house.gov|language=en|archive-date=December 9, 2020|archive-url=https://web.archive.org/web/20201209214135/https://lee.house.gov/news/press-releases/as-part-of-womens-history-month-reps-lee-and-gonzalez-lead-bipartisan-effort-to-issue-quarters-honoring-prominent-american-women|url-status=dead}}</ref> The original proposal was for 56 quarters, honoring one woman from each state and territory,<ref>{{Cite web|last=Wattles|first=Jackie|date=March 15, 2018|title=Lawmakers push to put women on quarters|url=https://money.cnn.com/2018/03/15/news/women-quarters-rosie-rios/index.html|archive-url=https://web.archive.org/web/20180316042831/http://money.cnn.com/2018/03/15/news/women-quarters-rosie-rios/index.html|url-status=dead|archive-date=March 16, 2018|access-date=January 16, 2021|website=CNNMoney}}</ref> but with a set of circulating coins intended to be released in 2026 for the [[United States Semiquincentennial]], it was amended to be shorter. It replaced an alternative proposal of quarters featuring [[animals]] or [[endangered species]].<ref>{{Cite web|title=Interview with Todd Martin of the United States Mint {{!}} Coin Update|url=https://news.coinupdate.com/interview-with-todd-martin-of-the-united-states-mint/|access-date=February 3, 2021|website=news.coinupdate.com|archive-date=October 23, 2023|archive-url=https://web.archive.org/web/20231023210415/https://news.coinupdate.com/interview-with-todd-martin-of-the-united-states-mint/|url-status=dead}}</ref>
+
+It succeeded the [[America the Beautiful quarters]] and Washington Crossing the Delaware quarter, and will be followed in 2027–2030 with a series depicting [[youth sports]].<ref>{{Cite web|date=September 23, 2020|title=Gonzalez bill to honor American women on the quarter passes U.S. House of Representatives|url=https://anthonygonzalez.house.gov/news/documentsingle.aspx?DocumentID=285|url-status=live|archive-url=https://web.archive.org/web/20200927024859/https://anthonygonzalez.house.gov/news/documentsingle.aspx?DocumentID=285 |archive-date=September 27, 2020 |access-date=January 16, 2021|website=U.S. Representative Anthony Gonzalez|language=en}}</ref> Some [[Coin collecting|coin collectors]] were critical of the "seemingly unending" proposal to continue to issue five new quarter designs every year for a third decade.<ref>{{Cite web|title=Monday Morning Brief for Oct. 5, 2020: Too ambitious?|url=https://www.coinworld.com/news/precious-metals/monday-morning-brief-for-oct-5-2020-too-ambitious|access-date=January 16, 2021|website=CoinWorld|language=en}}</ref> Many [[numismatist]]s are more interested in redesigns of other denominations and less frequent releases.<ref>{{Cite web|last=Golino|first=Louis|date=January 28, 2021|title=The Coin Analyst: Have Circulating Commemorative Programs Outlasted Their Welcome?|url=https://coinweek.com/modern-coins/the-coin-analyst-have-circulating-commemorative-programs-outlasted-their-welcome/|access-date=February 3, 2021|website=CoinWeek|language=en-US}}</ref>
+
+== Designs ==
+In addition to circulating coins, the series was also minted as a silver [[Proof coinage|proof]] set.<ref>{{Cite news |title=Silver Proof Set for American Women Quarters |language=en |work=Numismatic News |url=https://www.numismaticnews.net/us-coins/silver-proof-set-for-american-women-quarters |access-date=October 24, 2023}}</ref>
+
+=== Obverse ===
+[[Laura Gardin Fraser]]'s portrait of George Washington, which was originally submitted in 1931, was selected by the [[United States Commission of Fine Arts|Commission of Fine Arts]] and [[Citizens Coinage Advisory Committee]] to appear on the obverse of the American Women quarters.  The right-facing bust had been used for the 1999 [[George Washington half eagle]] for the 200th anniversary of Washington's death.<ref>{{Cite web|title=Fraser portrait to finally debut on quarter in 2022|url=https://www.coinworld.com/news/us-coins/fraser-portrait-to-finally-debut-on-quarter-in-2022|access-date=April 25, 2021|website=CoinWorld|language=en}}</ref>
+
+=== Reverse ===
+The [[United States Secretary of the Treasury]] selects the women featured for the series in consultation with the [[Smithsonian Institution]]'s [[American Women's History Initiative]], the [[National Women's History Museum]], and the [[Congressional Caucus for Women's Issues]]. Recommendations for women honorees were solicited from the public in 2021.<ref>{{Cite news|title=Maya Angelou and Sally Ride Will Be Honored on Quarters|url=https://www.nytimes.com/2021/05/09/us/quarters-maya-angelou-sally-ride.html|last=Pietsch|first=Bryan|date=May 9, 2021|access-date=May 19, 2021|work=[[The New York Times]]}}</ref><ref name=":1">{{Cite press release |url=https://www.usmint.gov/learn/coin-and-medal-programs/american-women-quarters |title=American Women Quarters Program |publisher=[[United States Mint]] |access-date=March 6, 2024}}</ref>
+
+====2022====
+Honorees featured in 2022 are:<ref name="2022designs">{{Cite press release |url=https://www.usmint.gov/news/press-releases/united-states-mint-announces-designs-for-2022-american-women-quarters-program-coins |title=United States Mint Announces Designs for 2022 American Women Quarters™ Program Coins |date=October 6, 2021 |publisher=[[United States Mint]] |access-date=March 6, 2024}}</ref>
+* [[Maya Angelou]], the first Black woman featured on U.S. currency.<ref>{{Cite news |last=Franklin |first=Jonathan |date=January 10, 2022 |title=The poet Maya Angelou is the first Black woman to be featured on a U.S. quarter |language=en |work=NPR |url=https://www.npr.org/2022/01/10/1071965134/maya-angelou-quarter-mint-shipped-first-black-woman |access-date=March 4, 2022}}</ref> Designed by Emily Damstra, who said her depiction of Angelou "convey[s] the passionate way she lived". She indicated that the bird in flight that silhouetted Angelou's arms was modeled on a [[Purple martin]], which is native to Angelou's home state of Arkansas, and symbolized her autobiography ''[[I Know Why the Caged Bird Sings]]''.<ref name=":4">{{Cite web |last=White |first=Katie |date=January 17, 2022 |title=Maya Angelou Is the First Black Woman to Appear on the U.S. Quarter. We Asked Its Designer to Walk Us Through Its Symbolism |url=https://news.artnet.com/art-world/new-maya-angelou-quarter-designer-2060027 |access-date=May 28, 2022 |website=Artnet News |language=en-US}}</ref> [[Oprah Winfrey]] called the design "a true treasure" and "an incredible moment" to commemorate her friend and poet's life.<ref>{{Cite web |date=January 24, 2022 |title=Oprah Reacts to Holding the Maya Angelou Quarter for the First Time |url=https://www.oprahdaily.com/entertainment/a38817583/oprah-maya-angelou-quarter-reaction/ |access-date=May 28, 2022 |website=Oprah Daily |language=en-us}}</ref> Because a bust portrait was not permitted, Damstra chose to limit the details in the quarter, balancing negative space.<ref>{{Cite web |last=Brandon |first=Elissaveta M. |date=January 26, 2022 |title=The fascinating design story behind the new Maya Angelou quarters |url=https://www.fastcompany.com/90715936/the-fascinating-design-story-behind-the-new-maya-angelou-quarters |access-date=May 28, 2022 |website=Fast Company |language=en-US}}</ref>
+* [[Sally Ride]], the first [[LGBT]] person on U.S. currency.<ref>{{Cite web |date=October 18, 2021 |title=Sally Ride will become first out LGBTQ person on US currency |url=https://www.metroweekly.com/2021/10/sally-ride-will-become-first-out-lgbtq-person-on-us-currency/ |access-date=March 4, 2022 |website=Metro Weekly |language=en-US}}</ref> Her partner [[Tam O'Shaughnessy]] said Ride's design by the Space Shuttle's window reflected her quote, "But when I wasn't working, I was usually at a window looking down at Earth." It shows her wearing a patch with an element Ride designed for the [[STS-7]] mission that represented her being the first American woman in space.<ref>{{Cite web |title=The new Sally Ride quarter has a lot of symbolism – Sally Ride Science |url=https://sallyridescience.ucsd.edu/the-new-sally-ride-quarter-has-a-lot-of-symbolism/ |access-date=May 28, 2022 |website=sallyridescience.ucsd.edu}}</ref> The design was unveiled at the 2021 [[Space Symposium]].<ref>{{Cite web |last=Isaac |first=O'Dell |title=U.S. Mint unveils Sally Ride quarter at Space Symposium in Colorado Springs |url=https://gazette.com/business/u-s-mint-unveils-sally-ride-quarter-at-space-symposium-in-colorado-springs/article_000d1ec2-b5e6-11ec-8da4-cf9b62f5320a.html |access-date=May 28, 2022 |website=Colorado Springs Gazette |date=April 6, 2022 |language=en}}</ref>
+* [[Wilma Mankiller]]; design released at an event at the [[Cherokee National Capitol]]. Cherokee Nation Principal Chief Chuck Hoskin Jr. said, "Chief Mankiller was the voice that first elevated Native American tribes and tribal issues in this country and served as the first female Chief in a role dominated by men during a time that the Cherokee Nation was first getting its footing after decades of suppression by the U.S. Government[...] She fought for civil rights and equality, and self-sufficiency for the Cherokee people, and was the anchor establishing what has now become the largest tribal health care system in the country. We are so proud she is forever honored on this coin by the U.S. Mint."<ref>{{Cite web |last=Staff |first=Callie Morris, KTUL |date=May 21, 2022 |title=Wilma Mankiller quarter to be released during ceremony in Cherokee Nation |url=https://ktul.com/news/local/wilma-mankiller-quarter-to-be-released-during-ceremony-in-cherokee-nation-tahlequah-oklahoma |access-date=May 28, 2022 |website=KTUL |language=en}}</ref>
+* [[Adelina Otero-Warren]], the first Hispanic American on U.S. currency.<ref>{{Cite web |date=October 12, 2021 |title=These Queer Icons Will Be the First LGBTQ+ People Featured on U.S. Currency |url=https://www.them.us/story/first-lgbtq-people-featured-us-currency-sally-ride-nina-otero-warren |access-date=March 4, 2022 |website=them. |language=en-US}}</ref>
+* [[Anna May Wong]], the first Asian American on U.S. currency.<ref>{{Cite web |date=October 18, 2022 |title=Anna May Wong will become the first Asian American to be on U.S. currency |url=https://www.npr.org/2022/10/18/1129717922/anna-may-wong-us-quarters-coins-movies |access-date=March 6, 2024 |work=[[NPR]] |language=en}}</ref>
+
+====2023====
+Honorees featured in 2023 are:<ref name="2023designs">{{Cite press release |url=https://www.usmint.gov/news/press-releases/united-states-mint-announces-designs-for-2023-american-women-quarters-program-coins |title=United States Mint Announces Designs for 2023 American Women Quarters™ Program Coins |date=August 29, 2022 |publisher=[[United States Mint]] |access-date=March 6, 2024}}</ref>
+* [[Bessie Coleman]]; design released at an event at the [[Federal Aviation Administration]]. FAA Deputy Administrator Brad Mims said the coin "[is] a valuable symbol of an important chapter in U.S. aviation history."<ref>{{Cite press release |date=February 24, 2023 |title=U.S. Mint Presents its New Bessie Coleman Commemorative Quarter to the FAA |url=https://www.faa.gov/newsroom/bessie-coleman-quarter |access-date=March 6, 2024 |language=en}}</ref>
+* [[Jovita Idar]]; design released at an event at the [[University of Texas at San Antonio]].<ref>{{Cite web |date=August 10, 2023 |title=UTSA, United States Mint, National Women's History Museum celebrate Jovita Idar quarter release |url=https://www.utsa.edu/today/2023/08/story/UTSA-U.S.-mint-national-womens-history-museum-celebrate-jovita-idar-quarter-release.html |access-date=October 24, 2023 |publisher=UTSA Today |language=en}}</ref>
+* [[Edith Kanakaʻole]], the first [[native Hawaiian]] on U.S. currency.<ref>{{Cite web |date=June 2, 2023 |title=Edith Kanaka'ole is the first Hawaiian woman to grace a U.S. quarter |url=https://www.npr.org/2023/06/02/1178874246/quarter-hawaiian-woman-edith-kanakaole-aunty-edith |access-date=March 6, 2024 |work=[[NPR]] |language=en}}</ref> The design was released at an event at the [[University of Hawaiʻi Hilo]], where Kanakaʻole previously taught. Designer Emily Damstra said, "It was a joy to become aware of Edith Kanakaʻole's legacy as I developed a design for her quarter[...] I came to understand that her deep connection to the land—her home in Hawaiʻi near the Maunakea volcano—played a large role in her life and work. To best honor the various ways she made an impact, I felt that the design should emphasize her relationship to that environment."<ref>{{Cite web |date=March 27, 2023 |title=Edith Kanakaʻole quarter released into circulation |url=https://www.hawaii.edu/news/2023/03/27/edith-kanakaole-quarter-released-into-circulation/ |publisher=University of Hawaiʻi News |access-date=March 6, 2024 |language=en}}</ref>
+* [[Eleanor Roosevelt]]
+* [[Maria Tallchief]], who also appears on the 2023 [[Sacagawea dollar]].<ref>{{Cite web |date=February 20, 2023 |title=$1 coin, quarter celebrate legendary Osage ballerina |url=https://www.kosu.org/local-news/2023-02-20/1-coin-quarter-celebrate-legendary-osage-ballerina |access-date=February 21, 2023 |website=KOSU |language=en}}</ref> Designer Ben Sowards said, "Although her artistry, precision, and technical skill made her one of the most renowned ballerinas of her time, it is Maria Tallchief's courage, perseverance, and strength of character that I hope are evident in the design[...] Her legacy continues to inspire us to pursue our dreams."<ref>{{Cite web |date=November 7, 2023 |title=US Mint Releases Maria Tallchief (Osage) Quarter |url=https://nativenewsonline.net/currents/us-mint-releases-maria-tallchief-osage-quarter |publisher=Native News Online |access-date=March 6, 2024 |language=en}}</ref>
+
+====2024====
+Honorees featured in 2024 are:<ref name="2024designs">{{Cite press release |url=https://www.usmint.gov/news/press-releases/united-states-mint-announces-designs-for-2024-american-women-quarters-program-coins |title=United States Mint Announces Designs for 2024 American Women Quarters™ Program Coins |date=July 20, 2023 |publisher=[[United States Mint]] |access-date=March 6, 2024}}</ref>
+* [[Pauli Murray]]; Murray's niece Rosita Stevens-Holsey said, "When I see my aunt's face looking out through the letters of the word 'hope', it brings to mind that she never lost hope in a society and world that needed to change to embrace the rights of all humans.  Her selection as one of the honorees is validation and a testament to more than 50 years of achievements in social justice, women's rights, civil rights, and human rights."<ref>{{Cite web |date=August 10, 2023 |title=Rev. Dr. Pauli Murray on 11th American Women's Quarter |url=https://www.paulimurraycenter.com/words-from-the-center/2023/8/10/rev-dr-pauli-murray-on-11th-american-womens-quarter |publisher=Pauli Murray Center |access-date=March 6, 2024 |language=en}}</ref>
+* [[Patsy Takemoto Mink]]; the design honors Mink's work on the [[Title IX Amendment of the Higher Education Act]], renamed the Patsy T. Mink Equal Opportunity in Education Act in 2002.<ref>{{Cite web |date=July 25, 2023 |title=Patsy Takemoto Mink honored with U.S. quarter |url=https://www.hawaii.edu/news/2023/07/25/patsy-takemoto-mink-us-quarter/ |publisher=University of Hawaiʻi News |access-date=March 6, 2024 |language=en}}</ref>
+* [[Mary Edwards Walker]]; Oswego Town Historian George DeMass, who advised the U.S. Mint on the design, said of the process, "The committees were so concerned about accuracy, which I'm very glad[...] They would ask questions like, 'Do you happen to know what hairstyle she was wearing during the war?' Which, you know, was 150 years ago, but fortunately we had pictures."<ref>{{Cite web |date=July 25, 2023 |title=Dr. Mary Walker quarter design finalized by U.S. Mint |url=https://www.wrvo.org/politics-and-government/2023-07-21/dr-mary-walker-quarter-design-finalized-by-u-s-mint |work=WRVO |last=Connolly |first=Abigail |access-date=March 6, 2024 |language=en}}</ref>
+* [[Celia Cruz]], the first [[Afro-Latina]] on U.S. currency.<ref>{{Cite news |last=O'Connell-Domenech |first=Alejandra |date=February 8, 2023 |title=Celia Cruz to be first Afro-Latina on US currency |url=https://thehill.com/changing-america/respect/diversity-inclusion/3849630-celia-cruz-to-be-first-afro-latina-on-us-currency/ |publisher=[[The Hill (newspaper)|The Hill]]}}</ref><ref>{{Cite news |last=Valdivia |first=Pablo |date=February 7, 2023 |title=Queen of salsa Celia Cruz will be the first Afro Latina to appear on a U.S. quarter |url=https://www.npr.org/2023/02/07/1155145680/celia-cruz-us-quarter |work=[[NPR]]}}</ref> Cruz's former manager Omer Pardillo said, "It's a significant honor to become the first Afro-Latina, who, despite her humble beginnings, managed to captivate the world with her exceptional talent and charisma[...] All Latinos should be very proud of this enormous accomplishment as Celia not only represents Cubans, but Latinos all over the world[...] She belonged to the world."<ref>{{Cite web |date=August 3, 2023 |title=The Story Behind the Celia Cruz Quarter Coming in 2024 |url=https://time.com/6301299/celia-cruz-quarter-2024/ |publisher=[[Time Magazine]] |last=Burga |first=Solcyré |access-date=March 6, 2024 |language=en}}</ref>
+* [[Zitkala-Ša]], a [[Yankton Dakota]] writer, editor, translator, musician, educator, and political activist.
+
+====2025====
+Honorees featured in 2025 are:<ref name="2025designs">{{Cite press release |url=https://www.usmint.gov/news/press-releases/united-states-mint-announces-2025-american-women-quarters-program-coins |title=United States Mint Announces Designs for 2025 American Women Quarters™ Program Coins |date=October 17, 2023 |publisher=[[United States Mint]] |access-date=March 6, 2024}}</ref>
+* [[Ida B. Wells]], an investigative journalist, suffragist, educator, and civil rights leader.
+* [[Juliette Gordon Low]], founder of [[Girl Scouts of the USA|Girl Scouts of the United States of America]]
+* [[Vera Rubin]], the first Jewish person featured on US currency, an astronomer who pioneered work on galaxy rotation uncovering crucial evidence of dark matter
+* [[Stacey Milbern]], a visionary disability justice activist
+* [[Althea Gibson]], a multisport athlete and first Black athlete to break the color barrier at the highest level in tennis and professional golf
+
+==List of designs==
+{| class="wikitable sortable" style="text-align: center"
+|-
+! rowspan="2" | Year
+! rowspan="2" | No.
+! rowspan="2" | Woman
+! rowspan="2" | Design
+! rowspan="2" | Elements depicted
+! colspan="2" |Artist(s)
+! rowspan="2" | Release date
+! colspan="4" | Mintage
+|-
+!Sculptor
+(Medallic Artist)
+!Designer
+(Artistic Infusion Program)
+! Denver
+! Philadelphia
+! San Francisco
+! Total
+|-
+| rowspan=5 bgcolor="#e95b77"|2022<ref name="2022designs" />
+| 1
+| {{sortname|Maya|Angelou}}
+|[[File:American Women quarter 2022 Maya Angelou.jpeg|150x150px]]
+| Angelou with her arms outstretched, in front of a flying bird and sunrise.<ref name=":5">{{Cite web |title=Maya Angelou Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/maya-angelou |access-date=December 13, 2022 |website=United States Mint |language=en-US}}</ref>
+|[[Craig Campbell (artist)|Craig Campbell]]
+|[[Emily Damstra]]
+| January 3, 2022<ref>{{cite press release |author=<!--Not stated--> |title=American Women QuartersTM Program|url=https://www.frbservices.org/resources/financial-services/cash/american-women-quarters-program|publisher=[[Federal Reserve Bank]] |date=January 10, 2022 |access-date=January 11, 2022}}</ref>
+| 258,200,000
+| 237,600,000
+| 303,520
+| 496,103,520
+|-
+| 2
+| {{sortname|Dr.|Sally Ride}}
+|[[File:American Women quarter 2022 Sally Ride.png|150x150px]]
+| Ride next to a [[Space Shuttle]] window, with Earth in the background.<ref name=":6">{{Cite web |title=Sally Ride Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/sally-ride |access-date=December 13, 2022 |website=United States Mint |language=en-US}}</ref>
+| [[Phebe Hemphill]]
+| [[Elana Hagler]]
+| March 22, 2022
+| 278,000,000
+| 275,200,000
+| 304,120
+| 553,504,120
+|-
+| 3
+| {{sortname|Wilma|Mankiller}}
+|[[File:American Women quarter 2022 Wilma Mankiller.png|150x150px]]
+| Mankiller wearing a shawl, by a seven-pointed [[Cherokee Nation]] star and ᏣᎳᎩᎯ ᎠᏰᎵ ("Cherokee Nation" in [[Cherokee syllabary]]).<ref name=":7">{{Cite news |title=Wilma Mankiller Quarter {{!}} American Women Quarters {{!}} U.S. Mint |language=en-US |work=United States Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/wilma-mankiller |access-date=December 13, 2022}}</ref>
+| [[Phebe Hemphill]]
+| [[Benjamin Sowards]]
+| June 6, 2022
+| 296,800,000
+| 310,000,000
+| 304,640
+| 607,104,640
+|-
+| 4
+| {{sortname|Nina|Otero-Warren|Adelina Otero-Warren}}
+|[[File:American Women quarter 2022 Nina Otero-Warren.png|150x150px]]
+| Otero-Warren with three ''[[Yucca]]'' flowers and the Spanish inscription {{lang|es|Voto para la mujer}} (Vote for Women).<ref name=":8">{{Cite web |title=Nina Otero-Warren Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/nina-otero-warren |access-date=December 13, 2022 |website=United States Mint |language=en-US}}</ref>
+|Craig Campbell
+| [[Chris Costello]]
+| August 15, 2022
+| 219,200,000
+| 225,000,000
+| 305,560
+| 444,505,560
+|-
+| 5
+| {{sortname|Anna May|Wong}}
+|[[File:American Women Quarter 2022 Anna May Wong.jpg|150x150px]]
+| Wong surrounded by marquee lights.<ref name=":9">{{Cite web |title=Anna May Wong Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/anna-may-wong |access-date=December 13, 2022 |website=United States Mint |language=en-US}}</ref>
+| [[John P. McGraw]]
+| Emily Damstra
+| October 25, 2022
+| 240,800,000
+| 226,800,000
+| 303,680
+| 467,903,680
+|-
+| rowspan=5 bgcolor="#beca40"|2023<ref name="2023designs" />
+| 6
+| {{sortname|Bessie|Coleman}}
+|[[File:2023 Bessie Coleman Womens Quarter.jpg|150x150px]]
+| Coleman in leather flying helmet looking into the clouds toward a flying biplane. The inscription "6.15.1921" is the date she received her international pilot's license.<ref name=":10">{{Cite web |title=Bessie Coleman Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/bessie-coleman |access-date=December 13, 2022 |website=United States Mint |language=en-US}}</ref>
+| [[Eric David Custer]]
+| Chris Costello
+| January 3, 2023
+| 317,200,000
+| 302,000,000
+| 500,360
+| 619,700,360
+|-
+| 7
+| [[Edith Kanakaʻole]]
+| [[File:2023 Edith Kanakaʻole Womens Quarter.jpg|frameless|150x150px]]
+| Kanakaʻole, with her hair and lei poʻo (head lei) blending into a Hawaiian landscape. The inscription "E hō mai ka ʻike" translates to "granting the wisdom" and refers to the role of [[hula]] and chants in cultural preservation.  This design features the denomination shown as "25¢" instead of "Quarter Dollar" used on all other previous designs.<ref name=":11">{{Cite web |title=Edith Kanakaʻole Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/edith-kanakaole |access-date=December 13, 2022 |website=United States Mint |language=en-US}}</ref>
+| [[Renata Gordon]]
+|Emily Damstra
+| March 27, 2023
+| 368,600,000
+| 372,800,000
+| 503,400
+| 741,903,400
+|-
+| 8
+| [[Eleanor Roosevelt]]
+| [[File:2023 Eleanor Roosevelt Womens Quarter.jpg|frameless|150x150px]]
+| Roosevelt stands by the [[Scales of justice (symbol)|scales of justice]] in front of a representation of the globe, above the inscription "[[Universal Declaration of Human Rights]]".<ref name=":12">{{Cite web |title=Eleanor Roosevelt Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/eleanor-roosevelt |access-date=December 13, 2022 |website=United States Mint |language=en-US}}</ref>
+|Craig Campbell
+|[[Don Everhart]]
+| June 5, 2023
+| 271,800,000
+| 284,000,000
+| 507,120
+| 556,307,120
+|-
+| 9
+| [[Jovita Idar]]
+| [[File:2023 Jovita Idar Womens Quarter.jpg|frameless|150x150px]]
+| Idar standing with her hands clasped. Her body is made up of inscriptions representing her accomplishments and the newspapers for which she wrote.<ref name=":13">{{Cite web |title=Jovita Idar Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/jovita-idar |access-date=December 13, 2022 |website=United States Mint |language=en-US}}</ref>
+| colspan="2" |John P. McGraw
+| August 14, 2023
+| 184,800,000
+| 190,600,000
+| 503,920
+| 375,903,920
+|-
+| 10
+| [[Maria Tallchief]]
+| [[File:2023 Maria Tallchief Womens Quarter.jpg|frameless|150x150px]]
+| Maria Tallchief spotlit in balletic pose. Her [[Osage Nation|Osage]] name, 𐓏𐓘𐓸𐓮𐓟-𐓍𐓪͘𐓬𐓘, which translates to "Two Standards", is written in the [[Osage script]].<ref name=":14">{{Cite web |title=Maria Tallchief Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/maria-tallchief |access-date=December 13, 2022 |website=United States Mint |language=en-US}}</ref>
+|[[Joseph Menna]]
+| Benjamin Sowards
+| October 23, 2023
+| 184,800,000
+| 185,800,000
+| 502,560
+| 371,102,560
+|-
+| rowspan=5 bgcolor="#90c8c7"|2024<ref name="2024designs" />
+| 11
+| [[Pauli Murray|Dr. Pauli Murray]]
+| [[File:2024 Pauli Murray Womens Quarter.jpg|frameless|150x150px]]
+|  Portrait of Rev. Dr. Murray inside the word "HOPE," with the quotation "A song in a weary throat," from her poem "Dark Testament."<ref>{{Cite web |title=Reverend Dr. Pauli Murray Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/pauli-murray |access-date=October 24, 2023 |website=United States Mint |language=en-US}}</ref>
+|[[Joseph Menna]]
+| Emily Damstra
+| February 1, 2024
+| 185,500,000
+| 168,400,000
+| 506,360
+| 354,406,360
+|-
+|12
+|[[Patsy Mink]]
+| [[File:2024 Patsy Takemoto Mink Womens Quarter.jpg|frameless|150x150px]]
+|Mink standing outside [[United States Capitol|the Capitol]] holding a copy of [[Title IX]] and wearing a [[Lei (garland)|lei]], with legend "Equal Opportunity in Education"<ref>{{Cite web |title=Patsy Takemoto Mink Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/patsy-takemoto-mink |access-date=October 24, 2023 |website=United States Mint |language=en-US}}</ref>
+| John P. McGraw
+| [[Beth Zaiken]]
+| March 25, 2024
+| 187,200,000
+| 210,200,000
+| 471,720
+| 397,871,720
+|-
+| 13
+|  [[Mary Edwards Walker|Dr. Mary Edwards Walker]]
+| [[File:2024 Mary Edwards Walker Womens Quarter.jpg|frameless|150x150px]]
+| Dr. Walker wearing her [[Medal of Honor]].<ref>{{Cite web |title=Dr. Mary Edwards Walker Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/mary-edwards-walker |access-date=October 24, 2023 |website=United States Mint |language=en-US}}</ref>
+| colspan="2" | [[Phebe Hemphill]]
+| June 3, 2024
+| 159,400,000
+| 141,200,000
+| 449,240
+| 301,049,240
+|-
+| 14
+| [[Celia Cruz]]
+| [[File:2024 Celia Cruz Womens Quarter.jpg|frameless|150x150px]]
+| Cruz performing with a microphone, with her catchphrase {{lang|es|"¡AZÚCAR!"}} ("SUGAR!")<ref>{{Cite web |title=Celia Cruz Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/celia-cruz |access-date=October 24, 2023 |website=United States Mint |language=en-US}}</ref>
+| colspan="2" | [[Phebe Hemphill]]
+| August 12, 2024
+| 156,200,000
+| 149,600,000
+| 557,160
+| 306,357,160
+|-
+| 15
+| [[Zitkala-Sa|Zitkala-Ša]]
+| [[File:2024 Zitkala-Sa Womens Quarter.jpg|frameless|150x150px]]
+| Zitkala-Ša in traditional [[Yankton Sioux]] dress and holding a book. A stylized sun represents her ''[[Sun Dance Opera]]'', while a [[Northern cardinal|red cardinal]] symbolizes her name, which means "Red Bird." A Yankton Sioux-inspired diamond pattern sits underneath the sun.<ref>{{Cite web |title=Zitkala-Ša Quarter {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/coins/coin-medal-programs/american-women-quarters/zitkala-sa |access-date=October 24, 2023 |website=United States Mint |language=en-US}}</ref>
+| Renata Gordon
+| [[Don Everhart]]
+| October 21, 2024
+| 170,200,000
+| 152,600,000
+| 430,280
+| 323,230,280
+|-
+| rowspan=5 bgcolor="#4db885"|2025<ref name="2025designs" />
+| 16
+| [[Ida B. Wells]]
+| [[File:Ida B Wells quarter.webp|frameless|150x150px]]
+| On the bottom, Ida B. Wells' most notable occupations ("Journalist", "Suffragist", and "Civil Rights Activist") are listed.<ref>{{Cite web |title=American Women Quarters 2025 Rolls and Bags - Ida B. Wells {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/american-women-quarters-2025-rolls-and-bags-ida-b-wells-MASTER_AWQIW.html |access-date=April 13, 2025 |website=United States Mint |language=en-US}}</ref>
+| [[Phebe Hemphill]]
+| Elana Hagier
+| February 4, 2025
+| 143,200,000
+| 166,200,000
+| 391,280
+| 309,791,280
+|-
+| 17
+| [[Juliette Gordon Low]]
+| [[File:Juliette Gordon Low quarter.webp|frameless|150x150px]]
+| Juliette Gordon Low next to the original Girl Scout trefoil, which she designed and patented.<ref>{{Cite web |title=American Women Quarters 2025 Rolls and Bags - Juliette Gordon Low {{!}} American Women Quarters {{!}} U.S. Mint |url=https://www.usmint.gov/american-women-quarters-2025-rolls-and-bags-juliette-gordon-low-MASTER_AWQJL.html |access-date=April 13, 2025 |website=United States Mint |language=en-US}}</ref>
+| Eric David Custer
+| [[Thomas Hipschen]]
+| March 24, 2025
+| 130,200,000
+| 200,400,000
+| 434,600
+| 331,034,600
+|-
+| 18
+| [[Vera Rubin|Dr. Vera Rubin]]
+| [[File:Design of U S quarter featuring Dr Vera C Rubin (rubin-2025-americanwomen-quarterscoin-verarubin).jpg|frameless|150x150px]]
+| Profile of Dr. Vera Rubin with dark matter background.
+| John P. McGraw
+| [[Christina Hess]]
+| June 3, 2025
+| 63,000,000
+| 55,800,000
+| 383,480
+| 119,183,480
+|-
+| 19
+| [[Stacey Milbern]]
+| [[File:Stacey Milbern quarter.webp|frameless|150x150px]]
+| Stacey Milbern in a wheelchair; below her name is the legend "Disability Justice".
+| Craig Campbell
+| Elena Hagler
+| August 12, 2025
+| 59,400,000
+| 94,800,000
+| 361,360
+| 154,561,360
+|-
+| 20
+| [[Althea Gibson]]
+| [[File:Althea Gibson quarter.webp|frameless|150x150px]]
+| Althea Gibson holding a tennis racket and surrounded by the legend "Trailblazing Champion".
+| Renata Gordon
+| [[Don Everhart]]
+| October 21, 2025
+| 31,600,000
+| 35,200,000
+| 326,560
+| 67,126,560
+|}
+
+== See also ==
+* [[50 State quarters]]
+* [[America the Beautiful quarters]]
+* [[District of Columbia and United States Territories quarters]]
+* [[Susan B. Anthony dollar]]
+* [[Sacagawea dollar]]
+* [[Presidential dollar coins]]
+* [[American Innovation dollars]]
+* [[Kennedy Half Dollar]]
+* [[Roosevelt Dime]]
+* [[Westward Journey nickel series]]
+* [[United States Bicentennial coinage]]
+
+==References==
+{{reflist}}
+
+== External links ==
+* [https://www.usmint.gov/coins/coin-programs/american-women-quarters-program/ United States Mint]
+* [https://www.womenshistory.org/american-women-quarters-program National Women's History Museum]
+* [https://womenshistory.si.edu/american-women-quarters-program Smithsonian American Women's History Museum]
+* {{USPL|116|330}}
+
+{{s-start}}
+{{succession box
+| title = American Women quarters <br>(2022–2025)
+| after = [[United States Semiquincentennial coinage]]
+| before = [[America the Beautiful quarters]]
+| years =
+}}
+{{s-end}}
+
+{{United States circulating coinage}}
+{{US commemorative coinage (2020s)}}
+{{Coinage (United States)|state=expanded}}
+{{George Washington}}
+{{Portal bar|Money|Numismatics|United States}}
+
+[[Category:Twenty-five-cent coins of the United States]]
+[[Category:Circulating commemorative coins of the United States]]
+[[Category:History of women in the United States]]
+[[Category:George Washington on United States currency]]
+[[Category:Maya Angelou]]
+[[Category:Sally Ride]]
+[[Category:Currencies introduced in 2022]]

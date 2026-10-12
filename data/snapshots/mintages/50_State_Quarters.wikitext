@@ -1,0 +1,812 @@
+{{Short description|Series of US coins}}
+{{use mdy dates|date=March 2024}}
+{{Use American English|date = March 2019}}
+{{Infobox Coin
+|Country=United States
+|Denomination=50 State quarter
+|Value=0.25 [[United States dollar|US Dollar]]
+|Mass=6.25 (Ag); 5.67 (Cu-Ni)
+|Diameter_inch=0.955
+|Diameter=24.26
+|Thickness_inch=0.069
+|Thickness=1.75
+|Edge=119 [[reeding|reeds]]
+|Composition=91.67% [[Copper|Cu]] 8.33% [[Nickel|Ni]] (standard)<br />90% [[Silver|Ag]] 10% [[Copper|Cu]] (proof only)
+|Years of Minting=1999–2008
+|Catalog Number=
+|Obverse=File:2006 Quarter Proof.png
+|Obverse Design=[[George Washington]]
+|Obverse Designer=[[John Flanagan (sculptor)|John Flanagan]] (1932 version) from a 1786 bust by [[Jean-Antoine Houdon|Houdon]] / William Cousin (modification to Flanagan's design)
+|Obverse Design Date=1999
+|Reverse=File:2008 HI Proof.png
+|Reverse Design=various; five designs per year (latest shown)
+|Reverse Designer=various
+|Reverse Design Date=1999–2008
+|Mint marks=[[Philadelphia Mint|P]], [[Denver Mint|D]], [[San Francisco Mint|S]] (proof only)
+}}
+The '''50 State quarters''' (authorized by {{USStatute|105|124|111|2534|1997|12|01}}) were a series of [[United States commemorative coin|circulating commemorative]] [[Quarter (United States coin)|quarters]] released by the [[United States Mint]]. Minted from 1999 through 2008, they featured unique designs for each of the 50 [[US state]]s on the [[obverse and reverse|reverse]].
+
+The 50 State Quarters Program was started to support a new generation of [[coin collectors]],<ref name=Muoio>Muoio, Anna. (1999-11-30) [http://www.fastcompany.com/38508/mint-condition "Mint Condition"] {{Webarchive|url=https://web.archive.org/web/20170525072905/https://www.fastcompany.com/38508/mint-condition |date=May 25, 2017 }}, ''Fast Company''. Retrieved 2011-01-16.</ref><ref>David L. Ganz, ''The Official Guidebook to America's State Quarters'', Random House, 2000.</ref> and it became the most successful [[Numismatics|numismatic]] program in US history, with roughly half of the [[US population]] collecting the coins, either in a casual manner or as a serious pursuit.<ref name="nyt nov07">{{cite news|last=Healey |first=Matthew |title=State Quarters Near End of Popular Run |work=The New York Times |date=2007-11-28 |url=https://www.nytimes.com/2007/11/28/us/28coins.html?em&ex=1196398800&en=5053b00525f22372&ei=5087%0A |access-date=2007-11-28 |archive-url=https://web.archive.org/web/20131223215649/http://www.nytimes.com/2007/11/28/us/28coins.html?em&ex=1196398800&en=5053b00525f22372&ei=5087 |archive-date=23 December 2013 |url-status=live }}</ref> The [[US Federal government|US federal government]] so far has made additional profits of $3 billion from collectors [[seigniorage|taking the coins out of circulation]].<ref name="StateQuarters">{{cite web|title=50 State Quarters Report: 10 Years of Honoring Our Nation's History and Heritage |url=http://www.usmint.gov/downloads/mint_programs/50sqReport.pdf |publisher=US Mint |access-date=24 January 2014 |url-status=dead |archive-url=https://web.archive.org/web/20160310125307/http://www.usmint.gov/downloads/mint_programs/50sqReport.pdf |archive-date=10 March 2016 }}</ref>
+
+In 2009, the US Mint began issuing quarters under the 2009 [[District of Columbia and United States Territories Quarters|District of Columbia and US Territories Program]]. The Territories Quarter Program was authorized by the passage of a newer legislative act, {{USBill|110|HR|2764}}. This program features the [[District of Columbia]], [[Puerto Rico]], [[American Samoa]], [[Guam]], the [[United States Virgin Islands]], and the [[Northern Mariana Islands]].<ref>Noles, Jim.  ''A Pocketful of History: Four Hundred Years of America&nbsp;– One State Quarter at a Time'' (Boston: Da Capo Press, 2009).</ref>
+
+== Origins ==
+The 50 State Quarters program was initially inspired by a 1992 [[Royal Canadian Mint]] program, "[[Quarter (Canadian commemorative coin)#1992: 125th anniversary of Confederation|Canada 125]]", marking the 125th anniversary of the country's [[Canadian Confederation|Confederation]] with a series of commemorative [[Quarter (Canadian coin)|25-cent pieces]] representing each of its 12 (at the time) provinces and territories. The Canada 125 program sparked a revival of interest in coin collecting among Canadians, which led American numismatists to advocate for the United States Mint to create a similar series of coins representing U.S. states.<ref>Noles, Jim. [https://books.google.com/books?id=DPpEaOLoIdMC&pg=PT9 A Pocketful of History: Four Hundred Years of America--One State Quarter at a Time], Hachette Books, March 25, 2009, p. 9.</ref><ref>Robitaille, Jesse. [https://canadiancoinnews.com/1992-canada-125-series-spurred-todays-collectors/ "1992 'Canada 125' series spurred today's collectors"], Canadian Coin News, November 2, 2021.</ref>
+
+In 1992, Congress passed the 1996 Atlanta Centennial Olympic Games Commemorative Coin Act. In addition to authorizing a series of commemorative coins marking the [[1996 Summer Olympics]], the law also established the [[Citizens Commemorative Coin Advisory Committee]] (CCCAC) to consider ideas for future releases.<ref>[https://www.congress.gov/bill/102nd-congress/house-bill/3654 H.R.3654 - 1996 Atlanta Centennial Olympic Games Commemorative Coin Act], congress.gov, retrieved May 22, 2023.</ref> After [[Treasury Secretary]] [[Lloyd Bentsen]] appointed the committee in December 1993, several of its members, led by David Ganz, urged the committee to endorse a state quarters program. Initially, Ganz found support from only Charles Atherton, from the Federal Commission on Fine Arts, and Dan Hoffman, a young numismatist from [[South Carolina]] who also served on the CCCAC. However, by 1995, the CCCAC finally endorsed the idea. The committee then sought the support of Representative [[Michael Castle]] ([[Republican Party (United States)|R]]-[[Delaware]]), chairman of the [[House Banking Committee|House Banking subcommittee]] with jurisdiction over the [[US coinage|nation's coinage]]. Castle's initial caution was resolved when Diehl suggested the coins be issued in the order the states entered the Union or [[Ratification of the United States Constitution by Rhode Island|ratified the Constitution]]. [[Delaware]], Castle's home state, was the first state to ratify the Constitution, and would thus get to be the first state to have its quarter released. Castle subsequently held hearings and filed legislation to authorize the program.<ref name=hearing>Hearing on the US Mint's Commemorative Coin Program before the Subcomm. On Domestic & International Monetary Policy of the House Committee on Banking & Financial Services, 104th. Cong., 1st session (Serial 104–25)(July 12, 1995)</ref>
+
+Despite the support of the director of the mint and the Treasury Secretary-appointed CCCAC, the Treasury Department opposed the 50 States Quarters Program, as commemorative coinage had come to be identified with abuses and excesses.<ref name="Travers2008">{{cite book|author=Scott A. Travers|author-link=Scott A. Travers|title=The Insider's Guide to Coins Values 2009|url=https://archive.org/details/isbn_9780440241683|url-access=registration|date=25 November 2008|publisher=Random House Publishing Group|isbn=978-0-440-24168-3|pages=[https://archive.org/details/isbn_9780440241683/page/44 44]–}}</ref> The Mint's [[economic model]]s estimated the program would earn the government between $2.6 billion and $5.1 billion in additional [[seignorage]] and $110 million in additional numismatic profits.  Diehl and Castle used these profit projections to urge the Treasury's support, but Treasury officials found the projections to lack credibility (at the program's conclusion, the Mint estimated the program had earned $3 billion in additional seignorage and $136.2 million in additional numismatic profits).<ref name="StateQuarters" />
+
+Diehl worked with Castle behind the scenes to move legislation forward despite the Treasury's opposition to the program.<ref name=Muoio/><ref>Hildebrand, Carol. (1999-04-24) [http://www.cio.com.au/article/106677/new_realm_coin/ "The New Realm of the Coin"] {{Webarchive|url=https://web.archive.org/web/20161019215655/http://www.cio.com.au/article/106677/new_realm_coin/ |date=October 19, 2016 }}, CIO magazine. Retrieved 2011-01-16</ref> However, the Treasury suggested to Castle that the department should conduct a study to determine the feasibility of the program. With Diehl's advice, Castle accepted the Treasury's offer, and the agreement was codified in the [[United States Commemorative Coin Act of 1996]].<ref>{{cite news|title=50-State Quarters: Credit Where Credit Is Due|url=http://www.scvhistory.com/scvhistory/signal/coins/worden-coinage1205a.htm|work=COINage magazine|issue=December 2005}}</ref><ref>{{cite web|url=http://www.gpo.gov/fdsys/pkg/PLAW-104publ329/pdf/PLAW-104publ329.pdf |title=Public Law 104–329, 104th Congress |access-date=2013-08-02}}</ref> The act also authorized the Secretary to proceed with the 50 States Quarters Program without further congressional action if the results of the feasibility study were favorable.
+
+The Treasury Department engaged the consulting firm [[Coopers and Lybrand]] to conduct the study in 1997, which confirmed the Mint's demand, seignorage, and numismatic profit projections for the program.<ref name="Travers2008"/> Among other conclusions, the study found that 98 million Americans were likely to save one or more full sets of the quarters (at the program's conclusion, the Mint estimated that 147 million Americans collected the 50 state quarters). Nevertheless, the Treasury Department continued to oppose the program and declined to proceed with it without a congressional mandate to do so.<ref name="StateQuarters" />
+
+In 1997, Congress issued that mandate in the form of {{USBill|105|S|1228}}, the 50 States Commemorative Coin Program Act, which was signed into law by [[President of the United States|President]] [[Bill Clinton]] on December 1, 1997.
+
+== 50 State Quarters Program ==
+The 50 State quarters were released by the [[United States Mint]] every ten weeks, or five each year. They were released in the same order that the [[List of U.S. states by date of admission to the Union|states ratified the Constitution or were admitted to the Union]].  Each quarter's [[Reverse (coin)|reverse]] commemorated one of the 50 states with a design emblematic of its unique history, traditions, and [[List of US state symbols|symbols]]. Certain design elements, such as [[Flags of the U.S. states and territories|state flags]], images of living persons, and head-and-shoulder images of deceased persons were prohibited.
+
+The authorizing legislation and Mint procedures gave each state a substantial role and considerable discretion in determining the design that would represent their state. The majority of states followed a process by which the [[Governor (United States)|governor]] solicited the state's citizens to submit design concepts and appointed an advisory group to oversee the process. Governors submitted three to five finalist design concepts to the Secretary of the Treasury for approval. Approved designs were returned to the states for selection of a final design.
+
+States usually employed one of two approaches in making this selection. In 33 states, the governor selected the final recommended design, often based on the recommendations of advisory groups and citizens. In the other 17 states, citizens selected the final design through online, telephone, mail, or other public votes. US Mint engravers applied all final design concepts approved by the Treasury Secretary. The media and public attention surrounding this process and the release of each state's quarter was intense and produced significant publicity for the program.<ref name="StateQuarters" /><ref name="faq">{{cite web|title=The United States Mint 50 State Quarters Program&nbsp;– Frequently Asked Questions |url=http://www.usmint.gov/mint_programs/50sq_program/index.cfm?action=faq_50sq#anchor246828 |publisher=[[United States Mint]] |access-date=2007-11-29 |archive-url=https://web.archive.org/web/20071216114150/http://www.usmint.gov/mint_programs/50sq_program/index.cfm?action=faq_50sq |archive-date=16 December 2007 |url-status=live }}</ref>
+
+In several cases, the process of creating and finalizing a design caused controversy in the represented state, with people and groups expressing disappointment that the design did not properly reflect their state. There were disputes over which state could lay claim to certain design elements that appeared in other states, such as an ear of corn or the [[Rocky Mountains]]. The Mint's conversion of each state's proposal into the final design that was used on the quarter also drew criticism for being overly simplified or poorly rendered.<ref name=barnes/> Paul Jackson, whose design was chosen for the [[Missouri]] quarter and then pared down by the Mint, led a series of protests which included placing stickers with Jackson's original design on the reverses of 250,000 quarters and distributing them nationwide.<ref>[https://www.chicagotribune.com/2002/09/10/missouri-artist-flips-over-changes-in-state-quarter/ "Missouri artist flips over changes in state quarter"], ''[[The Washington Post]]'', via the ''[[Chicago Tribune]]'', September 10, 2002, Web. Retrieved October 3, 2024.</ref><ref>Welton, Scott. [https://standard-democrat.com/story/1333240.html "Quarter artist makes a stop at the Depot"], ''[[Sikeston Standard-Democrat]]'', November 30, 2003, Web. Retrieved October 3, 2024.</ref> In response to these criticisms, the Mint established the [[Artistic Infusion Program]] in 2003, hiring more professional artists and engravers to create better-looking designs for all commemorative coins.<ref name=barnes>Barnes, Brooks. [https://www.tampabay.com/archive/2004/01/04/mint-draws-complaints-from-many-quarters/ "Mint draws complaints from many quarters"], ''[[The Wall Street Journal]]'', via the ''[[Tampa Bay Times]]'', January 4, 2004, Web. Retrieved October 3, 2024.</ref>
+
+The 50 State Quarters Program was the most popular commemorative coin program in the [[United States history]]; the United States Mint has estimated that 147 million Americans have collected state quarters and 3.5 million participated in the selection of state quarter designs.<ref name="StateQuarters" />
+
+By the end of 2008, all of the original 50 States quarters had been minted and released. The official total, according to the US Mint, was 34,797,600,000 coins. The average [[50 State quarter mintage figures|mintage]] was 695,952,000 coins per state, but ranged from [[Virginia]]'s 1,594,616,000 to [[Oklahoma]]'s 416,600,000. Demand was stronger for quarters issued early in the program. This was due to [[Great Recession in the United States|weakening economic conditions]] in later years and the waning of the initial surge of [[Demand (economics)|demand]] when the program was launched. Another factor was the reassertion of the Treasury Department's opposition to the program. When the director's term ended in 2000, the Treasury proceeded to reduce and finally terminate the most effective elements of the Mint's promotional program despite the high return on investment they earned.{{citation needed|date=January 2013}}
+
+== Designs ==
+
+{| class="wikitable sortable"
+|- style="white-space: nowrap;"
+! rowspan="2" | Year
+! rowspan="2" | No.
+! rowspan="2" | State
+! rowspan="2" | Release date<br /><small>''(statehood date)''</small><ref>{{cite web|url=http://www.usmint.gov/mint_programs/50sq_program/index.cfm?flash=yes&action=Schedule |title=State Quarter Release Schedule |publisher=Usmint.gov |access-date=2013-08-02 |url-status=dead |archive-url=https://web.archive.org/web/20100201064318/http://www.usmint.gov/mint_Programs/50sq_program/index.cfm?flash=yes |archive-date=2010-02-01 }}</ref>
+! rowspan="2" class="unsortable" | Design
+! rowspan="2" class="unsortable" | Elements depicted
+! rowspan="2" | Engraver
+! colspan="3" | Mintage<ref name=":02">{{Cite web |title=State Quarter Mintage {{!}} State Quarter Guide |url=https://www.statequarterguide.com/mintages/ |access-date=2019-07-16 |language=en-US}}</ref><ref name=":12">{{Cite web |title=Proof State Quarters |url=https://www.statequarterguide.com/proof-state-quarters/ |access-date=2019-07-16 |language=en-US}}</ref>
+|-
+!Philadelphia
+!Denver
+!San Francisco
+|- style="text-align:center;"
+| rowspan="5" style="background:#FF0000;" | 1999
+| 1
+| [[Delaware]]
+| January 1, 1999<br /><small>''(December 7, 1787)''</small>
+| [[File:1999 DE Proof.png|150px|Delaware quarter]]
+| [[Caesar Rodney]] on horseback<br />Captions: "The First State", "Caesar Rodney"
+| William Cousins
+| 373,400,000
+| 401,424,000
+| 3,713,359 (proof)<br />804,565 (silver proof)
+|- style="text-align:center;"
+| 2
+| [[Pennsylvania]]
+| March 8, 1999<br /><small>''(December 12, 1787)''</small>
+| [[File:1999 PA Proof.png|150px|Pennsylvania quarter]]
+| [[Commonwealth (statue)|''Commonwealth'' statue]], state outline, [[keystone symbol]]<br />Caption: "Virtue, Liberty, Independence"
+| [[John Mercanti]]
+|349,000,000
+| 358,332,000
+|3,713,359 (proof)<br />804,565 (silver proof)
+|- style="text-align:center;"
+| 3
+| [[New Jersey]]
+| May 17, 1999<br /><small>''(December 18, 1787)''</small>
+| [[File:1999 NJ Proof.png|150px|New Jersey quarter]]
+| ''[[Washington Crossing the Delaware (1851 paintings)|Washington Crossing the Delaware]]'', which includes [[George Washington]] (standing) and [[James Monroe]] (holding the flag)<br />Caption: "Crossroads of the Revolution"
+| Alfred Maletsky
+|363,200,000
+| 299,028,000
+|3,713,359 (proof)<br />804,565 (silver proof)
+|- style="text-align:center;"
+| 4
+| [[Georgia (U.S. state)|Georgia]]
+| July 19, 1999<br /><small>''(January 2, 1788)''</small>
+| [[File:1999 GA Proof.png|150px|Georgia quarter]]
+| [[Peach]], [[Quercus virginiana|live oak]] (state tree) sprigs, state outline<br />Banner with text: "Wisdom, Justice, Moderation" (the state motto)
+| [[T. James Ferrell]]
+|451,188,000
+| 488,744,000
+|3,713,359 (proof)<br />804,565 (silver proof)
+|- style="text-align:center;"
+| 5
+| [[Connecticut]]
+| October 12, 1999<br /><small>''(January 9, 1788)''</small>
+| [[File:1999 CT Proof.png|150px|Connecticut quarter]]
+| [[Charter Oak]]<br />Caption: "The Charter Oak"
+| [[T. James Ferrell]]
+|688,744,000
+| 657,880,000
+|3,713,359 (proof)<br />804,565 (silver proof)
+|- style="text-align:center;"
+| rowspan="5" style="background:#FF9A00;" | 2000
+| 6
+| [[Massachusetts]]
+| January 3, 2000<br /><small>''(February 6, 1788)''</small>
+| [[File:2000 MA Proof.png|150px|Massachusetts quarter]]
+| ''[[The Minute Man]]'' statue, state outline<br />Caption: "The Bay State"
+| [[Thomas D. Rogers]]
+|628,600,000
+|  535,184,000
+|4,020,172 (proof)<br />965,421 (silver proof)
+|- style="text-align:center;"
+| 7
+| [[Maryland]]
+| March 13, 2000<br /><small>''(April 28, 1788)''</small>
+| [[File:2000 MD Proof.png|150px|Maryland quarter]]
+| Dome of the [[Maryland State House]], [[Quercus alba|white oak]] (state tree) clusters<br />Caption: "The Old Line State"
+| [[Thomas D. Rogers]]
+|678,200,000
+|  556,532,000
+|4,020,172 (proof)<br />965,421 (silver proof)
+|- style="text-align:center;"
+| 8
+| [[South Carolina]]
+| May 22, 2000<br /><small>''(May 23, 1788)''</small>
+| [[File:2000 SC Proof.png|150px|South Carolina quarter]]
+| [[Carolina wren]] (state bird), [[Gelsemium sempervirens|yellow jessamine]] (state flower), [[Sabal palmetto|cabbage palmetto]] (state tree), state outline<br />Caption: "The Palmetto State"
+| [[Thomas D. Rogers]]
+|373,400,000
+|  401,424,000
+|4,020,172 (proof)<br />965,421 (silver proof)
+|- style="text-align:center;"
+| 9
+| [[New Hampshire]]
+| August 7, 2000<br /><small>''(June 21, 1788)''</small>
+| [[File:2000 NH Proof.png|150px|New Hampshire quarter]]
+| [[Old Man of the Mountain]], nine stars (representing New Hampshire as the 9th state to ratify the U.S. Constitution) <br />Captions: "Old Man of the Mountain", "[[Live Free or Die]]"
+| William Cousins
+|673,040,000
+|  495,976,000
+|4,020,172 (proof)<br />965,421 (silver proof)
+|- style="text-align:center;"
+| 10
+| [[Virginia]]
+| October 16, 2000<br /><small>''(June 25, 1788)''</small>
+| [[File:2000 VA Proof.png|150px|Virginia quarter]]
+|  Ships ''[[Susan Constant]]'', ''[[Godspeed (ship)|Godspeed]]'', ''[[Discovery (1602 ship)|Discovery]]''<br /> Captions: [[Jamestown 2007|"Jamestown, 1607–2007", "Quadricentennial"]]
+| Edgar Z. Steever
+|943,000,000
+|  651,616,000
+|4,020,172 (proof)<br />965,421 (silver proof)
+|- style="text-align:center;"
+| rowspan="5" style="background:#FAF800;" | 2001
+| 11
+| [[New York (state)|New York]]
+| January 2, 2001<br /><small>''(July 26, 1788)''</small>
+| [[File:2001 NY Proof.png|150px|New York quarter]]
+| [[Statue of Liberty]], 11 stars (representing New York as the 11th state to ratify the U.S. Constitution), state outline with line tracing [[Hudson River]] and [[Erie Canal]]<br />Caption: "Gateway to Freedom"
+| Alfred Maletsky
+|619,640,000
+|  655,400,000
+|3,094,140 (proof)<br />889,697 (silver proof)
+|- style="text-align:center;"
+| 12
+| [[North Carolina]]
+| March 12, 2001<br /><small>''(November 21, 1789)''</small>
+| [[File:2001 NC Proof.png|150px|North Carolina quarter]]
+| ''[[Wright Flyer]]'', [[John T. Daniels]]'s iconic photo of the [[Wright brothers]]<br />Caption: "First Flight"
+| [[John Mercanti]]
+|627,600,000
+|  427,876,000
+|3,094,140 (proof)<br />889,697 (silver proof)
+|- style="text-align:center;"
+| 13
+| [[Rhode Island]]
+| May 21, 2001<br /><small>''(May 29, 1790)''</small>
+| [[File:2001 RI Proof.png|150px|Rhode Island quarter]]
+| [[America's Cup]] [[yacht]] ''[[Reliance (yacht)|Reliance]]'' on [[Narragansett Bay]], [[Claiborne Pell Newport Bridge]]<br />Caption: "The Ocean State"
+| [[Thomas D. Rogers]]
+|423,000,000
+| 447,100,000
+|3,094,140 (proof)<br />889,697 (silver proof)
+|- style="text-align:center;"
+| 14
+| [[Vermont]]
+| August 6, 2001<br /><small>''(March 4, 1791)''</small>
+| [[File:2001 VT Proof.png|150px|Vermont quarter]]
+| [[Acer saccharum|Maple]] trees with sap buckets, [[Camel's Hump (Vermont)|Camel's Hump]] Mountain<br />Caption: "Freedom and Unity"
+| [[T. James Ferrell]]
+|423,400,000
+| 459,404,000
+|3,094,140 (proof)<br />889,697 (silver proof)
+|- style="text-align:center;"
+| 15
+| [[Kentucky]]
+| October 15, 2001<br /><small>''(June 1, 1792)''</small>
+| [[File:2001 KY Proof.png|150px|Kentucky quarter]]
+| [[Thoroughbred|Thoroughbred racehorse]] behind fence, [[Bardstown mansion]], [[Federal Hill (Kentucky)|Federal Hill]]<br /> Caption: "[[My Old Kentucky Home]]"
+| [[T. James Ferrell]]
+|353,000,000
+| 370,564,000
+|3,094,140 (proof)<br />889,697 (silver proof)
+|- style="text-align:center;"
+| rowspan="5" style="background:#00FF8C;" | 2002
+| 16
+| [[Tennessee]]
+| January 2, 2002<br /><small>''(June 1, 1796)''</small>
+| [[File:2002 TN Proof.png|150px|Tennessee quarter]]
+| [[Fiddle]], [[trumpet]], [[guitar]], musical score, [[Grand Divisions of Tennessee|three stars]]<br />Banner with text: "Musical Heritage"
+| [[Donna Weaver]]
+|361,600,000
+| 286,468,000
+|3,084,245 (proof)<br />892,229 (silver proof)
+|- style="text-align:center;"
+| 17
+| [[Ohio]]
+| March 11, 2002<br /><small>''(March 1, 1803)''</small>
+| [[File:2002 OH Proof.png|150px|Ohio quarter]]
+| [[Wright Flyer III]] (built by the [[Wright Brothers]] who were from [[Dayton, Ohio|Dayton]]); [[astronaut]]; state outline<br />Caption: "Birthplace of Aviation Pioneers"
+| [[Donna Weaver]]
+|217,200,000
+| 414,832,000
+|3,084,245 (proof)<br />892,229 (silver proof)
+|- style="text-align:center;"
+| 18
+| [[Louisiana]]
+| May 20, 2002<br /><small>''(April 30, 1812)''</small>
+| [[File:2002 LA Proof.png|150px|Louisiana quarter]]
+| [[Brown pelican]] (state bird); trumpet with musical notes, outline of [[Louisiana Purchase]] on map of US<br />Caption: "Louisiana Purchase"
+| [[John Mercanti]]
+|362,000,000
+| 402,204,000
+|3,084,245 (proof)<br />892,229 (silver proof)
+|- style="text-align:center;"
+| 19
+| [[Indiana]]
+| August 2, 2002<br /><small>''(December 11, 1816)''</small>
+| [[File:2002 IN Proof.png|150px|Indiana quarter]]
+| [[Indy Racing League|IndyCar]], state outline, 19 stars (representing Indiana as the 19th state to join the Union) <br />Caption: "Crossroads of America"
+| [[Donna Weaver]]
+|362,600,000
+| 327,200,000
+|3,084,245 (proof)<br />892,229 (silver proof)
+|- style="text-align:center;"
+| 20
+| [[Mississippi]]
+| October 15, 2002<br /><small>''(December 10, 1817)''</small>
+| [[File:2002 MS Proof.png|150px|Mississippi quarter]]
+| Two [[magnolia]] blossoms (state flower)<br />Caption: "The Magnolia State"
+| [[Donna Weaver]]
+|290,000,000
+| 289,600,000
+|3,084,245 (proof)<br />892,229 (silver proof)
+|- style="text-align:center;"
+| rowspan="5" style="background:#51D000;" | 2003
+| 21
+| [[Illinois]]
+| January 2, 2003<br /><small>''(December 3, 1818)''</small>
+| [[File:2003 IL Proof.png|150px|Illinois quarter]]
+| Young [[Abraham Lincoln]]; farm scene; [[Chicago]] skyline; state outline; 21 stars, 11 on left edge and 10 on right<br />Captions: "Land of Lincoln;" "21st state/century"
+| [[Donna Weaver]]
+|225,800,000
+| 237,400,000
+|3,408,516 (proof)<br />1,125,755 (silver proof)
+|- style="text-align:center;"
+| 22
+| [[Alabama]]
+| March 17, 2003<br /><small>''(December 14, 1819)''</small>
+| [[File:2003 AL Proof.png|150px|Alabama quarter]]
+| [[Helen Keller]], seated, [[longleaf pine]] (state tree) branch, [[magnolia]] blossoms<br />Banner with text: "Spirit of Courage"<br />Caption: "Helen Keller" in standard print and [[Braille]]
+| Norman E. Nemeth
+|225,000,000
+| 232,400,000
+|3,408,516 (proof)<br />1,125,755 (silver proof)
+|- style="text-align:center;"
+| 23
+| [[Maine]]
+| June 2, 2003<br /><small>''(March 15, 1820)''</small>
+| [[File:2003 ME Proof.png|150px|Maine quarter]]
+| [[Pemaquid Point Light|Pemaquid Point Lighthouse]]; the [[schooner]] ''[[Victory Chimes (schooner)|Victory Chimes]]''<ref>{{cite web|url=http://www.nps.gov/history/maritime/nhl/victory.htm |archive-url=https://web.archive.org/web/20071018125531/http://www.nps.gov/history/maritime/nhl/victory.htm |url-status=dead |archive-date=October 18, 2007 |title=Victory Chimes National Historic Landmark Nomination |publisher=Nps.gov |access-date=2013-08-02}}</ref> at sea
+| [[Donna Weaver]]
+|217,400,000
+| 231,400,000
+|3,408,516 (proof)<br />1,125,755 (silver proof)
+|- style="text-align:center;"
+| 24
+| [[Missouri]]
+| August 4, 2003<br /><small>''(August 10, 1821)''</small>
+| [[File:2003 MO Proof.png|150px|Missouri quarter]]
+| [[Jefferson National Expansion Memorial|Gateway Arch]], [[Lewis and Clark]] and [[York (explorer)|York]]<ref>{{cite web|first1=Charles |last1=Morgan |first2=Hubert |last2=Walker |url=https://coinweek.com/coins/commemoratives/african-americans-on-us-coins-circulating-coins-part-3/ |title=African-Americans on US Coins: Circulating Coins (Part 3) |publisher=CoinWeek |date=January 22, 2016 |access-date=2019-10-06}}</ref> returning down [[Missouri River]]<br />Caption: "[[Corps of Discovery]] 1804–2004"
+| Alfred Maletsky
+|225,000,000
+| 228,200,000
+|3,408,516 (proof)<br />1,125,755 (silver proof)
+|- style="text-align:center;"
+| 25
+| [[Arkansas]]
+| October 20, 2003<br /><small>''(June 15, 1836)''</small>
+| [[File:2003 AR Proof.png|150px|Arkansas quarter]]
+| [[Diamond]] (state gem), [[rice]] stalks, [[mallard]] flying above a lake
+|  [[John Mercanti]]
+|228,000,000
+| 229,800,000
+|3,408,516 (proof)<br />1,125,755 (silver proof)
+|- style="text-align:center;"
+| rowspan="5" style="background:#51ACFF;" | 2004
+| 26
+| [[Michigan]]
+| January 26, 2004<br /><small>''(January 26, 1837)''</small>
+| [[File:2004 MI Proof.png|150px|Michigan quarter]]
+| State outline, outline of [[Great Lakes]] system<br />Caption: "Great Lakes State"
+| [[Donna Weaver]]
+|233,800,000
+| 225,800,000
+|2,740,684 (proof)<br />1,769,786 (silver proof)
+|- style="text-align:center;"
+| 27
+| [[Florida]]
+| March 29, 2004<br /><small>''(March 3, 1845)''</small>
+| [[File:2004 FL Proof.png|150px|Florida quarter]]
+| Spanish [[galleon]], [[Sabal palmetto]] (state tree), [[Space Shuttle]]<br />Caption: "Gateway to Discovery"
+| [[T. James Ferrell]]
+|240,200,000
+| 241,600,000
+|2,740,684 (proof)<br />1,769,786 (silver proof)
+|- style="text-align:center;"
+| 28
+| [[Texas]]
+| June 1, 2004<br /><small>''(December 29, 1845)''</small>
+| [[File:2004 TX Proof.png|150px|Texas quarter]]
+| State outline, star, [[lasso|lariat]]<br />Caption: "The Lone Star State"
+| Norman E. Nemeth
+|278,800,000
+| 263,000,000
+|2,740,684 (proof)<br />1,769,786 (silver proof)
+|- style="text-align:center;"
+| 29
+| [[Iowa]]
+| August 30, 2004<br /><small>''(December 28, 1846)''</small>
+| [[File:2004 IA Proof.png|150px|Iowa quarter]]
+| Schoolhouse, teacher and students planting a tree; based on the [[Grant Wood]] painting ''Arbor Day''<ref>{{cite encyclopedia|first=Joni L.|last=Kinsey |title=Wood, Grant Devolson|url=http://uipress.lib.uiowa.edu/bdi/DetailsPage.aspx?id=416 |encyclopedia=The Biographical Dictionary of Iowa |year=2009 |publisher=The [[University of Iowa Press]]|access-date=January 10, 2019}}</ref><ref>{{cite news |first=Ken|last=Fuson|title = Mint set to strike first Iowa quarters |date = July 11, 2004 |work = [[The Des Moines Register]] |page = 1B<!-- a guess --> |via = [[Ancestry.com|Newspapers.com]]<!-- https://www.newspapers.com/newspage/131310444/ --> }}</ref><br />Captions: "Foundation in Education", "Grant Wood"
+| [[John Mercanti]]
+|213,800,000
+|  251,400,000
+|2,740,684 (proof)<br />1,769,786 (silver proof)
+|- style="text-align:center;"
+| 30
+| [[Wisconsin]]
+| October 25, 2004<br /><small>''(May 29, 1848)''</small>
+| [[File:2004 WI Proof.png|150px|Wisconsin quarter]]
+| Head of a [[cattle|cow]], round of [[cheese]] and ear of [[corn]] (state grain).<br />Banner with text: "Forward"
+| Alfred Maletsky
+|226,400,000
+|  226,800,000
+|2,740,684 (proof)<br />1,769,786 (silver proof)
+|- style="text-align:center;"
+| rowspan="5" style="background:#3B35FF;" | 2005
+| 31
+| [[California]]
+| January 31, 2005<br /><small>''(September 9, 1850)''</small>
+| [[File:2005 CA Proof.png|150px|California quarter]]
+| [[John Muir]], [[California condor]], [[Half Dome]] <br />Captions: "John Muir," "[[Yosemite Valley]]"
+| Don Everhart
+|257,200,000
+| 263,200,000
+|3,262,960 (proof)<br />1,678,649 (silver proof)
+|- style="text-align:center;"
+| 32
+| [[Minnesota]]
+| April 4, 2005<br /><small>''(May 11, 1858)''</small>
+| [[File:2005 MN Proof.png|150px|Minnesota quarter]]
+| [[Great northern diver|Common loon]] (state bird), [[fishing]], state outline<br />Caption: "Land of 10,000 Lakes"
+| Charles L. Vickers
+|239,600,000
+| 248,400,000
+|3,262,960 (proof)<br />1,678,649 (silver proof)
+|- style="text-align:center;"
+| 33
+| [[Oregon]]
+| June 6, 2005<br /><small>''(February 14, 1859)''</small>
+| [[File:2005 OR Proof.png|150px|Oregon quarter]]
+| &nbsp;[[Crater Lake National Park]]<br />Caption: "[[Crater Lake]]"
+| [[Donna Weaver]]
+|316,200,000
+| 404,000,000
+|3,262,960 (proof)<br />1,678,649 (silver proof)
+|- style="text-align:center;"
+| 34
+| [[Kansas]]
+| August 29, 2005<br /><small>''(January 29, 1861)''</small>
+| [[File:2005 KS Proof.png|150px|Kansas quarter]]
+| [[American bison]] (state mammal), [[sunflower]]s (state flower)
+| Norman E. Nemeth
+|263,400,000
+|  300,000,000
+|3,262,960 (proof)<br />1,678,649 (silver proof)
+|- style="text-align:center;"
+| 35
+| [[West Virginia]]
+| October 14, 2005<br /><small>''(June 20, 1863)''</small>
+| [[File:2005 WV Proof.png|150px|West Virginia quarter]]
+| [[New River Gorge Bridge]]<br />Caption: "New River Gorge"
+| [[John Mercanti]]
+|365,400,000
+| 356,200,000
+|3,262,960 (proof)<br />1,678,649 (silver proof)
+|- style="text-align:center;"
+| rowspan="5" style="background:#CA35FF;" | 2006
+| 36
+| [[Nevada]]
+| January 31, 2006<br /><small>''(October 31, 1864)''</small>
+| [[File:2006 NV Proof.png|150px|Nevada quarter]]
+| [[Mustang#Today|Mustang]]s, mountains, rising sun, [[Artemisia tridentata|sagebrush]] (state flower) <br />Banner with text: "The Silver State"
+| Don Everhart
+|277,000,000
+| 312,800,000
+|2,882,428 (proof)<br />1,585,008 (silver proof)
+|- style="text-align:center;"
+| 37
+| [[Nebraska]]
+| April 3, 2006<br /><small>''(March 1, 1867)''</small>
+| [[File:2006 NE Proof.jpg|150px|Nebraska quarter]]
+| [[Chimney Rock National Historic Site]], [[Conestoga wagon]]<br />Caption: "Chimney Rock"
+| Charles L. Vickers
+|318,000,000
+| 276,400,000
+|2,882,428 (proof)<br />1,585,008 (silver proof)
+|- style="text-align:center;"
+| 38
+| [[Colorado]]
+| June 14, 2006<br /><small>''(August 1, 1876)''</small>
+| [[File:2006 CO Proof.jpg|150px|Colorado quarter]]
+| [[Longs Peak]]<br />Banner with text: "Colorful Colorado"
+| Norman E. Nemeth
+|274,800,000
+| 294,200,000
+|2,882,428 (proof)<br />1,585,008 (silver proof)
+|- style="text-align:center;"
+| 39
+| [[North Dakota]]
+| August 28, 2006<br /><small>''(November 2, 1889)''</small>
+|[[File:2006 ND Proof.png|150px|North Dakota quarter]]
+| [[American bison]], [[badlands]]
+| [[Donna Weaver]]
+|305,800,000
+| 359,000,000
+|2,882,428 (proof)<br />1,585,008 (silver proof)
+|- style="text-align:center;"
+| 40
+| [[South Dakota]]
+| November 6, 2006<br /><small>''(November 2, 1889)''</small>
+| [[File:2006-50-state-quarters-coin-south-dakota-proof-reverse.jpg|150px|South Dakota quarter]]
+| [[Mount Rushmore]], [[Common pheasant|ring-necked pheasant]] (state bird), [[wheat]] (state grass)
+| [[John Mercanti]]
+|245,000,000
+| 265,800,000
+|2,882,428 (proof)<br />1,585,008 (silver proof)
+|- style="text-align:center;"
+| rowspan="5" style="background:#AB00AB;" | 2007
+| 41
+| [[Montana]]
+| January 29, 2007<br /><small>''(November 8, 1889)''</small>
+| [[File:2007 MT Proof.png|150px|Montana quarter]]
+| [[American bison]] skull in the center with mountains and the Missouri River in the background.<br />Caption: "Big Sky Country"
+| [[Don Everhart]]
+|257,000,000
+| 265,240,000
+|2,374,778 (proof)<br />1,313,481 (silver proof)
+|- style="text-align:center;"
+| 42
+| [[Washington (state)|Washington]]
+| April 2, 2007<br /><small>''(November 11, 1889)''</small>
+| [[File:2007 WA Proof.png|150px|Washington quarter]]
+| [[Salmon]] leaping in front of [[Mount Rainier]]<br />Caption: "The Evergreen State"
+| Charles L. Vickers
+|265,200,000
+| 280,000,000
+|2,374,778 (proof)<br />1,313,481 (silver proof)
+|- style="text-align:center;"
+| 43
+| [[Idaho]]
+| June 4, 2007<ref>{{cite web |url=http://coins.about.com/od/uscoins/a/idaho_quarter.htm |title=Idaho Quarter |publisher=Coins.about.com |date=2007-06-05 |access-date=2013-08-02 |archive-date=July 7, 2011 |archive-url=https://web.archive.org/web/20110707075132/http://coins.about.com/od/uscoins/a/idaho_quarter.htm |url-status=dead }}</ref><br /><small>''(July 3, 1890)''</small>
+| [[File:2007 ID Proof reverse.jpg|150px|Idaho quarter]]
+| [[Peregrine falcon]], state outline with star indicating location of state capital [[Boise, Idaho]]<br />Caption: "[[Esto perpetua|Esto Perpetua]]"
+| [[Don Everhart]]
+|294,600,000
+| 286,800,000
+|2,374,778 (proof)<br />1,313,481 (silver proof)
+|- style="text-align:center;"
+| 44
+| [[Wyoming]]
+| September 4, 2007<br /><small>''(July 10, 1890)''</small>
+| [[File:2007 WY Proof.png|150px|Wyoming quarter]]
+| [[Bucking Horse and Rider]]<br /> Caption: "The Equality State"
+| Norman E. Nemeth
+|243,600,000
+| 320,800,000
+|2,374,778 (proof)<br />1,313,481 (silver proof)
+|- style="text-align:center;"
+| 45
+| [[Utah]]
+| November 5, 2007<br /><small>''(January 4, 1896)''</small>
+| [[File:2007 UT Proof.png|150px|Utah quarter]]
+| [[Golden spike]], Locomotives ''[[Jupiter (locomotive)|Jupiter]]'', ''[[Union Pacific No. 119|No. 119]]'', and the completion of the [[First Transcontinental Railroad (North America)|Transcontinental Railroad]]<br />Caption: "Crossroads of the West"
+| [[Joseph Menna|Joseph F. Menna]]
+|255,000,000
+| 253,200,000
+|2,374,778 (proof)<br />1,313,481 (silver proof)
+|- style="text-align:center;"
+| rowspan="5" style="background:#FF0099;" | 2008
+| 46
+| [[Oklahoma]]
+| January 28, 2008<br /><small>''(November 16, 1907)''</small>
+| [[File:2008 OK Proof.png|150px|Oklahoma quarter]]
+| [[Scissor-tailed flycatcher]] (state bird), with [[Gaillardia pulchella|Indian blankets]] (state wildflower) in background
+| [[Phebe Hemphill]]
+|222,000,000
+| 194,600,000
+|2,078,112 (proof)<br />1,192,908 (silver proof)
+|- style="text-align:center;"
+| 47
+| [[New Mexico]]
+| April 7, 2008<br /><small>''(January 6, 1912)''</small>
+| [[File:2008 NM Proof.png|150px|New Mexico quarter]]
+| State outline with relief, [[Zia sun symbol]] from flag <br />Caption: "Land of Enchantment"
+| [[Don Everhart]]
+|244,200,000
+| 244,400,000
+|2,078,112 (proof)<br />1,192,908 (silver proof)
+|- style="text-align:center;"
+| 48
+| [[Arizona]]
+| June 2, 2008<br /><small>''(February 14, 1912)''</small>
+| [[File:2008 AZ Proof.png|150px|Arizona quarter]]
+| [[Grand Canyon]], [[saguaro|saguaro cactus]] closeup.<br />Banner with text: "Grand Canyon State"
+| [[Joseph F. Menna]]
+|244,600,000
+| 265,000,000
+|2,078,112 (proof)<br />1,192,908 (silver proof)
+|- style="text-align:center;"
+| 49
+| [[Alaska]]
+| August 25, 2008<br /><small>''(January 3, 1959)''</small>
+| [[File:2008 AK Proof.png|150px|Alaska quarter]]
+| [[Grizzly bear]] with [[salmon]] (state fish) and [[North Star]]<br />Caption: "The Great Land"
+| Charles L. Vickers
+|251,800,000
+| 254,000,000
+|2,078,112 (proof)<br />1,192,908 (silver proof)
+|- style="text-align:center;"
+| 50
+| [[Hawaii]]
+| November 3, 2008<br /><small>''(August 21, 1959)''</small>
+| [[File:2008 HI Proof.png|150px|Hawaii quarter]]
+| [[Kamehameha Statue|Statue]] of [[Kamehameha I]] with state outline and motto<br />Caption: "[[Ua Mau ke Ea o ka ʻĀina i ka Pono|Ua Mau ke Ea o ka {{okina}}Āina i ka Pono]]"
+| [[Don Everhart]]
+|254,000,000
+| 263,600,000
+|2,078,112 (proof)<br />1,192,908 (silver proof)
+|}
+
+=== District of Columbia and United States Territories release ===
+{{main article|District of Columbia and United States Territories quarters}}
+
+== Additional notes on individual designs ==
+
+*'''Alabama:''' The Alabama state quarter is the first coin circulated in the US that features [[Braille]] writing.<ref>{{cite news|url=https://www.washingtonpost.com/archive/politics/2003/03/24/helen-keller-quarter-coins-a-breakthrough/cc62233f-e325-4882-817c-625272284744/|title=Helen Keller Quarter Coins a Breakthrough|newspaper=Washington Post|author=Brian Faler
+|accessdate=July 13, 2020}}</ref>
+*'''Arizona:''' The banner reading "Grand Canyon State" in the design is intended to split the quarter into two sections and indicate the [[Grand Canyon]] and the [[Saguaro|saguaro cactus]] are in two different Arizona scenes, as the saguaro cactus is not native to the area near the Grand Canyon.<ref>{{cite web |url=http://www.azgovernor.gov/azquarter/QPoll.asp |title=Arizona State Quarter |access-date=2008-05-16 |work=Governor of Arizona (official site) |archive-url=https://web.archive.org/web/20080517012607/http://www.azgovernor.gov/azquarter/QPoll.asp |archive-date=17 May 2008 |url-status=dead }}</ref>
+*'''Connecticut:''' The [[Charter Oak]] on the reverse of the Connecticut quarter fell during a storm on August 21, 1856.  It also appears on a 1936 half dollar commemorating the 300th anniversary of the state's settlement by Europeans.<ref>{{cite web |url=http://www.ngccoin.com/news/ViewArticle.aspx?NewsletterNewsArticleID=1125 |title=From the NGC Archives: 1935 Connecticut Tercentenary Half Dollar |publisher=Ngccoin.com |date=2011-03-15 |access-date=2013-08-02 |archive-url=https://web.archive.org/web/20140201134750/http://www.ngccoin.com/news/ViewArticle.aspx?NewsletterNewsArticleID=1125 |archive-date=February 1, 2014 |url-status=dead |df=mdy-all }}</ref>
+*'''Georgia:''' The outline of the state of Georgia on the quarter appears to have accidentally left out [[Dade County, Georgia|Dade County]], which is in the extreme northwestern part of the state. In 1860, Dade residents voted to secede from the United States and from the state of Georgia. The county's secession was never legally recognized, and Dade residents chose to "rejoin" the United States in 1945.<ref>{{cite web|title=The State Of Dade |url=http://www.dadecounty-ga.gov/StateofDade.cfm?lid=1119 |publisher=Dade County, Georgia |access-date=4 April 2012 |url-status=dead |archive-url=https://web.archive.org/web/20121112162444/http://www.dadecounty-ga.gov/StateofDade.cfm?lid=1119 |archive-date=12 November 2012 }}</ref>
+*'''Hawaii:''' The Hawaii quarter features a rendition of [[Statues of Kamehameha I|the statue of]] [[Kamehameha I|King Kamehameha I]], who united the Hawaiian Islands in 1810, with the state outline and motto. This is the first [[business strike]] US coin to feature royalty or a monarch of any kind.
+*'''Illinois:''' The Illinois quarter is the only quarter to directly reference and portray an urban city, with a picture of the [[Chicago]] [[skyline]]  (the Missouri quarter indirectly references the city of [[St. Louis, Missouri|St. Louis]] with its portrayal of the iconic [[Gateway Arch]]).
+*'''Indiana:''' The Indiana quarter—having a problem similar to Georgia's quarter—is missing part of its northwestern corner. [[Lake County, Indiana|Lake County]] is either partially or completely missing (where it borders with [[Lake Michigan]]).  The error did not garner considerable notice.
+*'''Iowa:''' When Iowans were debating the design for its state quarter in 2002, there was a grassroots effort to use a design featuring the [[Sullivan brothers]] (to honor the five [[Waterloo, Iowa|Waterloo]] siblings who died when the ship they were aboard—the [[USS Juneau (CL-52)|USS ''Juneau'' (CL-52)]]—sank during the [[Naval Battle of Guadalcanal]], 1942). The effort was ultimately unsuccessful, and a [[Grant Wood]] design was used, but not before some copyright issues were resolved.<ref name="quadcity">{{cite web |url=http://www.qctimes.net/articles/2002/07/20/afternoon_edition/export38782.txt |title=Quarter design will not be put up for a vote |access-date=2007-02-03 |work=Quad City Times |date=2002-07-20}}</ref><ref>{{cite web |url=http://www.qctimes.net/articles/2002/08/23/morning_edition/export41037.txt |title=Grant Wood dominates field |access-date=2007-02-03 |work=Quad City Times |date=2002-08-23}}</ref>
+*'''Maryland:''' The Maryland Statehouse featured on the coin is the country's largest wooden dome built without nails.<ref>{{cite web|url=http://www.usmint.gov/mint_programs/50sq_program/states/index.cfm?state=md|publisher= U.S. Mint|title = Maryland|website=Usmint.gov|archive-url =https://web.archive.org/web/20090114003959/http://www.usmint.gov/mint_programs/50sq_program/states/index.cfm?state=md|archive-date = 14 January 2009}}</ref> Some residents complained that the quarter did not feature the state's famous [[Callinectes sapidus|blue crab]].
+*'''Missouri:''' The design contest winner for the Missouri quarter, Paul Jackson, has claimed that the Mint [[engraver]] needlessly redesigned Jackson's original submission. The Mint stated that Jackson's design was not coinable, but a private mint later demonstrated that it was. It emerged that Mint engravers may exercise discretion in the final design of US coinage, and the term "design contest" was dropped from solicitations for ideas for later state quarters.<ref name="pauljackson">{{cite web|url=http://www.pauljackson.com/Quartergate.pdf |title=Quartergate |access-date=2007-02-03 |archive-url=https://web.archive.org/web/20061224112122/http://pauljackson.com/Quartergate.pdf |archive-date=24 December 2006 |url-status=live }}</ref><ref name="scvhistory">{{cite web |url=http://www.scvhistory.com/scvhistory/signal/coins/worden-coinage1205a.htm |title=50-State Quarters: Credit Where Credit Is Due |publisher= [[Santa Clarita Valley Historical Society]] | access-date=2007-02-03 }}</ref>
+*'''Nebraska:''' One of the final concepts for the Nebraska quarter was based on the [[Ponca]] leader [[Standing Bear]], who, in a suit brought against the federal government, successfully argued that Native Americans were citizens entitled to rights under the US Constitution.
+*'''New Hampshire:''' The [[Old Man of the Mountain]], featured on the back of the New Hampshire quarter, collapsed in 2003, less than three years after the quarter's release.
+*'''New Jersey.''' The first coin in history to ever depict George Washington on both sides.<ref>[https://www.coin-collecting-guide-for-beginners.com/new-jersey-state-quarter.html New Jersey State Quarter] ''Coin Collecting Guide'' website.</ref>
+*'''Ohio:''' Astronauts [[John Glenn]], [[Neil Armstrong]], [[James Lovell]], and [[Judith Resnik]] were all natives of Ohio, as were the [[Wright Brothers]].
+*'''Oregon:''' Oregon's design features a scene of [[Crater Lake]] and [[Wizard Island]].  This design was chosen by the Oregon Commemorative Quarter Commission.  The Quarter Commission was made up of 18 members, including [[Governor]] [[Ted Kulongoski]], [[State Treasurer]] [[Randall Edwards (politician)|Randall Edwards]], [[Columbia Sportswear]] Chairperson [[Gert Boyle]], numismatist Monte Mensing, and [[Beaverton High School]] student Laura Davis, along with state legislators [[Charles Starr]], Joan Dukes, Betsy Johnson, and Betsy Close, among others.  The Quarter Commission chose the Crater Lake design from three other finalists: a jumping salmon, the [[Oregon Trail]], and [[Mount Hood]].
+*'''Rhode Island:''' With a mast height of 199&nbsp;ft (61m) the yacht ''[[Reliance (yacht)|Reliance]]'' could not have sailed under the [[Claiborne Pell Newport Bridge]], which has a clearance below of 188&nbsp;ft (57m), although the coin does not show the ship sailing under the bridge. This would also not have happened because ''Reliance'' was sold for scrap in 1913 and the Pell Bridge opened in 1969. 
+*'''South Dakota:''' Although South Dakota has the second highest proportion of [[Native Americans in the United States|Native Americans]] of any state, the South Dakota quarter features three items that are the result of European settlement. These symbols are [[Mount Rushmore]], which honors four U.S. presidents and is carved into the [[Black Hills]] which are seen as sacred by the [[Lakota people|Lakota]], a [[Common pheasant|ring-necked pheasant]] (an introduced species of Asian origin), and [[wheat]], a Eurasian crop which has replaced much of the state's native [[grassland]]s.
+*'''Tennessee:''' There has also been some controversy over the Tennessee quarter. Some sources<ref>{{cite news |archive-url=https://web.archive.org/web/20020320235108/http://story.news.yahoo.com/news?tmpl=story&u=%2F020306%2F168%2F17tmr.html |url=http://story.news.yahoo.com/news?tmpl=story&u=/020306/168/17tmr.html |archive-date=2002-03-20 |agency=AP |title=Top Stories Photos&nbsp;– AP |publisher=Yahoo! News |url-status=dead |access-date=2017-06-23 }}</ref> claim that the details on the instruments depicted on the quarter are inaccurate, such as the number of strings on the guitar and the location of the tubing on the trumpet. The number of strings on the guitar-like instrument would be accurate if the instrument was a [[Mexican vihuela]] that influenced the country-and-western music prominent in Nashville culture and business.[[File:TenneseeQuarter5String.jpg|thumb|5 strings on the guitar on the Tennessee state quarter.]] The instrument, however, has six tuning pegs, so is, in fact, a guitar and not a vihuela.
+*'''West Virginia:''' During the submission process for the design of the West Virginia quarter, there was an apparent movement to put the famous [[Mothman]] on the final design.<ref>{{cite web|url=http://www.starnewsonline.com/article/20030615/NEWS/206150435|title=Pick a coin: Mountains, a bridge or Mothman|access-date=2015-07-12|work=Star News Online|date= 15 June 2003}}</ref>
+*'''Wisconsin:''' There are two known misprints in circulation, both featuring an extra leaf on the corn stalk in different configurations. Theories for how this happened range from accidental [[mint error]] to deliberate modification.<ref>{{cite web| publisher=Heritage Auctions| title=Rare Wisconsin Quarter Varieties?| accessdate=2026-07-07| url=https://coins.ha.com/c/ref/questions.zx}}</ref> The average value for one of these misprints is $250 to $300<ref name="usatodaywisconsin1">{{cite news |url=https://www.usatoday.com/story/money/2022/09/09/wisconsin-quarters-error-tiktok-video/8033091001/ |title=
+Some Wisconsin quarters have an error. The rare coins could sell for far beyond 25 cents. |access-date=2026-07-07 |work=USA Today |date=2005-02-10 | first1=J.R. | last1=Radcliffe}}</ref>
+*'''Wyoming:''' Some Wyoming quarters were released in 2007 with indications of improper quality control. Many persons, upon first seeing the same cowboy outline design used on the state's automobile license plates, have mistakenly believed that the lack of detail is itself a flaw, the result of an incomplete striking. However, evidence of cracks in the die and subsequent hasty repairs have been observed in a few circulation specimens.<ref>{{Cite web|url=https://coinweek.com/coins/coin-profiles/modern-coin-profiles/united-states-2007-p-wyoming-50-state-quarter/|title=United States 2007-P Wyoming 50 State Quarter|publisher=Coin Week LLC|accessdate=July 13, 2022|archive-date=September 26, 2022|archive-url=https://web.archive.org/web/20220926101030/https://coinweek.com/coins/coin-profiles/modern-coin-profiles/united-states-2007-p-wyoming-50-state-quarter/|url-status=dead}}</ref>
+
+== Year map ==
+{|
+|+ '''The following map shows the years each state, federal district, or territory was released as a state quarter.'''
+|-
+| [[File:Statehood quarters map 2009.svg|600px]]
+|}
+
+{| class="wikitable"
+|+ '''The following table has the quarters grouped by year.'''
+|-
+! Color
+! Year
+! 1st release
+! 2nd release
+! 3rd release
+! 4th release
+! 5th release
+! 6th release
+|-
+| bgcolor="#FF0000" | &nbsp;
+| 1999
+| [[Delaware]]
+| [[Pennsylvania]]
+| [[New Jersey]]
+| [[Georgia (U.S. state)|Georgia]]
+| [[Connecticut]]
+| rowspan="10" {{N/a}}
+|-
+| bgcolor="#FF9A00" | &nbsp;
+| 2000
+| [[Massachusetts]]
+| [[Maryland]]
+| [[South Carolina]]
+| [[New Hampshire]]
+| [[Virginia]]
+|-
+| bgcolor="#FAF800" | &nbsp;
+| 2001
+| [[New York (state)|New York]]
+| [[North Carolina]]
+| [[Rhode Island]]
+| [[Vermont]]
+| [[Kentucky]]
+|-
+| bgcolor="#00FF8C" | &nbsp;
+| 2002
+| [[Tennessee]]
+| [[Ohio]]
+| [[Louisiana]]
+| [[Indiana]]
+| [[Mississippi]]
+|-
+| bgcolor="#51D000" | &nbsp;
+| 2003
+| [[Illinois]]
+| [[Alabama]]
+| [[Maine]]
+| [[Missouri]]
+| [[Arkansas]]
+|-
+| bgcolor="#51ACFF" | &nbsp;
+| 2004
+| [[Michigan]]
+| [[Florida]]
+| [[Texas]]
+| [[Iowa]]
+| [[Wisconsin]]
+|-
+| bgcolor="#3B35FF" | &nbsp;
+| 2005
+| [[California]]
+| [[Minnesota]]
+| [[Oregon]]
+| [[Kansas]]
+| [[West Virginia]]
+|-
+| bgcolor="#CA35FF" | &nbsp;
+| 2006
+| [[Nevada]]
+| [[Nebraska]]
+| [[Colorado]]
+| [[North Dakota]]
+| [[South Dakota]]
+|-
+| bgcolor="#AB00AB" | &nbsp;
+| 2007
+| [[Montana]]
+| [[Washington (state)|Washington]]
+| [[Idaho]]
+| [[Wyoming]]
+| [[Utah]]
+|-
+| bgcolor="#FF0099" | &nbsp;
+| 2008
+| [[Oklahoma]]
+| [[New Mexico]]
+| [[Arizona]]
+| [[Alaska]]
+| [[Hawaii]]
+|-
+| bgcolor="#008081" | &nbsp;
+| [[District of Columbia and United States Territories Quarters|2009]]
+| [[District of Columbia]]
+| [[Puerto Rico]]
+| [[Guam]]
+| [[American Samoa]]
+| [[United States Virgin Islands|US Virgin Islands]]
+| [[Northern Mariana Islands]]
+|}
+
+== Collectible value ==
+
+In 1997, [[United States Congress|Congress]] passed the 50 States Commemorative Coin Program Act, which instructed the creation of the 50 State quarters series to "honor the unique Federal Republic of 50 States that comprise the United States; and to promote the diffusion of knowledge among the youth of the United States about the individual states, their history and geography, and the rich diversity of the national heritage...", and to encourage "young people and their families to collect memorable tokens of all of the States for the face value of the coins."<ref>{{cite web |title=Public Law 105-124: 50 States Commemorative Coin Program Act |publisher=United States Congress via United States Mint |date=1997-12-01 |url=http://www.usmint.gov/mint_programs/50sq_program/index.cfm?action=us1claw }} {{Dead link|date=October 2026 |bot=InternetArchiveBot }}</ref>
+
+[[File:InGodWeRust.jpg|thumb|right|Coin with partially rubbed off "In God We Trust" motto]]
+
+While mintage totals of the various designs vary widely—Virginia quarters are almost 20 times as abundant as the Northern Marianas quarters—none of the regular circulating issues are rare enough to become a valuable investment.
+
+There was, however, a measure of collector interest over [[Die (manufacturing)|die]] errors in the Wisconsin quarter. Some designs from the Denver mint feature corn without a smaller leaf, others feature a small leaf pointing upwards, and still others have the leaf bending down.<ref name="HR3885">{{cite web |url=http://www.snopes.com/business/money/quarter.asp |website=Snopes.com|title =Wisconsin Quarter Error|first =David|last = Mikkelson|date = 16 May 2011 }}</ref> A set of all three quarters sold on [[eBay]] in February 2005 for $300 and initially saw significant increases, such as $1500 for individual coins, but as of February 2020 [[Professional Coin Grading Service|PCGS]] lists the value of MS-62 specimens from $92 to $130 each.<ref>{{cite web |title=Washington 50 States Quarters Price Guide |url=https://www.pcgs.com/prices/detail/washington-50-states-quarters/720/most-active |website=pcgs.com |publisher=Collectors Universe, Inc. |access-date= 14 February 2020}}</ref>
+
+Another die cast error ran with the first Delaware quarters. Being the first model of state quarter made, the mint gave it a disproportionate weight causing vending machines to not accept it. The quarter die was quickly fixed. Some Delaware quarters appeared without the last ''E'', now saying, "THE FIRST STAT". There also exists a die crack on the Delaware known as the "spitting horse" variety, which is caused by a die crack near the horses' mouth, resembling a horse spitting.<ref>{{cite web | last=Bennett | first=Laura | title=1999 Delaware Spitting Horse Quarter – Error Coin Value & Identification | publisher=Coin ID Scanner | date=2025-11-30 | url=https://coin-identifier.com/blog/coins-overview/1999-delaware-state-quarter | access-date=2026-08-30}}</ref>
+
+A major error occurred in 2000 when the reverse die of a [[Sacagawea dollar]] was combined with the obverse die of a state quarter on dollar-coin planchets to form what is known as a "[[Mule (coin)|mule]]".  As of August 2019, only 19 of [[2000 Sacagawea dollar – Washington quarter mule|these specimens]], produced on dollar planchets, are known to have escaped from the Mint.<ref>{{cite web|url=http://www.coinfacts.com/error_coins/mules/washington_sacajawea_mule.htm |title=Washington Quarter/ Sacajawea Dollar Mule |publisher=Coinfacts.com |access-date=2013-08-02}}</ref><ref>{{cite web |last1=Gilkes |first1=Paul |title=19th known double denomination mule error coin coming to auction |url=https://www.coinworld.com/news/us-coins/19th-known-double-denomination-mule-error-coin-coming-to-auction |website=www.coinworld.com |publisher=Coin World |access-date=11 May 2020}}</ref><ref name=Weinberg>{{cite web |last=Fred Weinberg & Co. |title=2000-P "Mule" Sacagawea Dollar Reverse w/ States Quarter Obverse |url=https://www.fredweinberg.com/error-news/ |publisher=Fred Weinberg & Co. |access-date=18 February 2018 |date=July 2017 |archive-date=May 14, 2019 |archive-url=https://web.archive.org/web/20190514204907/https://www.fredweinberg.com/error-news/ |url-status=dead }}</ref>
+
+A 2005 Minnesota double die quarter, as well as a 2005 Minnesota quarter with extra trees (another die error), have both triggered numismatic interest. An unusual die break on some 2005 Kansas quarters created a humpback bison.<ref name="coinworld">{{cite journal|title=Coin World |journal=Coin World |url=http://www.coinworldonline.com/ |access-date=2007-02-02 |date=October 17, 2005 |quote=no |archive-url=https://web.archive.org/web/20070127233034/http://coinworldonline.com/ |archive-date=27 January 2007 |url-status=live }}</ref> Relatively more common are Kansas quarters bearing the motto "IN GOD WE RUST."<ref>{{cite web|author=Susan Headley |title=In God We Rust&nbsp;– A State Quarter Error Caused by a Filled Die Strike Through |work=About.com |access-date=2007-08-11 |url=http://coins.about.com/od/uscoins/a/error_quarter_r.htm |archive-url=https://web.archive.org/web/20070908090408/http://coins.about.com/od/uscoins/a/error_quarter_r.htm |archive-date=8 September 2007 |url-status=live }}</ref>
+
+The United States produces [[proof coinage]] in circulating base metal and, since 1992, in separately sold sets with the dimes, quarters, and half-dollars in silver.  For the silver issues, the 1999 set is the most valuable, being the first year of the series and with a relatively small mintage, although prices have significantly decreased since the 50 State Quarters Program ended. The set in base metal, of this or any other year, is worth only a fraction as much.  The silver proof sets of later years, while having some intrinsic and collector worth, are also priced far lower.  The public is cautioned to research prices before buying advertised state quarter year or proof sets.
+
+In general, the program increased interest in quarter and general coin collecting.<ref>{{cite web|title=State Quarters|url=http://www.researchbooth.com/categories/hobbies/treasure_hunting/state_quarters.php|website=ResearchBooth.com|access-date=October 21, 2011|archive-date=April 25, 2012|archive-url=https://web.archive.org/web/20120425082850/http://www.researchbooth.com/categories/hobbies/treasure_hunting/state_quarters.php|url-status=dead}}</ref> Large numbers of advertisements, quarter products and quarter information were available during the years the program ran. [[Home Shopping Network]], [[Franklin Mint]], and [[Littleton Coin Company]] were among the most prominent in advertising space.
+
+== Seigniorage ==
+{{Further information|Seigniorage}}
+
+Since the 50 State Quarters Program was expected to increase public demand for quarters which would be collected and taken out of circulation, the Mint used economic models to estimate the additional seigniorage the program would produce. These estimates established a range of $2.6 billion to $5.1 billion. (At the end of the program, the Mint estimated the actual increase in seigniorage to be $3 billion.) The Mint also estimated the program would earn $110 million in additional numismatic profits. (The final, post-program estimate was $136.2 million.) The Mint used these estimates to support the proposed program, and the legislation enacting the 50 States Quarters program cited these estimates.<ref name="StateQuarters" />
+
+== Satire ==
+
+*On July 25, 2001, ''[[The Onion]]'' ran a satirical news story titled "Collecting All 50 State Quarters Senior's Only Reason To Remain Alive".<ref name="onion">{{cite news |url=https://theonion.com/collecting-all-50-state-quarters-seniors-only-reason-to-1819566097/ |title=Collecting All 50 State Quarters Senior's Only Reason To Remain Alive |access-date=2016-09-02 |work=[[The Onion]] | archive-url= https://web.archive.org/web/20150615044417/http://www.theonion.com/article/collecting-all-50-state-quarters-seniors-only-reas-301| archive-date= 15 June 2015 | url-status= live}}</ref> On May 4, 2005, it ran a further story titled "U.S. Mint Gears Up To Issue Commemorative County Pennies".<ref name="onion2">{{cite news |url=http://www.theonion.com/content/node/31003 |title=U.S. Mint Gears Up To Issue Commemorative County Pennies |access-date=2007-02-02 |work=[[The Onion]] |archive-url=https://web.archive.org/web/20070204040741/http://www.theonion.com/content/node/31003 |archive-date=2007-02-04 |url-status=dead }}</ref>
+*The ''[[Late Night with Conan O'Brien]]'' [[television show]] aired several segments about fictional satirical designs for new state quarters.<ref>''Late Night with Conan O'Brien''. NBC. Aired 2005-10-21.</ref><ref>''Late Night with Conan O'Brien''. NBC. Aired 2006-01-18.</ref><ref>''Late Night with Conan O'Brien''. NBC. Aired 2006-04-28.</ref><ref>''Late Night with Conan O'Brien''. NBC. Aired 2006-06-21.</ref><ref>''Late Night with Conan O'Brien''. NBC. Aired 2006-09-25.</ref><ref>''Late Night with Conan O'Brien''. NBC. Aired 2007-02-05.</ref>
+*Sculptor Daniel Carr, whose designs were used for the New York and Rhode Island state quarters and whose concept was adapted for the Maine state quarter, has created a series of parody quarters making light of the state quarter concept.<ref>{{cite web|url=http://www.dc-coin.com/index.asp?PageAction=VIEWCATS&Category=3 |title=Parody State Quarters, Etc |publisher=Dc-coin.com |access-date=2013-08-02}}</ref>
+
+== See also ==
+{{Portal|Money|Numismatics|United States}}
+*[[50 State quarter mintage figures]]
+*[[District of Columbia and United States Territories quarters]]
+*[[America the Beautiful quarters]]
+*[[Westward Journey Nickel Series]]
+*[[Presidential dollar coins]]
+*[[American Innovation dollars]]
+*[[United States Bicentennial coinage]]
+*[[German euro coins#German Bundesländer series I|German ''Bundesländer'' €2 coins]]
+*[[Quarter (Canadian coin)#1992: 125th anniversary of Confederation|Canadian 125th Anniversary provincial quarters]]
+*[[500 yen coin (commemorative)#2008–2016|60th Anniversary of Enforcement of the Local Autonomy Law 500 yen commemorative coins]]
+
+== References ==
+{{Reflist|30em}}
+
+== Bibliography ==
+*{{Yeoman-2014}}
+
+== External links ==
+{{sister project links|quarter-dollar}}
+*[http://www.usmint.gov/mint_programs/index.cfm?action=50_state_quarters_program The 50 State Quarters Program of the United States Mint Official Website] {{Webarchive|url=https://web.archive.org/web/20170131101453/http://www.usmint.gov/mint_programs/index.cfm?action=50_state_quarters_program |date=January 31, 2017 }}
+*[http://www.usmint.gov/mint_programs/DCAndTerritories/ The District of Columbia and United States Territories Program of the United States Mint Official Website] {{Webarchive|url=https://web.archive.org/web/20110225011425/http://www.usmint.gov/mint%5Fprograms/dcandterritories/ |date=February 25, 2011 }}
+*[http://thomas.loc.gov/cgi-bin/query/z?c105:S.1228.ENR: 50 States Commemorative Coin Program Act] {{Webarchive|url=https://web.archive.org/web/20200410020159/https://www.congress.gov/bill/105th-congress/senate-bill/1228/text/enr |date=April 10, 2020 }}
+*[http://www.quarterdesigns.com/ State Quarter Designs] {{Webarchive|url=https://web.archive.org/web/20210415092421/http://www.quarterdesigns.com/ |date=April 15, 2021 }}
+*[https://web.archive.org/web/20030628033334/http://money.cnn.com/2003/05/15/pf/banking/quarter_curse/ The curse of the quarter]
+*[http://www.statequarterguide.com/mintages/ State Quarter Mintage]
+*[https://oac.cdlib.org/search?style=oac4;Institution=California%20State%20Library::California%20History%20Room;idT=001619372 California Quarter Design Project, 2002-2004. California State Library, California History Room.]
+*[https://onlinecoin.club/Coins/CoinType/United_States/State_Quarter_Dollar/ State Quarter Dollar, Coin Type from United States]
+
+{{s-start}}
+{{succession box | title=50 State quarters<br />(1999–2008)
+| after=[[District of Columbia and United States Territories quarters]] | before=[[Washington quarter]] |years=}}
+{{s-end}}
+{{United States circulating coinage}}{{Coinage (United States)|state=expanded}}{{US commemorative coinage (1990s)}}{{US commemorative coinage (2000s)}}{{George Washington}}
+
+[[Category:Twenty-five-cent coins of the United States]]
+[[Category:Currencies introduced in 1999]]
+[[Category:Circulating commemorative coins of the United States]]
+[[Category:George Washington on United States currency]]
+[[Category:Birds on coins]]
+[[Category:Sun on coins]]
+[[Category:Ships on coins]]
+[[Category:Keystone symbol]]
+[[Category:Cultural depictions of James Monroe]]
+[[Category:Cultural depictions of the Wright brothers]]
+[[Category:Cultural depictions of Abraham Lincoln]]
+[[Category:Cultural depictions of Helen Keller]]
+[[Category:Cultural depictions of Meriwether Lewis and William Clark]]
+[[Category:Mount Rushmore]]
+[[Category:Cultural depictions of Kamehameha I]]
+[[Category:Horses on coins]]
+[[Category:Cattle on coins]]
+[[Category:American bison on coins]]
+[[Category:Bears on coins]]
+[[Category:Fish in art]]

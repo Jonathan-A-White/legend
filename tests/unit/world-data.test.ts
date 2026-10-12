@@ -79,4 +79,9 @@ describe('the service worker', () => {
   it('precaches the world files, so the globe and the country sheet work offline', () => {
     expect(injectManifestOptions.globPatterns).toContain('data/world/*.json');
   });
+
+  it('precaches the US files, mintages.json among them, and the biggest is under the size limit', () => {
+    expect(injectManifestOptions.globPatterns).toContain('data/us/*.json');
+    expect(statSync('public/data/us/mintages.json').size).toBeLessThan(injectManifestOptions.maximumFileSizeToCacheInBytes);
+  });
 });

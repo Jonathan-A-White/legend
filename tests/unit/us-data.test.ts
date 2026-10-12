@@ -4,12 +4,14 @@ import {
   loadGrades,
   loadKeyDates,
   loadMintPlacement,
+  loadMintages,
   loadMints,
   loadQuarters,
   loadStates,
   gradeFor,
   quartersByProgram,
 } from '../../src/data/us';
+import type { Mintages } from '../../src/data/us';
 
 // The loaders fetch /data/us/<file>; here the fetch reads public/ from disk.
 const fromDisk = (async (url: string) => {
@@ -177,5 +179,73 @@ describe('states.json', () => {
 
   it('is under 100 KB', () => {
     expect(readFileSync('public/data/us/states.json').length).toBeLessThan(100 * 1024);
+  });
+});
+
+describe('mintages.json', () => {
+  const rowOf = (m: Mintages, series: string, year: number, mint: string, variety: string | null = null, design: string | null = null) =>
+    m.series.find((s) => s.series === series)?.rows.find((r) => r.year === year && r.mint === mint && r.variety === variety && r.design === design);
+
+  it('matches the Mint figures for samples', async () => {
+    const m = await loadMintages(fromDisk);
+    expect(m.series.map((s) => s.series)).toEqual(['Lincoln cent', 'Jefferson nickel', 'Roosevelt dime', 'Washington quarter']);
+    expect(rowOf(m, 'Lincoln cent', 1909, 'S', 'V.D.B.')?.struck).toBe(484000);
+    expect(rowOf(m, 'Lincoln cent', 1909, 'S')?.struck).toBe(1825000);
+    expect(rowOf(m, 'Lincoln cent', 1914, 'D')?.struck).toBe(1193000);
+    expect(rowOf(m, 'Washington quarter', 1932, 'D')?.struck).toBe(436800);
+    expect(rowOf(m, 'Jefferson nickel', 1950, 'D')?.struck).toBe(2630030);
+    expect(rowOf(m, 'Washington quarter', 1999, 'P', null, 'Delaware')?.struck).toBe(373400000);
+    expect(rowOf(m, 'Washington quarter', 1999, 'D', null, 'Delaware')?.struck).toBe(401424000);
+  });
+
+  it('keeps 1965 to 1967 as one P row with a note, with no D or S rows', async () => {
+    const m = await loadMintages(fromDisk);
+    for (const s of m.series) {
+      for (const year of [1965, 1966, 1967]) {
+        const rows = s.rows.filter((r) => r.year === year);
+        expect(rows.map((r) => r.mint), `${s.series} ${year}`).toEqual(['P']);
+        expect(rows[0].note).toMatch(/mint marks/i);
+      }
+    }
+  });
+
+  it('has a P and a D row for every quarter design of 1999 to 2025, or lists it in gaps', async () => {
+    const m = await loadMintages(fromDisk);
+    const quarters = await loadQuarters(fromDisk);
+    const rows = m.series.find((s) => s.series === 'Washington quarter')!.rows;
+    const gapText = m.gaps.map((g) => `${g.series} ${g.years} ${g.why}`).join('\n');
+    for (const d of quarters.filter((x) => x.year >= 1999 && x.year <= 2025)) {
+      for (const mint of ['P', 'D']) {
+        const has = rows.some((r) => r.year === d.year && r.mint === mint && r.design === d.name);
+        expect(has || gapText.includes(d.name), `${d.year} ${d.name} ${mint}`).toBe(true);
+      }
+    }
+  });
+
+  it('holds only positive integer figures, never a proof, with known mints', async () => {
+    const m = await loadMintages(fromDisk);
+    for (const s of m.series) {
+      for (const r of s.rows) {
+        expect(Number.isInteger(r.struck) && r.struck > 0, `${s.series} ${r.year}${r.mint}`).toBe(true);
+        expect(['P', 'D', 'S', 'W', 'CC', 'O']).toContain(r.mint);
+        expect(`${r.note ?? ''} ${r.variety ?? ''}`).not.toMatch(/proof/i);
+      }
+    }
+    for (const g of m.gaps) {
+      expect(g.why.length).toBeGreaterThan(10);
+      expect(g.years.length).toBeGreaterThan(0);
+    }
+  });
+
+  it('has one row per series, year, mint, design and variety', async () => {
+    const m = await loadMintages(fromDisk);
+    for (const s of m.series) {
+      const keys = s.rows.map((r) => `${r.year}|${r.mint}|${r.design}|${r.variety}`);
+      expect(new Set(keys).size, s.series).toBe(keys.length);
+    }
+  });
+
+  it('is under 120 KB', () => {
+    expect(readFileSync('public/data/us/mintages.json').length).toBeLessThan(120 * 1024);
   });
 });

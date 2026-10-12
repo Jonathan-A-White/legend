@@ -1,4 +1,4 @@
-// The US reference data under public/data/us/: quarters, mints, grades, key dates and the states map. The files are
+// The US reference data under public/data/us/: quarters, mints, grades, key dates, mintages and the states map. The files are
 // static JSON the service worker precaches, so every loader works offline. Sources are named in docs/data.md.
 
 export type QuarterProgram =
@@ -73,6 +73,39 @@ export interface KeyDateSeries {
   entries: KeyDate[];
 }
 
+/** The mints that struck the four series. A coin with no mark was struck at P (or, 1965-1967, at any mint). */
+export type MintMark = 'P' | 'D' | 'S' | 'W' | 'CC' | 'O';
+
+/** How many were struck of one series, year and mint (a quarter design, or a variety, is its own row). Never a proof. */
+export interface MintageRow {
+  year: number;
+  mint: MintMark;
+  /** the quarter's name in quarters.json for 1999 on; a Bicentennial cent or Westward Journey nickel design; else null */
+  design: string | null;
+  /** 'V.D.B.', 'Wartime silver': set only where the same year and mint has a plain row too; the plain row has null */
+  variety: string | null;
+  struck: number;
+  note: string | null;
+}
+
+export interface MintageSeries {
+  /** a key-dates series name: 'Lincoln cent', 'Jefferson nickel', 'Roosevelt dime', 'Washington quarter' */
+  series: string;
+  rows: MintageRow[];
+}
+
+/** Years or designs the build left out and why: a number is never guessed. */
+export interface MintageGap {
+  series: string;
+  years: string;
+  why: string;
+}
+
+export interface Mintages {
+  series: MintageSeries[];
+  gaps: MintageGap[];
+}
+
 export interface StatesTopology {
   type: 'Topology';
   bbox: number[];
@@ -95,6 +128,7 @@ async function load<T>(file: string, fetchImpl: typeof fetch): Promise<T> {
 export const loadQuarters = (f: typeof fetch = fetch) => load<QuarterDesign[]>('quarters.json', f);
 export const loadGrades = (f: typeof fetch = fetch) => load<Grade[]>('grades.json', f);
 export const loadKeyDates = (f: typeof fetch = fetch) => load<KeyDateSeries[]>('key-dates.json', f);
+export const loadMintages = (f: typeof fetch = fetch) => load<Mintages>('mintages.json', f);
 export const loadStates = (f: typeof fetch = fetch) => load<StatesTopology>('states.json', f);
 export const loadMints = async (f: typeof fetch = fetch) => (await load<MintsFile>('mints.json', f)).mints;
 export const loadMintPlacement = async (f: typeof fetch = fetch) =>

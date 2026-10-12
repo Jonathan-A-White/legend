@@ -1,0 +1,872 @@
+{{Short description|none}}
+
+{{multiple image
+| image1 = 1996-S dime obverse.jpg
+| image2 = 1996-S dime reverse.jpg
+| width1 = 110
+| width2 = 112
+| footer = Roosevelt dime
+}}
+Below are the mintage figures for the [[Roosevelt dime]].
+
+The following [[mint mark]]s indicate which mint the coin was made at (parentheses indicate a lack of a mint mark):
+
+'''P''' = [[Philadelphia Mint]]
+
+'''D''' = [[Denver Mint]]
+
+'''S''' = [[San Francisco Mint]]
+
+'''W''' = [[West Point Mint]]
+
+== Silver dimes ==
+{{Sticky header}}
+{| class="wikitable sortable sticky-header" style="min-width:65%; text-align:center;"
+|+Initial Composition (90% silver, 10% copper) 1946–1964
+|-
+! width="20%" |Year
+! width="20%" |Mint
+! width="25%" |Mintage<ref name="Coin Mintages">{{Cite web|url=https://coinmintages.com/roosevelt-dime-mintage/|title=Circulating Coins Production {{!}} Coin Mintages |website=www.coinmintages.com|access-date=2025-10-25}}</ref>
+! width="35%" |Comments
+|-
+| rowspan="3" |1946
+|P
+| align="right" |255,250,000
+|
+|-
+|D
+| align="right" |61,043,500
+|
+|-
+|S
+| align="right" |27,900,000
+|
+|-
+| rowspan="3" |1947
+|P
+| align="right" |121,520,000
+|
+|-
+|D
+| align="right" |46,835,000
+|
+|-
+|S
+| align="right" |34,840,000
+|
+|-
+| rowspan="3" |1948
+|P
+| align="right" |74,950,000
+|
+|-
+|D
+| align="right" |52,841,000
+|
+|-
+|S
+| align="right" |35,520,000
+|
+|-
+| rowspan="3" |1949
+|P
+| align="right" |30,940,000
+|
+|-
+|D
+| align="right" |26,034,000
+|
+|-
+|S
+| align="right" |13,510,000
+|
+|-
+| rowspan="3" |1950
+|P
+| align="right" |50,130,114
+|
+|-
+|D
+| align="right" |46,803,000
+|
+|-
+|S
+| align="right" |20,440,000
+|
+|-
+| rowspan="3" |1951
+|P
+| align="right" |103,880,102
+|
+|-
+|D
+| align="right" |56,529,000
+|
+|-
+|S
+| align="right" |31,630,000
+|
+|-
+| rowspan="3" |1952
+|P
+| align="right" |99,040,093
+|
+|-
+|D
+| align="right" |122,100,000
+|
+|-
+|S
+| align="right" |44,419,500
+|
+|-
+| rowspan="3" |1953
+|P
+| align="right" |53,490,120
+|
+|-
+|D
+| align="right" |136,433,000
+|
+|-
+|S
+| align="right" |39,180,000
+|
+|-
+| rowspan="3" |1954
+|P
+| align="right" |114,010,200
+|
+|-
+|D
+| align="right" |106,397,000
+|
+|-
+|S
+| align="right" |22,860,000
+|
+|-
+| rowspan="3" |1955
+|P
+| align="right" |12,450,181
+|
+|-
+|D
+| align="right" |13,959,000
+|
+|-
+|S
+| align="right" |18,510,000
+|
+|-
+| rowspan="2" |1956
+|P
+| align="right" |108,640,000
+|
+|-
+|D
+| align="right" |108,015,100
+|
+|-
+| rowspan="2" |1957
+|P
+| align="right" |160,160,000
+|
+|-
+|D
+| align="right" |113,354,330
+|
+|-
+| rowspan="2" |1958
+|P
+| align="right" |31,910,000
+|
+|-
+|D
+| align="right" |136,564,600
+|
+|-
+| rowspan="2" |1959
+|P
+| align="right" |85,780,000
+|
+|-
+|D
+| align="right" |164,919,790
+|
+|-
+| rowspan="2" |1960
+|P
+| align="right" |70,390,000
+|
+|-
+|D
+| align="right" |200,160,400
+|
+|-
+| rowspan="2" |1961
+|P
+| align="right" |93,730,000
+|
+|-
+|D
+| align="right" |209,146,550
+|
+|-
+| rowspan="2" |1962
+|P
+| align="right" |72,450,000
+|
+|-
+|D
+| align="right" |334,948,380
+|
+|-
+| rowspan="2" |1963
+|P
+| align="right" |123,650,000
+|
+|-
+|D
+| align="right" |421,476,530
+|
+|-
+| rowspan="2" |1964
+|P
+| align="right" |929,360,000
+|
+|-
+|D
+| align="right" |1,357,517,180
+|
+|}
+
+== Clad dimes==
+{{Sticky header}}
+{| class="wikitable sortable sticky-header" style="min-width:65%; text-align:center;"
+|+Copper-Nickel Clad Composition (75% copper, 25% nickel) 1965–2025
+|-
+! width="20%" |Year
+! width="20%" |Mint
+! width="25%" |Mintage<ref name="Coin Mintages">{{Cite web|url=https://coinmintages.com/roosevelt-dime-mintage/|title=Circulating Coins Production {{!}} Coin Mintages |website=www.coinmintages.com|access-date=2025-10-25}}</ref><ref name="Circulating Coins Production">{{Cite web|url=http://www.usmint.gov/about/production-sales-figures/circulating-coins-production|title=Circulating Coins Production {{!}} U.S. Mint |website=www.usmint.gov|access-date=2025-10-19}}</ref>
+! width="35%" |Comments
+|-
+| rowspan="1" |1965
+|(P & D)
+| align="right" |1,652,140,570
+|
+|-
+| rowspan="1" |1966
+|(P & D)
+| align="right" |1,382,734,540
+|
+|-
+| rowspan="1" |1967
+|(P & D)
+| align="right" |2,244,007,320
+|
+|-
+| rowspan="2" |1968
+|(P)
+| align="right" |424,470,400
+|
+|-
+|D
+| align="right" |480,748,280
+|
+|-
+| rowspan="2" |1969
+|(P)
+| align="right" |145,790,000
+|
+|-
+|D
+| align="right" |563,323,870
+|
+|-
+| rowspan="2" |1970
+|(P)
+| align="right" |345,570,000
+|
+|-
+|D
+| align="right" |754,942,100
+|
+|-
+| rowspan="2" |1971
+|(P)
+| align="right" |162,690,000
+|
+|-
+|D
+| align="right" |377,914,240
+|
+|-
+| rowspan="2" |1972
+|(P)
+| align="right" |431,540,000
+|
+|-
+|D
+| align="right" |330,290,000
+|
+|-
+| rowspan="2" |1973
+|(P)
+| align="right" |315,670,000
+|
+|-
+|D
+| align="right" |455,032,426
+|
+|-
+| rowspan="2" |1974
+|(P)
+| align="right" |470,248,000
+|
+|-
+|D
+| align="right" |571,083,000
+|
+|-
+| rowspan="2" |1975
+|(P)
+| align="right" |585,673,900
+|
+|-
+|D
+| align="right" |313,705,300
+|
+|-
+| rowspan="2" |1976
+|(P)
+| align="right" |568,760,000
+|
+|-
+|D
+| align="right" |695,222,774
+|
+|-
+| rowspan="2" |1977
+|(P)
+| align="right" |796,930,000
+|
+|-
+|D
+| align="right" |376,607,228
+|
+|-
+| rowspan="2" |1978
+|(P)
+| align="right" |663,980,000
+|
+|-
+|D
+| align="right" |282,847,540
+|
+|-
+| rowspan="2" |1979
+|(P)
+| align="right" |315,440,000
+|
+|-
+|D
+| align="right" |390,921,184
+|
+|-
+| rowspan="2" |1980
+|P
+| align="right" |735,170,000
+|
+|-
+|D
+| align="right" |719,354,321
+|
+|-
+| rowspan="2" |1981
+|P
+| align="right" |676,650,000
+|
+|-
+|D
+| align="right" |712,284,143
+|
+|-
+| rowspan="3" |1982
+|P
+| align="right" |519,475,000
+|
+|-
+|D
+| align="right" |542,713,584
+|
+|-
+|(P)
+| align="right" |(150,000)<ref name="No-Mintmark Roosevelt Dimes Shine">{{Cite web|url=https://www.pcgs.com/news/no-mintmark-roosevelt-dimes-shine/|title=No-Mintmark Roosevelt Dimes Shine {{!}} PCGS |website=www.pcgs.com|access-date=2025-02-07}}</ref>
+|
+|-
+| rowspan="2" |1983
+|P
+| align="right" |647,025,000
+|
+|-
+|D
+| align="right" |730,129,224
+|
+|-
+| rowspan="2" |1984
+|P
+| align="right" |856,669,000
+|
+|-
+|D
+| align="right" |704,803,976
+|
+|-
+| rowspan="2" |1985
+|P
+| align="right" |705,200,962
+|
+|-
+|D
+| align="right" |587,979,970
+|
+|-
+| rowspan="2" |1986
+|P
+| align="right" |682,649,693
+|
+|-
+|D
+| align="right" |473,326,970
+|
+|-
+| rowspan="2" |1987
+|P
+| align="right" |762,709,481
+|
+|-
+|D
+| align="right" |653,203,402
+|
+|-
+| rowspan="2" |1988
+|P
+| align="right" |1,030,550,000
+|
+|-
+|D
+| align="right" |962,385,489
+|
+|-
+| rowspan="2" |1989
+|P
+| align="right" |1,298,400,000
+|
+|-
+|D
+| align="right" |896,535,597
+|
+|-
+| rowspan="2" |1990
+|P
+| align="right" |1,034,340,000
+|
+|-
+|D
+| align="right" |839,995,824
+|
+|-
+| rowspan="2" |1991
+|P
+| align="right" |927,220,000
+|
+|-
+|D
+| align="right" |601,241,114
+|
+|-
+| rowspan="2" |1992
+|P
+| align="right" |593,500,000
+|
+|-
+|D
+| align="right" |616,273,932
+|
+|-
+| rowspan="2" |1993
+|P
+| align="right" |766,180,000
+|
+|-
+|D
+| align="right" |750,110,166
+|
+|-
+| rowspan="2" |1994
+|P
+| align="right" |1,189,000,000
+|
+|-
+|D
+| align="right" |1,303,268,110
+|
+|-
+| rowspan="2" |1995
+|P
+| align="right" |1,125,500,000
+|
+|-
+|D
+| align="right" |1,274,890,000
+|
+|-
+| rowspan="3" |1996
+|P
+| align="right" |1,421,163,000
+|
+|-
+|D
+| align="right" |1,400,300,000
+|
+|-
+|W
+| align="right" |1,457,000
+|
+|-
+| rowspan="2" |1997
+|P
+| align="right" |991,640,000
+|
+|-
+|D
+| align="right" |979,810,000
+|
+|-
+| rowspan="2" |1998
+|P
+| align="right" |1,163,000,000
+|
+|-
+|D
+| align="right" |1,172,250,000
+|
+|-
+| rowspan="2" |1999
+|P
+| align="right" |2,164,000,000
+|
+|-
+|D
+| align="right" |1,397,750,000
+|
+|-
+| rowspan="2" |2000
+|P
+| align="right" |1,842,500,000
+|
+|-
+|D
+| align="right" |1,818,700,000
+|
+|-
+| rowspan="2" |2001
+|P
+| align="right" |1,369,590,000
+|
+|-
+|D
+| align="right" |1,412,800,000
+|
+|-
+| rowspan="2" |2002
+|P
+| align="right" |1,187,500,000
+|
+|-
+|D
+| align="right" |1,379,500,000
+|
+|-
+| rowspan="2" |2003
+|P
+| align="right" |1,085,500,000
+|
+|-
+|D
+| align="right" |986,500,000
+|
+|-
+| rowspan="2" |2004
+|P
+| align="right" |1,328,000,000
+|
+|-
+|D
+| align="right" |1,159,500,000
+|
+|-
+| rowspan="4" |2005
+|P
+| align="right" |1,412,000,000
+|
+|-
+|D
+| align="right" |1,423,500,000
+|
+|-
+|P (Satin)
+| align="right" |1,160,000<ref name="US Mint Uncirculated Coin Set (Satin) Sales">{{Cite web|url=https://mintsetguide.com/mint-set-mintage/|title="US Mint Uncirculated Coin Set (Satin) Sales" {{!}} U.S. Mint |website=mintsetguide.com|access-date=2023-11-23}}</ref>
+|
+|-
+|D (Satin)
+| align="right" |1,160,000<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+| rowspan="4" |2006
+|P
+| align="right" |1,381,000,000
+|
+|-
+|D
+| align="right" |1,447,000,000
+|
+|-
+|P (Satin)
+| align="right" |847,361<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+|D (Satin)
+| align="right" |847,361<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+| rowspan="4" |2007
+|P
+| align="right" |391,000,000
+|
+|-
+|D
+| align="right" |624,500,000
+|
+|-
+|P (Satin)
+| align="right" |895,628<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+|D (Satin)
+| align="right" |895,628<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+| rowspan="4" |2008
+|P
+| align="right" |413,000,000
+|
+|-
+|D
+| align="right" |637,500,000
+|
+|-
+|P (Satin)
+| align="right" |745,464<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+|D (Satin)
+| align="right" |745,464<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+| rowspan="4" |2009
+|P
+| align="right" |96,500,000
+|
+|-
+|D
+| align="right" |49,500,000
+|
+|-
+|P (Satin)
+| align="right" |784,614<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+|D (Satin)
+| align="right" |784,614<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+| rowspan="4" |2010
+|P
+| align="right" |557,000,000
+|
+|-
+|D
+| align="right" |562,000,000
+|
+|-
+|P (Satin)
+| align="right" |583,897<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+|D (Satin)
+| align="right" |583,897<ref name="US Mint Uncirculated Coin Set (Satin) Sales" />
+|
+|-
+| rowspan="2" |2011
+|P
+| align="right" |748,000,000
+|
+|-
+|D
+| align="right" |754,000,000
+|
+|-
+| rowspan="2" |2012
+|P
+| align="right" |808,000,000
+|
+|-
+|D
+| align="right" |868,000,000
+|
+|-
+| rowspan="2" |2013
+|P
+| align="right" |1,086,500,000
+|
+|-
+|D
+| align="right" |1,025,000,000
+|
+|-
+| rowspan="2" |2014
+|P
+| align="right" |1,125,000,000
+|
+|-
+|D
+| align="right" |1,177,000,000
+|
+|-
+| rowspan="2" |2015
+|P
+| align="right" |1,497,510,000
+|
+|-
+|D
+| align="right" |1,543,500,000
+|
+|-
+| rowspan="2" |2016
+|P
+| align="right" |1,517,000,000
+|
+|-
+|D
+| align="right" |1,437,000,000
+|
+|-
+| rowspan="3" |2017
+|P
+| align="right" |1,437,500,000
+|
+|-
+|D
+| align="right" |1,290,500,000
+|
+|-
+|S (Enhanced)
+| align="right" |223,310<ref name="2017-s, 225th Anniversary Enhanced Uncirculated Set">{{Cite web|url=https://www.usacoinbook.com/coins/6298/dimes/roosevelt/2017-S/enhanced-uncirculated/|title="2017-s, 225th Anniversary Enhanced Uncirculated Set" {{!}} |website=www.usacoinbook.com|access-date=2025-10-26}}</ref>
+|
+|-
+| rowspan="2" |2018
+|P
+| align="right" |1,193,000,000
+|
+|-
+|D
+| align="right" |1,006,000,000
+|
+|-
+| rowspan="2" |2019
+|P
+| align="right" |1,147,500,000
+|
+|-
+|D
+| align="right" |1,001,500,000
+|
+|-
+| rowspan="2" |2020
+|P
+| align="right" |1,333,500,000
+|
+|-
+|D
+| align="right" |1,445,000,000
+|
+|-
+| rowspan="2" |2021
+|P
+| align="right" |1,349,250,000
+|
+|-
+|D
+| align="right" |1,481,000,000
+|
+|-
+| rowspan="2" |2022
+|P
+| align="right" |1,551,000,000
+|
+|-
+|D
+| align="right" |1,583,000,000
+|
+|-
+| rowspan="2" |2023
+|P
+| align="right" |1,410,500,000
+|
+|-
+|D
+| align="right" |1,295,000,000
+|
+|-
+| rowspan="2" |2024
+|P
+| align="right" |307,000,000
+|
+|-
+|D
+| align="right" |248,000,000
+|
+|-
+| rowspan="2" |2025
+|P
+| align="right" |520,000,000
+|
+|-
+|D
+| align="right" |427,400,000
+|
+|}
+
+==See also==
+{{Portal|Money|Numismatics|United States}}
+* [[United States cent mintage figures]]
+** [[Lincoln cent mintage figures]]
+* [[United States nickel mintage figures]]
+* [[United States quarter mintage figures]]
+** [[Washington quarter mintage figures]]
+** [[50 State quarters]]
+** [[America the Beautiful quarter mintage figures]]
+** [[American Women quarters]]
+* [[United States half dollar mintage figures]]
+**[[Kennedy half dollar mintage figures]]
+* [[American Silver Eagle mintage figures]]
+
+==References==
+{{reflist}}
+
+{{United States circulating coinage}}
+{{Coinage (United States)}}
+
+[[Category:Ten-cent coins of the United States]]

@@ -1,0 +1,1792 @@
+{{Short description|none}}
+These are the mintage quantities for strikings of the [[nickel (United States coin)|United States nickel]].
+: '''P''' = [[Philadelphia Mint]] 
+: '''D''' = [[Denver Mint]]
+: '''S''' = [[San Francisco Mint]]
+:'''W''' = [[West Point Mint]]
+
+Parenthesis around the mint mark denotes that the coin does not have a mint mark on the coin, but was minted in that location.
+
+==Designs==
+
+===Shield nickels (1866–1883)===
+{{Main|Shield nickel}}
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+With Rays, 1866–1867
+|-
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage
+! width="60%" |Comments
+|-
+|1866
+|(P)
+| align="right" |14,742,500
+|First year of issue
+|-
+|1867
+|(P)
+| align="right" |2,019,000
+|Second and last year with rays on reverse of coin. Most 1867 shield nickels are of the "No Rays" variety.
+|}
+
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Without Rays, 1867–1883
+|-
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage
+! width="60%" |Comments
+|-
+|1867
+|(P)
+| align="right" |28,890,500
+|Type 2, Without Rays
+|-
+|1868
+|(P)
+| align="right" |28,817,000
+|
+|-
+|1869
+|(P)
+| align="right" |16,395,000
+|
+|-
+|1870
+|(P)
+| align="right" |4,806,000
+|
+|-
+|1871
+|(P)
+| align="right" |561,000
+|
+|-
+|1872
+|(P)
+| align="right" |6,036,000
+|
+|-
+|1873
+|(P)
+| align="right" |4,549,100
+|Includes Open 3 and Closed 3 varieties
+|-
+|1874
+|(P)
+| align="right" |3,538,000
+|
+|-
+|1875
+|(P)
+| align="right" |2,097,000
+|
+|-
+|1876
+|(P)
+| align="right" |2,530,000
+|
+|-
+|1877
+|(P)
+| align="right" |900
+|Proof only
+|-
+|1878
+|(P)
+| align="right" |2,350
+|Proof only
+|-
+|1879
+|(P)
+| align="right" |29,100
+|
+|-
+|1880
+|(P)
+| align="right" |19,995
+|Key date
+|-
+|1881
+|(P)
+| align="right" |72,375
+|
+|-
+|1882
+|(P)
+| align="right" |11,476,600
+|
+|-
+|1883
+|(P)
+| align="right" |1,456,919
+|Last year of issue
+|}
+
+===Liberty Head V nickel (1883–1913)===
+{{Main|Liberty Head nickel}}
+
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Liberty Head V Nickel (1883-1913)
+|-
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage
+! width="60%" |Comments
+|-
+| rowspan="2" |1883
+|(P)
+| align="right" |5,479,519
+|1883, No "CENTS" on reverse
+|-
+|(P)
+| align="right" |16,032,983
+|1883, With "CENTS" on reverse
+|-
+|1884
+|(P)
+| align="right" |11,273,942
+|
+|-
+|1885
+|(P)
+| align="right" |1,476,490
+|Key date
+|-
+|1886
+|(P)
+| align="right" |3,330,290
+|Key date
+|-
+|1887
+|(P)
+| align="right" |15,263,652
+|
+|-
+|1888
+|(P)
+| align="right" |10,720,483
+|
+|-
+|1889
+|(P)
+| align="right" |15,881,361
+|
+|-
+|1890
+|(P)
+| align="right" |16,259,272
+|
+|-
+|1891
+|(P)
+| align="right" |16,834,350
+|
+|-
+|1892
+|(P)
+| align="right" |11,699,642
+|
+|-
+|1893
+|(P)
+| align="right" |13,370,195
+|
+|-
+|1894
+|(P)
+| align="right" |5,413,132
+|
+|-
+|1895
+|(P)
+| align="right" |9,979,884
+|
+|-
+|1896
+|(P)
+| align="right" |8,842,920
+|
+|-
+|1897
+|(P)
+| align="right" |20,428,735
+|
+|-
+|1898
+|(P)
+| align="right" |12,532,087
+|
+|-
+|1899
+|(P)
+| align="right" |26,029,031
+|
+|-
+|1900
+|(P)
+| align="right" |27,255,995
+|
+|-
+|1901
+|(P)
+| align="right" |26,480,213
+|
+|-
+|1902
+|(P)
+| align="right" |31,480,579
+|
+|-
+|1903
+|(P)
+| align="right" |28,006,725
+|
+|-
+|1904
+|(P)
+| align="right" |21,404,984
+|
+|-
+|1905
+|(P)
+| align="right" |29,827,276
+|
+|-
+|1906
+|(P)
+| align="right" |38,613,725
+|
+|-
+|1907
+|(P)
+| align="right" |39,214,800
+|
+|-
+|1908
+|(P)
+| align="right" |22,686,177
+|
+|-
+|1909
+|(P)
+| align="right" |11,590,526
+|
+|-
+|1910
+|(P)
+| align="right" |30,169,353
+|
+|-
+|1911
+|(P)
+| align="right" |39,559,372
+|Highest mintage of the series
+|-
+| rowspan="3" |1912
+|(P)
+| align="right" |26,236,714
+|
+|-
+|D
+| align="right" |8,474,000
+|Only year minted at the Denver Mint
+|-
+|S
+| align="right" |238,000
+|Only year minted at the San Francisco Mint, Key date
+|-
+|[[1913 Liberty Head nickel|1913]]
+|(P)
+| align="right" |5
+|Incredibly rare, 5 known to exist
+|}
+
+===Indian Head (or Buffalo) nickel (1913–1938)===
+{{Main|Buffalo nickel}}
+
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Indian Head (or Buffalo) nickel 1913–1938
+|-
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage
+! width="60%" |Comments
+|-
+| rowspan="3" |1913, Type 1
+|(P)
+| align="right" |30,993,520
+|Type 1, mound on reverse
+|-
+|D
+| align="right" |5,337,000
+|Type 1, mound on reverse
+|-
+|S
+| align="right" |2,105,000
+|Type 1, mound on reverse
+|-
+| rowspan="3" |1913, Type 2
+|(P)
+| align="right" |29,858,700
+|Type 2, flat on reverse
+|-
+|D
+| align="right" |4,156,000
+|Type 2, flat on reverse
+|-
+|S
+| align="right" |1,209,000
+|Type 2, flat on reverse, Key date
+|-
+| rowspan="3" |1914
+|(P)
+| align="right" |20,665,738
+|Includes 4 Over 3 variety
+|-
+|D
+| align="right" |3,912,000
+|Semi-key date
+|-
+|S
+| align="right" |3,470,000
+|
+|-
+| rowspan="3" |1915
+|(P)
+| align="right" |20,987,270
+|
+|-
+|D
+| align="right" |7,569,500
+|
+|-
+|S
+| align="right" |1,505,000
+|Semi-key date
+|-
+| rowspan="3" |1916
+|(P)
+| align="right" |63,498,066
+|
+|-
+|D
+| align="right" |13,333,000
+| align="right" |
+|-
+|S
+| align="right" |11,860,000
+|
+|-
+| rowspan="3" |1917
+|(P)
+| align="right" |51,424,029
+|
+|-
+|D
+| align="right" |9,910,800
+|
+|-
+|S
+| align="right" |4,193,000
+|
+|-
+| rowspan="3" |1918
+|(P)
+| align="right" |32,086,314
+|
+|-
+|D
+| align="right" |8,362,314
+|Includes 8 Over 7 variety
+|-
+|S
+| align="right" |4,882,000
+|
+|-
+| rowspan="3" |1919
+|(P)
+| align="right" |60,868,000
+|
+|-
+|D
+| align="right" |8,006,000
+|
+|-
+|S
+| align="right" |7,521,000
+|
+|-
+| rowspan="3" |1920
+|(P)
+| align="right" |63,093,000
+|
+|-
+|D
+| align="right" |9,418,000
+|
+|-
+|S
+| align="right" |9,689,000
+|
+|-
+| rowspan="2" |1921
+|(P)
+| align="right" |10,663,000
+|
+|-
+|S
+| align="right" |1,557,000
+|Semi-key date
+|-
+| rowspan="2" |1923
+|(P)
+| align="right" |35,715,000
+|No buffalo nickels were made in 1922. Production resumed in 1923
+|-
+|S
+| align="right" |6,142,000
+|Semi-key date
+|-
+| rowspan="3" |1924
+|(P)
+| align="right" |21,620,000
+|
+|-
+|D
+| align="right" |5,258,000
+|
+|-
+|S
+| align="right" |1,437,000
+|Semi-key date
+|-
+| rowspan="3" |1925
+|(P)
+| align="right" |35,565,100
+|
+|-
+|D
+| align="right" |4,450,000
+|
+|-
+|S
+| align="right" |6,256,000
+|
+|-
+| rowspan="3" |1926
+|(P)
+| align="right" |44,693,000
+|
+|-
+|D
+| align="right" |5,638,000
+|
+|-
+|S
+| align="right" |970,000
+|Semi-key date
+|-
+| rowspan="3" |1927
+|(P)
+| align="right" |37,981,000
+|
+|-
+|D
+| align="right" |5,730,000
+|
+|-
+|S
+| align="right" |3,430,000
+|
+|-
+| rowspan="3" |1928
+|(P)
+| align="right" |23,411,000
+|
+|-
+|D
+| align="right" |6,436,000
+|
+|-
+|S
+| align="right" |6,936,000
+|
+|-
+| rowspan="3" |1929
+|(P)
+| align="right" |36,446,000
+|
+|-
+|D
+| align="right" |8,370,000
+|
+|-
+|S
+| align="right" |7,754,000
+|
+|-
+| rowspan="2" |1930
+|(P)
+| align="right" |22,849,000
+|
+|-
+|S
+| align="right" |5,435,000
+|
+|-
+|1931
+|S
+| align="right" |1,200,000
+|Only S mintmarks for 1931. Semi-key date
+|-
+| rowspan="2" |1934
+|(P)
+| align="right" |20,213,003
+|No nickels minted during 1932 and 1933. Production resumes 1934
+|-
+|D
+| align="right" |7,480,000
+|
+|-
+| rowspan="3" |1935
+|(P)
+| align="right" |58,264,000
+|
+|-
+|D
+| align="right" |12,092,000
+|
+|-
+|S
+| align="right" |10,300,000
+|
+|-
+| rowspan="3" |1936
+|(P)
+| align="right" |119,001,420
+|Highest mintage of the series
+|-
+|D
+| align="right" |24,814,000
+|Includes the rare "3 and 1/2 Legs" variety
+|-
+|S
+| align="right" |14,930,000
+|
+|-
+| rowspan="3" |1937
+|(P)
+| align="right" |79,485,769
+|Second-highest mintage of the series
+|-
+|D
+| align="right" |17,826,000
+|Includes the rare "3 Legs" variety
+|-
+|S
+| align="right" |5,635,000
+|
+|-
+|1938
+|D
+| align="right" |7,020,000
+|Includes the "D on S" variety, 1938 Buffalo nickels were only minted in Denver
+|}
+
+===Jefferson nickels (1938–present)===
+{{Main|Jefferson nickel}}
+
+Jefferson nickels have been minted since 1938 at the Philadelphia and Denver mints and from the San Francisco mint until 1970. Key dates for the series include the 1939-D, and 1950-D nickels. The 1939-D nickel with a mintage of 3,514,000 coins is the second lowest behind the 1950-D nickel. The cause of the key date of 1939 stems from the new design that excited collectors the year prior, after the initial hype had settled down fewer nickels were saved.<ref>{{cite web|url=http://www.bellaonline.com/articles/art178490.asp|title=1939-D Jefferson Nickel Now A Key Date|work=www.bellaonline.com|access-date=January 15, 2015}}</ref> 2,630,000 nickels were minted in Denver in 1950, this remains the lowest mintage for the Denver mint in the series. Despite its low mintage the nickel is not rare, its value is thought to be connected to the [[Brilliant Uncirculated|brilliant uncirculated]] [[coin roll|roll]] boom that burst between 1963 and 1964.<ref>{{cite web|url=http://www.coinweek.com/us-coins/us-coins-75-years-jefferson-nickels/|title=US Coins: 75 Years of Jefferson Nickels|work=www.coinweek.com|date=September 19, 2013|access-date=January 15, 2015}}</ref> On the opposite spectrum, the year 1964 saw the largest combined mintage of nickels to date. The result of the large mintages were due to a widespread shortage of small change that was blamed on coin collectors.<ref>{{cite web|url=http://www.numismaster.com/ta/numis/Article.jsp?ad=article&ArticleId=27140|title=1964 a Momentous Year in Coins|work=www.numismaster.com|date=August 19, 2013|access-date=January 16, 2015}}</ref> the following year, The [[Coinage Act of 1965]] removed all mint marks from nickels that were issued by the mints, this lasted until 1968 when the mintmark was moved from the reverse to the obverse side of the coin.<ref>{{cite web|url=http://www.usmint.gov/about_the_mint/collectors_corner/?action=mint_marks|title=Why Mint Marks?|work=www.usmint.gov|access-date=January 16, 2015}}</ref>
+
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Pre-War Composition (75% copper, 25% nickel) 1938-1942
+|-
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage
+! width="60%" |Comments
+|-
+| rowspan="3" |1938
+|(P)
+| align="right" |19,515,365
+|First year of issue
+|-
+|D
+| align="right" |5,376,000
+|
+|-
+|S
+| align="right" |4,105,000
+|
+|-
+| rowspan="3" |1939
+|(P)
+| align="right" |120,627,535
+|
+|-
+|D
+| align="right" |3,514,000
+|Semi-key date
+|-
+|S
+| align="right" |6,630,000
+|
+|-
+| rowspan="3" |1940
+|(P)
+| align="right" |176,499,158
+|
+|-
+|D
+| align="right" |43,540,000
+|
+|-
+|S
+| align="right" |39,690,000
+|
+|-
+| rowspan="3" |1941
+|(P)
+| align="right" |203,283,720
+|
+|-
+|D
+| align="right" |53,432,000
+|
+|-
+|S
+| align="right" |43,445,000
+|
+|-
+| rowspan="2" |1942
+|(P)
+| align="right" |49,818,600
+|
+|-
+|D
+| align="right" |13,938,000
+|
+|}
+
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Wartime Composition (56% copper, 35% silver, 9% manganese) 1942-1945
+|-
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage
+! width="60%" |Comments
+|-
+| rowspan="2" |1942
+|P
+| align="right" |57,900,600
+|Can be told apart from the non-silver nickels since these have a mintmark above Monticello.
+|-
+|S
+| align="right" |32,900,000
+|
+|-
+| rowspan="3" |1943
+|P
+| align="right" |271,165,000
+|
+|-
+|D
+| align="right" |15,294,000
+|
+|-
+|S
+| align="right" |104,060,000
+|
+|-
+| rowspan="3" |1944
+|P
+| align="right" |119,150,000
+|
+|-
+|D
+| align="right" |32,309,000
+|
+|-
+|S
+| align="right" |21,640,000
+|
+|-
+| rowspan="3" |1945
+|P
+| align="right" |119,408,100
+|
+|-
+|D
+| align="right" |37,158,000
+|
+|-
+|S
+| align="right" |58,939,000
+|
+|}
+
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Post-War Composition (75% copper, 25% nickel) 1946-2003
+|-
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage
+! width="60%" |Comments
+|-
+| rowspan="3" |1946
+|(P)
+| align="right" |161,116,000
+|
+|-
+|D
+| align="right" |45,292,200
+|
+|-
+|S
+| align="right" |13,560,000
+|
+|-
+| rowspan="3" |1947
+|(P)
+| align="right" |95,000,000
+|
+|-
+|D
+| align="right" |37,822,000
+|
+|-
+|S
+| align="right" |24,720,000
+|
+|-
+| rowspan="3" |1948
+|(P)
+| align="right" |89,348,000
+|
+|-
+|D
+| align="right" |44,734,000
+|
+|-
+|S
+| align="right" |11,300,000
+|
+|-
+| rowspan="3" |1949
+|(P)
+| align="right" |60,652,000
+|
+|-
+|D
+| align="right" |36,498,000
+|
+|-
+|S
+| align="right" |9,716,000
+|
+|-
+| rowspan="2" |1950
+|(P)
+| align="right" |9,847,386
+|
+|-
+|D
+| align="right" |2,630,030
+| Key date (lowest non-proof standard Jefferson Nickel)
+|-
+| rowspan="3" |1951
+|(P)
+| align="right" |28,609,500
+|
+|-
+|D
+| align="right" |20,460,000
+|
+|-
+|S
+| align="right" |7,776,000
+|
+|-
+| rowspan="3" |1952
+|(P)
+| align="right" |64,069,980
+|
+|-
+|D
+| align="right" |30,638,000
+|
+|-
+|S
+| align="right" |20,572,000
+|
+|-
+| rowspan="3" |1953
+|(P)
+| align="right" |46,772,800
+|
+|-
+|D
+| align="right" |59,878,600
+|
+|-
+|S
+| align="right" |19,210,900
+|
+|-
+| rowspan="3" |1954
+|(P)
+| align="right" |47,917,350
+|
+|-
+|D
+| align="right" |117,136,560
+|
+|-
+|S
+| align="right" |29,384,000
+|
+|-
+| rowspan="2" |1955
+|(P)
+| align="right" |8,266,200
+|
+|-
+|D
+| align="right" |74,464,100
+|
+|-
+| rowspan="2" |1956
+|(P)
+| align="right" |35,885,384
+|
+|-
+|D
+| align="right" |67,222,940
+|
+|-
+| rowspan="2" |1957
+|(P)
+| align="right" |39,655,952
+|
+|-
+|D
+| align="right" |136,828,900
+|
+|-
+| rowspan="2" |1958
+|(P)
+| align="right" |17,963,652
+|
+|-
+|D
+| align="right" |168,249,120
+|
+|-
+| rowspan="2" |1959
+|(P)
+| align="right" |28,397,291
+|
+|-
+|D
+| align="right" |160,738,240
+|
+|-
+| rowspan="2" |1960
+|(P)
+| align="right" |57,107,602
+|
+|-
+|D
+| align="right" |192,582,180
+|
+|-
+| rowspan="2" |1961
+|(P)
+| align="right" |76,668,244
+|
+|-
+|D
+| align="right" |229,342,760
+|
+|-
+| rowspan="2" |1962
+|(P)
+| align="right" |110,602,019
+|
+|-
+|D
+| align="right" |280,195,720
+|
+|-
+| rowspan="2" |1963
+|(P)
+| align="right" |178,851,645
+|
+|-
+|D
+| align="right" |276,829,460
+|
+|-
+| rowspan="2" |1964
+|(P)
+| align="right" |1,028,622,762
+|
+|-
+|D
+| align="right" |1,787,297,160
+|
+|-
+|1965
+|(P/D/S)
+| align="right" |136,131,380
+|Mintmarks suspended until 1968 to discourage coin collecting.
+|-
+|1966
+|(P/D/S)
+| align="right" |156,208,283
+|Mintmarks suspended until 1968 to discourage coin collecting.
+|-
+|1967
+|(P/D/S)
+| align="right" |107,325,800
+|Mintmarks suspended until 1968 to discourage coin collecting.
+|-
+| rowspan="2" |1968
+|D
+| align="right" |91,227,880
+|
+|-
+|S
+| align="right" |100,396,004
+|
+|-
+| rowspan="2" |1969
+|D
+| align="right" |202,807,500
+|
+|-
+|S
+| align="right" |123,099,631
+|
+|-
+| rowspan="2" |1970
+|D
+| align="right" |515,485,380
+|
+|-
+|S
+| align="right" |241,464,814
+|
+|-
+| rowspan="3" |1971
+|(P)
+| align="right" |106,884,000
+|
+|-
+|D
+| align="right" |316,144,800
+|
+|-
+|S
+| align="right" |3,220,733
+|Proof only. Includes the very rare "No S" variety, of which there are ~200 known.
+|-
+| rowspan="3" |1972
+|(P)
+| align="right" |202,036,000
+|
+|-
+|D
+| align="right" |351,694,600
+|
+|-
+|S
+| align="right" |3,260,996
+|Proof only
+|-
+| rowspan="3" |1973
+|(P)
+| align="right" |384,396,000
+|
+|-
+|D
+| align="right" |261,405,000
+|
+|-
+|S
+| align="right" |2,760,339
+|Proof only
+|-
+| rowspan="3" |1974
+|(P)
+| align="right" |601,752,000
+|
+|-
+|D
+| align="right" |277,373,000
+|
+|-
+|S
+| align="right" |2,612,568
+|Proof only
+|-
+| rowspan="3" |1975
+|(P)
+| align="right" |181,772,000
+|
+|-
+|D
+| align="right" |401,875,300
+|
+|-
+|S
+| align="right" |2,845,450
+|Proof only
+|-
+| rowspan="3" |1976
+|(P)
+| align="right" |367,124,000
+|
+|-
+|D
+| align="right" |563,964,147
+|
+|-
+|S
+| align="right" |2,845,450
+|Proof only
+|-
+| rowspan="3" |1977
+|(P)
+| align="right" |585,376,000
+|
+|-
+|D
+| align="right" |297,313,460
+|
+|-
+|S
+| align="right" |3,251,152
+|Proof only
+|-
+| rowspan="3" |1978
+|(P)
+| align="right" |391,308,000
+|
+|-
+|D
+| align="right" |313,092,780
+|
+|-
+|S
+| align="right" |3,127,781
+|Proof only
+|-
+| rowspan="3" |1979
+|(P)
+| align="right" |463,188,000
+|
+|-
+|D
+| align="right" |325,867,672
+|
+|-
+|S
+| align="right" |3,677,175
+|Proof only
+|-
+| rowspan="3" |1980
+|P
+| align="right" |593,004,000
+|"P" mintmark added to the obverse of the coin.
+|-
+|D
+| align="right" |502,323,448
+|
+|-
+|S
+| align="right" |3,554,806
+|Proof only
+|-
+| rowspan="3" |1981
+|P
+| align="right" |657,504,000
+|
+|-
+|D
+| align="right" |364,801,843
+|
+|-
+|S
+| align="right" |4,063,083
+|Proof only
+|-
+| rowspan="3" |1982
+|P
+| align="right" |292,355,000
+|
+|-
+|D
+| align="right" |373,726,544
+|
+|-
+|S
+| align="right" |3,857,479
+|Proof only
+|-
+| rowspan="3" |1983
+|P
+| align="right" |561,615,000
+|
+|-
+|D
+| align="right" |536,726,276
+|
+|-
+|S
+| align="right" |3,279,126
+|Proof only
+|-
+| rowspan="3" |1984
+|P
+| align="right" |746,769,000
+|
+|-
+|D
+| align="right" |517,675,146
+|
+|-
+|S
+| align="right" |3,065,110
+|Proof only
+|-
+| rowspan="3" |1985
+|P
+| align="right" |647,114,962
+|
+|-
+|D
+| align="right" |459,747,446
+|
+|-
+|S
+| align="right" |3,362,821
+|Proof only
+|-
+| rowspan="3" |1986
+|P
+| align="right" |536,883,483
+|
+|-
+|D
+| align="right" |361,819,140
+|
+|-
+|S
+| align="right" |3,010,497
+|Proof only
+|-
+| rowspan="3" |1987
+|P
+| align="right" |371,499,481
+|
+|-
+|D
+| align="right" |410,590,604
+|
+|-
+|S
+| align="right" |4,227,728
+|Proof only
+|-
+| rowspan="3" |1988
+|P
+| align="right" |771,360,000
+|
+|-
+|D
+| align="right" |663,771,652
+|
+|-
+|S
+| align="right" |3,262,948
+|Proof only
+|-
+| rowspan="3" |1989
+|P
+| align="right" |898,812,000
+|
+|-
+|D
+| align="right" |570,842,474
+|
+|-
+|S
+| align="right" |3,220,194
+|Proof only
+|-
+| rowspan="3" |1990
+|P
+| align="right" |661,636,000
+|
+|-
+|D
+| align="right" |663,938,503
+|
+|-
+|S
+| align="right" |3,299,559
+|Proof only
+|-
+| rowspan="3" |1991
+|P
+| align="right" |614,104,000
+|
+|-
+|D
+| align="right" |436,496,678
+|
+|-
+|S
+| align="right" |2,867,787
+|Proof only
+|-
+| rowspan="3" |1992
+|P
+| align="right" |399,552,000
+|
+|-
+|D
+| align="right" |450,565,113
+|
+|-
+|S
+| align="right" |4,176,560
+|Proof only
+|-
+| rowspan="3" |1993
+|P
+| align="right" |412,076,000
+|
+|-
+|D
+| align="right" |406,084,135
+|
+|-
+|S
+| align="right" |3,394,792
+|Proof only
+|-
+| rowspan="4" |1994
+|P
+| align="right" |722,160,000
+|
+|-
+|P
+| align="right" |167,703
+|Special Frosted Matte Uncirculated. Included in collector's sets.
+|-
+|D
+| align="right" |715,762,110
+|
+|-
+|S
+| align="right" |3,269,923
+|Proof only
+|-
+| rowspan="3" |1995
+|P
+| align="right" |774,156,000
+|
+|-
+|D
+| align="right" |888,112,000
+|
+|-
+|S
+| align="right" |2,797,481
+|Proof only
+|-
+| rowspan="3" |1996
+|P
+| align="right" |829,332,000
+|
+|-
+|D
+| align="right" |817,736,000
+|
+|-
+|S
+| align="right" |2,525,625
+|Proof only
+|-
+| rowspan="4" |1997
+|P
+| align="right" |470,972,000
+|
+|-
+|P
+| align="right" |25,000
+|Special Frosted Matte Uncirculated. Rare - Included in collector's sets.
+|-
+|D
+| align="right" |466,640,000
+|
+|-
+|S
+| align="right" |2,796,678
+|Proof only
+|-
+| rowspan="3" |1998
+|P
+| align="right" |688,292,000
+|
+|-
+|D
+| align="right" |635,380,000
+|
+|-
+|S
+| align="right" |2,086,507
+|Proof only
+|-
+| rowspan="3" |1999
+|P
+| align="right" |1,212,000,000
+|
+|-
+|D
+| align="right" |1,066,720,000
+|
+|-
+|S
+| align="right" |3,347,966
+|Proof only
+|-
+| rowspan="3" |2000
+|P
+| align="right" |846,240,000
+|
+|-
+|D
+| align="right" |1,509,220,000
+|
+|-
+|S
+| align="right" |4,047,993
+|Proof only
+|-
+| rowspan="3" |2001
+|P
+| align="right" |675,704,000
+|
+|-
+|D
+| align="right" |627,680,000
+|
+|-
+|S
+| align="right" |3,184,606
+|Proof only
+|-
+| rowspan="3" |2002
+|P
+| align="right" |529,280,000
+|
+|-
+|D
+| align="right" |691,200,000
+|
+|-
+|S
+| align="right" |3,211,995
+|Proof only
+|-
+| rowspan="3" |2003
+|P
+| align="right" |441,840,000
+|
+|-
+|D
+| align="right" |383,040,000
+|
+|-
+|S
+| align="right" |3,298,439
+|Proof only
+|}
+
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Westward Journey Series, 2004-2005
+|-
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage
+! width="60%" |Comments
+|-
+| rowspan="3" |2004
+|P
+| align="right" |361,440,000
+|Louisiana Purchase reverse
+|-
+|D
+| align="right" |372,000,000
+|Louisiana Purchase reverse
+|-
+|S
+| align="right" |2,992,069
+|Louisiana Purchase reverse, proof only
+|-
+| rowspan="3" |2004
+|P
+| align="right" |366,720,000
+|Keelboat reverse
+|-
+|D
+| align="right" |344,880,000
+|Keelboat reverse
+|-
+|S
+| align="right" |2,965,422
+|Keelboat reverse, proof only
+|-
+| rowspan="3" |2005
+|P
+| align="right" |448,320,000
+|American Bison reverse
+|-
+|D
+| align="right" |487,680,000
+|American Bison reverse
+|-
+|S
+| align="right" |3,344,679
+|American Bison reverse, proof only
+|-
+| rowspan="3" |2005
+|P
+| align="right" |394,080,000
+|Ocean in View reverse
+|-
+|D
+| align="right" |411,120,000
+|Ocean in View reverse
+|-
+|S
+| align="right" |3,344,679
+|Ocean in View reverse, proof only
+|}
+
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Return to Monticello (75% copper, 25% nickel) 2006–Present
+|-
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage
+! width="60%" |Comments
+|-
+| rowspan="3" |2006
+|P
+| align="right" |693,120,000
+|
+|-
+|D
+| align="right" |809,280,000
+|
+|-
+|S
+| align="right" |3,054,436
+|Proof only
+|-
+| rowspan="3" |2007
+|P
+| align="right" |571,680,000
+|
+|-
+|D
+| align="right" |626,160,000
+|
+|-
+|S
+| align="right" |2,577,166
+|Proof only
+|-
+| rowspan="3" |2008
+|P
+| align="right" |279,840,000
+|
+|-
+|D
+| align="right" |345,600,000
+|
+|-
+|S
+| align="right" |2,169,561
+|Proof only
+|-
+| rowspan="3" |2009
+|P
+| align="right" |39,840,000
+|the [[Great Recession]] caused low mintage numbers not seen since the 1950s.
+|-
+|D
+| align="right" |46,800,000
+|
+|-
+|S
+| align="right" |2,179,867
+|Proof only
+|-
+| rowspan="3" |2010
+|P
+| align="right" |260,640,000
+|
+|-
+|D
+| align="right" |229,920,000
+|
+|-
+|S
+| align="right" |1,689,216
+|Proof only
+|-
+| rowspan="3" |2011
+|P
+| align="right" |450,000,000
+|
+|-
+|D
+| align="right" |540,240,000
+|
+|-
+|S
+| align="right" |1,673,010
+|Proof only
+|-
+| rowspan="3" |2012
+|P
+| align="right" |464,640,000
+|
+|-
+|D
+| align="right" |558,960,000
+|
+|-
+|S
+| align="right" |1,239,148
+|Proof only
+|-
+| rowspan="3" |2013
+|P
+| align="right" |607,440,000
+|
+|-
+|D
+| align="right" |615,600,000
+|
+|-
+|S
+| align="right" |1,274,505
+|Proof only
+|-
+| rowspan="3" |2014
+|P
+| align="right" |635,520,000
+|
+|-
+|D
+| align="right" |570,720,000
+|
+|-
+|S
+| align="right" |1,193,735
+|Proof only
+|-
+| rowspan="3" |2015
+|P
+| align="right" |752,880,000
+|
+|-
+|D
+| align="right" |846,720,000
+|
+|-
+|S
+| align="right" |1,099,413
+|Proof only
+|-
+| rowspan="3" |2016
+|P
+| align="right" |786,960,000
+|
+|-
+|D
+| align="right" |759,600,000
+|
+|-
+|S
+| align="right" |1,011,684
+|Proof only
+|-
+| rowspan="4" |2017
+|P
+| align="right" |710,160,000
+|
+|-
+|D
+| align="right" |663,120,000
+|
+|-
+|S
+| align="right" |979,498
+|Proof only
+|-
+|S
+| align="right" |223,310
+|Enhanced Uncirculated
+|-
+| rowspan="4" |2018
+|P
+| align="right" |629,520,000
+|
+|-
+|D
+| align="right" |626,880,000
+|
+|-
+|S
+| align="right" |898,986
+|Proof only
+|-
+|S
+| align="right" |199,177
+|Reverse proof<ref>{{cite web | url=https://www.coincommunity.com/us_nickels/2018_s_jefferson_nickel.asp | title=2018 S Jefferson Nickel Photos, Mintage, Specifications, Errors, Varieties, Grading and Much More }}</ref>
+|-
+| rowspan="3" |2019
+|P
+| align="right" |567,854,400
+|
+|-
+|D
+| align="right" |527,040,000
+|
+|-
+|S
+| align="right" |989,862
+|Proof only
+|-
+| rowspan="5" |2020
+|P
+| align="right" |785,500,000<ref name="Circulating Coins Production">{{cite web | url=https://www.usmint.gov/about/production-sales-figures/circulating-coins-production|title=Circulating Coins Production|access-date=2025-10-19}}</ref>
+|
+|-
+|D
+| align="right" |837,600,000<ref name="Circulating Coins Production"/>
+|
+|-
+|S
+| align="right" |777,913<ref name="Cumulative Sales Figures">{{cite web | url=https://www.usmint.gov/about/production-sales-figures/cumulative-sales|title=Cumulative Sales Figures|access-date=2025-10-19}}</ref>
+| Proof only
+|-
+|W
+|align="right" |464,730<ref name="Cumulative Sales Figures"/>
+| Proof
+|-
+|W
+|align="right" |313,183<ref name="Cumulative Sales Figures"/>
+| Reverse proof
+|-
+| rowspan="3" |2021
+|P
+| align="right" |772,780,000<ref name="Circulating Coins Production"/>
+|
+|-
+|D
+| align="right" |798,000,000<ref name="Circulating Coins Production"/>
+| 
+|-
+|S
+| align="right" |513,866<ref name="Cumulative Sales Figures"/>
+| Proof only
+|-
+| rowspan="3" |2022
+|P
+| align="right" |769,920,000<ref name="Circulating Coins Production"/>
+|
+|-
+|D
+| align="right" |777,600,000<ref name="Circulating Coins Production"/>
+|
+|-
+|S
+| align="right" |400,002<ref name="Cumulative Sales Figures"/>
+| Proof only
+|-
+| rowspan="3" |2023
+|P
+| align="right" |692,600,000<ref name="Circulating Coins Production"/>
+|
+|-
+|D
+| align="right" |734,800,000<ref name="Circulating Coins Production"/>
+|
+|-
+|S
+| align="right" |369,236<ref name="Cumulative Sales Figures"/>
+| Proof only
+|-
+| rowspan="3" |2024
+|P
+| align="right" |79,920,000<ref name="Circulating Coins Production"/>
+
+| 
+|-
+|D
+| align="right" |32,880,000<ref name="Circulating Coins Production"/>
+| 
+|-
+|S
+| align="right" |355,786<ref name="Cumulative Sales Figures"/>
+| Proof only
+|-
+| rowspan="3" |2025
+|P
+| align="right" |443,840,000<ref name="Circulating Coins Production"/>
+
+| 
+|-
+|D
+| align="right" |322,320,000<ref name="Circulating Coins Production"/>
+| 
+|-
+|S
+| align="right" |304,725<ref name="Cumulative Sales Figures"/>
+| Proof only
+|}
+
+==See also==
+{{Portal|Money|numismatics|Numismatics|United States}}
+* [[United States cent mintage figures]]
+** [[Lincoln cent mintage figures]]
+* [[Roosevelt dime mintage figures]]
+* [[United States quarter mintage figures]]
+** [[Washington quarter mintage figures]]
+** [[50 State quarter mintage figures]]
+** [[America the Beautiful quarter mintage figures]]
+** [[American Women quarters]]
+* [[United States half dollar mintage figures]]
+**[[Kennedy half dollar mintage figures]]
+* [[American Silver Eagle mintage figures]]
+
+==References==
+{{reflist}}
+
+==External links==
+*[http://www.usmint.gov/ (United States Mint)]
+
+{{United States circulating coinage}}
+{{Coinage (United States)}}
+
+[[Category:Five-cent coins of the United States|*]]

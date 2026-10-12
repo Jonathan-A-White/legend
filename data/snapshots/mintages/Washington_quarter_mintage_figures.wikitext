@@ -1,0 +1,1231 @@
+{{Short description|Markings on a US quarter coin}}
+{{Main articles|United States quarter mintage figures}}
+
+{{Multiple image
+| image1 = 98 quarter obverse.png
+| image2 = 98 quarter reverse.png
+| width1 = 110
+| width2 = 110
+| footer = Washington quarter
+}}
+Below are the mintage figures for the [[Washington quarter]].
+
+The following [[mint mark]]s indicate which mint the coin was made at (parentheses indicate a lack of a mint mark):
+
+'''P''' = [[Philadelphia Mint]]
+
+'''D''' = [[Denver Mint]]
+
+'''S''' = [[San Francisco Mint]]
+
+== Eagle reverse (1932–1974) ==
+
+=== Silver ===
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Eagle reverse, 1932–1964 (Silver)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":0">{{Cite web|url=https://washingtonquarters.org/washington-quarter-mintage/|title=Washington Quarter Mintages|date=21 February 2010 |language=en-US|access-date=2019-07-15}}</ref><ref name=":1">{{Cite web|url=https://washingtonquarters.org/proof-washington-quarters/|title=Proof Washington Quarters|date=4 February 2010 |language=en-US|access-date=2019-07-15}}</ref>
+! width="60%" |Comments
+|-
+| rowspan="3" |1932
+|(P)
+|5,404,000
+|
+|-
+|D
+|436,800
+|
+|-
+|S
+|408,000
+|
+|-
+| rowspan="2" |1934
+|(P)
+|31,912,052
+|Doubled die errors are known.<ref>{{Cite web|url=https://www.usacoinbook.com/coins/2034/quarters/washington/1934-P/doubled-die/|title=1934 Washington Silver Quarter Doubled Die Coin Value Prices, Photos & Info|website=USA Coin Book|language=en|access-date=2019-07-15}}</ref>
+|-
+|D
+|3,527,200
+|
+|-
+| rowspan="3" |1935
+|(P)
+|32,484,000
+|
+|-
+|D
+|5,780,000
+|
+|-
+|S
+|5,660,000
+|
+|-
+| rowspan="4" |1936
+|(P)
+|41,300,000
+|
+|-
+|D
+|5,374,000
+|
+|-
+|S
+|3,828,000
+|
+|-
+|(P)
+|3,837
+|Proof
+|-
+| rowspan="4" |1937
+|(P)
+|19,696,000
+|Doubled die errors are known.<ref>{{Cite web|url=https://www.usacoinbook.com/coins/2045/quarters/washington/1937-P/doubled-die-obverse/|title=1937 Washington Silver Quarter Doubled Die Obverse Coin Value Prices, Photos & Info|website=USA Coin Book|language=en|access-date=2019-07-15}}</ref>
+|-
+|D
+|7,189,600
+|
+|-
+|S
+|1,652,000
+|
+|-
+|(P)
+|5,542
+|Proof
+|-
+| rowspan="3" |1938
+|(P)
+|9,472,000
+|
+|-
+|S
+|2,832,000
+|
+|-
+|(P)
+|8,045
+|Proof
+|-
+| rowspan="4" |1939
+|(P)
+|33,540,000
+|
+|-
+|D
+|7,092,000
+|
+|-
+|S
+|2,628,000
+|
+|-
+|(P)
+|8,795
+|Proof
+|-
+| rowspan="4" |1940
+|(P)
+|35,704,000
+|
+|-
+|D
+|2,797,600
+|
+|-
+|S
+|8,244,000
+|
+|-
+|(P)
+|11,246
+|Proof
+|-
+| rowspan="4" |1941
+|(P)
+|79,032,000
+|
+|-
+|D
+|16,714,800
+|
+|-
+|S
+|16,080,000
+|
+|-
+|(P)
+|15,287
+|Proof
+|-
+| rowspan="4" |1942
+|(P)
+|102,096,000
+|
+|-
+|D
+|17,487,200
+|Doubled die errors are known.<ref>{{Cite web|url=https://www.usacoinbook.com/coins/2061/quarters/washington/1942-D/doubled-die-obverse/|title=1942 D Washington Silver Quarter Doubled Die Obverse Coin Value Prices, Photos & Info|website=USA Coin Book|language=en|access-date=2019-07-15}}</ref>
+|-
+|S
+|19,384,000
+|
+|-
+|(P)
+|21,123
+|Proof
+|-
+| rowspan="3" |1943
+|(P)
+|99,700,000
+|Doubled die errors are known.<ref>{{Cite web|url=https://www.usacoinbook.com/coins/2064/quarters/washington/1943-P/doubled-die-obverse/|title=1943 Washington Silver Quarter Doubled Die Obverse Coin Value Prices, Photos & Info|website=USA Coin Book|language=en|access-date=2019-07-15}}</ref>
+|-
+|D
+|16,095,600
+|
+|-
+|S
+|21,700,000
+|Doubled die errors are known.<ref>{{Cite web|url=https://www.usacoinbook.com/coins/2067/quarters/washington/1943-S/doubled-die-obverse/|title=1943 S Washington Silver Quarter Doubled Die Obverse Coin Value Prices, Photos & Info|website=USA Coin Book|language=en|access-date=2019-07-15}}</ref>
+|-
+| rowspan="3" |1944
+|(P)
+|104,956,000
+|
+|-
+|D
+|14,600,800
+|
+|-
+|S
+|12,560,000
+|
+|-
+| rowspan="3" |1945
+|(P)
+|74,372,000
+|
+|-
+|D
+|12,341,600
+|
+|-
+|S
+|17,004,001
+|
+|-
+| rowspan="3" |1946
+|(P)
+|53,436,000
+|
+|-
+|D
+|9,072,800
+|
+|-
+|S
+|4,204,000
+|
+|-
+| rowspan="3" |1947
+|(P)
+|22,556,000
+|
+|-
+|D
+|15,388,000
+|
+|-
+|S
+|5,532,000
+|
+|-
+| rowspan="3" |1948
+|(P)
+|35,196,000
+|
+|-
+|D
+|16,766,800
+|
+|-
+|S
+|15,960,000
+|
+|-
+| rowspan="2" |1949
+|(P)
+|9,312,000
+|
+|-
+|D
+|10,068,400
+|
+|-
+| rowspan="4" |1950
+|(P)
+|24,920,126
+|
+|-
+|D
+|21,075,600
+|D over S overmark errors are known.<ref>{{Cite web|url=https://www.usacoinbook.com/coins/2087/quarters/washington/1950-D/d-over-s/|title=1950 D Washington Silver Quarter D Over S Coin Value Prices, Photos & Info|website=USA Coin Book|language=en|access-date=2019-07-15}}</ref>
+|-
+|S
+|10,284,004
+|S over D overmark errors are known.<ref>{{Cite web|url=https://www.usacoinbook.com/coins/2089/quarters/washington/1950-S/s-over-d/|title=1950 S Washington Silver Quarter S Over D Coin Value Prices, Photos & Info|website=USA Coin Book|language=en|access-date=2019-07-15}}</ref>
+|-
+|(P)
+|51,386
+|Proof
+|-
+| rowspan="4" |1951
+|(P)
+|43,448,102
+|
+|-
+|D
+|35,354,800
+|
+|-
+|S
+|9,048,000
+|
+|-
+|(P)
+|57,500
+|Proof
+|-
+| rowspan="4" |1952
+|(P)
+|38,780,093
+|
+|-
+|D
+|49,795,200
+|
+|-
+|S
+|13,707,800
+|
+|-
+|(P)
+|81,980
+|Proof
+|-
+| rowspan="4" |1953
+|(P)
+|18,536,120
+|
+|-
+|D
+|56,112,400
+|
+|-
+|S
+|14,016,000
+|
+|-
+|(P)
+|128,800
+|Proof
+|-
+| rowspan="4" |1954
+|(P)
+|54,412,203
+|
+|-
+|D
+|42,305,500
+|
+|-
+|S
+|11,834,722
+|
+|-
+|(P)
+|233,300
+|Proof
+|-
+| rowspan="3" |1955
+|(P)
+|18,180,181
+|
+|-
+|D
+|3,182,400
+|
+|-
+|(P)
+|378,200
+|Proof
+|-
+| rowspan="3" |1956
+|(P)
+|44,144,000
+|
+|-
+|D
+|32,334,500
+|
+|-
+|(P)
+|669,384
+|Proof
+|-
+| rowspan="3" |1957
+|(P)
+|46,532,000
+|
+|-
+|D
+|77,924,160
+|
+|-
+|(P)
+|1,247,952
+|Proof
+|-
+| rowspan="3" |1958
+|(P)
+|6,360,000
+|
+|-
+|D
+|78,124,900
+|
+|-
+|(P)
+|875,652
+|Proof
+|-
+| rowspan="3" |1959
+|(P)
+|24,384,000
+|
+|-
+|D
+|62,054,232
+|
+|-
+|(P)
+|1,149,291
+|Proof
+|-
+| rowspan="3" |1960
+|(P)
+|29,164,000
+|
+|-
+|D
+|63,000,324
+|
+|-
+|(P)
+|1,691,602
+|Proof
+|-
+| rowspan="3" |1961
+|(P)
+|37,036,000
+|
+|-
+|D
+|83,656,928
+|
+|-
+|(P)
+|3,028,244
+|Proof
+|-
+| rowspan="3" |1962
+|(P)
+|36,156,000
+|
+|-
+|D
+|127,554,756
+|
+|-
+|(P)
+|3,218,019
+|Proof
+|-
+| rowspan="3" |1963
+|(P)
+|74,316,000
+|
+|-
+|D
+|135,288,184
+|
+|-
+|(P)
+|3,075,645
+|Proof
+|-
+| rowspan="4" |1964
+|(P)
+|560,390,585
+|Continued to be struck until 1966
+|-
+|D
+|704,135,528
+|Continued to be struck until 1966
+|-
+|(P)
+|3,950,762
+|Proof
+|-
+|(S)
+|≈20-50<ref>{{Cite web|url=https://www.pcgs.com/coinfacts/coin/1964-25c-sms/5974|title=1964 25C SMS (Special Strike) Washington Quarter - PCGS CoinFacts|website=PCGS|access-date=2019-07-15}}</ref>
+|Satin finish, [[Special Mint Set]]
+|}
+
+=== Clad ===
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Eagle reverse, 1965–1974 (Nickel-clad copper)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":0" /><ref name=":1" />
+! width="60%" |Comments
+|-
+| rowspan="4" |1965
+|(P)
+|1,819,717,540
+|
+|-
+|(D)
+|^
+|
+|-
+|(S)
+|^
+|
+|-
+|(S)
+|2,360,000<ref>{{Cite web|url=https://www.pcgs.com/coinfacts/coin/1965-25c-sms/5997|title=1965 25C SMS (Special Strike) Washington Quarter - PCGS CoinFacts|website=PCGS|access-date=2019-07-15}}</ref>
+|Satin finish, Special Mint Set
+|-
+| rowspan="4" |1966
+|(P)
+|821,101,500
+|
+|-
+|(D)
+|^
+|
+|-
+|(S)
+|^
+|
+|-
+|(S)
+|2,261,583<ref>{{Cite web|url=https://www.pcgs.com/coinfacts/coin/1966-25c-sms/5998|title=1966 25C SMS (Special Strike) Washington Quarter - PCGS CoinFacts|website=PCGS|access-date=2019-07-15}}</ref>
+|Satin finish, Special Mint Set
+|-
+| rowspan="4" |1967
+|(P)
+|1,524,031,848
+|
+|-
+|(D)
+|^
+|
+|-
+|(S)
+|^
+|
+|-
+|(S)
+|1,863,344<ref>{{Cite web|url=https://www.pcgs.com/coinfacts/coin/1967-25c-sms/5999|title=1967 25C SMS (Special Strike) Washington Quarter - PCGS CoinFacts|website=PCGS|access-date=2019-07-15}}</ref>
+|Satin finish, Special Mint Set
+|-
+| rowspan="3" |1968
+|(P)
+|220,731,500
+|
+|-
+|D
+|101,534,000
+|
+|-
+|S
+|3,041,506
+|Proof only
+|-
+| rowspan="3" |1969
+|(P)
+|176,212,000
+|
+|-
+|D
+|114,372,000
+|
+|-
+|S
+|2,934,631
+|Proof only
+|-
+| rowspan="3" |1970
+|(P)
+|136,420,000
+|
+|-
+|D
+|417,341,364
+|
+|-
+|S
+|2,632,810
+|Proof only
+|-
+| rowspan="3" |1971
+|(P)
+|109,284,000
+|
+|-
+|D
+|258,634,428
+|
+|-
+|S
+|3,220,733
+|Proof only
+|-
+| rowspan="3" |1972
+|(P)
+|215,048,000
+|
+|-
+|D
+|311,067,732
+|
+|-
+|S
+|3,260,996
+|Proof only
+|-
+| rowspan="3" |1973
+|(P)
+|346,924,000
+|
+|-
+|D
+|232,977,400
+|
+|-
+|S
+|2,760,339
+|Proof only
+|-
+| rowspan="3" |1974
+|(P)
+|801,456,000
+|
+|-
+|D
+|353,160,300
+|
+|-
+|S
+|2,612,568
+|Proof only
+|}
+
+== Bicentennial reverse (1976) ==
+{{Main articles|United States Bicentennial coinage}}
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Bicentennial reverse, 1976 (Nickel-clad copper unless otherwise noted)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref>{{Cite web|url=https://www.usacoinbook.com/coins/quarters/washington/|title=Washington Quarters - Price Charts & Coin Values|website=www.usacoinbook.com|access-date=2019-07-15}}</ref>
+! width="60%" |Comments
+|-
+| rowspan="7" |1976
+|(P)
+|809,784,016
+|Struck in 1975 and 1976
+|-
+|D
+|860,118,839
+|Struck in 1975 and 1976
+|-
+|S
+|4,908,319
+|Uncirculated, silver-clad copper
+|-
+|S
+|2,845,450<ref>{{Cite web|url=https://proofsetguide.com/1975-proof-set/|title=1975 Proof Set {{!}} United States Mint Proof Sets|date=3 April 2009 |language=en-US|access-date=2019-07-15}}</ref>
+|Proof, struck in 1975
+|-
+|S
+|4,149,730<ref>{{Cite web|url=https://proofsetguide.com/1976-proof-set/|title=1976 Proof Set {{!}} United States Mint Proof Sets|date=5 April 2009 |language=en-US|access-date=2019-07-15}}</ref>
+|Proof, struck in 1976
+|-
+|S
+|3,998,621
+|Proof, silver-clad copper
+|-
+|(P)
+|c3-4<ref>{{Cite web|url=http://uspatterns.com/p2085.html|title=J2161/P2085|website=uspatterns.com|access-date=2019-07-15}}</ref>
+|Pattern, silver-clad copper
+|}
+
+== Eagle reverse (1977–1998) ==
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Eagle reverse, 1977–1998 (Nickel-clad copper unless otherwise noted)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":0" /><ref name=":1" />
+! width="60%" |Comments
+|-
+| rowspan="4" |1977
+|(P)
+|468,556,000
+|
+|-
+|(W)
+|^
+|First time West Point produced the quarter
+|-
+|D
+|256,524,978
+|
+|-
+|S
+|3,251,152
+|Proof only
+|-
+| rowspan="4" |1978
+|(P)
+|521,452,000
+|
+|-
+|(W)
+|^
+|
+|-
+|D
+|287,373,152
+|
+|-
+|S
+|3,127,781
+|Proof only
+|-
+| rowspan="4" |1979
+|(P)
+|518,708,000
+|
+|-
+|(W)
+|^
+|
+|-
+|D
+|489,789,780
+|
+|-
+|S
+|3,677,175
+|Proof only
+|-
+| rowspan="3" |1980
+|P
+|635,832,000
+|First time the P mint mark was used on the quarter
+|-
+|D
+|518,327,487
+|
+|-
+|S
+|3,554,806
+|Proof only
+|-
+| rowspan="3" |1981
+|P
+|601,716,000
+|
+|-
+|D
+|575,722,833
+|
+|-
+|S
+|4,063,083
+|Proof only
+|-
+| rowspan="3" |1982
+|P
+|500,931,000
+|
+|-
+|D
+|480,042,788
+|
+|-
+|S
+|3,857,479
+|Proof only
+|-
+| rowspan="3" |1983
+|P
+|673,535,000
+|
+|-
+|D
+|617,806,446
+|
+|-
+|S
+|3,279,126
+|Proof only
+|-
+| rowspan="3" |1984
+|P
+|676,545,000
+|
+|-
+|D
+|546,483,064
+|
+|-
+|S
+|3,065,110
+|Proof only
+|-
+| rowspan="3" |1985
+|P
+|775,818,962
+|
+|-
+|D
+|519,962,888
+|
+|-
+|S
+|3,362,821
+|Proof only
+|-
+| rowspan="3" |1986
+|P
+|551,199,333
+|
+|-
+|D
+|504,298,660
+|
+|-
+|S
+|3,010,497
+|Proof only
+|-
+| rowspan="3" |1987
+|P
+|582,499,481
+|
+|-
+|D
+|655,594,696
+|
+|-
+|S
+|4,227,728
+|Proof only
+|-
+| rowspan="3" |1988
+|P
+|562,052,000
+|
+|-
+|D
+|596,810,688
+|
+|-
+|S
+|3,262,948
+|Proof only
+|-
+| rowspan="3" |1989
+|P
+|512,868,000
+|
+|-
+|D
+|896,535,597
+|
+|-
+|S
+|3,220,194
+|Proof only
+|-
+| rowspan="3" |1990
+|P
+|613,792,000
+|
+|-
+|D
+|927,638,181
+|
+|-
+|S
+|3,299,559
+|Proof only
+|-
+| rowspan="3" |1991
+|P
+|570,968,000
+|
+|-
+|D
+|630,966,693
+|
+|-
+|S
+|2,867,787
+|Proof only
+|-
+| rowspan="4" |1992
+|P
+|384,764,000
+|
+|-
+|D
+|389,777,107
+|
+|-
+|S
+|2,858,981
+|Proof
+|-
+|S
+|1,317,579
+|Silver proof
+|-
+| rowspan="4" |1993
+|P
+|639,276,000
+|
+|-
+|D
+|645,476,128
+|
+|-
+|S
+|2,633,439
+|Proof
+|-
+|S
+|761,353
+|Silver proof
+|-
+| rowspan="4" |1994
+|P
+|825,600,000
+|
+|-
+|D
+|880,034,110
+|
+|-
+|S
+|2,484,594
+|Proof
+|-
+|S
+|785,329
+|Silver proof
+|-
+| rowspan="4" |1995
+|P
+|1,004,336,000
+|
+|-
+|D
+|1,103,216,000
+|
+|-
+|S
+|2,117,496
+|Proof
+|-
+|S
+|679,985
+|Silver proof
+|-
+| rowspan="4" |1996
+|P
+|925,040,000
+|
+|-
+|D
+|906,868,000
+|
+|-
+|S
+|1,750,244
+|Proof
+|-
+|S
+|775,021
+|Silver proof
+|-
+| rowspan="4" |1997
+|P
+|595,740,000
+|
+|-
+|D
+|599,680,000
+|
+|-
+|S
+|1,975,000
+|Proof
+|-
+|S
+|741,678
+|Silver proof
+|-
+| rowspan="4" |1998
+|P
+|896,268,000
+|
+|-
+|D
+|821,000,000
+|
+|-
+|S
+|2,086,507
+|Proof
+|-
+|S
+|878,792
+|Silver proof
+|}
+
+== 50 State quarters (1999-2008) ==
+{{Main articles|50 State quarter mintage figures}}
+
+== District of Columbia and United States Territories quarters (2009) ==
+{{Main articles|District of Columbia and United States Territories Quarters}}
+
+=== District of Columbia ===
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+District of Columbia reverse, 2009 (Nickel-clad copper unless otherwise noted)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":2">{{Cite web|url=https://www.usacoinbook.com/coins/quarters/50-states-and-territories/|title=50 States and Territories Quarters - Price Charts & Coin Values|website=www.usacoinbook.com|access-date=2019-07-16}}</ref>
+! width="60%" |Comments
+|-
+| rowspan="4" |2009
+|P
+|83,600,000
+|
+|-
+|D
+|88,800,000
+|
+|-
+|S
+|2,113,390
+|Proof
+|-
+|S
+|993,589
+|Silver proof
+|}
+
+=== Puerto Rico ===
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Puerto Rico reverse, 2009 (Nickel-clad copper unless otherwise noted)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":2" />
+! width="60%" |Comments
+|-
+| rowspan="4" |2009
+|P
+|53,000,000
+|
+|-
+|D
+|86,000,000
+|
+|-
+|S
+|2,113,390
+|Proof
+|-
+|S
+|993,589
+|Silver proof
+|}
+
+=== Guam ===
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Guam reverse, 2009 (Nickel-clad copper unless otherwise noted)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":2" />
+! width="60%" |Comments
+|-
+| rowspan="4" |2009
+|P
+|45,000,000
+|
+|-
+|D
+|42,600,000
+|
+|-
+|S
+|2,113,390
+|Proof
+|-
+|S
+|993,589
+|Silver proof
+|}
+
+=== American Samoa ===
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+American Samoa reverse, 2009 (Nickel-clad copper unless otherwise noted)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":2" />
+! width="60%" |Comments
+|-
+| rowspan="4" |2009
+|P
+|42,600,000
+|
+|-
+|D
+|39,600,000
+|
+|-
+|S
+|2,113,390
+|Proof
+|-
+|S
+|993,589
+|Silver proof
+|}
+
+=== US Virgin Islands ===
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+US Virgin Islands reverse, 2009 (Nickel-clad copper unless otherwise noted)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":2" />
+! width="60%" |Comments
+|-
+| rowspan="4" |2009
+|P
+|41,000,000
+|
+|-
+|D
+|41,000,000
+|
+|-
+|S
+|2,113,390
+|Proof
+|-
+|S
+|993,589
+|Silver proof
+|}
+
+=== Northern Mariana Islands ===
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Northern Mariana Islands reverse, 2009 (Nickel-clad copper unless otherwise noted)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":2" />
+! width="60%" |Comments
+|-
+| rowspan="4" |2009
+|P
+|35,200,000
+|
+|-
+|D
+|37,600,000
+|
+|-
+|S
+|2,113,390
+|Proof
+|-
+|S
+|993,589
+|Silver proof
+|}
+
+== America the Beautiful quarters (2010-2021) ==
+{{Main articles|America the Beautiful quarter mintage figures}}
+
+== Washington Crossing the Delaware quarter (2021) ==
+[[Washington quarter#2021: Return of the original obverse|Washington Crossing the Delaware quarter]]
+
+=== Washington Crossing the Delaware ===
+{| class="wikitable sortable" style="min-width:65%; text-align:center;"
+|+Washington Crossing the Delaware reverse, 2021 (Nickel-clad copper unless otherwise noted)
+! width="10%" |Year
+! width="10%" |Mint
+! width="20%" |Mintage<ref name=":3">{{Cite web|url=https://www.usacoinbook.com/coins/quarters/washington/|title=Washington Quarter Mintages|website=www.usacoinbook.com|access-date=2024-11-21}}</ref>
+! width="60%" |Comments
+|-
+| rowspan="4" |2021
+|P
+|838,400,000
+|
+|-
+|D
+|865,400,000
+|
+|-
+|S
+|512,798
+|Proof
+|-
+|S
+|350,891
+|Silver proof
+|}
+
+== American Women quarters (2022-2025) ==
+{{Main articles|American Women quarters}}
+
+== See also ==
+{{Portal|Money|Numismatics|United States}}
+
+* [[United States cent mintage figures]]
+** [[Lincoln cent mintage figures]]
+* [[United States nickel mintage figures]]
+* [[Roosevelt dime mintage figures]]
+* [[United States quarter mintage figures]]
+** [[50 State quarter mintage figures]]
+** [[America the Beautiful quarter mintage figures]]
+** [[American Women quarters]]
+* [[United States half dollar mintage figures]]
+**[[Kennedy half dollar mintage figures]]
+* [[American Silver Eagle mintage figures]]
+
+== References ==
+<references />
+
+{{United States circulating coinage}}
+{{Coinage (United States)}}
+
+[[Category:Twenty-five-cent coins of the United States]]

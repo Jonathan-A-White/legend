@@ -18,6 +18,7 @@
     "e2e:live": "LEGEND_E2E=live TZ=UTC playwright test --project=live --pass-with-no-tests",
     "icons": "node scripts/make-icons.mjs",
     "data:build": "tsx scripts/data-build.ts",
+    "mintages:build": "tsx scripts/mintages-build.ts",
     "check:licence": "tsx scripts/check-licence.ts",
     "grind:build": "tsx scripts/grind-build.ts"
   },

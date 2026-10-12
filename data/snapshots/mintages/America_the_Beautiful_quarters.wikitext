@@ -1,0 +1,986 @@
+{{Short description|Series of U.S. coins}}
+{{Use American English|date = March 2019}}
+{{Use mdy dates|date=May 2026}}
+{{Infobox coin
+| Country = United States
+| Denomination = America the Beautiful quarter
+| Value = 0.25 U.S. Dollar
+| Mass = 6.25(Ag); 5.67 (Cu-Ni)
+| Diameter_inch = 0.955
+| Diameter = 24.26
+| Thickness_inch = 0.069
+| Thickness = 1.75
+| Edge = 119 [[reeding|reeds]]
+| Composition = 91.67% [[Copper|Cu]] 8.33% [[Nickel|Ni]] (standard)<br>90% [[Silver|Ag]] 10% Cu (2010–2018 silver proof)<br>99.9% Ag (2019–2021 silver proof)
+| Years of Minting = 2010–2021
+| Mint marks = [[Philadelphia Mint|P]], [[Denver Mint|D]], [[San Francisco Mint|S]], [[West Point Mint|W]]
+| Catalog Number =
+| Obverse = [[File:America the Beautiful quarter obverse (Philadeplhia).jpg|200x200px|Obverse design for the America the Beautiful quarter series]]
+| Obverse Design = [[George Washington]]
+| Obverse Designer = [[John Flanagan (sculptor)|John Flanagan]] from a 1786 bust by [[Jean-Antoine Houdon|Houdon]]
+| Obverse Design Date = 2010
+| Reverse = [[File:2021 ATB quarter AL.jpg|200x200px|Tuskegee Airmen National Historic Site quarter]]
+| Reverse Design = various; up to five designs per year (latest design shown)
+| Reverse Designer = various
+| Reverse Design Date = 2010–2021}}
+The '''America the Beautiful quarters''' (sometimes abbreviated '''ATB quarters''') were a series of [[United States commemorative coin|circulating commemorative]] [[Quarter (United States coin)|quarters]] released by the [[United States Mint]]. Minted from 2010 through 2021, they featured unique designs commemorating a national natural or historic site such as [[List of national parks of the United States|national parks]], [[National Historic Site (United States)|national historic sites]], or [[National forest (United States)|national forests]]. There were five new reverse designs each year (one in 2021), which included one from each U.S. state, the [[Washington, D.C.|District of Columbia]], and each territory. The obverse depicts [[George Washington]] in a modified version of the portrait used for the original 1932 [[Washington quarter]].<ref>{{cite web|url=http://www.usmint.gov/mint_programs/NSQuartersProgram/ |title=About the Program |publisher=usmint.gov |access-date=July 28, 2010 |archive-url=https://web.archive.org/web/20100310194608/http://www.usmint.gov/mint_programs/NSQuartersProgram/ |archive-date=March 10, 2010 |url-status=live }}</ref>  The program was authorized by the America's Beautiful National Parks Quarter Dollar Coin Act of 2008 ({{USPL|110|456}}.<ref name=":1">{{cite web | url = http://www.gpo.gov/fdsys/pkg/PLAW-110publ456/pdf/PLAW-110publ456.pdf | publisher = usmint.gov | title = America's Beautiful National Parks Quarter Dollar Coin Act of 2008}}</ref>
+
+==Designs and mintage==
+Quarters were issued with reverse designs commemorating national parks and sites in the order of which that park or site was deemed a national site.<ref name="NSQP">{{Cite web|url=https://www.usmint.gov/learn/coin-and-medal-programs|title=U.S. Mint Coin and Medal Programs {{!}} U.S. Mint|website=www.usmint.gov|date=May 27, 2016 |access-date=March 8, 2019}}</ref> The quarters from three states depict parks or sites that were previously portrayed on the [[50 State quarters]] series ([[Grand Canyon National Park]] in Arizona, [[Yosemite National Park]] in California, and [[Mount Rushmore]] in South Dakota). While they depict the same sites, they bear new designs.<ref name="NSQP"/>
+
+Over the course of the series, four mints produced the America the Beautiful quarters. Standard circulating quarters were produced at the [[Philadelphia Mint|Philadelphia]] and [[Denver Mint]]s throughout the series. In 2010 and 2011, the [[San Francisco Mint]] produced quarters exclusively for the annual Proof Set. In 2012, San Francisco started producing America the Beautiful quarters in the standard circulation finish of the P and D quarters for sale to collectors.<ref>{{Cite web|url=https://www.usmint.gov/news/press-releases/20120525-united-states-mint-to-release-the-first-america-the-beautiful-quarters-program-coin-with-the-san-francisco-mint-mark-on-june-21|title=United States Mint to Release the First America the Beautiful Quarters® Program Coin with the San Francisco Mint mark on June 21 {{!}} U.S. Mint|website=www.usmint.gov|access-date=May 10, 2019}}</ref>
+
+On April 2, 2019, the United States Mint announced that the [[West Point Mint]] would release 10 million quarters (2 million of each design released that year).<ref>{{Cite web|url=https://www.usmint.gov/news/press-releases/mint-announces-w-mint-mark-circulating-quarter-collectible|title=W Mint Mark Circulating Quarter Collectible {{!}} U.S. Mint|website=www.usmint.gov|access-date=May 10, 2019}}</ref> This was the first time the mint mark appeared on a circulating coin. The quarters were mixed into uncirculated bags and rolls of the quarters to stimulate public interest in coin collecting. In 2020, the obverses of the quarters struck at West Point also include a [[privy mark]]. The privy design features the text "V75", celebrating the 75th anniversary of the end of World War II inside an outline of the [[Rainbow Pool]] at the [[World War II Memorial]] in Washington, DC.<ref>{{Cite web|title=Privy Marks on Coins {{!}} U.S. Mint|url=https://www.usmint.gov/news/inside-the-mint/privy-marks-on-coins|access-date=November 23, 2021|website=www.usmint.gov|date=April 6, 2020 }}</ref>
+{{clear}}
+
+==List of designs==
+{| class="wikitable sortable" style="text-align: center"
+|-
+! rowspan="2" | Year
+! rowspan="2" | No.
+! rowspan="2" | Jurisdiction
+! rowspan="2" | Site
+! rowspan="2" | Release date<ref>{{cite web | url = http://www.usmint.gov/mint_programs/atb/?action=siteRegister|
+title = America the Beautiful Quarters® National Site Register | publisher = usmint.gov | access-date = January 26, 2015}}</ref><br><small>''(national site date)''</small>
+! rowspan="2" | Design
+! rowspan="2" | Elements depicted
+!Engraver
+! colspan="5" | Mintage<ref>{{cite web | url = https://www.usmint.gov/about/production-sales-figures/circulating-coins-production?program=America+the+Beautiful+Quarters%C2%AE&+50StateQuarters%C2%AEyears=&+WestwardJourneyNickelSeries%E2%84%A2years=&+PresidentialOneDollaryears=&+DistrictofColumbiaandUSTerritoriesQuartersyears=&+AmericatheBeautifulQuarters%C2%AEyears=754&+CirculatingCoinsyears=|
+title = Circulating Coins Production - America the Beautiful Quarters – 2010-2021 | publisher = usmint.gov}}</ref>
+|-
+!
+! Denver ''Satin''<ref>{{cite web | url = https://www.coinnews.net/2010/12/22/satin-finish-ends-on-us-mint-sets/ |
+title = Satin Finish Ends on US Mint Sets | publisher = coinnews.net}}</ref>
+! Philadelphia ''Satin''
+! San Francisco ''Enhanced''<ref>{{cite web | url = https://www.usmint.gov/news/press-releases/united-states-mint-releases-set-of-enhanced-uncirculated-coins-on-aug-1? |
+title = United States Mint Releases Set of Enhanced Uncirculated Coins on Aug. 1 | publisher = usmint.gov}}</ref>
+!West Point<ref name=":0">{{Cite web|url=https://www.coinworld.com/news/us-coins/2019/04/us-mint-strikes-west-point-quarters-for-circulation.all.html|title=Circulating rarities head to circulation: Quarters with the W Mint mark|website=Coin World|access-date=April 17, 2019}}</ref><ref name=":3">{{Cite web|title=Adding V75 privy mark means 2020-W quarter for American Samoa will be released last|url=https://www.coinworld.com/news/precious-metals/adding-v75-privy-mark-means-2020-w-quarter-for-american-samoa-will-be-released-last|website=CoinWorld|language=en|access-date=May 24, 2020}}</ref>
+! Total
+|-
+| rowspan="5" bgcolor="#51D000" |2010
+| 1
+| [[Arkansas]]
+| [[Hot Springs National Park]]
+| {{dts|2010|4|19}}<br><small>''(April 20, 1832)''</small>
+| [[File:2010-AR-Proof.jpg|150px|Hot Springs National Park quarter]]
+| The park headquarters building with a thermal fountain in front of it
+|[[Joseph Menna]]
+| 34,000,000 ''583,879''
+| 35,600,000 ''583,879''
+|—
+|—
+| 70,767,758
+|-
+| 2
+| [[Wyoming]]
+| [[Yellowstone National Park]]
+| {{dts|2010|6|1}}<br><small>''(March 1, 1872)''</small>
+| [[File:2010-WY-Proof.jpg|150px|Yellowstone National Park quarter]]
+| A [[American bison|bison]] and [[Old Faithful]]
+|[[Don Everhart]]
+| 34,800,000 ''583,879''
+| 33,600,000 ''583,879''
+|—
+|—
+| 69,567,758
+|-
+| 3
+| [[California]]
+| [[Yosemite National Park]]
+| {{dts|2010|7|26}}<br><small>''(October 1, 1890)''</small>
+| [[File:2010-CA-Proof.jpg|150px|Yosemite National Park quarter]]
+| [[El Capitan]]
+|[[Phebe Hemphill]]
+| 34,800,000 ''583,879''
+| 35,200,000 ''583,879''
+|—
+|—
+| 71,167,758
+|-
+| 4
+| [[Arizona]]
+| [[Grand Canyon National Park]]
+| {{dts|2010|9|20}}<br><small>''(February 20, 1893)''</small>
+| [[File:2010-AZ-Proof.jpg|150px|Grand Canyon National Park quarter]]
+| [[Marble Canyon]]
+|[[Phebe Hemphill]]
+| 35,400,000 ''583,879''
+| 34,800,000 ''583,879''
+|—
+|—
+| 71,367,758
+|-
+| 5
+| [[Oregon]]
+| [[Mount Hood National Forest]]
+| {{dts|2010|11|15}}<br><small>''(September 28, 1893)''</small>
+| [[File:2010-OR-Proof.jpg|150px|Mount Hood National Forest quarter]]
+| [[Lost Lake (Hood River County, Oregon)|Lost Lake]] with [[Mount Hood]] in the distance
+|[[Phebe Hemphill]]
+| 34,400,000 ''583,879''
+| 34,400,000 ''583,879''
+|—
+|—
+| 69,967,758
+|-
+| rowspan="5" bgcolor="#FF9A00" |2011
+| 6
+| [[Pennsylvania]]
+| [[Gettysburg National Military Park]]
+| {{dts|2011|1|24}}<br><small>''(February 11, 1895)''</small>
+| [[File:2011-PA-Proof.jpg|150px|Gettysburg National Military Park quarter]]
+| The [[72nd Pennsylvania Infantry Monument]]
+|[[Phebe Hemphill]]
+| 30,400,000
+| 30,800,000
+|—
+|—
+| 61,200,000
+|-
+| 7
+| [[Montana]]
+| [[Glacier National Park (U.S.)|Glacier National Park]]
+| {{dts|2011|4|4}}<br><small>''(February 22, 1897)''</small>
+| [[File:2011-MT-Proof.jpg|150px|Glacier National Park quarter]]
+| A [[mountain goat]] with [[Reynolds Mountain]] in the distance
+|Charles L. Vickers
+| 31,200,000
+| 30,400,000
+|—
+|—
+| 61,600,000
+|-
+| 8
+| [[Washington (state)|Washington]]
+| [[Olympic National Park]]
+| {{dts|2011|6|13}}<br><small>''(February 22, 1897)''</small>
+| [[File:2011-WA-Proof.jpg|150px|Olympic National Park quarter]]
+| A [[Roosevelt elk]] at the [[Hoh River]] with [[Mount Olympus (Washington)|Mount Olympus]] in the distance
+|Michael Gaudioso
+| 30,500,000
+| 30,500,000
+|—
+|—
+| 61,000,000
+|-
+| 9
+| [[Mississippi]]
+| [[Vicksburg National Military Park]]
+| {{dts|2011|8|29}}<br><small>''(February 21, 1899)''</small>
+| [[File:2011-MS-Proof.jpg|150px|Vicksburg National Military Park quarter]]
+| The [[USS Cairo|USS ''Cairo'']] on the [[Yazoo River]]
+|[[Joseph Menna]]
+| 33,400,000
+| 30,800,000
+|—
+|—
+| 64,200,000
+|-
+| 10
+| [[Oklahoma]]
+| [[Chickasaw National Recreation Area]]
+| {{dts|2011|11|14}}<br><small>''(July 1, 1902)''</small>
+| [[File:2011-OK-Proof.jpg|150px|Chickasaw National Recreation Area quarter]]
+| The Lincoln Bridge
+|Jim Licaretz
+| 69,400,000
+| 73,800,000
+|—
+|—
+| 143,200,000
+|-
+| rowspan="5" bgcolor="#FF0000" |2012
+| 11
+| [[Puerto Rico]]
+| [[El Yunque National Forest]]
+| {{dts|2012|1|23}}<br><small>''(January 17, 1903)''</small>
+| [[File:2012-PR-Proof.jpg|150px|El Yunque National Forest quarter]]
+| A [[Puerto Rican amazon]] and a [[common coquí]]
+|Michael Gaudioso
+| 25,000,000
+| 25,800,000
+| 1,680,000
+|—
+| 52,480,000
+|-
+| 12
+| [[New Mexico]]
+| [[Chaco Culture National Historical Park]]
+| {{dts|2012|4|2}}<br><small>''(March 11, 1907)''</small>
+| [[File:2012-NM-Proof.jpg|150px|Chaco Culture National Historical Park quarter]]
+| Two elevated [[kiva]]s that are part of the [[Chetro Ketl]] complex
+|[[Phebe Hemphill]]
+| 22,000,000
+| 22,000,000
+| 1,389,020
+|—
+| 45,389,020
+|-
+| 13
+| [[Maine]]
+| [[Acadia National Park]]
+| {{dts|2012|6|11}}<br><small>''(July 8, 1916)''</small>
+| [[File:2012-ME-Proof.jpg|150px|Acadia National Park quarter]]
+| The [[Bass Harbor Head Light]]house
+|[[Joseph Menna]]
+| 21,606,000
+| 24,800,000
+| 1,409,120
+|—
+| 47,815,120
+|-
+| 14
+| [[Hawaii]]
+| [[Hawaiʻi Volcanoes National Park|Hawai'i Volcanoes National Park]]
+| {{dts|2012|8|27}}<br><small>''(August 1, 1916)''</small>
+| [[File:2012-ATB-Quarters-Proof-Hawaii.jpg|150px|Hawaiʻi Volcanoes National Park quarter]]
+| [[Kīlauea]]
+|Charles L. Vickers
+| 78,600,000
+| 46,200,000
+| 1,409,120
+|—
+| 126,209,120
+|-
+| 15
+| [[Alaska]]
+| [[Denali National Park and Preserve]]
+| {{dts|2012|11|5}}<br><small>''(February 26, 1917)''</small>
+| [[File:2012-AK-Proof.jpg|150px|Denali National Park and Preserve quarter]]
+| A [[Dall sheep]] with [[Denali]] in the background
+|Jim Licaretz
+| 166,600,000
+| 135,400,000
+| 1,409,220
+|—
+| 303,409,220
+|- id="New Hampshire"
+| rowspan="5" bgcolor="#0000FF" |{{fontcolor|gray|2013}}
+| 16
+| [[New Hampshire]]
+| [[White Mountain National Forest]]
+| {{dts|2013|1|28}}<br><small>''(May 16, 1918)''</small>
+| [[File:2013-america-the-beautiful-quarters-coin-white-mountain-new-hampshire-uncirculated-reverse.jpg|150x150px|White Mountain National Forest quarter]]
+| [[Mount Chocorua]] with [[birch|birch trees]] in the foreground
+|[[Phebe Hemphill]]
+| 107,600,000
+| 68,800,000
+| 1,606,900
+|—
+| 178,006,900
+|-
+| 17
+| [[Ohio]]
+| [[Perry's Victory and International Peace Memorial]]
+| {{dts|2013|4|1}}<br><small>''(March 3, 1919)''</small>
+| [[File:2013-OH-Proof.jpg|150x150px|Perry's Victory and International Peace Memorial quarter]]
+| The statue of [[Oliver Hazard Perry]] and the International Peace Memorial column
+|[[Don Everhart]]
+| 131,600,000
+| 107,600,000
+| 1,606,900
+|—
+| 240,825,860
+|-
+| 18
+| [[Nevada]]
+| [[Great Basin National Park]]
+| {{dts|2013|6|10}}<br><small>''(January 24, 1922)''</small>
+| [[File:2013-NV-Proof.jpg|150x150px|Great Basin National Park quarter]]
+| A [[bristlecone pine]]
+|Renata Gordon
+| 141,400,000
+| 122,400,000
+| 1,425,860
+|—
+| 265,116,500
+|-
+| 19
+| [[Maryland]]
+| [[Fort McHenry National Monument]]
+| {{dts|2013|8|26}}<br><small>''(March 3, 1925)''</small>
+| [[File:Fort McHenry National Historic Monument Quarter.jpg|150px|Fort McHenry National Historic Monument quarter]]
+| Fort McHenry under bombardment
+|[[Joseph Menna]]
+| 151,400,000
+| 120,000,000
+| 1,316,500
+|—
+| 272,713,680
+|-
+| 20
+| [[South Dakota]]
+| [[Mount Rushmore National Memorial]]
+| {{dts|2013|11|4}}<br><small>''(March 3, 1925)''</small>
+| [[File:2013-Mount-Rushmore-National-Memorial-Quarter.jpg|151x151px|Mount Rushmore National Memorial quarter]]
+| Workers carving the Mount Rushmore National Memorial
+|[[Joseph Menna]]
+| 272,400,000
+| 231,800,000
+| 1,373,260
+|—
+| 505,573,260
+|-
+| rowspan="5" bgcolor="#AB00AB" |2014
+| 21
+| [[Tennessee]]
+| [[Great Smoky Mountains National Park]]
+| {{dts|2014|1|27}}<br><small>''(May 22, 1926)''</small>
+| [[File:2014-ATB-Proof-Great-Smoky-Mountains-rev-200.png|150x150px|Great Smoky Mountains National Park quarter]]
+| A [[log cabin]] in the forest with a [[hawk]] in flight
+|Renata Gordon
+| 99,400,000
+| 73,200,000
+| 1,360,780
+|—
+| 173,960,780
+|-
+| 22
+| [[Virginia]]
+| [[Shenandoah National Park]]
+| {{dts|2014|3|31}}<br><small>''(May 22, 1926)''</small>
+| [[File:2014-ATB-Proof-Shenandoah-rev-200.png|150x150px|Shenandoah National Park quarter]]
+| A hiker at the summit of Stony Man Trail
+|[[Phebe Hemphill]]
+| 197,800,000
+| 112,800,000
+| 1,266,720
+|—
+| 311,866,720
+|-
+| 23
+| [[Utah]]
+| [[Arches National Park]]
+| {{dts|2014|6|9}}<br><small>''(April 12, 1929)''</small>
+|  [[File:2014-ATB-Proof-Arches-rev-200.png|150x150px|Arches National Park quarter]]
+| [[Delicate Arch]] with the [[La Sal Mountains]] in the distance
+|Charles L. Vickers
+| 251,400,000
+| 214,200,000
+| 1,235,940
+|—
+| 466,835,940
+|-
+| 24
+| [[Colorado]]
+| [[Great Sand Dunes National Park and Preserve]]
+| {{dts|2014|8|25}}<br><small>''(March 17, 1932)''</small>
+| [[File:2014-ATB-Proof-Great-Sand-Dunes-rev-200.png|150x150px|Great Sand Dunes National Park and Preserve quarter]]
+| A father and son playing on the banks of a creek, with [[dune|sand dunes]] and the [[Sangre de Cristo Mountains]] in the background
+|[[Don Everhart]]
+| 171,800,000
+| 159,600,000
+| 1,176,760
+|—
+| 332,576,760
+|-
+| 25
+| [[Florida]]
+| [[Everglades National Park]]
+| {{dts|2014|11|3}}<br><small>''(May 30, 1934)''</small>
+|  [[File:2014-ATB-Proof-Everglades-rev-200.png|150x150px|Everglades National Park quarter]]
+| An [[anhinga]] on a [[willow]], and a [[roseate spoonbill]] wading in the water
+|[[Joseph Menna]]
+| 142,400,000
+| 157,601,000
+| 1,180,900
+|—
+| 301,181,900
+|-
+| rowspan="5" bgcolor="#FF3399" |2015
+| 26
+| [[Nebraska]]
+| [[Homestead National Historical Park]]
+| {{dts|2015|2|9}}<br><small>''(March 19, 1936)''</small>
+| [[File:2015-ATB-Proof-Homestead-rev-200.jpg|150x150px|Homestead National Historical Park quarter]]
+| A log cabin, two ears of corn, and a water pump, representing shelter, food, and water
+|Jim Licaretz
+| 248,600,000
+| 214,400,000
+| 1,153,840
+|—
+| 464,153,840
+|-
+| 27
+| [[Louisiana]]
+| [[Kisatchie National Forest]]
+| {{dts|2015|4|13}}<br><small>''(June 3, 1936)''</small>
+| [[File:2015-ATB-Proof-Kisatchie-rev-200.jpg|150x150px|Kisatchie National Forest quarter]]
+| A [[wild turkey]] in flight over [[Andropogon gerardi|bluestem grass]], with [[Pinus palustris|long leaf pines]] in the background
+|[[Joseph Menna]]
+| 379,600,000
+| 397,200,000
+| 1,099,380
+|—
+| 777,899,380
+|-
+| 28
+| [[North Carolina]]
+| [[Blue Ridge Parkway]]
+| {{dts|2015|6|8}}<br><small>''(June 30, 1936)''</small>
+| [[File:2015-ATB-Proof-Blue-Ridge-Parkway-rev-200.jpg|150x150px|Blue Ridge Parkway quarter]]
+| A short stretch of the Blue Ridge Parkway, with [[Cornus florida|flowering dogwood]] in the foreground
+|[[Joseph Menna]]
+| 505,200,000
+| 325,616,000
+| 1,096,620
+|—
+| 831,912,620
+|-
+| 29
+| [[Delaware]]
+| [[Bombay Hook National Wildlife Refuge]]
+| {{dts|2015|9|14}}<br><small>''(June 22, 1937)''</small>
+| [[File:2015-ATB-Proof-Bombay-Hook-rev-200.jpg|150x150px|Bombay Hook National Wildlife Refuge quarter]]
+| A [[great blue heron]], with a [[great egret]] behind it, in a [[salt marsh]]
+|[[Phebe Hemphill]]
+| 206,400,000
+| 275,000,000
+| 1,013,920
+|—
+| 482,413,920
+|-
+| 30
+| [[New York (state)|New York]]
+| [[Saratoga National Historical Park]]
+| {{dts|2015|11|16}}<br><small>''(June 1, 1938)''</small>
+| [[File:2015-ATB-Proof-Saratoga-rev-200.jpg|150x150px|Saratoga National Historical Park quarter]]
+| A close-up of [[John Burgoyne]] surrendering his sword to [[Horatio Gates]]
+|Renata Gordon
+| 215,800,000
+| 223,000,000
+| 1,045,500
+|—
+| 439,845,500
+|-
+| rowspan="5" bgcolor="#51ABFF" |2016
+| 31
+| [[Illinois]]
+| [[Shawnee National Forest]]
+| {{dts|2016|2|1}}<br><small>''(September 6, 1939)''</small>
+| [[File:2016-america-the-beautiful-quarters-coin-shawnee-illinois-proof-reverse.jpg|150x150px|Shawnee National Forest quarter]]
+| Camel Rock and natural vegetation with a [[red-tailed hawk]] overhead
+|Jim Licaretz
+| 151,800,000
+| 155,600,000
+| 1,081,914
+|—
+| 308,481,914
+|-
+| 32
+| [[Kentucky]]
+| [[Cumberland Gap National Historical Park]]
+| {{dts|2016|4|4}}<br><small>''(June 11, 1940)''</small>
+| [[File:2016-america-the-beautiful-quarters-coin-cumberland-gap-kentucky-uncirculated-reverse.jpg|150x150px|Cumberland Gap National Historical Park quarter]]
+| A frontiersman gazing across the [[Cumberland Mountains]] to the West
+|[[Joseph Menna]]
+| 223,200,000
+| 215,400,000
+| 1,036,093
+|—
+| 439,636,093
+|-
+| 33
+| [[West Virginia]]
+| [[Harpers Ferry National Historical Park]]
+| {{dts|2016|6|6}}<br><small>''(June 30, 1944)''</small>
+| [[File:2016-america-the-beautiful-quarters-coin-harpers-ferry-west-virginia-uncirculated-reverse.jpg|150x150px|Harpers Ferry National Historical Park quarter]]
+| [[John Brown's Fort]]
+|[[Phebe Hemphill]]
+| 424,000,000
+| 434,630,000
+| 1,050,185
+|—
+| 859,680,185
+|-
+| 34
+| [[North Dakota]]
+| [[Theodore Roosevelt National Park]]
+| {{dts|2016|8|29}}<br><small>''(February 25, 1946)''</small>
+| [[File:2016-america-the-beautiful-quarters-coin-theodore-roosevelt-north-dakota-uncirculated-reverse.jpg|150x150px|Theodore Roosevelt National Park quarter]]
+| [[Theodore Roosevelt]] on horseback near the [[Little Missouri River (North Dakota)|Little Missouri River]]
+|[[Phebe Hemphill]]
+| 223,200,000
+| 231,600,000
+| 1,073,092
+|—
+| 455,873,092
+|-
+| 35
+| [[South Carolina]]
+| [[Fort Moultrie]] ([[Fort Sumter National Monument]])
+| {{dts|2016|11|14}}<br><small>''(April 28, 1948)''</small>
+| [[File:2016-america-the-beautiful-quarters-coin-fort-moultrie-south-carolina-uncirculated-reverse.jpg|150x150px|Fort Moultrie (Fort Sumter National Monument) quarter]]
+| [[William Jasper]] returning the [[Flag of South Carolina#Moultrie Flag|regimental flag]] to the ramparts of Fort Moultrie
+|Joseph Menna
+| 142,200,000
+| 154,400,000
+| 979,566
+|—
+| 297,579,566
+|-
+| rowspan="5" bgcolor="#990000" |2017
+| 36
+| [[Iowa]]
+| [[Effigy Mounds National Monument]]
+| {{dts|2017|2|6}}<br><small>''(October 25, 1949)''</small>
+| [[File:2017-america-the-beautiful-quarters-coin-effigy-mounds-iowa-proof-reverse.jpg|150x150px|Effigy Mounds National Monument quarter]]
+| An aerial view of [[effigy mound]]s in the Marching Bear Group
+|Renata Gordon
+| 210,800,000
+| 271,200,000
+| 945,853 ''210,419''
+|—
+| 483,156,272
+|-
+| 37
+| [[District of Columbia]]
+| [[Frederick Douglass National Historic Site]]
+| {{dts|2017|4|3}}<br><small>''(September 5, 1962)''</small>
+|[[File:2017-america-the-beautiful-quarters-coin-frederick-douglass-district-of-columbia-proof-reverse-768x768.jpg|150x150px|Frederick Douglass National Historic Site quarter]]
+| [[Frederick Douglass]] seated at a writing desk with his home in the background
+|[[Phebe Hemphill]]
+| 185,800,000
+| 184,800,000
+| 950,503 ''210,419''
+|—
+| 371,760,922
+|-
+| 38
+| [[Missouri]]
+| [[Ozark National Scenic Riverways]]
+| {{dts|2017|6|5}}<br><small>''(August 27, 1964)''</small>
+|[[File:2017-america-the-beautiful-quarters-coin-ozark-riverways-missouri-proof-reverse-768x768.jpg|150x150px|Ozark National Scenic Riverways quarter]]
+| [[Alley Spring Roller Mill|Alley Mill]]
+|Renata Gordon
+| 200,000,000
+| 203,000,000
+| 921,747 ''210,419''
+|—
+| 404,132,166
+|-
+| 39
+| [[New Jersey]]
+| [[Ellis Island]] ([[Statue of Liberty National Monument]])
+| {{dts|2017|8|28}}<br><small>''(May 11, 1965)''</small>
+|[[File:2017-america-the-beautiful-quarters-coin-ellis-island-new-jersey-proof-reverse-768x768.jpg|150x150px|Ellis Island (Statue of Liberty National Monument) quarter]]
+| An immigrant family approaching Ellis Island
+|[[Phebe Hemphill]]
+| 254,000,000
+| 234,000,000
+| 973,147  ''210,419''
+|—
+| 489,183,566
+|-
+| 40
+| [[Indiana]]
+| [[George Rogers Clark National Historical Park]]
+| {{dts|2017|11|13}}<br><small>''(July 23, 1966)''</small>
+|[[File:2017-america-the-beautiful-quarters-coin-george-rogers-clark-indiana-proof-reverse-768x768.jpg|150x150px|George Rogers Clark National Historical Park quarter]]
+| [[George Rogers Clark]] leading his men through the flooded plains [[Illinois campaign#Clark's trek to Vincennes|approaching Fort Sackville]]
+|Michael Gaudioso
+| 180,800,000
+| 191,600,000
+| 933,150 ''210,419''
+|—
+| 373,543,569
+|-
+| rowspan="5" bgcolor="#000099" |{{fontcolor|gray|2018}}
+| 41
+| [[Michigan]]
+| [[Pictured Rocks National Lakeshore]]
+| {{dts|2018|2|5}}<br><small>''(October 15, 1966)''</small>
+|[[File:2018-america-the-beautiful-quarters-coin-pictured-rocks-michigan-uncirculated-reverse-768x768.jpg|150x150px|Pictured Rocks National Lakeshore quarter]]
+| Chapel Rock, with a [[pine|white pine]] tree
+|Michael Gaudioso
+| 182,600,000
+| 186,714,000
+| 931,220
+|—
+| 370,245,220
+|-
+| 42
+| [[Wisconsin]]
+| [[Apostle Islands National Lakeshore]]
+| {{dts|2018|4|9}}<br><small>''(September 26, 1970)''</small>
+|[[File:2018-america-the-beautiful-quarters-coin-apostle-islands-wisconsin-uncirculated-reverse-768x768.jpg|150x150px|Apostle Islands National Lakeshore quarter]]
+| [[Devils Island (Wisconsin)|Devils Island]], with [[sea cave]]s and the [[Devils Island Light]]house, and a [[kayak]]er in the foreground
+|Renata Gordon
+| 216,600,000
+| 223,200,000
+| 889,080
+|—
+| 440,689,080
+|-
+| 43
+| [[Minnesota]]
+| [[Voyageurs National Park]]
+| {{dts|2018|6|11}}<br><small>''(January 8, 1971)''</small>
+|[[File:2018-america-the-beautiful-quarters-coin-voyageurs-minnesota-uncirculated-reverse-768x768.jpg|150x150px|Voyageurs National Park quarter]]
+| A [[common loon]], with a rock cliff in the background
+|[[Joseph Menna]]
+| 197,800,000
+| 237,400,000
+| 867,400
+|—
+| 436,067,400
+|-
+| 44
+| [[Georgia (U.S. state)|Georgia]]
+| [[Cumberland Island National Seashore]]
+| {{dts|2018|8|27}}<br><small>''(October 23, 1972)''</small>
+|[[File:2018-america-the-beautiful-quarters-coin-cumberland-island-georgia-uncirculated-reverse-768x768.jpg|150x150px|Cumberland Island National Seashore quarter]]
+| A [[snowy egret]], with a [[salt marsh]] in the background
+|[[Don Everhart]]
+| 151,600,000
+| 138,000,000
+| 880,940
+|—
+| 290,480,940
+|-
+| 45
+| [[Rhode Island]]
+| [[Block Island|Block Island National Wildlife Refuge]]
+| {{dts|2018|11|13}}<br><small>''(April 12, 1973)''</small>
+|[[File:2018-america-the-beautiful-quarters-coin-block-island-rhode-island-uncirculated-reverse-768x768.jpg|150x150px|Block Island National Wildlife Refuge quarter]]
+| A [[black-crowned night heron]] flying over Cow Cove beach, with the [[Block Island North Light|North Lighthouse]] in the background
+|[[Phebe Hemphill]]
+| 159,600,000
+| 159,600,000
+| 854,940
+|—
+| 320,054,940
+|-
+| rowspan="5" bgcolor="#FFCC00" |2019
+| 46
+| [[Massachusetts]]
+| [[Lowell National Historical Park]]
+| {{dts|2019|2|4}}<br><small>''(June 5, 1978)''</small>
+|[[File:2019-america-the-beautiful-quarters-coin-lowell-massachusetts-uncirculated-reverse-768x768.jpg|150x150px|Lowell National Historical Park quarter]]
+| A [[Lowell Mill Girls|mill girl]] working at a [[power loom]], with the [[Boott Mills]] clock tower outside the window
+|[[Phebe Hemphill]]
+| 182,200,000
+| 165,800,000
+| 909,080
+| 2,000,000
+| 350,909,080
+|-
+| 47
+| [[Northern Mariana Islands]]
+| [[American Memorial Park]]
+| {{dts|2019|4|1}}<br><small>''(August 18, 1978)''</small>
+|[[File:2019-america-the-beautiful-quarters-coin-american-memorial-park-northern-mariana-islands-uncirculated-reverse-768x768.jpg|150x150px|American Memorial Park quarter]]
+| A young [[Chamorro people|Chamorro]] woman at the [[American Memorial Park|Flag Circle and Court of Honor]]
+|[[Phebe Hemphill]]
+| 182,600,000
+| 142,800,000
+| 952,795
+| 2,000,000
+| 328,352,795
+|-
+| 48
+| [[Guam]]
+| [[War in the Pacific National Historical Park]]
+| {{dts|2019|6|3}}<br><small>''(August 18, 1978)''</small>
+|[[File:2019-america-the-beautiful-quarters-coin-war-in-the-pacific-guam-uncirculated-reverse-768x768.jpg|150x150px|War in the Pacific National Historical Park quarter]]
+| American forces coming ashore during the [[Battle of Guam (1944)|Second Battle of Guam]]
+|Michael Gaudioso
+| 114,400,000
+| 116,600,000
+| 947,001
+| 2,000,000
+| 233,947,001
+|-
+| 49
+| [[Texas]]
+| [[San Antonio Missions National Historical Park]]
+| {{dts|2019|8|26}} (official release date)
+
+before {{dts|2019|8|20}} (accidental release)<ref>{{Cite web|url=https://www.coinworld.com/news/us-coins/2019-san-antonio-missions-quarter-dollars-get-early-circulation-release|title=2019 San Antonio Missions quarter dollars get early circulation release|website=Coin World|access-date=August 30, 2019}}</ref><br><small>''(November 10, 1978)''</small>
+|[[File:2019-america-the-beautiful-quarters-coin-san-antonio-missions-texas-uncirculated-reverse-768x768.jpg|150x150px|San Antonio Missions National Historical Park quarter]]
+| In the angles of a Greek cross, the elements of the [[Spanish colonial real]] coin: arches and a bell of the [[Mission San Francisco de la Espada]] bell tower, a lion, waves, and wheat
+|[[Joseph Menna]]
+| 129,400,000
+| 142,800,000
+| 945,719
+| 2,000,000
+| 275,145,719
+|-
+| 50
+| [[Idaho]]
+| [[Frank Church–River of No Return Wilderness]]
+| {{dts|2019|11|4}} (official release date)
+
+before {{dts|2019|10|29}} (accidental release)<ref>{{Cite web|url=https://www.coinworld.com/news/us-coins/final-2019-w-quarters-found-week-before-official-release|title=Final 2019-W quarters found week before official release|website=Coin World|access-date=November 18, 2019}}</ref><br><small>''(July 23, 1980)''</small>
+|[[File:2019-america-the-beautiful-quarters-coin-river-of-no-return-wilderness-idaho-uncirculated-reverse-768x768.jpg|150x150px|Frank Church–River of No Return Wilderness quarter]]
+| A [[drift boat]] on the [[Salmon River (Idaho)|Salmon River]], with the wilderness in the background
+|Renata Gordon
+| 251,600,000
+| 223,400,000
+| 946,859
+| 2,000,000
+| 477,946,859
+|-
+| rowspan="5" bgcolor="#00FF00" |2020
+| 51
+| [[American Samoa]]
+| [[National Park of American Samoa]]
+| February 13, 2020<br><small>''(October 31, 1988)''</small>
+|[[File:2020-america-the-beautiful-quarters-coin-national-park-of-american-samoa-uncirculated-reverse-768x768.jpg|150x150px|National Park of American Samoa quarter]]
+| [[Samoa flying fox]] mother and pup
+|[[Phebe Hemphill]]
+| 212,200,000
+| 286,000,000
+| 955,145
+| 2,000,000
+| 498,000,000
+|-
+| 52
+| [[Connecticut]]
+| [[Weir Farm National Historical Park]]
+| April 6, 2020<br><small>''(October 31, 1990)''</small>
+|[[File:2020-america-the-beautiful-quarters-coin-weir-farm-connecticut-uncirculated-reverse-768x768.jpg|150x150px|Weir Farm National Historic Site quarter]]
+| Artist painting outside [[Weir Farm National Historic Site|Weir Farm]]
+|[[Phebe Hemphill]]
+| 155,000,000
+| 125,600,000
+| 961,229
+| 2,000,000
+| 283,561,229
+|-
+| 53
+| [[U.S. Virgin Islands]]
+| [[Salt River Bay National Historical Park and Ecological Preserve]]
+| June 1, 2020<br><small>''(February 24, 1992)''</small>
+|[[File:2020-america-the-beautiful-quarters-coin-salt-river-bay-us-virgin-islands-uncirculated-reverse-768x768.jpg|150x150px|Salt River Bay National Historical Park and Ecological Preserve quarter]]
+| Young [[Rhizophora mangle|red mangrove tree]]
+|[[Joseph Menna]]
+| 515,000,000
+| 580,200,000
+| 949,947
+| 2,000,000
+| 1,098,149,947<ref>{{cite web |last1=Unser |first1=Mike |title=US Mint Produces Over 1.65 Billion Coins for Circulation in August |url=https://www.coinnews.net/2020/09/11/u-s-mint-produces-over-1-65-billion-coins-for-circulation-in-august/ |website=coinnews.net |date=September 11, 2020 |access-date=September 13, 2020}}</ref>
+|-
+| 54
+| [[Vermont]]
+| [[Marsh-Billings-Rockefeller National Historical Park]]
+| August 31, 2020<br><small>''(August 26, 1992)''</small>
+|[[File:2020-america-the-beautiful-quarters-coin-marsh-billings-rockefeller-vermont-uncirculated-reverse-768x768.jpg|150x150px|Marsh-Billings-Rockefeller National Historical Park quarter]]
+| Young girl planting a [[Picea abies|Norway Spruce]] seedling
+|Michael Gaudioso
+| 345,800,000
+| 304,600,000
+| 945,449
+| 2,000,000
+| 653,345,449
+|-
+| 55
+| [[Kansas]]
+| [[Tallgrass Prairie National Preserve]]
+| November 16, 2020<br><small>''(November 12, 1996)''</small>
+|[[File:2020-america-the-beautiful-quarters-coin-tallgrass-prairie-kansas-uncirculated-reverse-768x768.jpg|150x150px|Tallgrass Prairie National Preserve]]
+| [[Regal fritillary]] flying through [[Andropogon gerardi|big bluestem]] grass
+|Renata Gordon
+| 142,400,000
+| 101,200,000
+| 951,612
+| 2,000,000
+| 246,551,612
+|-
+| rowspan="1" bgcolor="#008080" |2021
+| 56
+| [[Alabama]]
+| [[Tuskegee Airmen National Historic Site]]
+| January 4, 2021<br><small>''(November 6, 1998)''</small>
+| [[File:2021 ATB quarter AL.jpg|150x150px|Tuskegee Airmen National Historic Site quarter]]
+| [[Tuskegee Airmen|Tuskegee Airman]] suiting up with two [[North American P-51 Mustang|P-51 Mustangs]] flying overhead
+|[[Phebe Hemphill]]
+| 304,000,000
+| 160,400,000
+| 858,572
+|—
+| 465,258,572
+|}
+
+=== Site breakdown ===
+Of the 56 designs there are
+* 48 [[National Park Service]] [[List of areas in the United States National Park System|areas]]
+** 18 [[List of national parks of the United States|National parks]]
+** 5 [[List of National Monuments of the United States|National monuments]]
+** 13 [[National Historic Site (United States)|National Historic Sites and National Historical Parks]]
+** 3 [[List of United States national lakeshores and seashores|National lakeshores and seashores]]
+** 1 [[National recreation area]]
+** 2 [[National Military Park|National military parks]]
+** 3 [[List of National Memorials of the United States|National memorials]]
+** 1 [[National Parkway|National parkway]]
+** 1 [[National preserve]]
+** 1 [[National Wild and Scenic Rivers System|National river]]
+* 5 [[United States National Forest|National Forests]] ([[United States Forest Service]])
+* 1 [[National Wilderness Preservation System|Wilderness area]], composed of six national forests
+* 2 [[National Wildlife Refuge]]s ([[United States Fish and Wildlife Service]])
+
+== Mintage details ==
+Beginning with the El Yunque (Puerto Rico) design in the America the Beautiful Quarters Program, the U.S. Mint began selling (at a premium) uncirculated 40-coin rolls and 100-coin bags of quarters with the San Francisco mint mark.<ref>{{cite web |last1=Schechter |first1=Scott |title=S Mint quarters from US Mint bring premiums |url=https://www.coinworld.com/news/precious-metals/s-mint-quarters-from-us-mint-bring-premiums.html |website=coinworld.com |publisher=Amos Media Company |access-date=March 4, 2020}}</ref> These coins were not included in the 2012 uncirculated sets or the three-coin ATB quarter sets (which consisted of an uncirculated "P" and "D" and proof "S" specimen) and no "S" mint-marked quarters are being released into circulation, so that mintages will be determined solely by direct demand for the "S" mint-marked coins. As of January 2013 initial United States Mint sales figures indicated that between 1.3 million and 1.6 million of each 2012 design had been struck at the San Francisco Mint, close to the announced mintage of 1.4 million for each design. Direct U.S. Mint sales of rolls and bags of uncirculated business strike coins continued with the 2013 America the Beautiful quarter issues, with actual quantities again determined by customer orders. The mintages of the uncirculated "S" quarters are considerably lower than that of the "P" and "D" mint-marked coins and are comparable to the 1996-W Roosevelt Dime (also not issued for circulation), which sells in the neighborhood of $20 each in an average grade. As of 2019, uncirculated "S" quarters can be obtained from dealers for about three to four times their face value.
+
+In 2019 the Mint began to release "W" mintmarked quarters produced at the [[West Point Mint]].  Two million of each of the year's five issues, mixed in bags with the common "P" and "D" coins, were scheduled for distribution at various major cities. Intended to increase interest in coin collecting, these products are not available by order from the Mint.<ref>{{cite web |last=Gilkes |first=Paul |url=https://www.coinworld.com/news/us-coins/2019/04/us-mint-strikes-west-point-quarters-for-circulation.all.html |title=Circulating rarities head to circulation: Quarters with the W Mint mark |work=Coin World |date=April 2, 2019}}</ref>
+
+Also notable are the 2010 satin finish quarters issued only in 2010 mint sets with a low mintage of 583,897, and proof and silver proof issues, some with mintages almost as low as the 2010 satin finish quarters.
+
+There are collector versions of the America the Beautiful 5-ounce Silver Bullion Coin Program which debuted on December 10, 2010. They feature an uncirculated finish and contain a 'P' mintmark indicating they were struck at the US Mint's facility in Philadelphia. The bullion coins were also struck in Philadelphia but contain no mintmark. The United States Mint struck these coins late in 2010 with an extremely limited mintage of only 27,000. The Mint had insufficient time to strike more before the end of the year owing to initial production difficulties with both America the Beautiful Five Ounce Coin series. This forced the Mint to only release these Hot Springs Coins the following year on April 28, 2011. Demand was intense in the first hours of availability with collectors ordering 19,000 of them in the first nine hours. Within two weeks, the Mint indicated a sell-out of the limited mintage strikes. Each coin's price is determined by the current value of silver and the 2010 issues sold for $279.95. Many subsequent issues have even lower mintages and higher secondary market values.
+
+== Aftermath ==
+
+The 2008 legislation gave the Treasury Secretary the option of ordering a second round of 56 national parks quarters by 2018, but [[Steven Mnuchin]] did not do so. According to the legislation, once the America the Beautiful Quarters Program ended in 2021, the obverse of the quarter reverted to the original Flanagan design used from 1932 until the start of the 50 State Quarter Program.  However, the reverse was redesigned to feature General Washington crossing the [[Delaware River]], the same theme that was used on the 1999 New Jersey quarter.<ref name=":1" />  The new quarter was released on April 5, 2021, and was minted for the rest of the year.
+
+With the passage of the Circulating Collectible Coin Redesign Act of 2020 ({{USPL|116|330}}, the program was succeeded by the [[American Women quarters]] from 2022 to 2025, and will continue with a series commemorating the [[United States Semiquincentennial]] in 2026 and a series depicting youth sports from 2027 to 2030.<ref>{{Cite web|last=|first=|date=September 23, 2020|title=Gonzalez bill to honor American women on the quarter passes U.S. House of Representatives|url=https://anthonygonzalez.house.gov/news/documentsingle.aspx?DocumentID=285|url-status=live|archive-url=https://web.archive.org/web/20200927024859/https://anthonygonzalez.house.gov/news/documentsingle.aspx?DocumentID=285 |archive-date=September 27, 2020 |access-date=January 16, 2021|website=U.S. Representative Anthony Gonzalez|language=en}}</ref>
+
+==Year map==
+{|
+|+ '''The following map shows the years in which the selected National Park or site in each jurisdiction was honored.'''
+|-
+| [[File:National park quarters map.svg|600px]]
+|}
+
+{| class="wikitable"
+|+ '''The following table has the quarters grouped by year.'''
+|-
+! Color
+! Year
+! 1st release
+! 2nd release
+! 3rd release
+! 4th release
+! 5th release
+|-
+| style="color:inherit;background:#51D000" |
+| 2010
+| [[Hot Springs National Park]] <small>([[Arkansas]])</small>
+| [[Yellowstone National Park]] <small>([[Wyoming]])</small>
+| [[Yosemite National Park]] <small>([[California]])</small>
+| [[Grand Canyon National Park]] <small>([[Arizona]])</small>
+| [[Mount Hood National Forest]] <small>([[Oregon]])</small>
+|-
+| style="color:inherit;background:#FF9A00" |
+| 2011
+| [[Gettysburg National Military Park]] <small>([[Pennsylvania]])</small>
+| [[Glacier National Park (U.S.)|Glacier National Park]] <small>([[Montana]])</small>
+| [[Olympic National Park]] <small>([[Washington (state)|Washington]])</small>
+| [[Vicksburg National Military Park]] <small>([[Mississippi]])</small>
+| [[Chickasaw National Recreation Area]] <small>([[Oklahoma]])</small>
+|-
+| style="color:inherit;background:#FF0000" |
+| 2012
+| [[El Yunque National Forest]] <small>([[Puerto Rico]])</small>
+| [[Chaco Culture National Historical Park]] <small>([[New Mexico]])</small>
+| [[Acadia National Park]] <small>([[Maine]])</small>
+| [[Hawaiʻi Volcanoes National Park]] <small>([[Hawaii]])</small>
+| [[Denali National Park and Preserve]] <small>([[Alaska]])</small>
+|-
+| style="color:inherit;background:#0000FF" |
+| 2013
+| [[White Mountain National Forest]] <small>([[New Hampshire]])</small>
+| [[Perry's Victory and International Peace Memorial]] <small>([[Ohio]])</small>
+| [[Great Basin National Park]] <small>([[Nevada]])</small>
+| [[Fort McHenry|Fort McHenry National Monument and Historic Shrine]] <small>([[Maryland]])</small>
+| [[Mount Rushmore|Mount Rushmore National Memorial]]  <small>([[South Dakota]])</small>
+|-
+| style="color:inherit;background:#AB00AB" |
+| 2014
+| [[Great Smoky Mountains National Park]] <small>([[Tennessee]])</small>
+| [[Shenandoah National Park]] <small>([[Virginia]])</small>
+| [[Arches National Park]] <small>([[Utah]])</small>
+| [[Great Sand Dunes National Park and Preserve]] <small>([[Colorado]])</small>
+| [[Everglades National Park]] <small>([[Florida]])</small>
+|-
+| style="color:inherit;background:#FF3399" |
+| 2015
+| [[Homestead National Monument of America]] <small>([[Nebraska]])</small>
+| [[Kisatchie National Forest]] <small>([[Louisiana]])</small>
+| [[Blue Ridge Parkway]] <small>([[North Carolina]])</small>
+| [[Bombay Hook National Wildlife Refuge]] <small>([[Delaware]])</small>
+| [[Saratoga National Historical Park]] <small>([[New York (state)|New York]])</small>
+|-
+| style="color:inherit;background:#51ABFF" |
+| 2016
+| [[Shawnee National Forest]] <small>([[Illinois]])</small>
+| [[Cumberland Gap National Historical Park]] <small>([[Kentucky]])</small>
+| [[Harpers Ferry National Historical Park]] <small>([[West Virginia]])</small>
+| [[Theodore Roosevelt National Park]] <small>([[North Dakota]])</small>
+| [[Fort Moultrie]] ([[Fort Sumter|Fort Sumter National Monument]]) <small>([[South Carolina]])</small>
+|-
+| style="color:inherit;background:#990000" |
+| 2017
+| [[Effigy Mounds National Monument]] <small>([[Iowa]])</small>
+| [[Frederick Douglass National Historic Site]] <small>([[District of Columbia]])</small>
+| [[Ozark National Scenic Riverways]] <small>([[Missouri]])</small>
+| [[Ellis Island]] ([[Statue of Liberty National Monument]]) <small>([[New Jersey]])</small>
+| [[George Rogers Clark National Historical Park]] <small>([[Indiana]])</small>
+|-
+| style="color:inherit;background:#000099" |
+| 2018
+| [[Pictured Rocks National Lakeshore]] <small>([[Michigan]])</small>
+| [[Apostle Islands National Lakeshore]] <small>([[Wisconsin]])</small>
+| [[Voyageurs National Park]] <small>([[Minnesota]])</small>
+| [[Cumberland Island National Seashore]] <small>([[Georgia (U.S. state)|Georgia]])</small>
+| [[Block Island National Wildlife Refuge]] <small>([[Rhode Island]])</small>
+|-
+| style="color:inherit;background:#FFCC00" |
+| 2019
+| [[Lowell National Historical Park]] <small>([[Massachusetts]])</small>
+| [[American Memorial Park]] <small>([[Northern Mariana Islands]])</small>
+| [[War in the Pacific National Historical Park]] <small>([[Guam]])</small>
+| [[San Antonio Missions National Historical Park]] <small>([[Texas]])</small>
+| [[Frank Church–River of No Return Wilderness]] <small>([[Idaho]])</small>
+|-
+| style="color:inherit;background:#00FF00" |
+| 2020
+| [[National Park of American Samoa]] <small>([[American Samoa]])</small>
+| [[Weir Farm National Historical Park]] <small>([[Connecticut]])</small>
+| [[Salt River Bay National Historical Park and Ecological Preserve]] <small>([[United States Virgin Islands]])</small>
+| [[Marsh-Billings-Rockefeller National Historical Park]] <small>([[Vermont]])</small>
+| [[Tallgrass Prairie National Preserve]] <small>([[Kansas]])</small>
+|-
+| style="color:inherit;background:#008080" |
+| 2021
+| [[Tuskegee Airmen National Historic Site]] <small>([[Alabama]])</small>
+| colspan="4" {{N/a}}
+|}
+
+==See also==
+{{Portal|Money|Numismatics|United States}}
+* [[America the Beautiful quarter mintage figures]]
+* [[American Women quarters]]
+* [[50 State quarters]]
+* [[America the Beautiful silver bullion coins]]
+* [[District of Columbia and United States Territories quarters]]
+* [[Presidential dollar coins]]
+* [[American Innovation dollars]]
+* [[Westward Journey nickel series]]
+* [[United States Bicentennial coinage]]
+
+==References==
+{{reflist}}
+
+==External links==
+{{wikisource|America's Beautiful National Parks Quarter Dollar Coin Act of 2008}}
+* [https://www.usmint.gov/learn/coin-and-medal-programs/america-the-beautiful-quarters United States Mint America the Beautiful Quarters Programs]
+* [http://www.govtrack.us/congress/billtext.xpd?bill=h110-6184 H.R. 6184 (110th): America's Beautiful National Parks Quarter Dollar Coin Act of 2008]
+* [http://www.americathebeautifulquarters.com/ America the Beautiful Quarters Site]
+
+{{s-start}}
+{{succession box
+| title = America the Beautiful quarters <br>(2010–2021)
+| after = [[American Women quarters]]
+| before = [[District of Columbia and United States Territories quarters]]
+| years =
+}}
+{{s-end}}
+{{United States circulating coinage}}{{Coinage (United States)|state=expanded}}{{US commemorative coinage (2010s)}}{{US commemorative coinage (2020s)}}{{George Washington}}
+
+[[Category:Currencies introduced in 2010]]
+[[Category:Twenty-five-cent coins of the United States]]
+[[Category:Circulating commemorative coins of the United States]]
+[[Category:Birds on coins]]
+[[Category:George Washington on United States currency]]
+[[Category:American bison on coins]]
+[[Category:Horses on coins]]
