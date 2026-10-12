@@ -1,0 +1,15 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "coin-rarity-answer-1.0",
+  "title": "Coin Rarity answer 1.0",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["word", "struck", "struckIs", "reason", "confidence"],
+  "properties": {
+    "word": { "enum": ["very-common", "common", "less-common", "scarce", "rare", "unknown"] },
+    "struck": { "type": ["integer", "null"], "minimum": 0 },
+    "struckIs": { "enum": ["reported", "estimate", "unknown"] },
+    "reason": { "type": "string", "minLength": 1, "maxLength": 200 },
+    "confidence": { "enum": ["high", "medium", "low"] }
+  }
+}

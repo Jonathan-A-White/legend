@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "coin-rarity-input-1.0",
+  "title": "Coin Rarity Request 1.0",
+  "description": "The facts of one coin or banknote that Legend's tables do not cover; no photo, no notes, no tags, no grade.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["kind", "country", "currency", "denomination", "faceValue", "year", "mintMark", "series", "design", "material", "inscription"],
+  "properties": {
+    "kind": { "enum": ["coin", "note"] },
+    "country": { "type": ["string", "null"], "pattern": "^[A-Z]{2}$" },
+    "currency": { "type": ["string", "null"], "pattern": "^[A-Z]{3}$" },
+    "denomination": { "type": "string", "maxLength": 80 },
+    "faceValue": { "type": ["number", "null"], "minimum": 0 },
+    "year": { "type": ["integer", "null"], "minimum": -1000, "maximum": 2200 },
+    "mintMark": { "type": ["string", "null"], "maxLength": 12 },
+    "series": { "type": ["string", "null"], "maxLength": 120 },
+    "design": { "type": ["string", "null"], "maxLength": 400 },
+    "material": { "type": "string", "maxLength": 120 },
+    "inscription": { "type": "string", "maxLength": 300 }
+  }
+}

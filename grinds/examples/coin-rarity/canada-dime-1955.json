@@ -1,0 +1,22 @@
+{
+  "description": "A 1955 Canadian silver dime: a plain common coin; the answer is a word that is common or less common, and a number only as a reported figure or an estimate.",
+  "schemaVersion": "1.0",
+  "request": {
+    "kind": "coin",
+    "country": "CA",
+    "currency": "CAD",
+    "denomination": "Dime",
+    "faceValue": 0.1,
+    "year": 1955,
+    "mintMark": null,
+    "series": null,
+    "design": "Bluenose schooner on the back",
+    "material": "silver",
+    "inscription": "CANADA 10 CENTS 1955"
+  },
+  "expect": {
+    "word": { "one_of": ["common", "less-common"] },
+    "struck": { "is_null": false },
+    "struckIs": { "one_of": ["reported", "estimate"] }
+  }
+}

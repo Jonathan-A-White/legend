@@ -1,0 +1,21 @@
+{
+  "description": "A 1935 Canadian one dollar note: the answer is medium or low confidence, and the reason never names a price.",
+  "schemaVersion": "1.0",
+  "request": {
+    "kind": "note",
+    "country": "CA",
+    "currency": "CAD",
+    "denomination": "One dollar",
+    "faceValue": 1,
+    "year": 1935,
+    "mintMark": null,
+    "series": "1935 series",
+    "design": "Portrait on the front, a landscape on the back",
+    "material": "paper",
+    "inscription": "BANK OF CANADA"
+  },
+  "expect": {
+    "confidence": { "one_of": ["medium", "low"] },
+    "reason": { "matches": "^[^$]*$" }
+  }
+}
