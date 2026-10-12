@@ -24,9 +24,9 @@ A module is a folder under `src/` with one job and one entry file; import the en
 | learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`), each ending in Ask the tutor; pure: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
 | feedback | Tell the maker: `FeedbackButton`, `TellTheMakerButton` open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
 | tips | One-time `HintCard` tips (`hints.ts`), the usage log (`usageLog.ts`) | `src/tips/index.ts` | built |
-| tutor | The Ask sheet over an item or country (`?ask`): `AskBox`, `suggestions.ts`, answers kept in asks, settings cards; `request.ts` says what goes | `src/tutor/index.ts` | built |
+| tutor | The Ask sheet over an item or country (`?ask`): `AskBox`, `suggestions.ts` (an Other's are about the piece), answers kept in asks, settings cards; `request.ts` says what goes | `src/tutor/index.ts` | built |
 | capture | Add (`#/add`): viewfinder (`CaptureScreen`: Coin, Bill, Other; `useCamera`), `captureStill` (1600 px, <1 MB, 320 px thumb), `startItem` (stores, queues), Confirm sheet, `useNameQueue` | `src/capture/index.ts` | built |
-| worth | A rough worth, never a price: `WorthLine`, `RoughWorth` (the Collection's sum), `format.ts`; Show values hides it | `src/worth/index.ts` | built |
+| worth | A rough worth, never a price (an Other's is a guess, counted at medium+): `WorthLine`, `RoughWorth`, `format.ts`; Show values hides it | `src/worth/index.ts` | built |
 | wishlist | The Wish list (`#/wishlist`, from the Collection): goal card, wished coins, Got it!, Let it go; `WishSheet` is Wish for it on the Confirm sheet; `tally.ts` (pure) the money | `src/wishlist/index.ts` | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
 

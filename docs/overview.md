@@ -24,7 +24,7 @@ have, a checklist), Share (a picture of the globe, a card of one item), Tell the
 - `public/data/us/` the US reference data (quarters, mints, grades, key dates, mintages, a states map), loaded by `src/data/us.ts`; sources and licences in `docs/data.md`; `npm run mintages:build` builds the mintages.
 - `public/changelog.json` and `CHANGELOG.md` What's new; `ATTRIBUTION.md` credits every source.
 - `docs/data.md` the world data (`npm run data:build`: countries, currencies, licences); `public/data/world/`.
-- `grinds/` grists and examples (`coin-from-photos` reads a coin, bill or Other, `item-value`, `legend-ask` the tutor); `schemas/` theirs.
+- `grinds/` grists and examples (`coin-from-photos` reads a coin, bill or Other; `item-value`, `legend-ask` the tutor: Others too); `schemas/`.
 
 ## One-line rules
 
