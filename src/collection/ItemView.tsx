@@ -4,6 +4,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect, useState, type ReactNode } from 'react';
 import type { Item, Photo } from '../data/db';
+import { kindInfo, unnamedTitle } from '../data/kinds';
 import { getItem, removeItem, restoreItem, usePhotos } from '../data/repositories';
 import { ItemReading } from '../capture';
 import { askHash, isAsking, itemHash, navigate, useAddress } from '../nav/route';
@@ -22,8 +23,6 @@ import { useReference, type Reference } from './useReference';
 export const UNDO_MS = 5000;
 /** How long Remove must be held. */
 export const REMOVE_HOLD_MS = 700;
-
-const KIND_WORD = { coin: 'Coin', note: 'Banknote' } as const;
 
 function PhotoCard({ photo, side, title, onZoom }: { photo: Photo | undefined; side: 'Obverse' | 'Reverse'; title: string; onZoom: (url: string, label: string) => void }) {
   const url = useObjectUrl(photo?.blob);
@@ -60,9 +59,10 @@ function Facts({ item, reference }: { item: Item; reference: Reference }) {
         <Fact label="Country">
           {item.country ? `${reference.flag(item.country)} ${reference.countryName(item.country)}` : unknown}
         </Fact>
-        <Fact label="Kind">{KIND_WORD[item.kind]}</Fact>
-        <Fact label="Denomination">{item.denomination || unknown}</Fact>
-        <Fact label="Year">{item.year ?? unknown}</Fact>
+        <Fact label="Kind">{kindInfo(item.kind).label}</Fact>
+        {item.kind === 'other' && item.subtype ? <Fact label="Subtype">{item.subtype}</Fact> : null}
+        {item.kind !== 'other' || item.denomination ? <Fact label="Denomination">{item.denomination || unknown}</Fact> : null}
+        {item.kind !== 'other' || item.year !== null ? <Fact label="Year">{item.year ?? unknown}</Fact> : null}
         {item.mintMark ? <Fact label="Mint">{city ? `${item.mintMark} · ${city}` : item.mintMark}</Fact> : null}
         {item.series ? <Fact label="Series">{item.series}</Fact> : null}
         {item.design ? <Fact label="Design">{item.design}</Fact> : null}
@@ -137,7 +137,7 @@ export function ItemView({ id }: { id: string }) {
     );
   }
 
-  const title = item.denomination ? `${item.denomination}${item.year !== null ? `, ${item.year}` : ''}` : item.kind === 'coin' ? 'Unnamed coin' : 'Unnamed bill';
+  const title = item.denomination ? `${item.denomination}${item.year !== null ? `, ${item.year}` : ''}` : unnamedTitle(item);
   const photo = (side: 'obverse' | 'reverse') => photos?.find((p) => p.side === side);
 
   return (

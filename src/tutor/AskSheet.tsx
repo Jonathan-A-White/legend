@@ -3,6 +3,7 @@
 // when he comes back. Back (the address loses ?ask) or Done closes it, and a question still waiting is let go.
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect } from 'react';
+import { kindInfo } from '../data/kinds';
 import { listAsks, listAsksIn } from '../data/repositories';
 import { HintCard, TUTOR_OPENED } from '../tips';
 import { AnswerCard } from './AnswerCard';
@@ -13,7 +14,7 @@ import { useAsk, type OnAnswer } from './useAsk';
 function titleOf(about: AskAbout): string {
   if (about.kind === 'country') return `About ${about.name}`;
   const { item } = about;
-  const name = item.denomination || (item.kind === 'coin' ? 'coin' : 'bill');
+  const name = item.denomination || kindInfo(item.kind).noun;
   return `About your ${name}${item.year !== null ? `, ${item.year}` : ''}`;
 }
 

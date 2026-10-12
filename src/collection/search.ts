@@ -1,7 +1,8 @@
 // src/collection/search.ts: the Collection's one matcher. A query is split into words; an item matches when every word is found
 // (ignoring case and accents) in some field he might search by: country name, denomination, year, mint mark and its city, series,
-// design, inscription, material, tags, notes, and 'coin' or 'bill'. Pure: the country names and mint cities come in as lookups.
+// design, inscription, material, tags, notes, the words of its kind ('coin', 'bill', 'token') and an Other's subtype. Pure: the country names and mint cities come in as lookups.
 import type { Item } from '../data/db';
+import { kindInfo } from '../data/kinds';
 
 export interface SearchLookups {
   /** the country's name, or the code itself when unknown */
@@ -29,7 +30,8 @@ export function haystackOf(item: Item, lookups: SearchLookups): string {
       item.design ?? '',
       item.inscription ?? '',
       item.material,
-      item.kind === 'note' ? 'bill banknote note' : 'coin',
+      kindInfo(item.kind).searchWords,
+      item.subtype ?? '',
       ...item.tags,
       item.notes,
     ].join(' \n '),

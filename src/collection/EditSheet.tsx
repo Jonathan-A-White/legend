@@ -2,6 +2,7 @@
 // from a number pad, so a wrong entry is hard to make. Save writes through the repository; Cancel and Back leave it as it was.
 import { useEffect, useState, type ReactNode } from 'react';
 import type { Item, ItemKind } from '../data/db';
+import { KINDS, KIND_ORDER } from '../data/kinds';
 import { updateItem, type ItemChanges } from '../data/repositories';
 import { useSheetBack } from '../ui/sheetBack';
 import { GRADES, parseTags } from './fields';
@@ -29,6 +30,7 @@ export function EditSheet({ item, reference, onClose }: { item: Item; reference:
   }, [onClose]);
 
   const [kind, setKind] = useState<ItemKind>(item.kind);
+  const [subtype, setSubtype] = useState(item.subtype ?? '');
   const [country, setCountry] = useState(item.country ?? '');
   const [denomination, setDenomination] = useState(item.denomination);
   const [year, setYear] = useState(item.year === null ? '' : String(item.year));
@@ -47,6 +49,7 @@ export function EditSheet({ item, reference, onClose }: { item: Item; reference:
     setSaving(true);
     const changes: ItemChanges = {
       kind,
+      subtype: kind === 'other' ? subtype.trim() || null : null,
       country: country || null,
       denomination: denomination.trim(),
       year: year === '' ? null : Number(year),
@@ -81,12 +84,7 @@ export function EditSheet({ item, reference, onClose }: { item: Item; reference:
         }}
       >
         <div role="radiogroup" aria-label="Kind" className="flex gap-2">
-          {(
-            [
-              ['coin', 'Coin'],
-              ['note', 'Banknote'],
-            ] as const
-          ).map(([value, label]) => (
+          {KIND_ORDER.map((value) => (
             <button
               key={value}
               type="button"
@@ -95,10 +93,15 @@ export function EditSheet({ item, reference, onClose }: { item: Item; reference:
               onClick={() => setKind(value)}
               className={`min-h-12 flex-1 rounded-xl border text-lg font-medium ${kind === value ? 'border-accent bg-accent/15 text-accent' : 'border-line text-muted'}`}
             >
-              {label}
+              {KINDS[value].label}
             </button>
           ))}
         </div>
+        {kind === 'other' ? (
+          <Field label="Subtype" id="edit-subtype">
+            <input id="edit-subtype" value={subtype} onChange={(e) => setSubtype(e.target.value)} placeholder="Subway token, medal…" className={field} />
+          </Field>
+        ) : null}
         <Field label="Country" id="edit-country">
           <select id="edit-country" value={country} onChange={(e) => setCountry(e.target.value)} className={field}>
             <option value="">Not known</option>

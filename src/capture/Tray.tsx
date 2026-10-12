@@ -2,8 +2,9 @@
 // the ones named whose photos are still being kept), a chip to check each one that has been named, and, for one the factory could not
 // read, the words and Try again. Nothing here opens over the camera by itself: checking waits until he taps a chip.
 import type { Item } from '../data/db';
+import { kindInfo } from '../data/kinds';
 
-const titleOf = (item: Item): string => [item.year, item.denomination].filter(Boolean).join(' ') || (item.kind === 'coin' ? 'Coin' : 'Bill');
+const titleOf = (item: Item): string => [item.year, item.denomination].filter(Boolean).join(' ') || kindInfo(item.kind).noun.replace(/^./, (c) => c.toUpperCase());
 
 export function Tray({ items, keeping = 0, onCheck, onRetry }: { items: readonly Item[]; keeping?: number; onCheck: (id: string) => void; onRetry: (id: string) => void }) {
   const atFactory = keeping + items.filter((i) => i.reading && i.reading.state !== 'failed').length;

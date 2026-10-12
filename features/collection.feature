@@ -53,3 +53,25 @@ Feature: The Collection
     And he opens the United States quarter
     And he presses Back
     Then the Collection is showing
+
+  Scenario: An Other piece is counted, filtered and found
+    Given a collection of a coin, a bill and an Other piece, a Subway token from the United States
+    When the Collection opens
+    Then the count line reads "1 coin · 1 bill · 1 other piece · 1 country"
+    When he taps the Other chip
+    Then the grid shows only the Subway token
+    When he taps the All chip
+    And he types "subway" in the search box
+    Then the Subway token is the only tile
+    When he searches for "token" instead
+    Then the Subway token is still the only tile
+    When he searches for "medal" instead
+    Then the grid shows no tile
+
+  Scenario: Edit makes a piece an Other with a subtype
+    Given a collection of 3 coins and 1 bill from 3 countries
+    When he opens the Canada dime
+    And he edits it to Other with the subtype "Subway token" and clears the denomination
+    Then the item view shows "Subway token" as its title and no coin-only rows
+    When the app is reloaded
+    Then the item view still shows "Subway token" as its title

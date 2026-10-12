@@ -111,6 +111,38 @@ describe('matchesQuery', () => {
   });
 });
 
+describe('Other pieces', () => {
+  const token = item({ kind: 'other', subtype: 'Subway token', denomination: '', year: null, mintMark: null, series: null, design: null, inscription: '', material: 'Brass' });
+  it('are found by their subtype and by the words other and collectible', () => {
+    expect(matchesQuery(token, 'subway', lookups)).toBe(true);
+    expect(matchesQuery(token, 'SUBWAY token', lookups)).toBe(true);
+    expect(matchesQuery(token, 'other', lookups)).toBe(true);
+    expect(matchesQuery(token, 'collectible', lookups)).toBe(true);
+    expect(matchesQuery(token, 'medal', lookups)).toBe(false);
+    expect(matchesQuery(item({ kind: 'other', subtype: 'Medal' }), 'medal', lookups)).toBe(true);
+    expect(matchesQuery(token, 'banknote', lookups)).toBe(false);
+  });
+  it('are not found by a word that belongs to a coin or a bill', () => {
+    expect(matchesQuery(item({ kind: 'coin' }), 'medal', lookups)).toBe(false);
+    expect(matchesQuery(item({ kind: 'note' }), 'token', lookups)).toBe(false);
+  });
+  it('make the Other filter show only them', () => {
+    const all = [item({}), item({ kind: 'note' }), token];
+    expect(visibleItems(all, { query: '', kind: 'other', country: null, sort: 'newest' }, lookups)).toEqual([token]);
+    expect(visibleItems(all, { query: 'token', kind: 'all', country: null, sort: 'newest' }, lookups)).toEqual([token]);
+    expect(countryCounts(all, { query: '', kind: 'other' }, lookups)).toEqual([{ country: 'US', name: 'United States', count: 1 }]);
+  });
+  it('are counted as other pieces, after the bills', () => {
+    expect(countLine([item({}), item({ kind: 'note' }), token])).toBe('1 coin · 1 bill · 1 other piece · 1 country');
+    expect(countLine([token, item({ kind: 'other' }), item({ kind: 'other' })])).toBe('3 other pieces · 1 country');
+  });
+  it('an item stored before the subtype existed still reads', () => {
+    const old = item({ kind: 'other' });
+    expect('subtype' in old).toBe(false);
+    expect(matchesQuery(old, 'other', lookups)).toBe(true);
+  });
+});
+
 describe('countLine', () => {
   it('counts coins, bills and countries', () => {
     const items = [

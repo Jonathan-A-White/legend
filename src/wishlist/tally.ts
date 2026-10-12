@@ -1,6 +1,7 @@
 // src/wishlist/tally.ts: the Wish list's money, as pure functions: reading what he typed, adding the savings up, how full the bar is, and
 // the words for a price. All figures are US dollars; no money moves anywhere, this is only a tally.
 import type { Item, ItemValue, Saving } from '../data/db';
+import { unnamedTitle } from '../data/kinds';
 import { rangeText } from '../worth';
 
 /** The most a typed amount may be; anything bigger is a slip of the thumb. */
@@ -43,5 +44,5 @@ export function priceLine(item: Pick<Item, 'askingPrice'>, value: Pick<ItemValue
 }
 
 /** 'Standing Liberty quarter, 1916' */
-export const wishTitle = (item: Pick<Item, 'denomination' | 'year' | 'kind'>): string =>
-  item.denomination ? `${item.denomination}${item.year !== null ? `, ${item.year}` : ''}` : item.kind === 'coin' ? 'Unnamed coin' : 'Unnamed bill';
+export const wishTitle = (item: Pick<Item, 'denomination' | 'year' | 'kind' | 'subtype'>): string =>
+  item.denomination ? `${item.denomination}${item.year !== null ? `, ${item.year}` : ''}` : unnamedTitle(item);

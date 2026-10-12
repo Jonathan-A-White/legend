@@ -4,7 +4,7 @@
 // Timestamps are epoch milliseconds and ids are UUID strings.
 import Dexie, { type EntityTable } from 'dexie';
 
-export type ItemKind = 'coin' | 'note';
+export type ItemKind = 'coin' | 'note' | 'other';
 /** 'considering' is an item he is only looking at (Just looking): named like the rest, but not in the collection or its counts until he adds it.
  * 'wished' is a coin he wants and has not bought (it carries an askingPrice): on the Wish list, never in the collection or its counts. */
 export type ItemStatus = 'pending' | 'named' | 'confirmed' | 'considering' | 'wished';
@@ -31,6 +31,8 @@ export interface Reading {
 export interface Item {
   id: string;
   kind: ItemKind;
+  /** what an 'other' piece is, in his words ('Subway token', 'Medal'); an item stored before it existed has none */
+  subtype?: string | null;
   /** ISO 3166-1 alpha-2, upper case ('US') */
   country: string | null;
   /** ISO 4217 ('USD') */

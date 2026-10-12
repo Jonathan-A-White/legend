@@ -47,7 +47,7 @@ export const isoDay = (at: number): string => {
 
 export function valueInput(item: Item, now: number): ValueInput {
   return {
-    kind: item.kind,
+    kind: item.kind === 'note' ? 'note' : 'coin', // the grind knows coins and notes only; needsValue never asks about an Other
     country: item.country,
     currency: item.currency,
     denomination: item.denomination,
@@ -69,7 +69,7 @@ export const valueKey = (item: Item): string => `${item.year ?? ''}|${item.grade
 /** True when the item should have a value asked for: it is named (not pending, not at the factory), and it has none, or its value is
  * 30 days old, or its year or grade guess changed since. */
 export function needsValue(item: Item, value: ItemValue | undefined, now: number): boolean {
-  if (item.deletedAt !== null || item.status === 'pending' || item.reading) return false;
+  if (item.deletedAt !== null || item.status === 'pending' || item.reading || item.kind === 'other') return false;
   if (!value) return true;
   if (now - value.asOf >= VALUE_REFRESH_MS) return true;
   return value.forYear !== item.year || value.forGrade !== item.gradeGuess;

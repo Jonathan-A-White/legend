@@ -1,8 +1,9 @@
 // src/collection/view.ts: what the Collection shows, as pure rules: the count line, the filters, the sort and the country counts.
-import type { Item } from '../data/db';
+import type { Item, ItemKind } from '../data/db';
+import { KIND_ORDER, countWords } from '../data/kinds';
 import { matchesQuery, type SearchLookups } from './search';
 
-export type KindFilter = 'all' | 'coin' | 'note';
+export type KindFilter = 'all' | ItemKind;
 export type SortBy = 'newest' | 'country' | 'year';
 
 export interface ViewState {
@@ -21,12 +22,11 @@ export const SORTS: readonly { value: SortBy; label: string }[] = [
 
 const plural = (n: number, one: string, many: string): string => `${n} ${n === 1 ? one : many}`;
 
-/** '14 coins · 3 bills · 6 countries': what he has, leaving out what there is none of. */
+/** '14 coins · 3 bills · 2 other pieces · 6 countries': what he has, leaving out what there is none of. An item of an unknown kind counts as a bill. */
 export function countLine(items: readonly Item[]): string {
-  const coins = items.filter((i) => i.kind === 'coin').length;
-  const bills = items.length - coins;
+  const countOf = (kind: ItemKind) => items.filter((i) => (KIND_ORDER.includes(i.kind) ? i.kind : 'note') === kind).length;
   const countries = new Set(items.map((i) => i.country).filter(Boolean)).size;
-  return [coins ? plural(coins, 'coin', 'coins') : '', bills ? plural(bills, 'bill', 'bills') : '', countries ? plural(countries, 'country', 'countries') : '']
+  return [...KIND_ORDER.map((kind) => (countOf(kind) ? countWords(kind, countOf(kind)) : '')), countries ? plural(countries, 'country', 'countries') : '']
     .filter(Boolean)
     .join(' · ');
 }

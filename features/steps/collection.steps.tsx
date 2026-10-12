@@ -216,4 +216,80 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
       expect(await screen.findByRole('list', { name: 'Your collection' })).toBeInTheDocument();
     });
   });
+
+  Scenario('An Other piece is counted, filtered and found', ({ Given, When, And, Then }) => {
+    const search = async (text: string) => {
+      const box = screen.getByRole('searchbox', { name: 'Search your collection' });
+      await userEvent.clear(box);
+      await userEvent.type(box, text);
+    };
+    const onlyToken = async () => {
+      await waitFor(() => expect(tiles()).toHaveLength(1));
+      expect(tiles()[0]).toHaveTextContent('Subway token');
+    };
+    Given('a collection of a coin, a bill and an Other piece, a Subway token from the United States', async () => {
+      await addItem({ kind: 'coin', country: 'US', denomination: 'Quarter dollar', year: 1964, status: 'confirmed' });
+      await addItem({ kind: 'note', country: 'US', denomination: 'One dollar', year: 1935, status: 'confirmed' });
+      await addItem({ kind: 'other', subtype: 'Subway token', country: 'US', material: 'Brass', status: 'confirmed' });
+    });
+    When('the Collection opens', theCollectionOpens);
+    Then('the count line reads "1 coin · 1 bill · 1 other piece · 1 country"', async () => {
+      await waitFor(() => expect(countLine()).toHaveTextContent(/^1 coin · 1 bill · 1 other piece · 1 country$/));
+    });
+    When('he taps the Other chip', async () => {
+      await userEvent.click(screen.getByRole('radio', { name: 'Other' }));
+    });
+    Then('the grid shows only the Subway token', onlyToken);
+    When('he taps the All chip', async () => {
+      await userEvent.click(screen.getByRole('radio', { name: 'All' }));
+      await waitFor(() => expect(tiles()).toHaveLength(3));
+    });
+    And('he types "subway" in the search box', () => search('subway'));
+    Then('the Subway token is the only tile', onlyToken);
+    When('he searches for "token" instead', () => search('token'));
+    Then('the Subway token is still the only tile', onlyToken);
+    When('he searches for "medal" instead', () => search('medal'));
+    Then('the grid shows no tile', async () => {
+      expect(await screen.findByText('Nothing matches')).toBeInTheDocument();
+      expect(screen.queryByRole('list', { name: 'Your collection' })).toBeNull();
+    });
+  });
+
+  Scenario('Edit makes a piece an Other with a subtype', ({ Given, When, And, Then }) => {
+    const title = () => screen.findByRole('heading', { level: 1, name: 'Subway token' });
+    const noCoinRows = async () => {
+      const facts = await screen.findByRole('region', { name: 'Facts' });
+      const labels = within(facts).getAllByText(/./, { selector: 'dt' }).map((dt) => dt.textContent);
+      expect(labels).toContain('Subtype');
+      for (const gone of ['Denomination', 'Mint', 'Grade']) expect(labels).not.toContain(gone);
+    };
+    Given('a collection of 3 coins and 1 bill from 3 countries', aCollection);
+    When('he opens the Canada dime', async () => {
+      await open('#/collection');
+      await userEvent.click(await screen.findByRole('link', { name: /Dime/ }));
+      await screen.findByRole('heading', { name: /Dime/ });
+    });
+    And('he edits it to Other with the subtype "Subway token" and clears the denomination', async () => {
+      await userEvent.click(screen.getByRole('button', { name: 'Edit' }));
+      const sheet = await screen.findByRole('dialog', { name: 'Edit' });
+      expect(within(sheet).queryByRole('textbox', { name: 'Subtype' })).toBeNull();
+      await userEvent.click(within(sheet).getByRole('radio', { name: 'Other' }));
+      await userEvent.clear(within(sheet).getByRole('textbox', { name: 'Denomination' }));
+      await userEvent.type(within(sheet).getByRole('textbox', { name: 'Subtype' }), 'Subway token');
+      await userEvent.click(within(sheet).getByRole('button', { name: 'Save' }));
+      await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Edit' })).toBeNull());
+    });
+    Then('the item view shows "Subway token" as its title and no coin-only rows', async () => {
+      await title();
+      await noCoinRows();
+      expect((await getItem(seeded.caDime.id))?.subtype).toBe('Subway token');
+    });
+    When('the app is reloaded', async () => {
+      await open(`#/item/${seeded.caDime.id}`);
+    });
+    Then('the item view still shows "Subway token" as its title', async () => {
+      await title();
+      await noCoinRows();
+    });
+  });
 });

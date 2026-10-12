@@ -1,7 +1,8 @@
-// src/collection/CollectionScreen.tsx: the Collection at #/collection: a count line, a search box, chips for All / Coins / Bills and a
+// src/collection/CollectionScreen.tsx: the Collection at #/collection: a count line, a search box, chips for All / Coins / Bills / Other and a
 // country picker, and the items as a grid of obverse thumbnails or a list. Everything is filtered on the phone, as he types.
 import { useMemo, useState } from 'react';
 import type { Item } from '../data/db';
+import { KINDS as KIND_WORDS, KIND_ORDER, unnamedTitle } from '../data/kinds';
 import { useItems, useThumbs } from '../data/repositories';
 import { FeedbackButton } from '../feedback';
 import { ADD_HASH, WISHLIST_HASH, itemHash } from '../nav/route';
@@ -16,14 +17,13 @@ type Mode = 'grid' | 'list';
 
 const KINDS: readonly { value: KindFilter; label: string }[] = [
   { value: 'all', label: 'All' },
-  { value: 'coin', label: 'Coins' },
-  { value: 'note', label: 'Bills' },
+  ...KIND_ORDER.map((kind) => ({ value: kind, label: KIND_WORDS[kind].plural })),
 ];
 
 // How he last looked at it, kept while the app is open.
 const remembered: { mode: Mode; sort: SortBy } = { mode: 'grid', sort: 'newest' };
 
-const titleOf = (item: Item): string => item.denomination || (item.kind === 'coin' ? 'Unnamed coin' : 'Unnamed bill');
+const titleOf = (item: Item): string => item.denomination || unnamedTitle(item);
 
 const chip = (on: boolean) =>
   `flex min-h-11 items-center gap-1.5 rounded-full border px-3.5 text-base font-medium ${on ? 'border-accent bg-accent/15 text-accent' : 'border-line text-muted'}`;
@@ -120,7 +120,7 @@ export function CollectionScreen() {
         type="search"
         role="searchbox"
         aria-label="Search your collection"
-        placeholder="Search coins and bills…"
+        placeholder="Search your collection…"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         autoCapitalize="none"
