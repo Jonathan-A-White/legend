@@ -42,11 +42,13 @@ export interface CardFacts {
 /** The facts of an item a card may carry. Notes, tags, wear notes, the fun fact, face value, currency and any estimate of worth are
  * not read at all. */
 export function cardFacts(item: Item, look: CardLookups): CardFacts {
-  const denomination = fit(item.denomination) ?? (item.kind === 'coin' ? 'Coin' : 'Banknote');
+  const type = item.kind === 'other' ? fit(item.subtype) : null;
+  const denomination = fit(item.denomination) ?? (item.kind === 'other' ? (type ?? 'Piece') : item.kind === 'coin' ? 'Coin' : 'Banknote');
   const mark = fit(item.mintMark);
   const city = mark ? look.mintCity(mark, item.country) : null;
   const rows: CardFacts['rows'] = [];
   const add = (label: string, value: string | null) => value && rows.push({ label, value });
+  add('Type', type);
   add('Mint', mark ? (city ? `${mark} · ${city}` : mark) : null);
   add('Series', fit(item.series));
   add('Design', fit(item.design));

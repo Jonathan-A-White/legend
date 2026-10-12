@@ -102,6 +102,14 @@ describeFeature(feature, ({ Scenario }) => {
     itemId = item.id;
     for (const side of ['obverse', 'reverse'] as const) await addPhoto({ itemId, side, blob: bytes(), thumb: bytes(), width: 800, height: 600 });
   };
+  const aToken = async () => {
+    await startOver();
+    const item = await addItem({
+      kind: 'other', subtype: 'Subway token', country: 'US', notes: 'Grandpa gave me this one', tags: ['grandpa-silver'], funFact: 'Worth about $40 to collectors', status: 'confirmed',
+    });
+    itemId = item.id;
+    await addPhoto({ itemId, side: 'obverse', blob: bytes(), thumb: bytes(), width: 800, height: 600 });
+  };
   const globeOpen = () => open('#/globe');
   const tapShare = async () => {
     ctx.reset();
@@ -143,6 +151,38 @@ describeFeature(feature, ({ Scenario }) => {
       const written = ctx.texts.join('\n');
       expect(written).not.toMatch(/Grandpa|grandpa/);
       expect(written).not.toMatch(/\d{8,}/);
+    });
+  });
+
+  Scenario('Sharing an Other piece', ({ Given, And, When, Then }) => {
+    Given('he has a Subway token from the United States with a note, a tag and a worth', aToken);
+    And('that item is open', () => open(`#/item/${itemId}`));
+    When('he taps Share on the item', tapShare);
+    Then('the share sheet is offered one JPEG picture of 1080 by 1350', () => {
+      expect(sentFile().type).toBe('image/jpeg');
+      expect(canvas.cuts.at(-1)).toEqual({ width: 1080, height: 1350, type: 'image/jpeg' });
+    });
+    And('the card is titled Subway token and shows the country, a Type row and no Mint row', () => {
+      expect(ctx.texts).toContain('Subway token');
+      expect(ctx.texts.join('\n')).toContain('United States');
+      expect(ctx.texts).toContain('Type');
+      expect(ctx.texts).not.toContain('Mint');
+    });
+    And('the card shows no note, no tag and no worth', () => {
+      const written = ctx.texts.join('\n');
+      expect(written).not.toMatch(/Grandpa|grandpa|\$40|worth/i);
+    });
+  });
+
+  Scenario('An Other piece without navigator.share gets a Save picture link', ({ Given, And, When, Then }) => {
+    Given('he has a Subway token from the United States with a note, a tag and a worth', aToken);
+    And('the phone has no share sheet', () => void Object.defineProperty(navigator, 'share', { configurable: true, value: undefined }));
+    And('that item is open', () => open(`#/item/${itemId}`));
+    When('he taps Share on the item', tapShare);
+    Then('a Save picture link appears for the picture', () => {
+      const link = screen.getByRole('link', { name: 'Save picture' });
+      expect(link).toHaveAttribute('href', expect.stringMatching(/^blob:/));
+      expect(share).not.toHaveBeenCalled();
     });
   });
 

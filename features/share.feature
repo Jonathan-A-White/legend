@@ -18,6 +18,21 @@ Feature: Share
     And the card shows both photos and the denomination, year, country, mint, series, design, grade guess and inscription
     And the card shows no note, no tag and no run of eight digits
 
+  Scenario: Sharing an Other piece
+    Given he has a Subway token from the United States with a note, a tag and a worth
+    And that item is open
+    When he taps Share on the item
+    Then the share sheet is offered one JPEG picture of 1080 by 1350
+    And the card is titled Subway token and shows the country, a Type row and no Mint row
+    And the card shows no note, no tag and no worth
+
+  Scenario: An Other piece without navigator.share gets a Save picture link
+    Given he has a Subway token from the United States with a note, a tag and a worth
+    And the phone has no share sheet
+    And that item is open
+    When he taps Share on the item
+    Then a Save picture link appears for the picture
+
   Scenario: without navigator.share a Save picture link appears
     Given he has 2 coins from Germany and 1 from the United States
     And the phone has no share sheet

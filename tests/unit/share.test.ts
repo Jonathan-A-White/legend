@@ -58,6 +58,41 @@ describe('the item card text', () => {
     expect(text).toContain('1964');
   });
 
+  describe('an Other piece', () => {
+    const token = (over: Partial<Item> = {}) =>
+      item({
+        kind: 'other', subtype: 'Subway token', country: 'US', currency: null, denomination: '', faceValue: null, year: null, mintMark: null, series: null,
+        design: null, inscription: undefined, funFact: 'Good for one fare in 1953.', gradeGuess: null, gradeNotes: '', notes: 'Paul found it in a drawer, worth $5',
+        tags: ['subway-trip'], ...over,
+      });
+
+    it('is titled by its subtype when it has no denomination, with the year when it has one, a Type row and no Mint row', () => {
+      const plain = cardFacts(token(), look);
+      expect(plain.title).toBe('Subway token');
+      expect(plain.rows).toEqual([{ label: 'Type', value: 'Subway token' }]);
+      expect(plain.country).toEqual({ flag: '🇺🇸', name: 'United States' });
+      expect(cardFacts(token({ year: 1953 }), look).title).toBe('Subway token, 1953');
+    });
+
+    it('is titled by its denomination when it has one, and still names its Type', () => {
+      const facts = cardFacts(token({ denomination: 'Ten cent fare', year: 1953 }), look);
+      expect(facts.title).toBe('Ten cent fare, 1953');
+      expect(facts.rows).toContainEqual({ label: 'Type', value: 'Subway token' });
+    });
+
+    it('never holds a note, a tag, the fun fact or any worth', () => {
+      const text = cardText(cardFacts(token({ year: 1953 }), look));
+      for (const banned of ['drawer', 'worth', '$5', 'subway-trip', 'Good for one fare']) expect(text, banned).not.toContain(banned);
+      expect(text).not.toMatch(/Mint/);
+    });
+
+    it('with no subtype and no denomination is still titled, and a coin is not given a Type row', () => {
+      expect(cardFacts(token({ subtype: null }), look).title).toBe('Piece');
+      expect(cardFacts(token({ subtype: null }), look).rows).toEqual([]);
+      expect(cardFacts(item(), look).rows.map((r) => r.label)).not.toContain('Type');
+    });
+  });
+
   it('knows what a serial number looks like and what a year is', () => {
     expect(looksLikeSerial('12345678')).toBe(true);
     expect(looksLikeSerial('A12345678B')).toBe(true);
