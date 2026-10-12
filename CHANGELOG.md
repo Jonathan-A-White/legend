@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.30
+_2026-10-12_
+- New: Other pieces such as tokens can now be shared as a card, and they light up their country on the Globe.
+
 ## 0.1.29
 _2026-10-12_
 - New: Tokens, medals and other pieces now get a rough guess of what they might be worth, and the tutor can tell you about them.
