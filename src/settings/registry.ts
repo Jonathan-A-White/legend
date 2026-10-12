@@ -84,9 +84,10 @@ export const SETTINGS: readonly SettingEntry[] = [
     options: [
       { value: 'coin', label: 'Coin' },
       { value: 'note', label: 'Banknote' },
+      { value: 'other', label: 'Other' },
     ],
     label: 'Adding starts with',
-    hint: 'Whether a new item is a coin or a banknote until you say otherwise.',
+    hint: 'Whether a new item is a coin, a banknote or another piece until you say otherwise.',
     help: 'When you add an item, Legend starts from this kind. You can change the kind of any item as you add it.',
     section: 'collection',
     talkable: true,
