@@ -4,14 +4,14 @@ A module is a folder under `src/` with one job and one entry file; import the en
 
 | Module | One responsibility | Entry | Status |
 |---|---|---|---|
-| App shell | Start the app: scroll guard, banner, service worker, config | `src/main.tsx`, `src/App.tsx`, `src/config.ts`, `src/sw.ts` | built |
+| App shell | Start the app: scroll guard, banner, worker, config | `src/main.tsx`, `src/App.tsx`, `src/config.ts`, `src/sw.ts` | built |
 | Update flow | Banner, waiting build, What's new | `src/UpdateBanner.tsx`, `src/whatsNew/` | built |
-| gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell, `Unlock` shows meanwhile | `src/gate/index.ts` | built |
+| gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell, `Unlock` shows | `src/gate/index.ts` | built |
 | data | The local store (Dexie: items, photos, settings, meta, asks, values, outbox, usage, savings) and its types; `kinds.ts` the kinds' words | `src/data/db.ts` | built |
 | data/world | Countries (TopoJSON, names, flags) and currencies by date, in `public/data/world/` | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, mintages, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
-| rarity | How rare a coin is: `rarityWord`, `findRow`, `placeInSeries`, `struckSentence` over mintages.json (pure; no UI yet) | `src/rarity/index.ts` | built |
+| rarity | How rare a US coin is: pure rules (`findRow`, `placeInSeries`), `RarityLine`, `Strip`; `keyDateStruck` for Special years | `src/rarity/index.ts` | built |
 | services | Everything that leaves the phone: `grist.ts` (seam `setGristPort`), `feedback.ts`, the tutor `ask.ts`, licence, device key, app update; the photo reader `nameItem.ts` (on a worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time, resumes from `item.reading`, values), `itemAnswer.ts` (1.1: other, subtype), `value.ts` | `src/services/appUpdate.ts` | built |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
@@ -19,7 +19,7 @@ A module is a folder under `src/` with one job and one entry file; import the en
 | ui | Shared controls: scroll guard, build stamp, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), `useObjectUrl` | `src/ui/` (one file each) | built |
 | globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`; Others light theirs): a canvas globe; `render.ts` draws (pure), `controller.ts` loops | `src/globe/index.ts` | built |
 | quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist; `match.ts` (pure) names an item's design, `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
-| collection | The Collection (`#/collection`: count line, search, filters, Looking at) and one item (`#/item/<id>`: photos, facts, notes, Edit, Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
+| collection | The Collection (`#/collection`: count line, search, filters, Looking at) and one item (`#/item/<id>`: photos, facts, rarity, notes, Edit, Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
 | share | Share: a globe picture or item card, else Save picture; `text.ts` says what a card may say (Other: subtype) | `src/share/index.ts` | built |
 | learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`), each ending in Ask the tutor; pure: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
 | feedback | Tell the maker: `FeedbackButton`, `TellTheMakerButton` open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
