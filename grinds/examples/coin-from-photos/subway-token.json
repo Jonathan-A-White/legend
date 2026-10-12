@@ -1,0 +1,13 @@
+{
+  "description": "A New York City subway token, not money: the collector says Other and the photo reader names it a token, an Other with a subtype, from the US, with no face value.",
+  "schemaVersion": "1.1",
+  "request": { "kind": "other", "hint": null, "sides": ["obverse"] },
+  "photos": ["nyc-subway-token.jpg"],
+  "expect": {
+    "kind": { "equals": "other" },
+    "subtype": { "matches": "[Tt]oken" },
+    "country": { "equals": "US" },
+    "denomination": { "matches": "[Tt]oken|NYC|[Tt]ransit|[Ss]ubway" },
+    "faceValue": { "is_null": true }
+  }
+}

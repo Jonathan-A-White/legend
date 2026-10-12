@@ -20,7 +20,8 @@ scenario's shape without a network, and fails when a grind has no scenario.
 ```
 
 - `schemaVersion`: one of the grind's `versions`; names the input and answer schema
-  (`schemas/<kind>-input-<version>.schema.json`).
+  (`schemas/<kind>-input-<version>.schema.json`). coin-from-photos has 1.0 and 1.1 (the app sends 1.1: `other` and `subtype`);
+  its older scenarios stay under 1.0, the Other ones are 1.1.
 - `request`: the grind's input exactly as the app sends it; valid against the input schema. For coin-from-photos, `sides`
   names what each photo shows, in the photos' order.
 - `photos`: file names beside the scenario (`.jpg`, `.jpeg` or `.webp`), as many as the grind's `attachments` allow. Public-safe
@@ -48,14 +49,16 @@ scenario or the unit test fails.
 
 ## coin-from-photos: where each photo comes from
 
-Every photo is on Wikimedia Commons and free to use; each was scaled down (long side 600 to 1000 px) and saved as a JPEG
-under 100 KB, nothing else changed. Credit is also in `ATTRIBUTION.md`.
+Every photo is on Wikimedia Commons and free to use; each was scaled down (long side 600 to 1000 px; the token and the
+Yosemite reverse are used at their own size) and saved as a JPEG under about 100 KB, nothing else changed. Credit is also in `ATTRIBUTION.md`.
 
 | File | Source and author | Licence |
 |---|---|---|
 | `lincoln-1909s-obverse.jpg`, `lincoln-1909s-reverse.jpg` | [1909-S VDB Lincoln cent obverse](https://commons.wikimedia.org/wiki/File:1909-S_VDB_Lincoln_cent_obverse.jpg) and [reverse](https://commons.wikimedia.org/wiki/File:1909-S_VDB_Lincoln_cent_reverse.jpg); image by Lost Dutchman Rare Coins, coin design by Victor David Brenner | Public domain |
 | `washington-quarter-1944s-obverse.jpg`, `washington-quarter-1944s-reverse.jpg` | [Washington Quarter Silver 1944S Obverse](https://commons.wikimedia.org/wiki/File:Washington_Quarter_Silver_1944S_Obverse.png) and [Reverse](https://commons.wikimedia.org/wiki/File:Washington_Quarter_Silver_1944S_Reverse.png); image by Brandon Grossardt, coin design by John Flanagan | Public domain |
 | `canada-dime-1955.jpg` | [Canada $0.1 1955](https://commons.wikimedia.org/wiki/File:Canada_$0.1_1955.jpg); photograph by Mister rf, coin design by Emanuel Hahn | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
+| `nyc-subway-token.jpg` | [Nyc transit authority token](https://commons.wikimedia.org/wiki/File:Nyc_transit_authority_token.png); photograph by Jessamyn; converted from PNG to JPEG at its own size (250 px) | Public domain |
+| `yosemite-quarter-2010-reverse.jpg` | [ATBQ 2010 CA Yosemite](https://commons.wikimedia.org/wiki/File:ATBQ_2010_CA_Yosemite.jpg); United States Mint | Public domain |
 | `canada-1935-one-dollar-note.jpg` | [Obverse of $1 banknote, Canada 1935 Series, English version](https://commons.wikimedia.org/wiki/File:Obverse_of_$1_banknote,_Canada_1935_Series,_English_version.jpg); Bank of Canada, from the National Currency Museum. A specimen note: its number A0000003 is the specimen's, not a real note's | Public domain |
 
 ## legend-ask: the tutor's scenarios

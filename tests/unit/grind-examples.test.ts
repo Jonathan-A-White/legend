@@ -16,12 +16,14 @@ import {
   type GrindExample,
   type Schema,
 } from '../support/grind-examples';
+import { tokenAnswer } from '../support/coin-answers';
 
 const readJson = (rel: string): Record<string, unknown> => JSON.parse(readFileSync(rel, 'utf8')) as Record<string, unknown>;
 
 const MIME_BY_EXT: Record<string, string> = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp' };
 
 const ajv = new Ajv({ allErrors: true, strict: true });
+const schemas = new Map<string, Record<string, unknown>>();
 const grindFiles = readdirSync('grinds').filter((f) => f.endsWith('.json'));
 
 describe('the grinds have scenarios', () => {
@@ -36,6 +38,14 @@ describe('the grinds have scenarios', () => {
     const exampleFiles = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.json')) : [];
     const attachments = grind.attachments as { min: number; max: number; mime: string[]; maxBytes: number };
     const inputSchema = readJson(grind.inputSchema as string);
+    // a scenario under another of the grind's versions is checked against that version's schemas (schemas/<kind>-<input|answer>-<version>.schema.json)
+    const schemaFor = (which: 'input' | 'answer', version: string, fallback: Record<string, unknown>) => {
+      const path = `schemas/${kind}-${which}-${version}.schema.json`;
+      if (!existsSync(path)) return fallback;
+      // the same object each time, so Ajv compiles it once
+      if (!schemas.has(path)) schemas.set(path, readJson(path));
+      return schemas.get(path)!;
+    };
     // A forwarding grind ("forward": "mayor") has no model, no instructions and no answer schema: the mill answers {"status":"sent"}.
     const forwards = grind.forward === 'mayor';
     const answerSchema = forwards ? FORWARD_ANSWER_SCHEMA : readJson(grind.answerSchema as string);
@@ -56,9 +66,9 @@ describe('the grinds have scenarios', () => {
       expect(typeof example.description === 'string' && example.description.length > 0, 'description').toBe(true);
       expect(grind.versions, "schemaVersion is one of the grind's versions").toContain(example.schemaVersion);
 
-      const validateInput = ajv.compile(inputSchema);
+      const validateInput = ajv.compile(schemaFor('input', example.schemaVersion, inputSchema));
       expect(validateInput(example.request), JSON.stringify(validateInput.errors)).toBe(true);
-      expect(expectProblems(example.expect, answerSchema), 'the expect fits the answer schema').toEqual([]);
+      expect(expectProblems(example.expect, forwards ? answerSchema : schemaFor('answer', example.schemaVersion, answerSchema)), 'the expect fits the answer schema').toEqual([]);
 
       const photos = example.photos ?? [];
       expect(photos.length, 'files named').toBeGreaterThanOrEqual(attachments.min);
@@ -73,6 +83,25 @@ describe('the grinds have scenarios', () => {
         expect(size, `${name} is within the grind's maxBytes`).toBeLessThanOrEqual(attachments.maxBytes);
       }
     });
+  });
+
+  it('covers an Other (a subway token, valid against the 1.1 answer) and a commemorative legal-tender quarter that is a coin', () => {
+    const dir = 'grinds/examples/coin-from-photos';
+    const examples = readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => readJson(`${dir}/${f}`) as unknown as GrindExample);
+    const token = examples.find((e) => asCheck(e.expect.kind).equals === 'other');
+    expect(token, 'a scenario answering other').toBeDefined();
+    expect(token!.schemaVersion).toBe('1.1');
+    expect(token!.request.kind).toBe('other');
+    expect(asCheck(token!.expect.subtype).matches).toMatch(/oken/);
+    // an answer the scenario describes fits the 1.1 answer schema, and the 1.0 schema has no way to say other
+    const own = new Ajv({ allErrors: true, strict: true });
+    const fits = own.compile(readJson('schemas/coin-from-photos-answer-1.1.schema.json'));
+    expect(fits(tokenAnswer()), JSON.stringify(fits.errors)).toBe(true);
+    const old = own.compile(readJson('schemas/coin-from-photos-answer-1.0.schema.json'));
+    expect(old(tokenAnswer())).toBe(false);
+    const quarter = examples.find((e) => e.schemaVersion === '1.1' && asCheck(e.expect.kind).equals === 'coin');
+    expect(quarter, 'a commemorative legal-tender coin scenario answering coin').toBeDefined();
+    expect(asCheck(quarter!.expect.faceValue).equals).toBe(0.25);
   });
 
   it('covers a Lincoln cent, a Washington quarter, a coin from outside the US and a banknote', () => {

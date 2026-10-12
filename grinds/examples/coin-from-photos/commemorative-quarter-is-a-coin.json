@@ -1,0 +1,15 @@
+{
+  "description": "The 2010 Yosemite America the Beautiful quarter, a commemorative but legal-tender coin: the collector says Other, the photo decides, and the answer is coin with no subtype.",
+  "schemaVersion": "1.1",
+  "request": { "kind": "other", "hint": null, "sides": ["reverse"] },
+  "photos": ["yosemite-quarter-2010-reverse.jpg"],
+  "expect": {
+    "kind": { "equals": "coin" },
+    "subtype": { "equals": "" },
+    "country": { "equals": "US" },
+    "currency": { "equals": "USD" },
+    "denomination": { "matches": "[Qq][Uu][Aa][Rr][Tt][Ee][Rr]" },
+    "faceValue": { "equals": 0.25 },
+    "year": { "equals": 2010 }
+  }
+}

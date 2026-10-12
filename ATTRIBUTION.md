@@ -33,6 +33,8 @@ not shipped in the app) are from Wikimedia Commons, each scaled down and saved a
 - Canadian dime of 1955: photograph by Mister rf, coin design by Emanuel Hahn.
   [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0).
 - Bank of Canada 1935 one dollar specimen note: Bank of Canada, National Currency Museum. Public domain.
+- New York City subway token (obverse): photograph by Jessamyn on Commons. Public domain.
+- 2010 America the Beautiful quarter, Yosemite (reverse): United States Mint. Public domain.
 
 Each photo's page is linked in `grinds/examples/README.md`.
 
