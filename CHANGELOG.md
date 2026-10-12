@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.31
+_2026-10-12_
+- New: A coin's page now says how rare it is by how many the Mint made, with a strip showing where its year sits, and Special years shows the number struck.
+
 ## 0.1.30
 _2026-10-12_
 - New: Other pieces such as tokens can now be shared as a card, and they light up their country on the Globe.

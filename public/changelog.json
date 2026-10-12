@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.31",
+    "date": "2026-10-12",
+    "story": "mw-2dghhp.2",
+    "kind": "new",
+    "text": "A coin's page now says how rare it is by how many the Mint made, with a strip showing where its year sits, and Special years shows the number struck."
+  },
+  {
     "version": "0.1.30",
     "date": "2026-10-12",
     "story": "mw-f9fv9f.4",
