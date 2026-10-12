@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.29",
+    "date": "2026-10-12",
+    "story": "mw-f9fv9f.3",
+    "kind": "new",
+    "text": "Tokens, medals and other pieces now get a rough guess of what they might be worth, and the tutor can tell you about them."
+  },
+  {
     "version": "0.1.27",
     "date": "2026-10-12",
     "story": "mw-f9fv9f.2",
