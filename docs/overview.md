@@ -1,6 +1,6 @@
 # Legend overview
 
-Legend is an offline-first PWA for collecting coins and banknotes. It was built for Paul, who is eight, so it is
+Legend is an offline-first PWA for collecting coins, banknotes and other pieces. It was built for Paul, who is eight, so it is
 grown-up and never kiddy, and it is made so any collector can use it. The legend is the inscription around a coin.
 
 Served at https://legend.allmymind.org (the VPS; no GitHub Pages). Licence-gated through bsv-kit; the tutor and the
@@ -11,7 +11,7 @@ and what they choose to share: `docs/privacy.md`.
 
 Built: the licence gate (`docs/testing.md`), the shell (bottom bar; reopens where they left), Settings
 (Appearance, Collection, Photos, Tutor, Privacy, About), Home (`#/`), the Collection (count line, rough worth, search,
-filters, a Looking at strip) and one item (photos, facts, notes, Edit, hold to Remove), Add (`#/add`: photograph front and back, a queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Wish list (`#/wishlist`: Wish for it at the store's price, a saving goal, Got it!), the Globe (`#/globe`: a globe turned with one
+filters, Looking at) and one item (photos, facts, notes, Edit, hold to Remove), Add (`#/add`: photograph front and back, a queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Wish list (`#/wishlist`: Wish for it at the store's price, a saving goal, Got it!), the Globe (`#/globe`: a globe turned with one
 finger, lit where the items come from; Not yet lists the countries with nothing) and the
 Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map lit with the quarters they
 have, a checklist), Share (a picture of the globe, a card of one item), Tell the maker (`docs/feedback.md`) and one-time tips. Learn (grading, mint marks, special years, Your path). The tutor (`?ask` on an item or a country: his questions, its answers, settings only on his Apply).

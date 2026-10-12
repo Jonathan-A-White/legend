@@ -7,7 +7,7 @@ A module is a folder under `src/` with one job and one entry file; import the en
 | App shell | Start the app: scroll guard, banner, service worker, config | `src/main.tsx`, `src/App.tsx`, `src/config.ts`, `src/sw.ts` | built |
 | Update flow | Banner, waiting build, What's new | `src/UpdateBanner.tsx`, `src/whatsNew/` | built |
 | gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell, `Unlock` shows meanwhile | `src/gate/index.ts` | built |
-| data | The local store (Dexie: items, photos, settings, meta, asks, values, outbox, usage, savings) and its types; `reading` while at the factory | `src/data/db.ts` | built |
+| data | The local store (Dexie: items, photos, settings, meta, asks, values, outbox, usage, savings) and its types; `kinds.ts` the kinds' words | `src/data/db.ts` | built |
 | data/world | Countries (TopoJSON, names, flags) and currencies by date, in `public/data/world/` | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
@@ -18,7 +18,7 @@ A module is a folder under `src/` with one job and one entry file; import the en
 | ui | Shared controls: scroll guard, build stamp, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), `useObjectUrl` | `src/ui/` (one file each) | built |
 | globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): a canvas globe; `render.ts` draws a frame (pure), `controller.ts` the loop, `clock.ts` its seam | `src/globe/index.ts` | built |
 | quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist; `match.ts` (pure) names an item's design, `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
-| collection | The Collection (`#/collection`: count line, search, filters, Looking at) and one item (`#/item/<id>`: photos, facts, notes, Edit, hold to Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
+| collection | The Collection (`#/collection`: count line, search, filters, Looking at) and one item (`#/item/<id>`: photos, facts, notes, Edit, Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
 | share | Share: a globe picture or an item card, else Save picture; `text.ts` says what a card may say | `src/share/index.ts` | built |
 | learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`), each ending in Ask the tutor; pure: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
 | feedback | Tell the maker: `FeedbackButton`, `TellTheMakerButton` open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
