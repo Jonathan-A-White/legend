@@ -3,7 +3,7 @@
 // year's place among its series are worked out here. Nothing is guessed: a coin with no row gets no word.
 import type { Item } from '../data/db';
 import type { KeyDate, KeyDateSeries, MintageRow, Mintages, Mint, QuarterDesign } from '../data/us';
-import { keyDateMatches, seriesOf } from '../learn';
+import { keyDateMatches, needsLook, seriesOf } from '../learn/years';
 
 export type RarityWord = 'Very common' | 'Common' | 'Less common' | 'Scarce' | 'Rare';
 
@@ -113,13 +113,18 @@ const PLACE_WORDS: Record<PlaceVerdict, string> = {
   biggest: 'one of the biggest runs of the',
 };
 
+/** The rows a row is compared with: the same series from the same mint, the three years of mints counted together left out. */
+export function seriesPool(table: Mintages, found: FoundRow): MintageRow[] {
+  return table.series.find((s) => s.series === found.series)?.rows.filter((r) => r.mint === found.row.mint && !isTogether(r)) ?? [];
+}
+
 /**
  * Where a row stands among the same series from the same mint, by how many were struck. The 1965 to 1967 rows count three
  * mints together, so they are neither ranked nor ranked against; fewer than five rows is too few to compare, so null.
  */
 export function placeInSeries(table: Mintages, found: FoundRow, mints: Mint[]): Place | null {
   if (isTogether(found.row)) return null;
-  const pool = table.series.find((s) => s.series === found.series)?.rows.filter((r) => r.mint === found.row.mint && !isTogether(r)) ?? [];
+  const pool = seriesPool(table, found);
   if (pool.length < 5) return null;
   const fewer = pool.filter((r) => r.struck < found.row.struck).length;
   const share = fewer / pool.length;
@@ -140,4 +145,30 @@ export function keyDateFor(keyDates: KeyDateSeries[], item: Item): KeyDate | nul
     if (hit) return hit;
   }
   return null;
+}
+
+/** Why an item has no row: it is not a coin of the four series or the table lacks it ('tables'), the year or the mint mark is not
+ *  known, or two designs fit ('design') or two varieties ('variety') and the item does not say which. */
+export type NoRowReason = 'tables' | 'year' | 'mark' | 'design' | 'variety';
+
+export function noRowReason(table: Mintages, item: Item): NoRowReason {
+  const series = seriesOf(item);
+  if (!series) return 'tables';
+  if (item.year === null) return 'year';
+  const inYear = table.series.find((s) => s.series === series)?.rows.filter((r) => r.year === item.year) ?? [];
+  if (inYear.length === 0) return 'tables';
+  const mark = item.mintMark?.trim().toUpperCase() || null;
+  const atMint = inYear.filter((r) => r.mint === (mark ?? 'P'));
+  if (atMint.length === 0) return mark ? 'tables' : 'mark';
+  return atMint.some((r) => r.design !== null) ? 'design' : 'variety';
+}
+
+/** The row a key date counts: its own year and mint mark, the variety its name says ('1909-S VDB' is the V.D.B. row). Null for a
+ *  span of years, a doubled die or a plain year (no one row is that coin), an entry with no mint mark, or two rows that fit. */
+export function keyDateStruck(table: Mintages, series: string, entry: KeyDate): MintageRow | null {
+  if (entry.yearTo !== undefined || entry.mintMark === null || needsLook(entry)) return null;
+  const rows = table.series.find((s) => s.series === series)?.rows.filter((r) => r.year === entry.year && r.mint === entry.mintMark) ?? [];
+  if (rows.length <= 1) return rows[0] ?? null;
+  const named = rows.filter((r) => r.variety !== null && compact(entry.name).includes(compact(r.variety)));
+  return named.length === 1 ? named[0] : null;
 }

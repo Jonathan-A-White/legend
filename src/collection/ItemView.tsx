@@ -11,6 +11,7 @@ import { askHash, isAsking, itemHash, navigate, useAddress } from '../nav/route'
 import { ShareButton, shareItem } from '../share';
 import { AskSheet } from '../tutor';
 import { HoldBar } from '../ui/HoldBar';
+import { RarityLine } from '../rarity';
 import { WishedCard } from '../wishlist';
 import { WorthLine } from '../worth';
 import { EditSheet } from './EditSheet';
@@ -166,6 +167,7 @@ export function ItemView({ id }: { id: string }) {
         </div>
 
         <Facts item={item} reference={reference} />
+        <RarityLine item={item} onEdit={() => setEditing(true)} />
         <WorthLine itemId={item.id} />
 
         {item.inscription ? (

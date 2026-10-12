@@ -1,6 +1,7 @@
 // src/learn/YearsPage.tsx: #/learn/years. The key dates of each series (cent, nickel, dime, quarter) with the one-line why; a date he has
 // a coin for says 'You have one!' and shows it, the others say 'Keep an eye out'.
-import { loadKeyDates } from '../data/us';
+import { loadKeyDates, loadMintages } from '../data/us';
+import { keyDateStruck } from '../rarity/rarity';
 import { useItems, useThumbs } from '../data/repositories';
 import { CoinLinks, Failed, Page } from './Page';
 import { keyDateMatches, needsLook } from './years';
@@ -8,6 +9,7 @@ import { useLoaded } from './useLoaded';
 
 export function YearsPage() {
   const dates = useLoaded(loadKeyDates);
+  const mintages = useLoaded(loadMintages);
   const items = useItems();
   const thumbs = useThumbs();
 
@@ -28,6 +30,7 @@ export function YearsPage() {
             {s.entries.map((e) => {
               const mine = (items ?? []).filter((i) => keyDateMatches(i, s.series, e));
               const have = mine.length > 0;
+              const struck = mintages.value ? keyDateStruck(mintages.value, s.series, e) : null;
               return (
                 <li key={e.name} data-key-date={e.name} data-have={have} className={`rounded-2xl border p-4 ${have ? 'border-accent bg-accent/10' : 'border-line bg-surface'}`}>
                   <div className="flex items-baseline justify-between gap-3">
@@ -37,6 +40,11 @@ export function YearsPage() {
                     </span>
                   </div>
                   <p className="mt-1 text-base">{e.why}</p>
+                  {struck ? (
+                    <p data-struck className="mt-1 text-base text-muted">
+                      {struck.struck.toLocaleString('en-US')} struck
+                    </p>
+                  ) : null}
                   {have && needsLook(e) ? <p className="mt-1 text-base text-muted">You have one from that year: only some coins of it are the special kind, so look closely.</p> : null}
                   <CoinLinks items={mine} thumbs={thumbs} />
                 </li>

@@ -160,6 +160,22 @@ describeFeature(
       });
     });
 
+    Scenario('Special years shows how many were struck', ({ When, Then, And }) => {
+      When('the Special years page opens', async () => {
+        await open('#/learn/years', 'Special years');
+        await waitFor(() => expect(keyDate('1955 doubled die')).toBeTruthy());
+      });
+      Then('1909-S VDB says 484,000 struck', async () => {
+        await waitFor(() => expect(keyDate('1909-S VDB').querySelector('[data-struck]')).toHaveTextContent('484,000 struck'));
+      });
+      And('1950-D says 2,630,030 struck', async () => {
+        await waitFor(() => expect(keyDate('1950-D')).toHaveTextContent('2,630,030 struck'));
+      });
+      And('1955 doubled die shows no number struck', () => {
+        expect(keyDate('1955 doubled die').querySelector('[data-struck]')).toBeNull();
+      });
+    });
+
     Scenario("Your path shows each skill's level and next step from his items", ({ Given, When, Then, And }) => {
       Given('his collection holds three graded coins from two countries and he has asked the tutor once', async () => {
         await addItem({ ...quarter, year: 1964, gradeGuess: 'VF' });

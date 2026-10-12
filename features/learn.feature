@@ -35,6 +35,12 @@ Feature: Learn teaches grading, mint marks and special years on the coins he has
     Then 1955 doubled die says You have one!
     And 1909-S VDB says Keep an eye out
 
+  Scenario: Special years shows how many were struck
+    When the Special years page opens
+    Then 1909-S VDB says 484,000 struck
+    And 1950-D says 2,630,030 struck
+    And 1955 doubled die shows no number struck
+
   Scenario: Your path shows each skill's level and next step from his items
     Given his collection holds three graded coins from two countries and he has asked the tutor once
     When the Your path page opens

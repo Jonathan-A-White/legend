@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { Item } from '../../src/data/db';
 import type { KeyDateSeries, Mint, Mintages, QuarterDesign } from '../../src/data/us';
-import { findRow, keyDateFor, placeInSeries, rarityWord, struckSentence } from '../../src/rarity';
+import { findRow, keyDateFor, keyDateStruck, noRowReason, placeInSeries, rarityWord, struckSentence } from '../../src/rarity';
 import { matchDesign } from '../../src/quarters/match';
 
 const table = JSON.parse(readFileSync('public/data/us/mintages.json', 'utf8')) as Mintages;
@@ -154,5 +154,32 @@ describe('keyDateFor', () => {
     expect(keyDateFor(keyDates, cent({ year: 1914, mintMark: 'D' }))?.name).toMatch(/1914/);
     expect(keyDateFor(keyDates, cent({ year: 1914, mintMark: 'P' }))).toBeNull();
     expect(keyDateFor(keyDates, item({ country: 'CA', year: 1914 }))).toBeNull();
+  });
+});
+
+describe('noRowReason', () => {
+  const reason = (i: Item) => noRowReason(table, i);
+  it('says why a coin has no row', () => {
+    expect(reason(item({ year: null }))).toBe('year');
+    expect(reason(item({ country: 'CA', year: 1955 }))).toBe('tables');
+    expect(reason(item({ denomination: 'Half dollar', year: 1964 }))).toBe('tables');
+    expect(reason(item({ year: 1800, mintMark: 'D' }))).toBe('tables');
+    expect(reason(item({ year: 1999, mintMark: 'P' }))).toBe('design');
+  });
+  it('says the mint mark is not known when only other mints struck that year', () => {
+    expect(reason(cent({ year: 1922, mintMark: null, series: 'Lincoln cent' }))).toBe('mark');
+    expect(reason(item({ denomination: 'Five cents', year: 1968, mintMark: null, series: 'Jefferson nickel' }))).toBe('mark');
+    expect(reason(cent({ year: 1922, mintMark: 'P', series: 'Lincoln cent' }))).toBe('tables');
+  });
+});
+
+describe('keyDateStruck', () => {
+  const dates = (series: string, name: string) => keyDates.find((s) => s.series === series)!.entries.find((e) => e.name === name)!;
+  it('gives the V.D.B. row for 1909-S VDB and the D row for 1950-D', () => {
+    expect(keyDateStruck(table, 'Lincoln cent', dates('Lincoln cent', '1909-S VDB'))?.struck).toBe(484_000);
+    expect(keyDateStruck(table, 'Jefferson nickel', dates('Jefferson nickel', '1950-D'))?.struck).toBe(2_630_030);
+  });
+  it('gives nothing for a doubled die', () => {
+    expect(keyDateStruck(table, 'Lincoln cent', dates('Lincoln cent', '1955 doubled die'))).toBeNull();
   });
 });
