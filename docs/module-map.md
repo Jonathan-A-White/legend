@@ -10,7 +10,8 @@ A module is a folder under `src/` with one job and one entry file; import the en
 | data | The local store (Dexie: items, photos, settings, meta, asks, values, outbox, usage, savings) and its types; `kinds.ts` the kinds' words | `src/data/db.ts` | built |
 | data/world | Countries (TopoJSON, names, flags) and currencies by date, in `public/data/world/` | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
-| data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
+| data/us | The US reference data (quarters, mints, grades, key dates, mintages, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
+| rarity | How rare a coin is: `rarityWord`, `findRow`, `placeInSeries`, `struckSentence` over mintages.json (pure; no UI yet) | `src/rarity/index.ts` | built |
 | services | Everything that leaves the phone: `grist.ts` (seam `setGristPort`), `feedback.ts`, the tutor `ask.ts`, licence, device key, app update; the photo reader `nameItem.ts` (on a worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time, resumes from `item.reading`, values), `itemAnswer.ts` (1.1: other, subtype), `value.ts` | `src/services/appUpdate.ts` | built |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
@@ -36,7 +37,7 @@ A module is a folder under `src/` with one job and one entry file; import the en
 
 ## Screens
 
-Each screen is a folder `src/screens/<name>/` exporting its component from `index.ts`. The bottom bar has Collection, Globe,
+The bottom bar has Collection, Globe,
 Quarters, Learn and Settings (`src/settings/SettingsScreen.tsx`); `home` is `#/`; `item` (`#/item/<id>`) and `country`
 (`#/country/<cc>`) are reached from them. Those live in their module folders above; `add` (`#/add`, `src/capture/`) opens over the bar.
 
@@ -57,4 +58,3 @@ from inside another module's folder, only its entry.
 
 - UI reaches the store only through a repository; a repository owns its transactions.
 - Anything that leaves the phone lives in `services/` (a shared picture, in `share/`).
-- A change to a source, a screen's purpose or a module boundary updates this file, `docs/overview.md` and `ATTRIBUTION.md`.

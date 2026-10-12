@@ -52,6 +52,14 @@ The US reference data in `public/data/us/` (the facts and the lists are written 
 - **Sheldon grades** (`grades.json`): the 1-to-70 scale was devised by William Sheldon (1949). The step names are the common
   ones; every description is written for Legend and not taken from a grading service.
 - **Key dates** (`key-dates.json`): common knowledge of the hobby, with no prices and no mintage figures. Our own words.
+- **Mintages** (`mintages.json`, built by `npm run mintages:build`): how many coins were struck, from the mintage tables of Wikipedia's
+  [Lincoln cent](https://en.wikipedia.org/wiki/Lincoln_cent_mintage_figures), [nickel](https://en.wikipedia.org/wiki/United_States_nickel_mintage_figures),
+  [Roosevelt dime](https://en.wikipedia.org/wiki/Roosevelt_dime_mintage_figures) and [Washington quarter](https://en.wikipedia.org/wiki/Washington_quarter_mintage_figures)
+  mintage pages and the pages of the [50 State](https://en.wikipedia.org/wiki/50_State_Quarters), [America the Beautiful](https://en.wikipedia.org/wiki/America_the_Beautiful_quarters),
+  [American Women](https://en.wikipedia.org/wiki/American_Women_quarters) and [Semiquincentennial](https://en.wikipedia.org/wiki/United_States_Semiquincentennial_coinage)
+  quarters, text [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0). The figures are facts from the [US Mint](https://www.usmint.gov)'s
+  production reports (public domain). Changes: only the circulation figures are kept (no proofs or collector pieces), 1965 to 1967 are summed,
+  quarter designs are named as in `quarters.json`; the wikitext snapshots are in `data/snapshots/mintages/`.
 - **States map** (`states.json`): **[us-atlas](https://github.com/topojson/us-atlas)** by Mike Bostock, ISC, from US Census
   Bureau cartographic boundaries (public domain), the `states-albers-10m` file. Changes: the national outline removed, and
   each state's two-letter code added in place of its FIPS id. Alaska and Hawaii are the file's own insets.

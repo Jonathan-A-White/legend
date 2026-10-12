@@ -67,6 +67,7 @@ hand-written from public facts: no catalogue (Numista, PCGS, NGC, ucoin, Colnect
 | `mints.json` | `mints`: the eight marks (P, D, S, W, CC, O, C, D Dahlonega) with city, years and a note; `placement`: where the mark sits on the cent, nickel, dime and quarter | Wikipedia "Mint mark" (CC BY-SA 4.0); the US Mint mint marks page is the reference (it blocked the Builder's fetch, so placement is from general knowledge: check it when a story relies on it) |
 | `grades.json` | Sheldon steps PO-1 to MS-70, each with the numbers it covers (`from`-`to`) and a plain description on a Lincoln cent and a Washington quarter | Sheldon's scale; descriptions written for Legend |
 | `key-dates.json` | Lincoln cent, Jefferson nickel, Roosevelt dime and Washington quarter: key dates and varieties, one plain reason each | Hobby knowledge; our words, no prices or mintages |
+| `mintages.json` | how many were struck: Lincoln cent, Jefferson nickel, Roosevelt dime and Washington quarter, by year, mint, quarter design and variety | Wikipedia's mintage tables (CC BY-SA 4.0) of the US Mint's reports; built by `npm run mintages:build`, see Mintages below |
 | `states.json` | TopoJSON of the 50 states and DC (Albers, 975 x 610, under 100 KB), `properties: {name, code}` | us-atlas `states-albers-10m` (ISC; Census data, public domain) |
 
 ### Rules
@@ -106,3 +107,31 @@ Every Learn page reads the files above and his own items; nothing leaves the pho
   mark where the date names one, and with no mark where the date is plain or a doubled die; those say to look closely.
 - Your path: levels start at counts Grading 0/5/20 (items with a gradeGuess), Mints 0/3/8 (distinct US marks), World 1/5/15/30
   (countries), Quarters 0/10/30/60 (designs matched), Looking 0/5/20 (items tagged `considered`), Tutor 0/3/10 (asks).
+
+### Mintages (`public/data/us/mintages.json`)
+
+The one rarity fact Legend states is how many were struck, and the number never comes from a model's memory or from a hand: `npm run
+mintages:build` (`scripts/mintages-build.ts`, `tsx`) reads the wikitext of the Wikipedia pages that carry the US Mint's production
+figures and writes the file. The wikitext is committed in `data/snapshots/mintages/` (the series pages `Lincoln_cent_mintage_figures`,
+`United_States_nickel_mintage_figures`, `Roosevelt_dime_mintage_figures`, `Washington_quarter_mintage_figures`, and for the quarters of
+1999 on `50_State_Quarters`, `America_the_Beautiful_quarters`, `American_Women_quarters` and `United_States_Semiquincentennial_coinage`),
+so the build needs no network and a second run changes nothing. `tests/unit/mintages-build.test.ts` parses the snapshots and checks the
+output equals the committed file. To refresh, run `npm run mintages:build -- --refresh` (it fetches the pages through the MediaWiki API),
+read the diff, and commit the snapshots with the new file. The US Mint's own production pages (public domain) are the original source
+but answer 403 to a script (checked 2026-10-12), so the build cannot use them; the Wikipedia tables cite them.
+
+`{ series: [{ series, rows: [{ year, mint, design, variety, struck, note }] }], gaps: [{ series, years, why }] }`:
+
+- `series` is a key-dates series name (`seriesOf`), `mint` one of P D S W CC O, `struck` a positive integer. Philadelphia and no-mark
+  coins are `P`; a mint that struck coins without a mark (West Point cents 1974-1980) keeps its own letter and says so in `note`.
+- 1965 to 1967 had no mint marks and the Mint counted every mint together: one `P` row per series and year, summed, with a note.
+- Proofs and collector pieces (satin, special mint set, enhanced, reverse proof, patterns) are left out, so the figure is what went
+  into circulation. A mint-year with two kinds has one row each: the plain one has `variety: null` (1909-S and 1909-S V.D.B.; the
+  1942 nickel and its wartime silver one). A variety is named only where there is a plain row to tell it from.
+- `design` is the quarters.json `name` for a quarter of 1999 on (every year's P and D, and W for 2019), the Bicentennial cent's and the
+  Westward Journey nickel's design name, else `null`. Designs of one year are separate rows.
+- Where the source has no clean integer (marked ^ for included in another row, ?, an estimate, a dash, not reported yet) the row is
+  left out and `gaps` says which series and years and why. Nothing is guessed. A 2026 figure is as the page stood when snapshotted.
+
+`src/rarity/` (pure) turns the table into words: `rarityWord(struck)` (Very common 100M and up, Common 10M, Less common 1M, Scarce 100k,
+Rare below; PROVISIONAL), `findRow`, `placeInSeries` (the rank among the same series and mint, and a phrase) and `struckSentence`.

@@ -39,6 +39,7 @@ npm run lint         # eslint, no explicit any
 npm run shots        # Playwright at 390x844 against `vite preview` of dist/ (build first, or npm run gate:shots); writes shots/<name>.png
 npm run e2e:live     # live specs (tests/e2e/*-live.spec.ts: photo-live, ask-live) against the DEPLOYED app; not in the gate; see Live tests
 npm run data:build   # rebuild public/data/world/*.json from data/raw and data/snapshots (docs/data.md); a second run changes nothing
+npm run mintages:build # rebuild public/data/us/mintages.json from data/snapshots/mintages; needs no network
 npm run icons        # re-render public/icon-192.png and icon-512.png from public/icon.svg
 npm run grind:build  # write the talkable settings into grinds/legend-ask.md and its answer schema (after a registry change)
 ```

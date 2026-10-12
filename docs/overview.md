@@ -9,8 +9,7 @@ and what they choose to share: `docs/privacy.md`.
 
 ## Screens planned
 
-Built: the licence gate (`docs/testing.md`), the shell (bottom bar; reopens where they left), Settings
-(Appearance, Collection, Photos, Tutor, Privacy, About), Home (`#/`), the Collection (count line, rough worth, search,
+Built: the licence gate (`docs/testing.md`), the shell (bottom bar; reopens where they left), Settings, Home (`#/`), the Collection (count line, rough worth, search,
 filters, Looking at) and one item (photos, facts, notes, Edit, hold to Remove), Add (`#/add`: photograph front and back, a queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Wish list (`#/wishlist`: Wish for it at the store's price, a saving goal, Got it!), the Globe (`#/globe`: a globe turned with one
 finger, lit where the items come from; Not yet lists the countries with nothing) and the
 Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map lit with the quarters they
@@ -22,7 +21,7 @@ have, a checklist), Share (a picture of the globe, a card of one item), Tell the
   talk through the bus (`docs/events.md`), a setting is one registry entry.
 - `docs/testing.md` how tests pass the licence gate (the device key seam).
 - `features/*.feature` Gherkin scenarios; `features/steps/` their steps; `tests/unit/` unit tests; `tests/e2e/` Playwright.
-- `public/data/us/` the US reference data (quarters, mints, grades, key dates, a states map), loaded by `src/data/us.ts`; sources and licences in `docs/data.md`.
+- `public/data/us/` the US reference data (quarters, mints, grades, key dates, mintages, a states map), loaded by `src/data/us.ts`; sources and licences in `docs/data.md`; `npm run mintages:build` builds the mintages.
 - `public/changelog.json` and `CHANGELOG.md` What's new; `ATTRIBUTION.md` credits every source.
 - `docs/data.md` the world data (`npm run data:build`: countries, currencies, licences); `public/data/world/`.
 - `grinds/` grists and examples (`coin-from-photos` reads a coin, bill or Other, `item-value`, `legend-ask` the tutor); `schemas/` theirs.
