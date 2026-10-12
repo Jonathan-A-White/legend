@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.32
+_2026-10-12_
+- New: Coins and notes Legend has no table for can now be asked how rare they are, and the answer is marked as the tutor's estimate.
+
 ## 0.1.31
 _2026-10-12_
 - New: A coin's page now says how rare it is by how many the Mint made, with a strip showing where its year sits, and Special years shows the number struck.

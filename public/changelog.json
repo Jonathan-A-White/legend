@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.32",
+    "date": "2026-10-12",
+    "story": "mw-2dghhp.3",
+    "kind": "new",
+    "text": "Coins and notes Legend has no table for can now be asked how rare they are, and the answer is marked as the tutor's estimate."
+  },
+  {
     "version": "0.1.31",
     "date": "2026-10-12",
     "story": "mw-2dghhp.2",
