@@ -19,6 +19,13 @@ import { useUndoToast } from './useUndoToast';
 
 const SIDES = ['Front', 'Back'] as const;
 
+/** The guide in the viewfinder, and what it asks, for each kind: a circle for a coin, a wide frame for a bill, a plain rounded square for a piece that is neither. */
+const FRAMES: Record<ItemKind, { frame: string; caption: string }> = {
+  coin: { frame: 'aspect-square w-[72%] rounded-full', caption: 'Fit the coin in the circle.' },
+  note: { frame: 'aspect-[2/1] w-[88%] rounded-2xl', caption: 'Fit the bill in the frame.' },
+  other: { frame: 'aspect-square w-[72%] rounded-2xl', caption: 'Fit the piece in the frame.' },
+};
+
 function Choice<T extends string>({ label, value, options, onChange }: { label: string; value: T; options: readonly { value: T; text: string }[]; onChange: (value: T) => void }) {
   return (
     <div role="radiogroup" aria-label={label} className="flex gap-1 rounded-2xl bg-black/60 p-1">
@@ -122,7 +129,7 @@ export function CaptureScreen() {
       <video ref={videoRef} className="absolute inset-0 h-full w-full object-cover" playsInline muted />
 
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 flex items-center justify-center">
-        <div className={`border-2 border-dashed border-white/70 ${kind === 'coin' ? 'aspect-square w-[72%] rounded-full' : 'aspect-[2/1] w-[88%] rounded-2xl'}`} />
+        <div data-testid="frame" className={`border-2 border-dashed border-white/70 ${FRAMES[kind].frame}`} />
       </div>
 
       <div className="relative z-10 bg-gradient-to-b from-black/80 to-transparent pt-[max(env(safe-area-inset-top),0.75rem)] pb-3">
@@ -131,7 +138,7 @@ export function CaptureScreen() {
             <p data-testid="prompt" aria-live="polite" className="text-4xl font-semibold tracking-wide">
               {prompt}
             </p>
-            <p className="text-base text-white/80">{both ? 'Tap Name it to send them.' : kind === 'coin' ? 'Fit the coin in the circle.' : 'Fit the bill in the frame.'}</p>
+            <p className="text-base text-white/80">{both ? 'Tap Name it to send them.' : FRAMES[kind].caption}</p>
           </div>
           <button type="button" aria-label="Close" onClick={() => navigate('#/collection', { replace: true })} className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black/60 text-2xl">
             <span aria-hidden="true">✕</span>
@@ -188,6 +195,7 @@ export function CaptureScreen() {
           options={[
             { value: 'coin', text: 'Coin' },
             { value: 'note', text: 'Bill' },
+            { value: 'other', text: 'Other' },
           ]}
         />
         <div className="flex items-center justify-between gap-3">

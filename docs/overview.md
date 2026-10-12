@@ -20,12 +20,12 @@ have, a checklist), Share (a picture of the globe, a card of one item), Tell the
 
 - `src/` the app, one folder per module: `docs/module-map.md`. Everything is stored in Dexie behind repositories, screens
   talk through the bus (`docs/events.md`), a setting is one registry entry.
-- `docs/testing.md` how tests get past the licence gate (the device key seam).
+- `docs/testing.md` how tests pass the licence gate (the device key seam).
 - `features/*.feature` Gherkin scenarios; `features/steps/` their steps; `tests/unit/` unit tests; `tests/e2e/` Playwright.
 - `public/data/us/` the US reference data (quarters, mints, grades, key dates, a states map), loaded by `src/data/us.ts`; sources and licences in `docs/data.md`.
 - `public/changelog.json` and `CHANGELOG.md` What's new; `ATTRIBUTION.md` credits every source.
-- `docs/data.md` the world data (`npm run data:build`: countries and currencies, sources and licences); `public/data/world/`.
-- `grinds/` the grists and examples (`coin-from-photos`, `item-value`, `legend-ask` the tutor); `schemas/` theirs.
+- `docs/data.md` the world data (`npm run data:build`: countries, currencies, licences); `public/data/world/`.
+- `grinds/` grists and examples (`coin-from-photos` reads a coin, bill or Other, `item-value`, `legend-ask` the tutor); `schemas/` theirs.
 
 ## One-line rules
 

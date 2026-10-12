@@ -11,7 +11,7 @@ A module is a folder under `src/` with one job and one entry file; import the en
 | data/world | Countries (TopoJSON, names, flags) and currencies by date, in `public/data/world/` | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
-| services | Everything that leaves the phone: `grist.ts` (seam `setGristPort`), `feedback.ts`, the tutor `ask.ts`, licence, device key, app update; the photo reader `nameItem.ts` (on a worker: `sendOffThread.ts`), `nameQueue.ts` (one send at a time, resumes from `item.reading`, values), `itemAnswer.ts`, `value.ts` | `src/services/appUpdate.ts` | built |
+| services | Everything that leaves the phone: `grist.ts` (seam `setGristPort`), `feedback.ts`, the tutor `ask.ts`, licence, device key, app update; the photo reader `nameItem.ts` (on a worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time, resumes from `item.reading`, values), `itemAnswer.ts` (1.1: other, subtype), `value.ts` | `src/services/appUpdate.ts` | built |
 | events | The typed in-app bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
@@ -24,7 +24,7 @@ A module is a folder under `src/` with one job and one entry file; import the en
 | feedback | Tell the maker: `FeedbackButton`, `TellTheMakerButton` open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
 | tips | One-time `HintCard` tips (`hints.ts`), the usage log (`usageLog.ts`) | `src/tips/index.ts` | built |
 | tutor | The Ask sheet over an item or country (`?ask`): `AskBox`, `suggestions.ts`, answers kept in asks, settings cards; `request.ts` says what goes | `src/tutor/index.ts` | built |
-| capture | Add (`#/add`): viewfinder (`CaptureScreen`, `useCamera`), `captureStill` (grab at the tap, keep behind: 1600 px, <1 MB, 320 px thumb), `startItem` (stores once kept, queues), Confirm sheet, `useNameQueue` | `src/capture/index.ts` | built |
+| capture | Add (`#/add`): viewfinder (`CaptureScreen`: Coin, Bill, Other; `useCamera`), `captureStill` (1600 px, <1 MB, 320 px thumb), `startItem` (stores, queues), Confirm sheet, `useNameQueue` | `src/capture/index.ts` | built |
 | worth | A rough worth, never a price: `WorthLine`, `RoughWorth` (the Collection's sum), `format.ts`; Show values hides it | `src/worth/index.ts` | built |
 | wishlist | The Wish list (`#/wishlist`, from the Collection): goal card, wished coins, Got it!, Let it go; `WishSheet` is Wish for it on the Confirm sheet; `tally.ts` (pure) the money | `src/wishlist/index.ts` | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |

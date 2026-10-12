@@ -16,7 +16,7 @@ import { nameQueue } from '../../src/services/nameQueue';
 import { seedCollection, serveReferenceData } from '../../tests/support/collection-fixtures';
 import { installFakeCamera, type FakeCamera } from '../../tests/support/fake-camera';
 import { answered, deferred, fakeGrist, refused, type FakeGrist } from '../../tests/support/fake-grist';
-import { quarterAnswer } from '../../tests/support/coin-answers';
+import { quarterAnswer, tokenAnswer } from '../../tests/support/coin-answers';
 import { openGate } from '../../tests/support/open-gate';
 
 beforeAll(() => {
@@ -175,7 +175,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     Then('the grist is sent as app legend, kind coin-from-photos, with the device key and the two photos in order', async () => {
       await waitFor(() => expect(factory.sent).toHaveLength(1));
       const [sent] = factory.sent;
-      expect(sent).toMatchObject({ app: 'legend', kind: 'coin-from-photos', v: '1.0', input: { kind: 'coin', hint: null, sides: ['obverse', 'reverse'] } });
+      expect(sent).toMatchObject({ app: 'legend', kind: 'coin-from-photos', v: '1.1', input: { kind: 'coin', hint: null, sides: ['obverse', 'reverse'] } });
       expect(Array.from(sent.key)).toEqual(Array.from(getDeviceKeyBytes()));
       expect(sent.photos).toHaveLength(2);
       const stored = atSend[0].photos;
@@ -451,6 +451,59 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
       await userEvent.click(await screen.findByRole('button', { name: 'Undo' }));
       await waitFor(async () => expect((await db.items.get(ids[1]))?.deletedAt).toBeNull());
       expect((await db.items.get(ids[1]))?.status).toBe('considering');
+    });
+  });
+
+  Scenario('Adding an Other by photo', ({ Given, When, And, Then }) => {
+    Given('the camera is open on Add and the factory will name a subway token', async () => {
+      factory.onAnswer(async () => answered(tokenAnswer()));
+      await cameraOpen();
+    });
+    When('he chooses Other', async () => {
+      await userEvent.click(screen.getByRole('radio', { name: 'Other' }));
+      expect(screen.getByRole('radio', { name: 'Other' })).toBeChecked();
+      expect(screen.getByText('Fit the piece in the frame.')).toBeInTheDocument();
+    });
+    And('he takes the Front photo and the Back photo', takeBoth);
+    And('he taps Name it', nameOne);
+    And('he opens the named piece to check it', openToCheck);
+    Then('the grist is sent asking for an Other with its two photos as obverse and reverse', async () => {
+      await waitFor(() => expect(factory.sent).toHaveLength(1));
+      expect(factory.sent[0]).toMatchObject({ kind: 'coin-from-photos', v: '1.1', input: { kind: 'other', hint: null, sides: ['obverse', 'reverse'] } });
+      expect(factory.sent[0].photos).toHaveLength(2);
+    });
+    And('the item is kept as an Other with the subtype Subway token and the country US', async () => {
+      expect(await onlyItem()).toMatchObject({ kind: 'other', subtype: 'Subway token', country: 'US', denomination: 'NYC Transit token' });
+    });
+    And('the Confirm sheet names it NYC Transit token', () => {
+      expect(within(sheet()).getByText('NYC Transit token')).toBeInTheDocument();
+    });
+  });
+
+  Scenario("The reader's kind wins", ({ Given, When, Then }) => {
+    Given('the camera is open on Add and the factory will name a subway token', async () => {
+      factory.onAnswer(async () => answered(tokenAnswer()));
+      await cameraOpen();
+    });
+    When('he leaves Coin chosen and names a piece', async () => {
+      expect(screen.getByRole('radio', { name: 'Coin' })).toBeChecked();
+      await takeBoth();
+      await nameOne();
+    });
+    Then('the item is stored as an Other', async () => {
+      await waitFor(async () => expect(await onlyItem()).toMatchObject({ kind: 'other', subtype: 'Subway token' }));
+    });
+    When('the factory will name a commemorative quarter and he chooses Other and names a piece', async () => {
+      factory.onAnswer(async () => answered({ ...quarterAnswer(), series: 'America the Beautiful quarters, Yosemite', notableFeatures: ['commemorative issue'] }));
+      await userEvent.click(screen.getByRole('radio', { name: 'Other' }));
+      await takeBoth();
+      await nameOne();
+    });
+    Then('the second item is stored as a coin with no subtype', async () => {
+      await waitFor(async () => {
+        const coin = (await allItems()).find((i) => i.series === 'America the Beautiful quarters, Yosemite');
+        expect(coin).toMatchObject({ kind: 'coin', subtype: null });
+      });
     });
   });
 });

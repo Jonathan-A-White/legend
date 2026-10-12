@@ -123,3 +123,32 @@ test('Just looking puts the coin under Looking at, outside the count', async ({ 
   expect(await pageScrolls(page)).toBe(false);
   await shot(page, 'add-looking');
 });
+
+test('Add offers Coin, Bill and Other, and Other has a plain square frame', async ({ page }) => {
+  await openUnlocked(page);
+  await fakeCamera(page);
+  await fakeFactory(page);
+  await page.goto('/#/add');
+  await expect(page.getByRole('button', { name: 'Take photo' })).toBeEnabled();
+  const choice = page.getByRole('radiogroup', { name: 'What it is' });
+  await expect(choice.getByRole('radio')).toHaveText(['Coin', 'Bill', 'Other']);
+  const frame = page.getByTestId('frame');
+  const radius = () => frame.evaluate((el) => getComputedStyle(el).borderTopLeftRadius);
+  const round = await radius();
+
+  await choice.getByRole('radio', { name: 'Other' }).click();
+  await expect(choice.getByRole('radio', { name: 'Other' })).toBeChecked();
+  await expect(page.getByText('Fit the piece in the frame.')).toBeVisible();
+  const box = (await frame.boundingBox())!;
+  expect(Math.abs(box.width - box.height)).toBeLessThanOrEqual(2);
+  expect(box.width).toBeLessThan(390);
+  expect(await radius()).not.toBe(round);
+  expect(parseFloat(await radius())).toBeLessThan(box.width / 4);
+  for (const name of ['Coin', 'Bill', 'Other']) {
+    const target = (await choice.getByRole('radio', { name }).boundingBox())!;
+    expect(target.height).toBeGreaterThanOrEqual(44);
+    expect(target.width).toBeGreaterThanOrEqual(44);
+  }
+  expect(await pageScrolls(page)).toBe(false);
+  await shot(page, 'add-other');
+});

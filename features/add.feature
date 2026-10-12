@@ -95,3 +95,20 @@ Feature: Add from the camera, or Just looking
     Then the first item is confirmed and no longer under Looking at
     When he opens the second and taps Let it go
     Then the second item is removed and Undo brings it back
+
+  Scenario: Adding an Other by photo
+    Given the camera is open on Add and the factory will name a subway token
+    When he chooses Other
+    And he takes the Front photo and the Back photo
+    And he taps Name it
+    And he opens the named piece to check it
+    Then the grist is sent asking for an Other with its two photos as obverse and reverse
+    And the item is kept as an Other with the subtype Subway token and the country US
+    And the Confirm sheet names it NYC Transit token
+
+  Scenario: The reader's kind wins
+    Given the camera is open on Add and the factory will name a subway token
+    When he leaves Coin chosen and names a piece
+    Then the item is stored as an Other
+    When the factory will name a commemorative quarter and he chooses Other and names a piece
+    Then the second item is stored as a coin with no subtype
