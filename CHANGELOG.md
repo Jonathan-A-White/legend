@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.27
+_2026-10-12_
+- New: Add now has an Other choice for tokens, medals and other collectibles, and the photo reader names them.
+
 ## 0.1.26
 _2026-10-12_
 - New: You can now keep other pieces such as tokens and medals in your Collection, with a name like "Subway token", and find them again with a new Other filter and search.
