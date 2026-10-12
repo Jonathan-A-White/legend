@@ -50,7 +50,7 @@
             "required": ["key", "value", "why"],
             "properties": {
               "key": { "const": "defaultKind" },
-              "value": { "type": "string", "enum": ["coin", "note"] },
+              "value": { "type": "string", "enum": ["coin", "note", "other"] },
               "why": { "type": "string", "minLength": 1, "maxLength": 200 }
             }
           },

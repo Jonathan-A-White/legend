@@ -1,0 +1,78 @@
+{
+  "description": "On his subway token he asks what it was used for: the answer says it was a fare token for the transit system, does not grade it as a coin, and gives no price.",
+  "schemaVersion": "1.1",
+  "request": {
+    "question": "What was this subway token used for?",
+    "sides": [],
+    "context": {
+      "screen": "item",
+      "item": {
+        "kind": "other",
+        "subtype": "Subway token",
+        "country": "US",
+        "countryName": "United States",
+        "currency": null,
+        "denomination": "Transit token",
+        "faceValue": null,
+        "year": 1986,
+        "mintMark": null,
+        "mintCity": null,
+        "series": null,
+        "design": "A brass token with a Y cut out of the middle and the words NYC Transit Authority",
+        "material": "brass",
+        "inscription": "NYC TRANSIT AUTHORITY",
+        "gradeGuess": null,
+        "gradeNotes": "",
+        "funFact": "",
+        "confirmed": true
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      },
+      "collectionSummary": {
+        "items": 3,
+        "coins": 1,
+        "notes": 0,
+        "others": 2,
+        "countries": [
+          {
+            "code": "US",
+            "coins": 1,
+            "notes": 0,
+            "others": 2
+          }
+        ]
+      }
+    },
+    "settings": {
+      "theme": "system",
+      "textSize": "normal",
+      "defaultKind": "coin",
+      "showValues": true,
+      "keepOriginals": false,
+      "sizeCap": 1600,
+      "tutorVoice": false,
+      "answerLength": "medium"
+    },
+    "history": []
+  },
+  "expect": {
+    "answer": {
+      "all": [
+        {
+          "matches": "([Ff]are|[Tt]urnstile|[Rr]ide|[Ss]ubway)"
+        },
+        {
+          "matches": "[Tt]oken"
+        }
+      ]
+    },
+    "followUps": {
+      "present": true
+    },
+    "settingsChanges": {
+      "equals": []
+    }
+  }
+}

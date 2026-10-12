@@ -1,0 +1,26 @@
+{
+  "description": "An Other with almost nothing to go on (a souvenir with no year, no maker, no material): the answer is low confidence, with a basis that says plainly it is not known, never a made-up price.",
+  "schemaVersion": "1.1",
+  "request": {
+    "kind": "other",
+    "subtype": "Souvenir piece",
+    "country": null,
+    "currency": null,
+    "denomination": "",
+    "faceValue": null,
+    "year": null,
+    "mintMark": null,
+    "series": null,
+    "design": null,
+    "material": "",
+    "gradeGuess": null,
+    "gradeNotes": "",
+    "today": "2026-10-12"
+  },
+  "expect": {
+    "currency": "USD",
+    "confidence": "low",
+    "basis": { "matches": "know|guess|unknown|hard to say|too little" },
+    "asOf": "2026-10-12"
+  }
+}

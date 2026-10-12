@@ -22,6 +22,8 @@ scenario's shape without a network, and fails when a grind has no scenario.
 - `schemaVersion`: one of the grind's `versions`; names the input and answer schema
   (`schemas/<kind>-input-<version>.schema.json`). coin-from-photos has 1.0 and 1.1 (the app sends 1.1: `other` and `subtype`);
   its older scenarios stay under 1.0, the Other ones are 1.1.
+  item-value and legend-ask also have 1.0 and 1.1 (the app sends 1.1: `other` and `subtype`, and the tutor's count of `others`); their
+  coin and country scenarios stay under 1.0, the Other ones are 1.1. Their answer schemas stay at 1.0.
 - `request`: the grind's input exactly as the app sends it; valid against the input schema. For coin-from-photos, `sides`
   names what each photo shows, in the photos' order.
 - `photos`: file names beside the scenario (`.jpg`, `.jpeg` or `.webp`), as many as the grind's `attachments` allow. Public-safe

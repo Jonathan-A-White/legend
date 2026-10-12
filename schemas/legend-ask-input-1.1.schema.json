@@ -1,0 +1,117 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "legend-ask-input-1.1",
+  "title": "Legend Ask input 1.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["question", "sides", "context", "settings", "history"],
+  "properties": {
+    "question": { "type": "string", "minLength": 1, "maxLength": 400 },
+    "sides": {
+      "description": "What each attached photo shows, in the photos' order; empty when no photo goes along.",
+      "type": "array",
+      "maxItems": 2,
+      "items": { "enum": ["obverse", "reverse", "other"] }
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["screen", "item", "country", "collectionSummary"],
+      "properties": {
+        "screen": { "enum": ["item", "country"] },
+        "item": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "kind", "subtype", "country", "countryName", "currency", "denomination", "faceValue", "year", "mintMark", "mintCity", "series",
+                "design", "material", "inscription", "gradeGuess", "gradeNotes", "funFact", "confirmed"
+              ],
+              "properties": {
+                "kind": { "enum": ["coin", "note", "other"] },
+                "subtype": { "description": "What an other piece is, in his words ('Subway token'); null for a coin or a banknote.", "type": ["string", "null"], "maxLength": 80 },
+                "country": { "type": ["string", "null"], "pattern": "^[A-Z]{2}$" },
+                "countryName": { "type": ["string", "null"], "maxLength": 80 },
+                "currency": { "type": ["string", "null"], "maxLength": 3 },
+                "denomination": { "type": "string", "maxLength": 80 },
+                "faceValue": { "type": ["number", "null"] },
+                "year": { "type": ["integer", "null"] },
+                "mintMark": { "type": ["string", "null"], "maxLength": 8 },
+                "mintCity": { "type": ["string", "null"], "maxLength": 60 },
+                "series": { "type": ["string", "null"], "maxLength": 200 },
+                "design": { "type": ["string", "null"], "maxLength": 400 },
+                "material": { "type": "string", "maxLength": 120 },
+                "inscription": { "type": "string", "maxLength": 400 },
+                "gradeGuess": { "type": ["string", "null"], "maxLength": 8 },
+                "gradeNotes": { "type": "string", "maxLength": 400 },
+                "funFact": { "type": "string", "maxLength": 400 },
+                "confirmed": { "type": "boolean" }
+              }
+            }
+          ]
+        },
+        "country": {
+          "anyOf": [
+            { "type": "null" },
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["code", "name"],
+              "properties": {
+                "code": { "type": "string", "pattern": "^[A-Z]{2}$" },
+                "name": { "type": "string", "minLength": 1, "maxLength": 80 }
+              }
+            }
+          ]
+        },
+        "collectionSummary": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["items", "coins", "notes", "others", "countries"],
+          "properties": {
+            "items": { "type": "integer", "minimum": 0 },
+            "coins": { "type": "integer", "minimum": 0 },
+            "notes": { "type": "integer", "minimum": 0 },
+            "others": { "type": "integer", "minimum": 0 },
+            "countries": {
+              "type": "array",
+              "maxItems": 300,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["code", "coins", "notes", "others"],
+                "properties": {
+                  "code": { "type": "string", "pattern": "^[A-Z]{2}$|^\\?$" },
+                  "coins": { "type": "integer", "minimum": 0 },
+                  "notes": { "type": "integer", "minimum": 0 },
+                  "others": { "type": "integer", "minimum": 0 }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "settings": {
+      "description": "The settings the tutor may suggest a change to, with the value each holds now.",
+      "type": "object",
+      "additionalProperties": { "anyOf": [{ "type": "string" }, { "type": "number" }, { "type": "boolean" }] }
+    },
+    "history": {
+      "description": "The last questions he asked here and their answers, oldest first.",
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question", "answer"],
+        "properties": {
+          "question": { "type": "string", "minLength": 1, "maxLength": 400 },
+          "answer": { "type": "string", "minLength": 1, "maxLength": 2400 }
+        }
+      }
+    }
+  }
+}
