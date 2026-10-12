@@ -130,3 +130,33 @@ test('the country sheet shows his coins from there and the money now and before'
   expect(pageScrolls).toBe(false);
   await shot(page, 'country');
 });
+
+test('the country sheet lists an Other piece under its subtype and lights its country', async ({ page }) => {
+  await seed(page);
+  await page.evaluate(async () => {
+    const db = await new Promise<IDBDatabase>((resolve, reject) => {
+      const open = indexedDB.open('legend');
+      open.onsuccess = () => resolve(open.result);
+      open.onerror = () => reject(open.error);
+    });
+    const at = Date.now();
+    const tx = db.transaction(['items'], 'readwrite');
+    tx.objectStore('items').put({
+      id: 'seed-token', kind: 'other', subtype: 'Subway token', country: 'JP', currency: null, denomination: '', faceValue: null, year: null,
+      mintMark: null, series: null, design: null, material: '', gradeGuess: null, gradeNotes: '', notes: '', tags: [], status: 'confirmed',
+      confidence: null, createdAt: at, updatedAt: at, deletedAt: null,
+    });
+    await new Promise((resolve, reject) => {
+      tx.oncomplete = resolve;
+      tx.onerror = () => reject(tx.error);
+    });
+    db.close();
+  });
+  await page.goto('/#/country/JP');
+  await expect(page.getByRole('heading', { level: 1, name: /Japan/ })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'You have 2 from here' })).toBeVisible();
+  await expect(page.getByRole('link', { name: /Subway token/ })).toContainText('◇');
+  const pageScrolls = await page.evaluate(() => document.documentElement.scrollHeight > window.innerHeight);
+  expect(pageScrolls).toBe(false);
+  await shot(page, 'country-other');
+});

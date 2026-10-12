@@ -2,6 +2,7 @@
 // (a tap opens the item), or 'Not yet'; the money there, the currency now and the ones before it, newest first; and Ask the tutor,
 // which opens the tutor's sheet over it (#/country/<cc>?ask).
 import { useEffect, useMemo } from 'react';
+import { kindInfo } from '../data/kinds';
 import { usePhotos, useItems, type Item } from '../data/repositories';
 import { countryName, flagOf, loadCountries, loadCurrencies, type CurrencyRow } from '../data/world';
 import { askHash, countryHash, isAsking, itemHash, navigate, useAddress } from '../nav/route';
@@ -101,12 +102,24 @@ function MoneyList({ title, rows }: { title: string; rows: CurrencyRow[] }) {
   );
 }
 
+/** What a piece with no denomination is called on a tile: an Other by its subtype, then 'A piece'. */
+function tileWord(item: Item): string {
+  if (item.kind === 'other') return item.subtype?.trim() || 'A piece';
+  return item.kind === 'note' ? 'A note' : 'A coin';
+}
+
+/** The glyph on a tile with no photo: an Other's from the kinds table, a note's ▭, a coin's ◎. */
+function tileGlyph(item: Item): string {
+  if (item.kind === 'note') return '▭';
+  return (item.kind === 'other' && kindInfo(item.kind).glyph) || '◎';
+}
+
 function ItemTile({ item }: { item: Item }) {
   const photos = usePhotos(item.id);
   const photo = photos?.find((p) => p.side === 'obverse') ?? photos?.[0];
   const url = useMemo(() => (photo && typeof URL.createObjectURL === 'function' ? URL.createObjectURL(photo.thumb) : null), [photo]);
   useEffect(() => () => void (url && URL.revokeObjectURL(url)), [url]);
-  const label = [item.denomination || (item.kind === 'note' ? 'A note' : 'A coin'), item.year].filter(Boolean).join(', ');
+  const label = [item.denomination || tileWord(item), item.year].filter(Boolean).join(', ');
 
   return (
     <a href={itemHash(item.id)} className="flex flex-col items-center gap-1 rounded-2xl p-1 text-center active:bg-surface">
@@ -114,7 +127,7 @@ function ItemTile({ item }: { item: Item }) {
         <img src={url} alt={label} className="aspect-square w-full rounded-full object-cover" />
       ) : (
         <span role="presentation" className="flex aspect-square w-full items-center justify-center rounded-full border border-line bg-surface text-2xl text-accent">
-          {item.kind === 'note' ? '▭' : '◎'}
+          {tileGlyph(item)}
         </span>
       )}
       <span aria-hidden={url ? true : undefined} className="line-clamp-2 text-sm text-ink">

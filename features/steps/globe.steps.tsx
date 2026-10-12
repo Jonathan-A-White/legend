@@ -194,6 +194,56 @@ describeFeature(feature, ({ Scenario }) => {
     });
   });
 
+  Scenario('An Other piece lights its country', ({ Given, And, When, Then }) => {
+    Given('he has a Subway token from Japan with no currency, and another Other piece with no country', async () => {
+      await startOver();
+      await addItem({ kind: 'other', subtype: 'Subway token', country: 'JP', currency: null, denomination: '', status: 'confirmed' });
+      await addItem({ kind: 'other', subtype: 'Medal', country: null, status: 'confirmed' });
+    });
+    And('the globe is open', openGlobe);
+    Then('the globe is lit for Japan alone, with one piece', async () => {
+      await waitFor(() => expect(globe()).toHaveAccessibleName(/Japan \(1\)/));
+      expect(globe()).not.toHaveAccessibleName(/Germany|United States/);
+    });
+    When('he taps Not yet', async () => {
+      await userEvent.click(screen.getByRole('button', { name: /^Not yet/ }));
+    });
+    Then('Japan is not in the list', async () => {
+      await screen.findByRole('list', { name: 'Europe' });
+      expect(screen.queryByRole('list', { name: 'Asia' })).toBeNull();
+      expect(screen.queryByRole('button', { name: /Japan/ })).toBeNull();
+    });
+    When('the sheet for Japan is open', async () => {
+      cleanup();
+      window.history.replaceState(null, '', '/#/country/JP');
+      render(<App gate={openGate} />);
+      await sheetFor('Japan');
+    });
+    Then('it says You have 1 from here, with the piece under the name Subway token and the Other glyph', async () => {
+      expect(await screen.findByRole('heading', { name: 'You have 1 from here' })).toBeInTheDocument();
+      const tile = within(sheet()).getByRole('link', { name: /Subway token/ });
+      expect(tile).toHaveTextContent('Subway token');
+      expect(tile).toHaveTextContent('◇');
+      expect(within(sheet()).getAllByRole('link', { name: /Subway token/ })).toHaveLength(1);
+    });
+    And("no word on it is undefined and the money block is only the country's own", async () => {
+      const now = await screen.findByRole('list', { name: 'Now' });
+      expect(within(now).getByRole('listitem')).toHaveTextContent(/Yen.*JPY/);
+      expect(sheet().textContent).not.toMatch(/undefined|null|NaN/);
+      expect(sheet()).not.toHaveTextContent('No money is recorded');
+    });
+    When('the sheet for the United States is open', async () => {
+      cleanup();
+      window.history.replaceState(null, '', '/#/country/US');
+      render(<App gate={openGate} />);
+      await sheetFor('United States');
+    });
+    Then('it says Not yet, since a piece with no country is on no country', async () => {
+      expect(await screen.findByRole('heading', { name: 'Not yet' })).toBeInTheDocument();
+      expect(within(sheet()).queryByRole('link')).toBeNull();
+    });
+  });
+
   Scenario('search spins to Japan', ({ Given, And, When, Then }) => {
     Given('he has 2 coins from Germany and 1 from the United States', hasGermanyAndUs);
     And('the globe is open', openGlobe);

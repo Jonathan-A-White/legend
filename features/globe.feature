@@ -29,6 +29,18 @@ Feature: The globe
     And it says Not yet
     And the money there now is the Yen, and before it the Old Yen until 1950
 
+  Scenario: An Other piece lights its country
+    Given he has a Subway token from Japan with no currency, and another Other piece with no country
+    And the globe is open
+    Then the globe is lit for Japan alone, with one piece
+    When he taps Not yet
+    Then Japan is not in the list
+    When the sheet for Japan is open
+    Then it says You have 1 from here, with the piece under the name Subway token and the Other glyph
+    And no word on it is undefined and the money block is only the country's own
+    When the sheet for the United States is open
+    Then it says Not yet, since a piece with no country is on no country
+
   Scenario: search spins to Japan
     Given he has 2 coins from Germany and 1 from the United States
     And the globe is open
