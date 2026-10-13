@@ -1,11 +1,12 @@
-// src/globe/view.ts: how the globe was left (its rotation, the country picked), kept for this page's life so the globe is as
+// src/globe/view.ts: how the globe was left (its rotation, its zoom, the country picked), kept for this page's life so the globe is as
 // he left it when he comes back from a country.
 import type { Rotation } from './render';
 
-export const view: { rotation: Rotation | null; picked: string | null } = { rotation: null, picked: null };
+export const view: { rotation: Rotation | null; zoom: number; picked: string | null } = { rotation: null, zoom: 1, picked: null };
 
 /** For tests: the next globe opens fresh. */
 export function forgetGlobeView(): void {
   view.rotation = null;
+  view.zoom = 1;
   view.picked = null;
 }

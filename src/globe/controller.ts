@@ -4,13 +4,14 @@
 // stops it, and while the page is hidden no frame and no timer runs (PWA best practices, section 11).
 //
 // The canvas carries what tests read: data-state (rest, drag, coast, turn, spin), and on coming to rest data-rotation and the
-// average time the frames since the last rest took to draw (data-frame-ms over data-frames).
+// average time the frames since the last rest took to draw (data-frame-ms over data-frames), and data-zoom always.
 import { clock } from './clock';
 import { dragRotation } from './drag';
 import { centreOf, type CountryFeature } from './geo';
 import { atRest, coast, flingVelocity, spin, turnBetween, type Sample, type Velocity } from './motion';
-import { pickCountry } from './pick';
+import { countriesNear } from './pick';
 import { createRenderer, type DrawContext, type Palette, type Rotation, type Scene } from './render';
+import { clampZoom } from './zoom';
 
 export type GlobeState = 'rest' | 'drag' | 'coast' | 'turn' | 'spin';
 
@@ -27,12 +28,22 @@ export interface GlobeOptions {
   lit: ReadonlyMap<string, number>;
   palette: Palette;
   rotation: Rotation;
+  /** 1 is the whole globe; zoom.ts holds the bounds. */
+  zoom: number;
   picked: string | null;
   /** Spin when left alone (off when the phone asks for reduced motion). */
   idleSpin: boolean;
   onPick(code: string): void;
+  /** A tap with no country under the finger and two or more within a finger's width: the codes, nearest first. */
+  onChoose?(codes: string[]): void;
   /** Told whenever the globe stops, with where it stopped. */
-  onRest?(rotation: Rotation, picked: string | null): void;
+  onRest?(rotation: Rotation, picked: string | null, zoom: number): void;
+}
+
+/** Two fingers on the globe: the zoom follows how far apart they are, from where they started. */
+interface Pinch {
+  distance: number;
+  zoom: number;
 }
 
 interface Press {
@@ -47,13 +58,17 @@ interface Press {
 export class GlobeController {
   private readonly ctx: DrawContext | null;
   private readonly renderer = createRenderer();
-  private scene: Omit<Scene, 'rotation' | 'picked'>;
+  private scene: Omit<Scene, 'rotation' | 'zoom' | 'picked'>;
   private rotation: Rotation;
+  private zoom: number;
   private picked: string | null;
   private state: GlobeState = 'rest';
   private velocity: Velocity = [0, 0];
   private turn: { from: Rotation; to: Rotation; start: number } | null = null;
   private press: Press | null = null;
+  private pinch: Pinch | null = null;
+  /** Where each finger on the glass is (the first two). */
+  private readonly fingers = new Map<number, [number, number]>();
   private frameId: number | null = null;
   private idleId: number | null = null;
   private lastTime = 0;
@@ -70,6 +85,8 @@ export class GlobeController {
     this.options = options;
     this.ctx = canvas.getContext('2d', { alpha: true }) as DrawContext | null;
     this.rotation = options.rotation;
+    this.zoom = clampZoom(options.zoom);
+    canvas.dataset.zoom = String(this.zoom);
     this.picked = options.picked;
     this.scene = { width: 0, height: 0, dpr: 1, features: options.features, lit: options.lit, palette: options.palette };
     this.pageHidden = this.hidden = typeof document !== 'undefined' && document.visibilityState === 'hidden';
@@ -120,7 +137,14 @@ export class GlobeController {
   }
 
   pointerDown(id: number, at: [number, number]): void {
-    if (this.press || this.stopped) return;
+    if (this.stopped || this.pinch || this.fingers.has(id)) return;
+    this.fingers.set(id, at);
+    if (this.press) {
+      // A second finger: no longer a tap or a turn, but a pinch.
+      this.press = null;
+      this.pinch = { distance: this.spread(), zoom: this.zoom };
+      return;
+    }
     this.press = { id, at, t: clock.now(), rotation: this.rotation, moved: false, samples: [{ t: clock.now(), rotation: this.rotation }] };
     this.turn = null;
     this.velocity = [0, 0];
@@ -128,11 +152,17 @@ export class GlobeController {
   }
 
   pointerMove(id: number, at: [number, number]): void {
+    if (this.fingers.has(id)) this.fingers.set(id, at);
+    if (this.pinch) {
+      // With one finger left of the pair the zoom holds; the pinch ends when that finger lifts.
+      if (this.fingers.size === 2) this.setZoom(clampZoom((this.pinch.zoom * this.spread()) / this.pinch.distance));
+      return;
+    }
     const press = this.press;
     if (!press || press.id !== id) return;
     if (!press.moved && Math.hypot(at[0] - press.at[0], at[1] - press.at[1]) < TAP_SLOP) return;
     press.moved = true;
-    const rotation = dragRotation(press.rotation, press.at, at, this.scene.width, this.scene.height);
+    const rotation = dragRotation(press.rotation, press.at, at, this.scene.width, this.scene.height, this.zoom);
     if (!rotation) return;
     this.rotation = rotation;
     press.samples.push({ t: clock.now(), rotation });
@@ -141,15 +171,17 @@ export class GlobeController {
   }
 
   pointerUp(id: number, at: [number, number]): void {
+    if (this.letGo(id)) return;
     const press = this.press;
     if (!press || press.id !== id) return;
     this.press = null;
     const now = clock.now();
     if (!press.moved && now - press.t < TAP_MS) {
-      const code = pickCountry(this.scene.features, this.rotation, this.scene.width, this.scene.height, at);
-      if (code) this.picked = code;
+      const codes = countriesNear(this.scene.features, this.rotation, this.scene.width, this.scene.height, at, this.zoom);
+      if (codes.length === 1) this.picked = codes[0];
       this.enter('rest');
-      if (code) this.options.onPick(code);
+      if (codes.length === 1) this.options.onPick(codes[0]);
+      else if (codes.length > 1) this.options.onChoose?.(codes);
       return;
     }
     this.velocity = flingVelocity(press.samples, now);
@@ -157,9 +189,34 @@ export class GlobeController {
   }
 
   pointerCancel(id: number): void {
+    if (this.letGo(id)) return;
     if (this.press?.id !== id) return;
     this.press = null;
     this.enter('rest');
+  }
+
+  /** A finger left the glass. True while it was part of a pinch, which ends when the last finger is up: no tap, no fling. */
+  private letGo(id: number): boolean {
+    this.fingers.delete(id);
+    if (!this.pinch) return false;
+    if (!this.fingers.size) {
+      this.pinch = null;
+      this.enter('rest');
+    }
+    return true;
+  }
+
+  /** The pixels between the two fingers, at least one so a pinch from touching fingers does not divide by nothing. */
+  private spread(): number {
+    const [a, b] = [...this.fingers.values()];
+    return b ? Math.max(1, Math.hypot(a[0] - b[0], a[1] - b[1])) : 1;
+  }
+
+  private setZoom(zoom: number): void {
+    if (zoom === this.zoom) return;
+    this.zoom = zoom;
+    this.canvas.dataset.zoom = String(zoom);
+    this.ask();
   }
 
   /** The page hid or showed (visibilitychange, pagehide, pageshow). */
@@ -180,6 +237,8 @@ export class GlobeController {
     this.hidden = hidden;
     if (hidden) {
       this.press = null;
+      this.pinch = null;
+      this.fingers.clear();
       this.turn = null;
       this.velocity = [0, 0];
       this.cancelFrame();
@@ -194,7 +253,7 @@ export class GlobeController {
 
   /** The screen is closing: keep where the globe is, then nothing more runs. */
   stop(): void {
-    this.options.onRest?.(this.rotation, this.picked);
+    this.options.onRest?.(this.rotation, this.picked, this.zoom);
     this.stopped = true;
     this.cancelFrame();
     this.cancelIdle();
@@ -211,7 +270,7 @@ export class GlobeController {
         this.canvas.dataset.frames = String(this.stats.frames);
       }
       this.stats = { ms: 0, frames: 0 };
-      this.options.onRest?.(this.rotation, this.picked);
+      this.options.onRest?.(this.rotation, this.picked, this.zoom);
       this.waitForIdle();
     } else {
       this.cancelIdle();
@@ -262,7 +321,7 @@ export class GlobeController {
     } else {
       moving = false;
     }
-    if (this.ctx && this.renderer.draw(this.ctx, { ...this.scene, rotation: this.rotation, picked: this.picked })) {
+    if (this.ctx && this.renderer.draw(this.ctx, { ...this.scene, rotation: this.rotation, zoom: this.zoom, picked: this.picked })) {
       this.stats.ms += clock.now() - started;
       this.stats.frames += 1;
     }
