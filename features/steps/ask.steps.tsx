@@ -42,7 +42,7 @@ afterAll(async () => {
 
 const user = userEvent.setup();
 const PHONE_KEY = '00'.repeat(31) + '02';
-const inputSchema = JSON.parse(readFileSync('schemas/legend-ask-input-1.1.schema.json', 'utf8')) as object;
+const inputSchema = JSON.parse(readFileSync('schemas/legend-ask-input-1.2.schema.json', 'utf8')) as object;
 let fake: FakePostern;
 let quarter: Item;
 
@@ -62,7 +62,13 @@ async function fresh(): Promise<void> {
   // a named item's rough worth is asked on open: refused at once, so the oldest grist waiting is always the tutor's
   fake.kindReplies['item-value'] = { status: 'refused', reason: 'not in this test' };
   const world = serveGlobeWorld();
-  vi.stubGlobal('fetch', (input: RequestInfo | URL, init?: RequestInit) => (String(input).startsWith(POSTERN_ORIGIN) ? fake.fetch(input, init) : world(input, init)));
+  vi.stubGlobal('fetch', (input: RequestInfo | URL, init?: RequestInit) => {
+    const url = String(input);
+    if (url.startsWith(POSTERN_ORIGIN)) return fake.fetch(input, init);
+    // the US tables are the committed files, as the app reads them
+    if (url.startsWith('/data/us/')) return Promise.resolve(new Response(readFileSync(`public${url}`, 'utf8')));
+    return world(input, init);
+  });
   await usageWritesSettled();
   await db.open();
   await Promise.all(db.tables.map((t) => t.clear()));
@@ -110,8 +116,22 @@ const tapSuggestion = async (_: unknown, question: string) => {
 const oneAskSent = async () => {
   await waitFor(() => expect(asks()).toHaveLength(1));
   expect(firstAsk().grist.app).toBe('legend');
-  expect(firstAsk().grist.v).toBe('1.1');
+  expect(firstAsk().grist.v).toBe('1.2');
 };
+
+const rarityOf = (grist: ReceivedGrist): { rarity: unknown; struck: unknown } => {
+  const item = (grist.input.context as { item: { rarity: unknown; struck: unknown } }).item;
+  return { rarity: item.rarity, struck: item.struck };
+};
+
+/** Opens the item, taps Ask the tutor and the suggestion, and waits for the grist. */
+async function askAbout(item: Item, heading: RegExp, question: string): Promise<void> {
+  await openAt(`#/item/${item.id}`);
+  await screen.findByRole('heading', { level: 1, name: heading });
+  await tapAskTheTutor();
+  await tapSuggestion(null, question);
+  await oneAskSent();
+}
 
 const fitsTheSchema = () => {
   const validate = new Ajv({ strict: true }).compile(inputSchema);
@@ -184,6 +204,44 @@ describeFeature(feature, ({ Scenario }) => {
       expect(context().collectionSummary).toMatchObject({ items: 1, coins: 0, notes: 0, others: 1 });
     });
     And('the grist fits the legend-ask input schema', fitsTheSchema);
+  });
+
+  Scenario('The tutor is told how rare it is', ({ Given, When, And, Then }) => {
+    Given('Legend is open on his 1932-D quarter behind a fake Postern', async () => {
+      await fresh();
+      quarter = await addItem({ kind: 'coin', country: 'US', currency: 'USD', denomination: 'Quarter dollar', faceValue: 0.25, year: 1932, mintMark: 'D', series: 'Washington quarter', status: 'confirmed', confidence: 'high' });
+      await openAt(`#/item/${quarter.id}`);
+      await screen.findByRole('heading', { level: 1, name: /Quarter dollar/ });
+    });
+    When('he taps "Ask the tutor"', tapAskTheTutor);
+    And('he taps the suggested question {string}', tapSuggestion);
+    Then('the mill received one legend-ask grist for the legend app', oneAskSent);
+    And("the grist says the quarter's rarity with 436,800 and the number 436800", () => {
+      const { rarity, struck } = rarityOf(firstAsk());
+      expect(rarity).toEqual(expect.stringContaining('436,800'));
+      expect(rarity).toEqual(expect.stringContaining('Scarce'));
+      expect(rarity).toEqual(expect.stringContaining('key date'));
+      expect(struck).toBe(436800);
+    });
+    And('the grist fits the legend-ask input schema', fitsTheSchema);
+    When('he asks about a quarter with no year', async () => {
+      await fresh();
+      const noYear = await addItem({ kind: 'coin', country: 'US', currency: 'USD', denomination: 'Quarter dollar', faceValue: 0.25, series: 'Washington quarter', status: 'confirmed', confidence: 'high' });
+      await askAbout(noYear, /Quarter dollar/, 'How rare is it?');
+    });
+    Then('the grist says no rarity and no number', () => {
+      expect(rarityOf(firstAsk())).toEqual({ rarity: null, struck: null });
+      fitsTheSchema();
+    });
+    When('he asks about his subway token', async () => {
+      await fresh();
+      const token = await addItem({ kind: 'other', subtype: 'Subway token', country: 'US', denomination: 'Fare token', year: 1986, status: 'confirmed', confidence: 'medium' });
+      await askAbout(token, /Fare token/, 'Is it rare?');
+    });
+    Then("the token's grist says no rarity and no number", () => {
+      expect(rarityOf(firstAsk())).toEqual({ rarity: null, struck: null });
+      fitsTheSchema();
+    });
   });
 
   Scenario('a country question goes out with the country and the collection summary and no photos', ({ Given, When, And, Then }) => {

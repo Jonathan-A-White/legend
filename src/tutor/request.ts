@@ -14,6 +14,8 @@ import {
   type CollectionSummary,
   type LegendAskRequest,
 } from '../services/ask';
+import { loadKeyDates, loadMintages, loadMints, loadQuarters } from '../data/us';
+import { rarityWords, type RarityTables } from '../rarity';
 import { currentSettings, SETTINGS } from '../settings/registry';
 import type { PhotoSide, StoredValue } from '../data/db';
 
@@ -29,7 +31,10 @@ export const askPlace = (about: AskAbout): { itemId: string | null; context: str
 const clip = (text: string, max: number): string => (text.length > max ? `${text.slice(0, max - 1)}…` : text);
 const clipOrNull = (text: string | null, max: number): string | null => (text === null ? null : clip(text, max));
 
-export function itemFacts(item: Item, countryName: string | null, mintCity: string | null): AskItemFacts {
+/** What the tutor is handed of the item's rarity, as the item's own line says it (src/rarity/words.ts); null when there is none. */
+export type AskRarity = ReturnType<typeof rarityWords>;
+
+export function itemFacts(item: Item, countryName: string | null, mintCity: string | null, rarity: AskRarity = null): AskItemFacts {
   return {
     kind: item.kind,
     subtype: item.kind === 'other' && item.subtype?.trim() ? clip(item.subtype.trim(), 80) : null,
@@ -49,6 +54,8 @@ export function itemFacts(item: Item, countryName: string | null, mintCity: stri
     gradeNotes: clip(item.gradeNotes, 400),
     funFact: clip(item.funFact, 400),
     confirmed: item.status === 'confirmed',
+    rarity: rarity?.words ?? null,
+    struck: rarity?.struck ?? null,
   };
 }
 
@@ -94,18 +101,29 @@ async function photoFiles(itemId: string): Promise<{ sides: PhotoSide[]; files: 
   return { sides: photos.map((p) => p.side), files };
 }
 
+/** The four files the rarity line reads; null when they cannot be had (the tutor is then handed no rarity, not a guess). */
+async function rarityTables(): Promise<RarityTables | null> {
+  try {
+    const [mintages, mints, keyDates, quarters] = await Promise.all([loadMintages(), loadMints(), loadKeyDates(), loadQuarters()]);
+    return { mintages, mints, keyDates, quarters };
+  } catch {
+    return null;
+  }
+}
+
 /** The request for `question` and the files that go with it. */
 export async function buildAsk(about: AskAbout, question: string, kept: Ask[]): Promise<{ request: LegendAskRequest; files: grist.GristFile[] }> {
-  const [items, settings, photos] = await Promise.all([
+  const [items, settings, photos, tables] = await Promise.all([
     listItems(),
     talkableSettings(),
     about.kind === 'item' ? photoFiles(about.item.id) : Promise.resolve({ sides: [], files: [] }),
+    about.kind === 'item' && about.item.kind !== 'other' ? rarityTables() : Promise.resolve(null),
   ]);
   const context: AskContext =
     about.kind === 'item'
       ? {
           screen: 'item',
-          item: itemFacts(about.item, about.countryName, about.mintCity),
+          item: itemFacts(about.item, about.countryName, about.mintCity, tables ? rarityWords(about.item, tables) : null),
           country: about.item.country && about.countryName ? { code: about.item.country, name: about.countryName } : null,
           collectionSummary: summarize(items),
         }

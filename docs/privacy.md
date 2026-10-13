@@ -7,8 +7,8 @@ Nothing is sent anywhere unless he asks for it, and only these things ever leave
 
 - **Grist he sends.** Asking the tutor a question or having a coin read from its photos sends that one request to the
   factory's mill (grist, through `src/services/`). It goes when he taps Ask (or a suggested question) or Add, never in the
-  background. A question to the tutor carries his question; on an item, its facts (never his notes or tags) and its two
-  photos; on a country, the country and no photo; always a count of his collection by country and kind, the settings the
+  background. A question to the tutor carries his question; on an item, its facts (never his notes or tags, but with its
+  rarity line, the same words the item shows) and its two photos; on a country, the country and no photo; always a count of his collection by country and kind, the settings the
   tutor may suggest, and the last three questions asked there with their answers. The tutor can suggest a setting, never
   change one: it changes only when he taps Apply.
 - **A rough worth.** Once an item is named, its facts and grade guess (never its photos, notes or tags) go to the mill to ask

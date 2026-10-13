@@ -11,7 +11,7 @@ A module is a folder under `src/` with one job and one entry file; import the en
 | data/world | Countries (TopoJSON, names, flags) and currencies by date, in `public/data/world/` | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, mintages, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
-| rarity | How rare a coin is: pure rules (`findRow`, `placeInSeries`), `RarityLine`, `Strip`; `TutorRarity` asks the tutor on a tap (`services/rarity.ts`, `item.rarity`); `keyDateStruck` | `src/rarity/index.ts` | built |
+| rarity | How rare a coin is: pure rules (`findRow`, `placeInSeries`), `rarityWords` (for the tutor), `RarityLine`, `Strip`; `TutorRarity` asks on a tap (`item.rarity`); `keyDateStruck` | `src/rarity/index.ts` | built |
 | services | Everything that leaves the phone: `grist.ts` (seam `setGristPort`), `feedback.ts`, the tutor `ask.ts`, licence, device key, app update, the photo reader `nameItem.ts` (on a worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time, resumes from `item.reading`, values), `itemAnswer.ts`, `value.ts`, `rarity.ts` | `src/services/appUpdate.ts` | built |
 | events | The typed bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |

@@ -5,6 +5,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { Item, ItemRarity } from '../data/db';
 import { askRarity, hasRarity, wordText } from '../services/rarity';
+import { estimateStruck } from './words';
 
 const TAP = 'min-h-11 px-1 text-lg font-medium text-accent underline disabled:text-muted disabled:no-underline';
 
@@ -36,12 +37,7 @@ function Estimate({ rarity }: { rarity: ItemRarity }) {
   if (rarity.confidence === 'low' || rarity.word === 'unknown') {
     return <p>Not known for sure · {rarity.reason}</p>;
   }
-  const struck =
-    rarity.struck === null
-      ? "the tutor's estimate"
-      : rarity.struckIs === 'reported'
-        ? `${rarity.struck.toLocaleString('en-US')} struck, as reported`
-        : `about ${rarity.struck.toLocaleString('en-US')} struck, the tutor's estimate`;
+  const struck = estimateStruck(rarity);
   return (
     <>
       <p>

@@ -7,8 +7,8 @@ import { getDeviceKeyBytes } from './deviceKey';
 import { askGrind, currentGristPort, GristError, type GristFailure } from './grist';
 
 export const ASK_KIND = 'legend-ask';
-/** Sent at 1.1 (an Other, its subtype and the count of others); the grind still reads 1.0. */
-export const ASK_VERSION = '1.1';
+/** Sent at 1.2 (the item's rarity line and the number struck, beside 1.1's Other, its subtype and the count of others); the grind still reads 1.0 and 1.1. */
+export const ASK_VERSION = '1.2';
 
 /** The limits of the grind (grinds/legend-ask.json and its schemas). */
 export const MAX_QUESTION_CHARS = 400;
@@ -39,6 +39,10 @@ export interface AskItemFacts {
   funFact: string;
   /** he checked the facts himself */
   confirmed: boolean;
+  /** the rarity line the item shows, or the mill's estimate marked as such; null for an Other piece, a pending one or one nobody has placed */
+  rarity: string | null;
+  /** the number struck that line gives; null with it */
+  struck: number | null;
 }
 
 /** How many items he has, by country and kind: counts only, never photos. */
@@ -58,7 +62,7 @@ export interface AskContext {
   collectionSummary: CollectionSummary;
 }
 
-/** What the grind is sent (schemas/legend-ask-input-1.1.schema.json). */
+/** What the grind is sent (schemas/legend-ask-input-1.2.schema.json). */
 export interface LegendAskRequest {
   question: string;
   /** what each attached photo shows, in order */

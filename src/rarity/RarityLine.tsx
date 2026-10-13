@@ -8,10 +8,10 @@ import type { Item } from '../data/db';
 import { loadKeyDates, loadMintages, loadMints, loadQuarters } from '../data/us';
 import { needsLook } from '../learn/years';
 import { useLoaded } from '../learn/useLoaded';
-import { matchDesign } from '../quarters/match';
-import { findRow, keyDateFor, noRowReason, placeInSeries, rarityWord, seriesPool, struckSentence, type NoRowReason } from './rarity';
+import { noRowReason, seriesPool, struckSentence, type NoRowReason } from './rarity';
 import { Strip } from './Strip';
 import { TutorRarity } from './TutorRarity';
+import { tableLine } from './words';
 
 const HONESTY =
   "Legend's word is about how many the Mint made, which is reported. How many are left, and in what condition, is not known: coins are spent, lost and melted.";
@@ -34,10 +34,10 @@ export function RarityLine({ item, onEdit }: { item: Item; onEdit?: () => void }
   if (!mintages.value || !mints.value || !keyDates.value || !quarters.value) return null;
 
   const table = mintages.value;
-  const found = findRow(table, item, matchDesign(item, quarters.value));
+  const line = tableLine(item, { mintages: table, mints: mints.value, keyDates: keyDates.value, quarters: quarters.value });
   const text = 'text-lg text-ink';
 
-  if (!found) {
+  if (!line) {
     const reason = noRowReason(table, item);
     // the tables do not cover it: the tutor may be asked, on his tap
     if (reason === 'tables') {
@@ -64,10 +64,8 @@ export function RarityLine({ item, onEdit }: { item: Item; onEdit?: () => void }
     );
   }
 
+  const { found, word, sentence, place, key, isKey } = line;
   const { row } = found;
-  const key = keyDateFor(keyDates.value, item);
-  const isKey = key !== null && !needsLook(key);
-  const place = placeInSeries(table, found, mints.value);
   const others = (table.series.find((s) => s.series === found.series)?.rows ?? []).filter(
     (r) => r !== row && r.year === row.year && r.mint === row.mint && r.design === row.design,
   );
@@ -75,7 +73,7 @@ export function RarityLine({ item, onEdit }: { item: Item; onEdit?: () => void }
   return (
     <div data-testid="item-rarity-line" className={text}>
       <p>
-        {rarityWord(row.struck)} · <span className="text-muted">{struckSentence(row, mints.value)}</span>
+        {word} · <span className="text-muted">{sentence}</span>
         {isKey ? (
           <>
             {' · '}

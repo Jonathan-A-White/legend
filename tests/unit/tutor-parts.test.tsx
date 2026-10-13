@@ -92,6 +92,10 @@ describe('the questions suggested', () => {
     expect(token).toEqual(['What was this subway token used for?', 'Is it rare?', 'How can I tell a real one?']);
     expect(suggestionsFor({ screen: 'item', kind: 'other', subtype: 'NYC token' })[0]).toBe('What was this NYC token used for?');
     expect(suggestionsFor({ screen: 'item', kind: 'other', subtype: null })[0]).toBe('What was this piece used for?');
+    const chips = suggestionsFor({ screen: 'item', kind: 'coin', subtype: null });
+    expect(chips).toHaveLength(3);
+    expect(chips).toContain('How rare is it?');
+    expect(chips).not.toContain("What's special about this year?");
     expect(suggestionsFor({ screen: 'country', kind: null, subtype: null })).toContain('What money did they use before?');
   });
 });

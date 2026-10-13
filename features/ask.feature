@@ -27,6 +27,20 @@ Feature: The tutor
     And the grist names the token's kind other and its subtype
     And the grist fits the legend-ask input schema
 
+  Scenario: The tutor is told how rare it is
+    The rarity line the item shows goes to the tutor as a fact, so "How rare is it?" is answered from the real number. A coin the
+    tables do not place, and an Other piece, go with nothing: the tutor then says it does not have the figure.
+    Given Legend is open on his 1932-D quarter behind a fake Postern
+    When he taps "Ask the tutor"
+    And he taps the suggested question "How rare is it?"
+    Then the mill received one legend-ask grist for the legend app
+    And the grist says the quarter's rarity with 436,800 and the number 436800
+    And the grist fits the legend-ask input schema
+    When he asks about a quarter with no year
+    Then the grist says no rarity and no number
+    When he asks about his subway token
+    Then the token's grist says no rarity and no number
+
   Scenario: a country question goes out with the country and the collection summary and no photos
     Given Legend is open on Japan's sheet behind a fake Postern, with two US coins and one Japanese note
     When he taps "Ask the tutor"

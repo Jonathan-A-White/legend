@@ -5,7 +5,7 @@ import type { ItemKind } from '../data/db';
 import type { AskContext } from '../services/ask';
 
 export const SUGGESTIONS: Record<AskContext['screen'], readonly string[]> = {
-  item: ['How do I grade this one?', "What's special about this year?", 'Where is the mint mark?'],
+  item: ['How do I grade this one?', 'How rare is it?', 'Where is the mint mark?'],
   country: ['What money did they use before?', 'Which of their coins are easy to find?', 'What is on their money today?'],
 };
 
