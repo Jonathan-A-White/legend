@@ -6,13 +6,14 @@ import Ajv from 'ajv';
 export const EXAMPLE_PHOTO_MAX_BYTES = 200 * 1024;
 
 // The names mw grist smoke reads (millwright application/gristsmokecheck.go); it refuses any other key in a check.
-export const CHECKS = ['equals', 'is_null', 'one_of', 'contains', 'matches', 'present', 'all'];
+export const CHECKS = ['equals', 'is_null', 'one_of', 'between', 'contains', 'matches', 'present', 'all'];
 
 /** What one answer field must show. Every key given must hold; `all` is a list of checks that must each hold too. */
 export interface FieldCheck {
   equals?: unknown;
   is_null?: boolean;
   one_of?: unknown[];
+  between?: [number, number];
   contains?: string;
   matches?: string;
   present?: boolean;
@@ -88,6 +89,14 @@ function checkProblems(path: string, check: unknown, schema: Schema, valid: (val
       }
     }
   }
+  if ('between' in c) {
+    const [low, high] = Array.isArray(c.between) ? c.between : [];
+    if (!Array.isArray(c.between) || c.between.length !== 2 || typeof low !== 'number' || typeof high !== 'number' || low > high) {
+      problems.push(`${path}: between must be a list of two numbers, low then high`);
+    } else if (!allowsType(schema, 'number') && !allowsType(schema, 'integer')) {
+      problems.push(`${path}: between needs a number field`);
+    }
+  }
   if ('is_null' in c) {
     if (typeof c.is_null !== 'boolean') problems.push(`${path}: is_null must be true or false`);
     else if (c.is_null && !allowsNull(schema)) problems.push(`${path}: is never null in the answer schema`);
@@ -156,6 +165,9 @@ function checkFailures(path: string, c: FieldCheck, value: unknown): string[] {
   }
   if (c.one_of && !c.one_of.some((o) => JSON.stringify(o) === JSON.stringify(value))) {
     failures.push(`${path}: expected one of ${JSON.stringify(c.one_of)}, got ${shown}`);
+  }
+  if (c.between && !(typeof value === 'number' && value >= c.between[0] && value <= c.between[1])) {
+    failures.push(`${path}: expected a number between ${c.between[0]} and ${c.between[1]}, got ${shown}`);
   }
   if (c.contains !== undefined && !(typeof value === 'string' && value.includes(c.contains))) {
     failures.push(`${path}: expected to contain ${JSON.stringify(c.contains)}, got ${shown}`);
