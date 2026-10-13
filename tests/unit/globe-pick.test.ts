@@ -2,10 +2,12 @@
 // the globe so the place under the finger stays under it.
 import { describe, expect, it } from 'vitest';
 import { dragRotation } from '../../src/globe/drag';
+import { clampZoom } from '../../src/globe/zoom';
 import { countryFeatures } from '../../src/globe/geo';
-import { pickCountry } from '../../src/globe/pick';
+import { countriesNear, pickCountry } from '../../src/globe/pick';
 import { projectionFor, type Rotation } from '../../src/globe/render';
 import { globeCountries } from '../support/globe-fixtures';
+import { bigAndSmall, tinyWorld } from '../support/tiny-world';
 
 const features = countryFeatures(globeCountries);
 const facing = (lon: number, lat: number): Rotation => [-lon, -lat, 0];
@@ -43,5 +45,74 @@ describe('drag', () => {
 
   it('does not turn for a finger off the globe', () => {
     expect(dragRotation(facing(0, 0), [200, 200], [1, 1], 400, 400)).toBeNull();
+  });
+});
+
+describe('pick within a finger', () => {
+  const tiny = countryFeatures(tinyWorld);
+  const mixed = countryFeatures(bigAndSmall);
+  const at = (rotation: Rotation, place: [number, number], zoom = 1): [number, number] => projectionFor(rotation, 390, 600, zoom)(place)!;
+
+  it('picks a small country by a tap beside it, and the sea farther off than a finger by nothing', () => {
+    const rotation = facing(6.05, 49.65);
+    const [x, y] = at(rotation, [6.05, 49.65]);
+    expect(countriesNear(tiny, rotation, 390, 600, [x - 14, y + 6])).toEqual(['LU']);
+    expect(countriesNear(tiny, rotation, 390, 600, [x - 40, y])).toEqual([]);
+    expect(pickCountry(tiny, rotation, 390, 600, [x - 14, y + 6])).toBeNull();
+  });
+
+  it('lists every country within a finger when none is under it', () => {
+    const rotation = facing(-61.1, 14.2);
+    const [x, y] = at(rotation, [-61.1, 14.2]);
+    expect(countriesNear(tiny, rotation, 390, 600, [x + 8, y]).sort()).toEqual(['BB', 'DM', 'LC']);
+  });
+
+  it('lists them nearest first', () => {
+    const rotation = facing(-61.1, 14.2);
+    const [x, y] = at(rotation, [-59.6, 13.2]);
+    expect(countriesNear(tiny, rotation, 390, 600, [x + 3, y + 3])[0]).toBe('BB');
+    const [dx, dy] = at(rotation, [-61.3, 15.4]);
+    expect(countriesNear(tiny, rotation, 390, 600, [dx - 3, dy - 3])[0]).toBe('DM');
+  });
+
+  it('picks the country under the finger, though a small one is nearer its edge', () => {
+    const rotation = facing(10, 51);
+    const [x, y] = at(rotation, [6.7, 49.65]);
+    expect(pickCountry(mixed, rotation, 390, 600, [x, y])).toBe('DE');
+    expect(countriesNear(mixed, rotation, 390, 600, [x, y])).toEqual(['DE']);
+  });
+
+  it('keeps a finger the same size on the screen at any zoom', () => {
+    const rotation = facing(6.05, 49.65);
+    const [x, y] = at(rotation, [6.05, 49.65], 4);
+    expect(countriesNear(tiny, rotation, 390, 600, [x - 20, y], 4)).toEqual(['LU']);
+    expect(countriesNear(tiny, rotation, 390, 600, [x - 30, y], 4)).toEqual([]);
+  });
+
+  it('ignores countries on the far side of the globe', () => {
+    expect(countriesNear(tiny, facing(120, 0), 390, 600, [195, 300])).toEqual([]);
+  });
+});
+
+describe('zoom', () => {
+  it('draws the globe larger by the zoom, about the same centre', () => {
+    const one = projectionFor(facing(0, 0), 390, 600);
+    const three = projectionFor(facing(0, 0), 390, 600, 3);
+    expect(three.scale()).toBeCloseTo(one.scale() * 3, 6);
+    expect(three.translate()).toEqual(one.translate());
+  });
+
+  it('picks and drags through the zoomed projection', () => {
+    const rotation = facing(10, 51);
+    expect(projectionFor(rotation, 400, 400, 3)([10, 51])![0]).toBeCloseTo(200, 3);
+    const turned = dragRotation(rotation, [200, 200], [230, 200], 400, 400, 3)!;
+    const place = projectionFor(rotation, 400, 400, 3).invert!([200, 200])!;
+    expect(projectionFor(turned, 400, 400, 3)(place)![0]).toBeCloseTo(230, 3);
+  });
+
+  it('holds the zoom between 1 and 6', () => {
+    expect(clampZoom(0.2)).toBe(1);
+    expect(clampZoom(2.5)).toBe(2.5);
+    expect(clampZoom(40)).toBe(6);
   });
 });

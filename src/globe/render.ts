@@ -44,6 +44,8 @@ export interface Scene {
   /** the canvas's pixels per CSS pixel */
   dpr: number;
   rotation: Rotation;
+  /** 1 (the default) is the whole globe in the box; more is closer (zoom.ts) */
+  zoom?: number;
   features: readonly CountryFeature[];
   /** alpha-2 -> how many items he has from there */
   lit: ReadonlyMap<string, number>;
@@ -53,12 +55,12 @@ export interface Scene {
 
 const MARGIN = 10;
 
-/** The globe's projection for a rotation in a box of this size: centred, as large as fits. */
-export function projectionFor(rotation: Rotation, width: number, height: number): GeoProjection {
+/** The globe's projection for a rotation in a box of this size: centred, as large as fits at zoom 1, larger by the zoom. */
+export function projectionFor(rotation: Rotation, width: number, height: number, zoom = 1): GeoProjection {
   return geoOrthographic()
     .rotate([rotation[0], rotation[1], rotation[2]])
     .translate([width / 2, height / 2])
-    .scale(Math.max(1, Math.min(width, height) / 2 - MARGIN))
+    .scale(Math.max(1, Math.min(width, height) / 2 - MARGIN) * zoom)
     .clipAngle(90)
     // No adaptive resampling: the 110m shapes' edges are short already, and resampling cost a quarter of each frame.
     .precision(0);
@@ -82,6 +84,7 @@ function sameScene(a: Scene | undefined, b: Scene): boolean {
     a.rotation[0] === b.rotation[0] &&
     a.rotation[1] === b.rotation[1] &&
     a.rotation[2] === b.rotation[2] &&
+    a.zoom === b.zoom &&
     a.features === b.features &&
     a.lit === b.lit &&
     a.picked === b.picked &&
@@ -111,7 +114,7 @@ export function createRenderer(): Renderer {
 
 function paint(ctx: DrawContext, scene: Scene): void {
   const { width, height, dpr, palette, lit } = scene;
-  const projection = projectionFor(scene.rotation, width, height);
+  const projection = projectionFor(scene.rotation, width, height, scene.zoom);
   const path = geoPath(projection, ctx);
   const radius = projection.scale();
   const [cx, cy] = projection.translate();

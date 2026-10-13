@@ -52,8 +52,8 @@ function delta(v0: Vec, v1: Vec): Versor {
 }
 
 /** The rotation that, from `start`, carries the place under screen point `from` to `to`; null when either is off the globe. */
-export function dragRotation(start: Rotation, from: [number, number], to: [number, number], width: number, height: number): Rotation | null {
-  const projection = projectionFor(start, width, height);
+export function dragRotation(start: Rotation, from: [number, number], to: [number, number], width: number, height: number, zoom = 1): Rotation | null {
+  const projection = projectionFor(start, width, height, zoom);
   const a = onGlobe(projection, from);
   const b = onGlobe(projection, to);
   if (!a || !b) return null;

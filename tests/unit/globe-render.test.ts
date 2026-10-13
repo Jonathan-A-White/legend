@@ -23,6 +23,7 @@ const scene = (over: Partial<Scene> = {}): Scene => ({
   height: 400,
   dpr: 2,
   rotation: [0, -90, 0],
+  zoom: 1,
   features: countryFeatures(globeCountries),
   lit: new Map([
     ['DE', 2],
@@ -75,6 +76,17 @@ describe('render', () => {
 
     expect(renderer.draw(ctx, { ...first, rotation: [5, -90, 0] })).toBe(true);
     expect(ctx.paints.length).toBeGreaterThan(0);
+  });
+
+  it('draws again when the globe is zoomed', () => {
+    const ctx = new FakeContext();
+    const renderer = createRenderer();
+    const first = scene();
+    renderer.draw(ctx, first);
+    ctx.reset();
+
+    expect(renderer.draw(ctx, { ...first, zoom: 2 })).toBe(true);
+    expect(ctx.clears).toBe(1);
   });
 
   it('leaves out the countries on the far side', () => {
