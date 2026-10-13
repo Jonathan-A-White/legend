@@ -84,7 +84,8 @@ test('a tap farther than a finger from every country opens nothing', async ({ pa
   await turnTo(page, 'Falkland');
   await page.getByRole('searchbox', { name: 'Find a country' }).blur();
   const [x, y] = await whereIs(page, FALKLANDS);
-  await touchAt(page, x + 60, y);
+  // (60 px east is South Georgia now: it has its own shape in the world file)
+  await touchAt(page, x + 30, y + 50);
   await expect(page).toHaveURL(/#\/globe$/);
   await expect(page.getByRole('list', { name: 'Countries near your tap' })).toHaveCount(0);
   const [mx, my] = await whereIs(page, [-20, -40]);

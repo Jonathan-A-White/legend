@@ -2,11 +2,22 @@
 // to turn to when it is searched for.
 import { geoCentroid, geoDistance } from 'd3-geo';
 import { feature } from 'topojson-client';
-import type { Feature, MultiPolygon, Polygon } from 'geojson';
+import type { Feature, MultiPolygon, Point, Polygon } from 'geojson';
 import type { Topology } from 'topojson-specification';
 import type { Countries } from '../data/world';
 
-export type CountryFeature = Feature<Polygon | MultiPolygon, { name: string }> & { id: string };
+/** A country: a shape, or a Point for one too small to draw as a shape (a dot on the globe). */
+export type CountryFeature = Feature<Polygon | MultiPolygon | Point, { name: string }> & { id: string };
+
+/** True for a country drawn as a dot: the microstates and small islands (data-build.ts, DOT_BELOW_DEGREES). */
+export const isDot = (country: CountryFeature): boolean => country.geometry.type === 'Point';
+
+/** Every ring of a shape, each a list of [lon, lat]; none for a dot. */
+export function ringsOf(country: CountryFeature): number[][][] {
+  const geometry = country.geometry;
+  if (geometry.type === 'Point') return [];
+  return (geometry.type === 'Polygon' ? [geometry.coordinates] : geometry.coordinates).flat();
+}
 
 const made = new WeakMap<Countries, CountryFeature[]>();
 
@@ -43,8 +54,7 @@ export function mayFace(country: CountryFeature, facing: [number, number]): bool
   if (!reach) {
     const centre = centreOf(country);
     let radius = 0;
-    const polygons = country.geometry.type === 'Polygon' ? [country.geometry.coordinates] : country.geometry.coordinates;
-    for (const polygon of polygons) for (const ring of polygon) for (const point of ring) radius = Math.max(radius, geoDistance(centre, point as [number, number]));
+    for (const ring of ringsOf(country)) for (const point of ring) radius = Math.max(radius, geoDistance(centre, point as [number, number]));
     reach = { centre, radius };
     reaches.set(country, reach);
   }

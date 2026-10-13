@@ -2,6 +2,7 @@
 // count them with a fake. Pure: it reads only the scene it is given. A renderer remembers the last scene it drew and draws
 // nothing when the next one is the same; the loop (controller.ts) can therefore ask on every frame.
 import { geoGraticule, geoOrthographic, geoPath, type GeoProjection } from 'd3-geo';
+import { DOT_RADIUS, PICKED_DOT_RADIUS } from './dots';
 import { mayFace, type CountryFeature } from './geo';
 
 /** d3's [λ, φ, γ]: the globe faces the point (-λ, -φ). */
@@ -115,7 +116,7 @@ export function createRenderer(): Renderer {
 function paint(ctx: DrawContext, scene: Scene): void {
   const { width, height, dpr, palette, lit } = scene;
   const projection = projectionFor(scene.rotation, width, height, scene.zoom);
-  const path = geoPath(projection, ctx);
+  const path = geoPath(projection, ctx).pointRadius(DOT_RADIUS);
   const radius = projection.scale();
   const [cx, cy] = projection.translate();
   const facing: [number, number] = [-scene.rotation[0], -scene.rotation[1]];
@@ -164,6 +165,7 @@ function paint(ctx: DrawContext, scene: Scene): void {
 
   const picked = scene.picked ? near.find((c) => c.id === scene.picked) : undefined;
   if (picked) {
+    path.pointRadius(PICKED_DOT_RADIUS);
     ctx.beginPath();
     path(picked);
     ctx.strokeStyle = palette.outline;
