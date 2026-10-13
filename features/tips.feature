@@ -1,6 +1,6 @@
 Feature: One-time tips
   A tip is one quiet line with Got it, shown where it helps and never again once he has tapped Got it. There are three: the camera
-  ('Front first, then back, in daylight'), the globe ('Drag to turn, tap a lit country') and the tutor ('Ask about the coin in
+  ('Front first, then back, in daylight'), the globe ('Drag to turn, pinch to zoom, tap a lit country') and the tutor ('Ask about the coin in
   front of you'). The list and "dismissed for good" are bsv-kit's tips; the dismissals live in the phone's localStorage. Each tip
   shown and each tap is counted in the usage log by name, never by anything he typed.
 
@@ -17,7 +17,7 @@ Feature: One-time tips
   Scenario: The globe tip and the tutor tip likewise
     Given a fresh phone
     When the Globe opens
-    Then the tip "Drag to turn, tap a lit country" is shown
+    Then the tip "Drag to turn, pinch to zoom, tap a lit country" is shown
     When he taps Got it on the globe tip
     And the Globe opens again
     Then no tip is shown on the Globe
@@ -38,4 +38,4 @@ Feature: One-time tips
   Scenario: The Globe screen shows its tip
     Given a fresh phone
     When the real Globe screen opens
-    Then the tip "Drag to turn, tap a lit country" is shown
+    Then the tip "Drag to turn, pinch to zoom, tap a lit country" is shown

@@ -8,7 +8,7 @@ describe('hints', () => {
   it('has the camera, globe and tutor tips, each tied to its own event', () => {
     expect(HINTS.map((h) => [h.id, h.event, h.text])).toEqual([
       ['camera', CAMERA_OPENED, 'Front first, then back, in daylight'],
-      ['globe', GLOBE_OPENED, 'Drag to turn, tap a lit country'],
+      ['globe', GLOBE_OPENED, 'Drag to turn, pinch to zoom, tap a lit country'],
       ['tutor', TUTOR_OPENED, 'Ask about the coin in front of you'],
     ]);
   });

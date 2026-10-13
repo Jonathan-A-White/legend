@@ -36,7 +36,7 @@ so a record never goes twice. A record leaves the outbox only after the mill's r
 ## Tips
 
 Three one-line tips, each shown once and dismissed with **Got it** (`src/tips/`): camera *Front first, then back, in daylight*;
-globe *Drag to turn, tap a lit country*; tutor *Ask about the coin in front of you*. They are static (no grind). The list and
+globe *Drag to turn, pinch to zoom, tap a lit country*; tutor *Ask about the coin in front of you*. They are static (no grind). The list and
 "dismissed for good" are bsv-kit's `tips`; the dismissals are in `localStorage` under `legend.tipsDismissed`. A screen draws its tip
 with `<HintCard event={CAMERA_OPENED | GLOBE_OPENED | TUTOR_OPENED} />`. The Globe draws its own; the camera and tutor tips are
 drawn by the stories that build those screens.

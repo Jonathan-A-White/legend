@@ -47,7 +47,7 @@ test('the globe tip shows once', async ({ page }) => {
   await openUnlocked(page);
   await page.goto('/#/globe');
   const tip = page.getByRole('note');
-  await expect(tip).toContainText('Drag to turn, tap a lit country');
+  await expect(tip).toContainText('Drag to turn, pinch to zoom, tap a lit country');
   await tip.getByRole('button', { name: 'Got it' }).click();
   await expect(tip).toHaveCount(0);
   await page.reload();

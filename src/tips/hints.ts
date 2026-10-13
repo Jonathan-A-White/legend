@@ -11,7 +11,7 @@ export const TUTOR_OPENED = 'tutor-opened';
 
 export const HINTS: readonly tips.Tip[] = [
   { id: 'camera', text: 'Front first, then back, in daylight', event: CAMERA_OPENED },
-  { id: 'globe', text: 'Drag to turn, tap a lit country', event: GLOBE_OPENED },
+  { id: 'globe', text: 'Drag to turn, pinch to zoom, tap a lit country', event: GLOBE_OPENED },
   { id: 'tutor', text: 'Ask about the coin in front of you', event: TUTOR_OPENED },
 ];
 
