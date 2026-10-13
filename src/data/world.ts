@@ -11,15 +11,18 @@ export interface CountryInfo {
   continent: string;
 }
 
-export interface CountryGeometry {
-  type: 'Polygon' | 'MultiPolygon';
-  arcs: number[][] | number[][][];
+interface CountryGeometryBase {
   /** The ISO alpha-2 code (XK for Kosovo). */
   id: string;
   properties: { name: string };
 }
 
-/** TopoJSON of the 110m countries, plus `names` keyed by alpha-2. */
+/** A country as a shape, or, when it is too small to draw as one, as a dot: a quantized [x, y] under the file's transform. */
+export type CountryGeometry =
+  | (CountryGeometryBase & { type: 'Polygon' | 'MultiPolygon'; arcs: number[][] | number[][][] })
+  | (CountryGeometryBase & { type: 'Point'; coordinates: [number, number] });
+
+/** TopoJSON of the 110m countries (and the small ones 110m leaves out, see docs/data.md), plus `names` keyed by alpha-2. */
 export interface Countries {
   type: 'Topology';
   objects: { countries: { type: 'GeometryCollection'; geometries: CountryGeometry[] } };

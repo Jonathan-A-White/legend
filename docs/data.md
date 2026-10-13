@@ -8,7 +8,7 @@ Two sets of static JSON ship with the app, both precached (`pwa-precache.ts`): t
 the service worker (`pwa-precache.ts`), so the globe and the country sheet work offline. Both are committed. A second run
 changes nothing: `git diff --exit-code public/data` is clean.
 
-Raw downloads go to `data/raw/` (git-ignored; the build downloads what is missing and skips what is there). The one network
+Raw downloads (the 110m and 50m shapes, the two CSVs) go to `data/raw/` (git-ignored; the build downloads what is missing and skips what is there). The one network
 answer that is not a plain file, Wikidata's, is committed as `data/snapshots/wikidata-currencies.json`, so after the first run
 the build needs no network. To refresh it, delete the snapshot and run the build; commit the new snapshot with the new output.
 
@@ -17,14 +17,25 @@ the build needs no network. To refresh it, delete the snapshot and run the build
 | Source | Used for | Licence |
 |---|---|---|
 | [world-atlas](https://github.com/topojson/world-atlas) `countries-110m.json` (Mike Bostock; built from [Natural Earth](https://www.naturalearthdata.com)) | the country shapes, with ISO 3166-1 numeric ids | ISC; Natural Earth is public domain |
+| world-atlas `countries-50m.json` (same) | the countries 110m leaves out: a shape, or a dot at the centre of one under a degree across | same |
 | [datasets/country-codes](https://github.com/datasets/country-codes) | numeric -> alpha-2, names, continent, each country's current ISO 4217 code | PDDL |
 | [datasets/currency-codes](https://github.com/datasets/currency-codes) `codes-all.csv` (ISO 4217, current and historic) | currency names, withdrawal dates of old codes | PDDL |
 | [Wikidata](https://www.wikidata.org) via `scripts/wikidata-currencies.rq` | each country's currencies with start and end dates (P38 with P580/P582) | CC0 |
 
 ### `public/data/world/countries.json`
 
-TopoJSON (about 119 KB; kept under 120 KB). `objects.countries.geometries[]` has one shape per country, ordered by alpha-2:
-`{type, arcs, id: "DE", properties: {name: "Germany"}}`. `id` is the ISO 3166-1 alpha-2 code; Kosovo is `XK`, the
+TopoJSON (about 141 KB; kept under 150 KB; 119 KB before the small countries were added). `objects.countries.geometries[]` has
+one geometry per country, ordered by alpha-2: a shape `{type, arcs, id: "DE", properties: {name: "Germany"}}`, or, for a
+country too small to draw as one, a dot `{type: "Point", coordinates: [x, y], id: "SG", properties: {name: "Singapore"}}`
+(`x`, `y` quantized with the file's `transform`, like the arcs). About 247 countries: the 175 of 110m, about 70 from the 50m
+file (the microstates, the small islands, the territories with an ISO code) and eleven placed by hand (`HAND_PLACED` in
+`scripts/data-build.ts`: Tuvalu, Gibraltar, Tokelau, Christmas and Cocos Islands, Caribbean Netherlands, Svalbard,
+Guadeloupe, Martinique, Mayotte, Réunion). A 50m country under 1 degree across (`DOT_BELOW_DEGREES`) is a dot at its centre,
+so the Vatican, Monaco, San Marino, Andorra, Liechtenstein, Malta, Singapore and the small Caribbean and Pacific islands
+are dots; larger ones (Maldives, Tonga, Samoa, Cabo Verde, ...) are shapes whose rings are re-quantized to the
+110m grid, as arcs of their own. The globe draws a dot as a small round mark (`src/globe/dots.ts`) and a tap on or near it
+picks it (`src/globe/pick.ts`). French Guiana stays inside France's shape; Bouvet and the US Minor Outlying Islands have no dot
+(nobody lives on them). "St." and "&" in names are written "Saint" and "and". `id` is the ISO 3166-1 alpha-2 code; Kosovo is `XK`, the
 user-assigned code. Shapes with no ISO code (Somaliland, Northern Cyprus) are left out. The top-level `names` maps alpha-2
 to `{name, numeric, flag, continent}`: `numeric` is the three-digit ISO number (`""` for Kosovo), `flag` the flag emoji,
 `continent` one of AF, AN, AS, EU, NA, OC, SA. The `land` object and the arcs only it used are dropped.

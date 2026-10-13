@@ -68,7 +68,12 @@ The world data in `public/data/world/` (built by `npm run data:build`; `docs/dat
 
 - **[Natural Earth](https://www.naturalearthdata.com)** 110m country shapes, public domain, as repackaged by
   **[world-atlas](https://github.com/topojson/world-atlas)** by Mike Bostock, ISC. Changes: a country's shape is kept under
-  its ISO alpha-2 code with a name; Somaliland and Northern Cyprus (no ISO code) and the land outline are left out.
+  its ISO alpha-2 code with a name; Somaliland and Northern Cyprus (no ISO code) and the land outline are left out. The
+  countries 110m leaves out (the microstates and small islands, about 70) come from Natural Earth's 50m shapes in the same
+  package: a shape re-quantized to the 110m file's grid, or, when under a degree across, one dot at its centre. Eleven more
+  places no Natural Earth file has (Tuvalu, Gibraltar, Tokelau, Christmas and the Cocos Islands, Caribbean Netherlands,
+  Svalbard, Guadeloupe, Martinique, Mayotte, Réunion) are dots at positions written by hand: a place's position is a fact.
+  Saint names are written out ("Saint Lucia", not "St. Lucia").
 - **[datasets/country-codes](https://github.com/datasets/country-codes)** (ISO 3166-1 and 4217 facts: alpha-2 codes, names,
   continents, current currency codes) and **[datasets/currency-codes](https://github.com/datasets/currency-codes)** (the ISO 4217
   code list with withdrawal dates), both under the Public Domain Dedication and License (PDDL). Changes: joined, names

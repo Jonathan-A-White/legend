@@ -30,8 +30,8 @@ describe('countries.json', () => {
     for (const cc of ['US', 'JP', 'DE', 'MX']) expect(ids).toContain(cc);
   });
 
-  it('is under 120 KB', () => {
-    expect(statSync(countriesPath).size).toBeLessThan(120 * 1024);
+  it('is under 150 KB', () => {
+    expect(statSync(countriesPath).size).toBeLessThan(150 * 1024);
   });
 });
 

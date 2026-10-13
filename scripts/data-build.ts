@@ -1,5 +1,6 @@
 // scripts/data-build.ts: npm run data:build
-// Turns Natural Earth's 110m countries (world-atlas, ISC; Natural Earth is public domain), the datasets.pm country-codes
+// Turns Natural Earth's 110m countries (world-atlas, ISC; Natural Earth is public domain), with the countries 110m leaves out
+// taken from the 50m file and a few places added by hand (see addSmallCountries), the datasets.pm country-codes
 // table (ISO 3166-1 and 4217 facts, PDDL), the ISO 4217 code list with its withdrawal dates (PDDL) and Wikidata's
 // currency history (CC0) into public/data/world/countries.json and currencies.json. The raw downloads go to data/raw
 // (git-ignored, skipped when present); the Wikidata answer is a committed snapshot (data/snapshots/), so after the first
@@ -7,14 +8,19 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { geoBounds, geoCentroid } from 'd3-geo';
+import { feature } from 'topojson-client';
+import type { Topology } from 'topojson-specification';
 import { flagOf } from '../src/data/world';
 import type { Countries, CountryGeometry, CountryInfo, Currencies, CurrencyRow } from '../src/data/world';
 
 export const WORLD_ATLAS_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json';
+export const WORLD_ATLAS_50_URL = 'https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json';
 export const COUNTRY_CODES_URL = 'https://raw.githubusercontent.com/datasets/country-codes/main/data/country-codes.csv';
 export const CURRENCY_CODES_URL = 'https://raw.githubusercontent.com/datasets/currency-codes/main/data/codes-all.csv';
 export const WIKIDATA_URL = 'https://query.wikidata.org/sparql';
 const TOPOLOGY_FILE = 'countries-110m.json';
+const TOPOLOGY_50_FILE = 'countries-50m.json';
 const COUNTRY_CODES_FILE = 'country-codes.csv';
 const CURRENCY_CODES_FILE = 'codes-all.csv';
 const SNAPSHOT_FILE = 'wikidata-currencies.json';
@@ -153,6 +159,7 @@ interface RawGeometry {
   id?: string;
   properties: { name: string };
 }
+type ShapeGeometry = Extract<CountryGeometry, { arcs: unknown }>;
 export interface RawTopology {
   type: 'Topology';
   objects: Record<string, { type: 'GeometryCollection'; geometries: RawGeometry[] }>;
@@ -174,6 +181,10 @@ const XK: CountryCodeRow = {
 // CLDR writes the short forms "US" and "UK", and "Congo - Kinshasa" and "Bosnia"; the app says the country's name.
 const NAME_OVERRIDES: Record<string, string> = {
   US: 'United States', GB: 'United Kingdom', CD: 'DR Congo', CG: 'Republic of the Congo', BA: 'Bosnia and Herzegovina',
+  // and "St." and "&": a child types Saint Lucia, and "and" is how it is said
+  BL: 'Saint Barthélemy', KN: 'Saint Kitts and Nevis', LC: 'Saint Lucia', MF: 'Saint Martin', PM: 'Saint Pierre and Miquelon',
+  SH: 'Saint Helena', VC: 'Saint Vincent and the Grenadines', AG: 'Antigua and Barbuda', TC: 'Turks and Caicos Islands',
+  HM: 'Heard and McDonald Islands', SJ: 'Svalbard and Jan Mayen', CC: 'Cocos (Keeling) Islands',
 };
 
 function nameOf(row: CountryCodeRow, atlasName: string): string {
@@ -184,21 +195,113 @@ function nameOf(row: CountryCodeRow, atlasName: string): string {
 
 /** Drops the arcs no kept shape uses (the dropped shapes' own, and everything `land` used) and renumbers the rest. */
 function pruneArcs(geometries: CountryGeometry[], arcs: number[][][]): number[][][] {
+  const shapes = geometries.filter((g): g is ShapeGeometry => g.type !== 'Point');
   const used = new Set<number>();
   const walk = (a: unknown): void => {
     if (Array.isArray(a)) a.forEach(walk);
     else used.add(a as number < 0 ? ~(a as number) : (a as number));
   };
-  geometries.forEach((g) => walk(g.arcs));
+  shapes.forEach((g) => walk(g.arcs));
   const renumber = new Map<number, number>();
   const kept = arcs.filter((_, i) => used.has(i));
   [...used].sort((a, b) => a - b).forEach((old, i) => renumber.set(old, i));
   const remap = (a: unknown): unknown => (Array.isArray(a) ? a.map(remap) : (a as number) < 0 ? ~(renumber.get(~(a as number)) as number) : renumber.get(a as number));
-  geometries.forEach((g) => (g.arcs = remap(g.arcs) as CountryGeometry['arcs']));
+  shapes.forEach((g) => (g.arcs = remap(g.arcs) as ShapeGeometry['arcs']));
   return kept;
 }
 
-export function buildCountries(topology: RawTopology, codes: CountryCodeRow[]): Countries {
+/** A country smaller than this many degrees across (about 110 km) is a dot, not a shape: at the globe's size it is a few pixels. */
+export const DOT_BELOW_DEGREES = 1;
+
+/**
+ * Places no Natural Earth file has a shape for, written by hand (a place's position is a fact, not a work): [lon, lat] of the
+ * main settlement or the middle of the islands. Each is an ISO 3166-1 territory or state with coins or notes of its own.
+ */
+export const HAND_PLACED: Record<string, [number, number]> = {
+  TV: [179.19, -8.52], // Tuvalu, Funafuti
+  GI: [-5.35, 36.14], // Gibraltar
+  TK: [-171.85, -9.17], // Tokelau
+  CX: [105.63, -10.49], // Christmas Island
+  CC: [96.85, -12.15], // Cocos (Keeling) Islands
+  BQ: [-68.27, 12.2], // Caribbean Netherlands, Bonaire
+  SJ: [15.65, 78.22], // Svalbard, Longyearbyen
+  GP: [-61.55, 16.25], // Guadeloupe
+  MQ: [-61.02, 14.64], // Martinique
+  YT: [45.15, -12.82], // Mayotte
+  RE: [55.54, -21.12], // Réunion
+};
+
+type Quantizer = RawTopology['transform'];
+type Placed = { type: 'Point'; coordinates: [number, number] } | { type: 'Polygon'; arcs: number[][] } | { type: 'MultiPolygon'; arcs: number[][][] };
+
+function quantize([lon, lat]: number[], { scale, translate }: Quantizer): [number, number] {
+  return [Math.round((lon - translate[0]) / scale[0]), Math.round((lat - translate[1]) / scale[1])];
+}
+
+/** A ring as one TopoJSON arc (quantized, then delta-encoded), or null when it shrinks to less than a triangle. */
+function encodeRing(ring: number[][], transform: Quantizer): number[][] | null {
+  const points: [number, number][] = [];
+  for (const position of ring) {
+    const q = quantize(position, transform);
+    const last = points[points.length - 1];
+    if (!last || last[0] !== q[0] || last[1] !== q[1]) points.push(q);
+  }
+  if (points.length < 4) return null;
+  return points.map(([x, y], i) => (i === 0 ? [x, y] : [x - points[i - 1][0], y - points[i - 1][1]]));
+}
+
+/** How far across a place is, in degrees: the larger of its width (across the antimeridian too) and its height. */
+function extentOf(geometry: unknown): number {
+  const [[west, south], [east, north]] = geoBounds(geometry as never);
+  return Math.max(((east - west + 360) % 360) || 0, north - south);
+}
+
+/**
+ * Adds what the 110m shapes leave out (the microstates and the small islands) from the 50m file, and the hand-placed places.
+ * A country under DOT_BELOW_DEGREES across becomes a Point at its centre; a larger one a shape, its rings quantized the way
+ * the 110m shapes are and kept as arcs of their own (they are islands: nothing is shared with a neighbour's border).
+ */
+function addSmallCountries(geometries: CountryGeometry[], names: Record<string, CountryInfo>, arcs: number[][][], topology: RawTopology, detail: RawTopology | undefined, codes: CountryCodeRow[]): void {
+  const byNumeric = new Map(codes.map((c) => [Number(c.numeric), c]));
+  const byAlpha2 = new Map(codes.map((c) => [c.alpha2, c]));
+  const add = (row: CountryCodeRow, geometry: Placed, atlasName: string): void => {
+    const name = nameOf(row, atlasName);
+    geometries.push({ ...geometry, id: row.alpha2, properties: { name } } as CountryGeometry);
+    names[row.alpha2] = { name, numeric: row.numeric, flag: flagOf(row.alpha2), continent: row.continent };
+  };
+  const dot = (row: CountryCodeRow, place: number[], atlasName: string): void => add(row, { type: 'Point', coordinates: quantize(place, topology.transform) }, atlasName);
+
+  if (detail) {
+    const topo = detail as unknown as Topology;
+    for (const g of detail.objects.countries.geometries) {
+      const row = g.id !== undefined ? byNumeric.get(Number(g.id)) : undefined;
+      if (!row || names[row.alpha2]) continue;
+      const shape = feature(topo, g as never) as unknown as { geometry: { type: 'Polygon' | 'MultiPolygon'; coordinates: number[][][] | number[][][][] } };
+      const middle = geoCentroid(shape as never);
+      if (extentOf(shape) < DOT_BELOW_DEGREES) {
+        dot(row, middle, g.properties.name);
+        continue;
+      }
+      const polygons = (shape.geometry.type === 'Polygon' ? [shape.geometry.coordinates] : shape.geometry.coordinates) as number[][][][];
+      const kept: number[][][] = [];
+      const polygonArcs: number[][][] = [];
+      for (const polygon of polygons) {
+        const rings = polygon.map((ring) => encodeRing(ring, topology.transform));
+        if (!rings[0]) continue; // the outer ring is gone: so is the island
+        polygonArcs.push(rings.filter((r): r is number[][] => r !== null).map((r) => [arcs.length + kept.push(r) - 1]));
+      }
+      if (!polygonArcs.length) dot(row, middle, g.properties.name);
+      else add(row, polygonArcs.length === 1 ? { type: 'Polygon', arcs: polygonArcs[0] } : { type: 'MultiPolygon', arcs: polygonArcs }, g.properties.name);
+      arcs.push(...kept);
+    }
+  }
+  for (const [alpha2, place] of Object.entries(HAND_PLACED)) {
+    const row = byAlpha2.get(alpha2);
+    if (row && !names[alpha2]) dot(row, place, row.names.find(Boolean) ?? alpha2);
+  }
+}
+
+export function buildCountries(topology: RawTopology, codes: CountryCodeRow[], detail?: RawTopology): Countries {
   const byNumeric = new Map(codes.map((c) => [Number(c.numeric), c]));
   const geometries: CountryGeometry[] = [];
   const names: Record<string, CountryInfo> = {};
@@ -206,11 +309,13 @@ export function buildCountries(topology: RawTopology, codes: CountryCodeRow[]): 
     const row = g.id !== undefined ? byNumeric.get(Number(g.id)) : g.properties.name === 'Kosovo' ? XK : undefined;
     if (!row) continue; // Somaliland and Northern Cyprus have no code
     const name = nameOf(row, g.properties.name);
-    geometries.push({ type: g.type, arcs: g.arcs, id: row.alpha2, properties: { name } });
+    geometries.push({ type: g.type, arcs: g.arcs, id: row.alpha2, properties: { name } } as CountryGeometry);
     names[row.alpha2] = { name, numeric: row.numeric, flag: flagOf(row.alpha2), continent: row.continent };
   }
+  const allArcs = [...topology.arcs];
+  addSmallCountries(geometries, names, allArcs, topology, detail, codes);
   geometries.sort((a, b) => a.id.localeCompare(b.id));
-  const arcs = pruneArcs(geometries, topology.arcs);
+  const arcs = pruneArcs(geometries, allArcs);
   return {
     type: 'Topology',
     objects: { countries: { type: 'GeometryCollection', geometries } },
@@ -360,11 +465,12 @@ async function wikidataRows(root: string): Promise<WikidataRow[]> {
 export async function main(root = process.cwd()): Promise<void> {
   const rawDir = join(root, 'data/raw');
   const topology = JSON.parse(await raw(rawDir, TOPOLOGY_FILE, WORLD_ATLAS_URL)) as RawTopology;
+  const detail = JSON.parse(await raw(rawDir, TOPOLOGY_50_FILE, WORLD_ATLAS_50_URL)) as RawTopology;
   const codes = parseCountryCodes(await raw(rawDir, COUNTRY_CODES_FILE, COUNTRY_CODES_URL));
   const iso = parseIsoCurrencies(await raw(rawDir, CURRENCY_CODES_FILE, CURRENCY_CODES_URL));
   const wikidata = await wikidataRows(root);
 
-  const countries = buildCountries(topology, codes);
+  const countries = buildCountries(topology, codes, detail);
   const currencies = buildCurrencies({ countries: countries.names, codes, iso, wikidata });
   writeJson(join(root, 'public/data/world/countries.json'), countries);
   writeJson(join(root, 'public/data/world/currencies.json'), currencies);

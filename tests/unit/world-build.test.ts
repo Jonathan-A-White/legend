@@ -2,6 +2,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   buildCountries,
+  HAND_PLACED,
   buildCurrencies,
   parseCountryCodes,
   parseCsv,
@@ -47,6 +48,68 @@ describe('buildCountries', () => {
 
   it('is the same on a second run', () => {
     expect(JSON.stringify(buildCountries(topologySlice, codes))).toBe(JSON.stringify(countries));
+  });
+});
+
+describe('buildCountries with the 50m detail', () => {
+  const codes = parseCountryCodes(
+    [
+      countryCodesCsv,
+      '702,SG,Singapore,Singapore,Singapore,SINGAPORE,SGD,Singapore Dollar,AS',
+      '462,MV,Maldives,Maldives,Maldives,MALDIVES,MVR,Rufiyaa,AS',
+      '662,LC,St. Lucia,Saint Lucia,Saint Lucia,SAINT LUCIA,XCD,East Caribbean Dollar,NA',
+      '798,TV,Tuvalu,Tuvalu,Tuvalu,TUVALU,AUD,Australian Dollar,OC',
+    ].join('\n'),
+  );
+  // Degrees, in 0.01-degree steps from (-180, -90): a 0.4-degree square at Singapore and at St. Lucia (dots), a 3-degree square
+  // for the Maldives (a shape), and Germany, which 110m already has and 50m must not replace.
+  const square = (lon: number, lat: number, side: number): number[][] => [[(lon + 180) * 100, (lat + 90) * 100], [0, side * 100], [side * 100, 0], [0, -side * 100], [-side * 100, 0]];
+  const polygon = (arc: number, id: string | undefined, name: string) => ({ type: 'Polygon' as const, arcs: [[arc]], id, properties: { name } });
+  const detail = {
+    type: 'Topology' as const,
+    objects: {
+      countries: {
+        type: 'GeometryCollection' as const,
+        geometries: [polygon(0, '702', 'Singapore'), polygon(1, '462', 'Maldives'), polygon(0, '276', 'Germany'), polygon(2, '662', 'Saint Lucia'), polygon(0, undefined, 'Somewhere with no code')],
+      },
+    },
+    arcs: [square(103.6, 1.2, 0.4), square(73, 1, 3), square(-61.1, 13.7, 0.4)],
+    transform: { scale: [0.01, 0.01] as [number, number], translate: [-180, -90] as [number, number] },
+    bbox: [-180, -90, 180, 90] as [number, number, number, number],
+  };
+  const countries = buildCountries(topologySlice, codes, detail);
+  const geometry = (id: string) => countries.objects.countries.geometries.find((g) => g.id === id);
+
+  it('adds a country 110m leaves out: a dot when it is under a degree across, a shape when it is larger', () => {
+    expect(geometry('SG')).toMatchObject({ type: 'Point' });
+    expect(geometry('MV')).toMatchObject({ type: 'Polygon' });
+    expect(countries.names.SG).toEqual({ name: 'Singapore', numeric: '702', flag: '🇸🇬', continent: 'AS' });
+    expect(countries.names.MV.name).toBe('Maldives');
+  });
+
+  it('puts a dot where the place is, in the file own quantization', () => {
+    const { coordinates } = geometry('SG') as { coordinates: [number, number] };
+    const { scale, translate } = countries.transform;
+    expect(coordinates[0] * scale[0] + translate[0]).toBeCloseTo(103.8, 0);
+    expect(coordinates[1] * scale[1] + translate[1]).toBeCloseTo(1.4, 0);
+  });
+
+  it('keeps the 110m shape of a country both files have, and skips a 50m shape with no code', () => {
+    expect(countries.objects.countries.geometries.filter((g) => g.id === 'DE')).toHaveLength(1);
+    expect(countries.objects.countries.geometries.map((g) => g.id)).toEqual(['DE', 'JP', 'LC', 'MR', 'MV', 'SB', 'SG', 'TV', 'US', 'XK']);
+  });
+
+  it('places by hand a country no file has a shape for, as a dot', () => {
+    expect(geometry('TV')).toMatchObject({ type: 'Point' });
+    expect(HAND_PLACED.TV).toBeDefined();
+  });
+
+  it('writes "Saint", not "St."', () => {
+    expect(countries.names.LC.name).toBe('Saint Lucia');
+  });
+
+  it('is the same on a second run', () => {
+    expect(JSON.stringify(buildCountries(topologySlice, codes, detail))).toBe(JSON.stringify(countries));
   });
 });
 
