@@ -1,5 +1,6 @@
 // src/globe/GlobeScreen.tsx: the Globe, at #/globe. A globe he turns with one finger, lit where his items come from; a tap on
-// a country opens it (#/country/<cc>); a search at the thumb turns the globe to a country; 'Not yet' lists the countries he
+// a country opens it (#/country/<cc>), and so does a tap within a finger's width of a small one; a tap among several tiny ones
+// offers a short list of them; two fingers zoom. A search at the thumb turns the globe to a country; 'Not yet' lists the countries he
 // has nothing from. The drawing and the finger live in controller.ts; this file wires them to the page.
 import { useEffect, useMemo, useRef, useState, type FormEvent, type PointerEvent, type RefObject } from 'react';
 import { useItems } from '../data/repositories';
@@ -8,6 +9,7 @@ import { FeedbackButton } from '../feedback';
 import { countryHash, navigate, useAddress } from '../nav/route';
 import { ShareButton, shareGlobe } from '../share';
 import { GLOBE_OPENED, HintCard } from '../tips';
+import { clock } from './clock';
 import { GlobeController } from './controller';
 import { centreOf, countryFeatures } from './geo';
 import { NotYet } from './NotYet';
@@ -17,6 +19,8 @@ import { useLoaded } from './useLoaded';
 import { view } from './view';
 
 const NOT_YET = '#/globe?not-yet';
+/** A click on the list of near countries sooner than this after it appears is the tap that opened it, sent on. */
+const NEAR_SETTLE_MS = 350;
 /** With nothing collected the globe opens on the Atlantic, the Americas to one side and Europe and Africa to the other. */
 const FIRST_VIEW: Rotation = [40, -20, 0];
 
@@ -41,6 +45,8 @@ export function GlobeScreen() {
   const lit = useMemo(() => litCounts(items ?? []), [items]);
   const controllerRef = useRef<GlobeController | null>(null);
   const notYetOpen = useAddress() === NOT_YET;
+  /** The countries near a tap that had none under the finger, for him to choose from. */
+  const [near, setNear] = useState<string[] | null>(null);
 
   return (
     <main className="relative flex min-h-0 flex-1 flex-col">
@@ -49,13 +55,13 @@ export function GlobeScreen() {
           <h1 className="text-3xl font-semibold tracking-wide text-accent">Globe</h1>
           <FeedbackButton screen="Globe" className="-mr-2" />
         </div>
-        <p className="mt-1 text-base text-muted">Where your coins and notes come from. Turn it with a finger; tap a country.</p>
+        <p className="mt-1 text-base text-muted">Where your coins and notes come from. Turn it with a finger, pinch to zoom; tap a country.</p>
       </header>
       <HintCard event={GLOBE_OPENED} className="mx-5 mt-2 shrink-0" />
       {countries.value && items ? (
         <>
-          <GlobeCanvas countries={countries.value} lit={lit} covered={notYetOpen} controllerRef={controllerRef} />
-          <Controls countries={countries.value} lit={lit} controllerRef={controllerRef} />
+          <GlobeCanvas countries={countries.value} lit={lit} covered={notYetOpen} controllerRef={controllerRef} near={near} setNear={setNear} />
+          <Controls countries={countries.value} lit={lit} controllerRef={controllerRef} onSearch={() => setNear(null)} />
           {notYetOpen && <NotYet countries={countries.value} lit={lit} onClose={() => window.history.back()} />}
         </>
       ) : (
@@ -76,7 +82,16 @@ export function GlobeScreen() {
   );
 }
 
-function GlobeCanvas({ countries, lit, covered, controllerRef }: { countries: Countries; lit: ReadonlyMap<string, number>; covered: boolean; controllerRef: RefObject<GlobeController | null> }) {
+interface CanvasProps {
+  countries: Countries;
+  lit: ReadonlyMap<string, number>;
+  covered: boolean;
+  controllerRef: RefObject<GlobeController | null>;
+  near: string[] | null;
+  setNear(codes: string[] | null): void;
+}
+
+function GlobeCanvas({ countries, lit, covered, controllerRef, near, setNear }: CanvasProps) {
   const canvas = useRef<HTMLCanvasElement>(null);
   // The controller is made once per loaded world; `lit` reaches it through the effect below.
   const firstLit = useRef(lit);
@@ -92,11 +107,14 @@ function GlobeCanvas({ countries, lit, covered, controllerRef }: { countries: Co
       lit: firstLit.current,
       palette: readPalette(),
       rotation: start,
+      zoom: view.zoom,
       picked: view.picked,
       idleSpin: !window.matchMedia?.('(prefers-reduced-motion: reduce)').matches,
       onPick: (code) => navigate(countryHash(code)),
-      onRest: (rotation, picked) => {
+      onChoose: setNear,
+      onRest: (rotation, picked, zoom) => {
         view.rotation = rotation;
+        view.zoom = zoom;
         view.picked = picked;
       },
     });
@@ -129,7 +147,7 @@ function GlobeCanvas({ countries, lit, covered, controllerRef }: { countries: Co
       themes.disconnect();
       scheme?.removeEventListener?.('change', repaint);
     };
-  }, [countries, controllerRef]);
+  }, [countries, controllerRef, setNear]);
 
   useEffect(() => controllerRef.current?.setLit(lit), [lit, controllerRef]);
   useEffect(() => controllerRef.current?.setCovered(covered), [covered, controllerRef]);
@@ -152,6 +170,7 @@ function GlobeCanvas({ countries, lit, covered, controllerRef }: { countries: Co
           } catch {
             // No capture (jsdom, an old browser): the drag still follows while the finger stays on the canvas.
           }
+          setNear(null);
           controllerRef.current?.pointerDown(e.pointerId, at(e));
         }}
         onPointerMove={(e) => controllerRef.current?.pointerMove(e.pointerId, at(e))}
@@ -159,12 +178,45 @@ function GlobeCanvas({ countries, lit, covered, controllerRef }: { countries: Co
         onPointerCancel={(e) => controllerRef.current?.pointerCancel(e.pointerId)}
         onContextMenu={(e) => e.preventDefault()}
       />
+      {near && <NearTap countries={countries} codes={near} onClose={() => setNear(null)} />}
+    </div>
+  );
+}
+
+/** A tap among tiny countries: their names, nearest first, each a tap away from its sheet. */
+function NearTap({ countries, codes, onClose }: { countries: Countries; codes: string[]; onClose(): void }) {
+  // The list appears under the finger that asked for it, and the phone may send that same tap on as a click to whatever is
+  // there now: a click this soon is not his.
+  const shownAt = useRef(clock.now());
+  const his = (act: () => void) => () => {
+    if (clock.now() - shownAt.current >= NEAR_SETTLE_MS) act();
+  };
+  return (
+    <div className="absolute inset-x-4 bottom-3 overflow-hidden rounded-2xl border border-line bg-surface shadow-lg">
+      <div className="flex items-center justify-between pl-4 pr-2">
+        <h2 className="text-base text-muted">Which one?</h2>
+        <button type="button" onClick={his(onClose)} className="min-h-11 px-3 text-base text-muted active:text-ink">
+          Close
+        </button>
+      </div>
+      <ul aria-label="Countries near your tap">
+        {codes.map((cc) => (
+          <li key={cc}>
+            <button type="button" onClick={his(() => navigate(countryHash(cc)))} className="flex min-h-12 w-full items-center gap-3 px-4 text-left text-lg text-ink active:bg-canvas">
+              <span aria-hidden="true" className="text-2xl">
+                {countries.names[cc]?.flag}
+              </span>
+              {countries.names[cc]?.name ?? cc}
+            </button>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 /** The search, then the Not yet and Share buttons, at the foot under the thumb. */
-function Controls({ countries, lit, controllerRef }: { countries: Countries; lit: ReadonlyMap<string, number>; controllerRef: RefObject<GlobeController | null> }) {
+function Controls({ countries, lit, controllerRef, onSearch }: { countries: Countries; lit: ReadonlyMap<string, number>; controllerRef: RefObject<GlobeController | null>; onSearch(): void }) {
   const [query, setQuery] = useState('');
   const input = useRef<HTMLInputElement>(null);
   const matches = useMemo(() => findCountries(countries, query), [countries, query]);
@@ -172,6 +224,7 @@ function Controls({ countries, lit, controllerRef }: { countries: Countries; lit
 
   const pick = (code: string) => {
     setQuery('');
+    onSearch();
     input.current?.blur();
     controllerRef.current?.turnTo(code);
   };
@@ -205,7 +258,10 @@ function Controls({ countries, lit, controllerRef }: { countries: Countries; lit
           enterKeyHint="go"
           autoComplete="off"
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onChange={(e) => {
+            setQuery(e.target.value);
+            onSearch();
+          }}
           className="h-12 w-full rounded-full border border-line bg-surface px-5 text-lg text-ink placeholder:text-muted focus:border-accent focus:outline-none"
         />
       </form>

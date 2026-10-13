@@ -1,6 +1,6 @@
 # Legend module map
 
-A module is a folder under `src/` with one job and one entry file; import the entry, not its insides.
+A module is a folder under `src/` with one job and one entry; import that.
 
 | Module | One responsibility | Entry | Status |
 |---|---|---|---|
@@ -17,7 +17,7 @@ A module is a folder under `src/` with one job and one entry file; import the en
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared: scroll guard, build stamp, `HoldBar` (hold to act), `useSheetBack` (Back closes a sheet), `useObjectUrl` | `src/ui/` (one file each) | built |
-| globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): a canvas globe; `render.ts` draws (pure), `controller.ts` loops | `src/globe/index.ts` | built |
+| globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): a canvas globe; `render.ts` draws, `controller.ts` loops and pinches, `pick.ts` picks near a tap | `src/globe/index.ts` | built |
 | quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist; `match.ts` (pure) names an item's design, `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
 | collection | The Collection (`#/collection`: count, search, filters, Looking at) and one item (`#/item/<id>`: photos, facts, rarity, notes, Edit, Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
 | share | Share: a globe picture or item card, else Save picture; `text.ts` says what a card may say (Other: subtype) | `src/share/index.ts` | built |
