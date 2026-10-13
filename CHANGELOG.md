@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.36
+_2026-10-13_
+- New: On the Globe you can pinch to zoom, and tapping next to a small country now opens it, with a short list to choose from when several are close together.
+
 ## 0.1.33
 _2026-10-13_
 - New: Ask the tutor "How rare is it?" on a coin and it answers from the real number struck, saying how many survive is not known, and never a price.

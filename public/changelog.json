@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.36",
+    "date": "2026-10-13",
+    "story": "mw-f9fv9f.8",
+    "kind": "new",
+    "text": "On the Globe you can pinch to zoom, and tapping next to a small country now opens it, with a short list to choose from when several are close together."
+  },
+  {
     "version": "0.1.33",
     "date": "2026-10-13",
     "story": "mw-2dghhp.4",
