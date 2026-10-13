@@ -122,7 +122,7 @@ describe('the grinds have scenarios', () => {
 });
 
 // The names `mw grist smoke` knows (millwright application/gristsmokecheck.go); it refuses any other key in a check.
-const SMOKE_CHECK_NAMES = ['equals', 'is_null', 'one_of', 'contains', 'matches', 'present', 'all'];
+const SMOKE_CHECK_NAMES = ['equals', 'is_null', 'one_of', 'between', 'contains', 'matches', 'present', 'all'];
 
 // The keys a check object holds, found by reading the JSON, however deep an `all` nests them.
 const checkKeys = (check: unknown): string[] => {
@@ -221,6 +221,22 @@ describe('the scenarios use the names mw grist smoke checks', () => {
   });
 });
 
+describe('the item-value scenarios give a price as a range', () => {
+  const dir = 'grinds/examples/item-value';
+  const examples = readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => ({ f, e: readJson(`${dir}/${f}`) as unknown as GrindExample }));
+
+  it.each(examples)('$f: low and high are never a list of figures', ({ e }) => {
+    for (const field of ['low', 'high']) {
+      expect(asCheck(e.expect[field]).one_of, `${field} lists figures: use between`).toBeUndefined();
+    }
+  });
+
+  it('lets the 1964 silver quarter be worth 18', () => {
+    const quarter = examples.find(({ f }) => f === 'washington-quarter-1964-silver.json')!.e;
+    expect(checkExpect({ high: quarter.expect.high }, { high: 18 })).toEqual([]);
+  });
+});
+
 describe('the scenario checks', () => {
   const schema: Schema = {
     type: 'object',
@@ -263,6 +279,18 @@ describe('the scenario checks', () => {
       'level: expected "high", got "low"',
       'note: expected to contain "shelf", got "Seen on the tag."',
     ]);
+  });
+
+  it('reads between as an inclusive range of numbers', () => {
+    const numbers: Schema = { type: 'object', properties: { low: { type: 'number' }, note: { type: 'string' } } };
+    expect(expectProblems({ low: { between: [3, 30] } }, numbers)).toEqual([]);
+    expect(expectProblems({ low: { between: [30, 3] } }, numbers)).toEqual(['low: between must be a list of two numbers, low then high']);
+    expect(expectProblems({ low: { between: [3] } }, numbers)).toEqual(['low: between must be a list of two numbers, low then high']);
+    expect(expectProblems({ note: { between: [3, 30] } }, numbers)).toEqual(['note: between needs a number field']);
+    expect(checkExpect({ low: { between: [3, 30] } }, { low: 18 })).toEqual([]);
+    expect(checkExpect({ low: { between: [3, 30] } }, { low: 3 })).toEqual([]);
+    expect(checkExpect({ low: { between: [3, 30] } }, { low: 31 })).toEqual(['low: expected a number between 3 and 30, got 31']);
+    expect(checkExpect({ low: { between: [3, 30] } }, { low: '18' })).toEqual(['low: expected a number between 3 and 30, got "18"']);
   });
 
   it('checkExpect names the field, what was wanted and what came', () => {

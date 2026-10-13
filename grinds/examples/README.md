@@ -34,13 +34,14 @@ scenario's shape without a network, and fails when a grind has no scenario.
   - `equals`: the value is exactly this
   - `is_null`: `true` the value is null, `false` it is not
   - `one_of`: the value is one of these
+  - `between`: `[low, high]`, a number within them, ends included (a non-number fails)
   - `contains`: a string field includes this text
   - `matches`: a string field matches this regular expression (case classes such as `[Cc]ent`: no inline flags)
   - `present`: `true` the field is in the answer, `false` it is left out
   - `all`: a list of checks of these same names, each of which must hold too (for a field that must show several things)
 
-The checks cannot compare numbers (no "under" or "above"), so a range a scenario wants ("low under 1", "high under 5") is a
-`one_of` list of the figures that satisfy it (`item-value/`). A grind that takes no photo (`attachments.max` 0) has scenarios
+A range a scenario wants ("low under 1", "high under 5") is a `between` check (`item-value/`), not a list of every fair figure.
+A grind that takes no photo (`attachments.max` 0) has scenarios
 with no `photos` and a request with no `sides`.
 
 Every `expect` path must be a field of the grind's answer schema, and every `equals` or `one_of` value must be one the schema
