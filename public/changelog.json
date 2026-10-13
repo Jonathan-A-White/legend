@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.33",
+    "date": "2026-10-13",
+    "story": "mw-2dghhp.4",
+    "kind": "new",
+    "text": "Ask the tutor \"How rare is it?\" on a coin and it answers from the real number struck, saying how many survive is not known, and never a price."
+  },
+  {
     "version": "0.1.32",
     "date": "2026-10-12",
     "story": "mw-2dghhp.3",

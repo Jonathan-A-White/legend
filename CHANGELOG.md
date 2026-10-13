@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.33
+_2026-10-13_
+- New: Ask the tutor "How rare is it?" on a coin and it answers from the real number struck, saying how many survive is not known, and never a price.
+
 ## 0.1.32
 _2026-10-12_
 - New: Coins and notes Legend has no table for can now be asked how rare they are, and the answer is marked as the tutor's estimate.
