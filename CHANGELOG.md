@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.37
+_2026-10-13_
+- New: The smallest countries, such as Singapore, the Vatican, Monaco and Malta, are on the globe now: you can search for them and tap them.
+
 ## 0.1.36
 _2026-10-13_
 - New: On the Globe you can pinch to zoom, and tapping next to a small country now opens it, with a short list to choose from when several are close together.
