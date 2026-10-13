@@ -1,0 +1,80 @@
+{
+  "description": "On his 1932-D quarter he asks how rare it is, with the app's rarity line given: the answer uses the 436,800 struck, says nothing of how many survive being known, and gives no price.",
+  "schemaVersion": "1.2",
+  "request": {
+    "question": "How rare is it?",
+    "sides": [],
+    "context": {
+      "screen": "item",
+      "item": {
+        "kind": "coin",
+        "subtype": null,
+        "country": "US",
+        "countryName": "United States",
+        "currency": "USD",
+        "denomination": "Quarter dollar",
+        "faceValue": 0.25,
+        "year": 1932,
+        "mintMark": "D",
+        "mintCity": "Denver",
+        "series": "Washington quarter",
+        "design": "Washington; an eagle on the back",
+        "material": "90% silver, 10% copper",
+        "inscription": "LIBERTY IN GOD WE TRUST",
+        "gradeGuess": "VF",
+        "gradeNotes": "",
+        "funFact": "",
+        "confirmed": true,
+        "rarity": "Scarce · 436,800 struck at Denver in 1932 · the fewest of the 56 years Denver struck Washington quarters · a key date",
+        "struck": 436800
+      },
+      "country": {
+        "code": "US",
+        "name": "United States"
+      },
+      "collectionSummary": {
+        "items": 1,
+        "coins": 1,
+        "notes": 0,
+        "others": 0,
+        "countries": [
+          {
+            "code": "US",
+            "coins": 1,
+            "notes": 0,
+            "others": 0
+          }
+        ]
+      }
+    },
+    "settings": {
+      "theme": "system",
+      "textSize": "normal",
+      "defaultKind": "coin",
+      "showValues": true,
+      "keepOriginals": false,
+      "sizeCap": 1600,
+      "tutorVoice": false,
+      "answerLength": "medium"
+    },
+    "history": []
+  },
+  "expect": {
+    "answer": {
+      "all": [
+        {
+          "contains": "436,800"
+        },
+        {
+          "matches": "^[^$]*$"
+        }
+      ]
+    },
+    "followUps": {
+      "present": true
+    },
+    "settingsChanges": {
+      "equals": []
+    }
+  }
+}

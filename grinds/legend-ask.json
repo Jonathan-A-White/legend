@@ -2,11 +2,11 @@
   "grind": 1,
   "app": "legend",
   "kind": "legend-ask",
-  "versions": ["1.0", "1.1"],
+  "versions": ["1.0", "1.1", "1.2"],
   "model": "sonnet",
   "effort": "medium",
   "instructions": "grinds/legend-ask.md",
-  "inputSchema": "schemas/legend-ask-input-1.1.schema.json",
+  "inputSchema": "schemas/legend-ask-input-1.2.schema.json",
   "answerSchema": "schemas/legend-ask-answer-1.0.schema.json",
   "attachments": {
     "min": 0,

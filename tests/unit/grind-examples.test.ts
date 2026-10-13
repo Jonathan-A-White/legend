@@ -144,6 +144,19 @@ describe('the tutor has its two scenarios', () => {
     expect(grading!.photos).toEqual(['washington-quarter-1944s-obverse.jpg', 'washington-quarter-1944s-reverse.jpg']);
   });
 
+  it('asks how rare the 1932-D quarter is with the rarity line given, no photo, and wants no price in the answer', () => {
+    const rare = examples.find((e) => /how-rare/.test(e.description) || /rare/i.test(String(e.request.question)) && e.schemaVersion === '1.2');
+    expect(rare, 'a rarity question under 1.2').toBeDefined();
+    expect(rare!.schemaVersion).toBe('1.2');
+    expect(context(rare!).item).toMatchObject({ year: 1932, mintMark: 'D', struck: 436800 });
+    expect(JSON.stringify(rare!.expect)).toContain('436,800');
+    expect(rare!.photos ?? []).toEqual([]);
+    const answer = asCheck(rare!.expect.answer) as { all: { contains?: string; matches?: string }[] };
+    const noPrice = answer.all.find((c) => c.matches);
+    expect(noPrice && new RegExp(noPrice.matches!).test('There were 436,800 struck.')).toBe(true);
+    expect(noPrice && new RegExp(noPrice.matches!).test('Worth $50.')).toBe(false);
+  });
+
   it('asks about Japan with no photo', () => {
     const japan = examples.find((e) => context(e).screen === 'country' && context(e).country?.code === 'JP');
     expect(japan, 'a country question on Japan').toBeDefined();
