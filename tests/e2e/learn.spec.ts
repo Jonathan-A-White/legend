@@ -2,6 +2,7 @@
 // the walk ending in Keep, the mints and the special years, none of them wider than the phone. Writes shots/learn.png and shots/grading.png.
 import { expect, test, type Page } from '@playwright/test';
 import { shot } from './shot';
+import { openUnlocked } from './unlocked';
 
 const base = { kind: 'coin', country: 'US', currency: 'USD', status: 'confirmed', material: '', inscription: '', funFact: '', gradeNotes: '', notes: '', tags: [], confidence: null, deletedAt: null, design: null };
 
@@ -13,6 +14,7 @@ const OWNED = [
 ];
 
 async function seed(page: Page): Promise<void> {
+  await openUnlocked(page);
   await page.goto('/#/settings');
   await page.evaluate(
     async ({ rows, template }) => {
