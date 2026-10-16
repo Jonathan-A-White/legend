@@ -1,8 +1,8 @@
 // src/tips/hints.ts: the one-time tips that sit on a screen where they help, from Lampas's src/tips/hints.ts. The list of tips, "which
-// one shows now" and "dismissed for good" are bsv-kit's (bsv-kit/tips); this file is Legend's list and the storage it keeps the
+// one shows now" and "dismissed for good" are pwa-kit's (pwa-kit/tips); this file is Legend's list and the storage it keeps the
 // dismissals in (the phone's localStorage, key 'legend.tipsDismissed'). The tips are written here: no grind is asked for them. A later
 // tip is one more entry in HINTS and an event name for the screen that draws it.
-import { tips } from 'bsv-kit/tips';
+import { tips } from 'pwa-kit/tips';
 
 /** The events a tip is tied to: a screen draws `<HintCard event={…} />` when it opens. */
 export const CAMERA_OPENED = 'camera-opened';

@@ -2,7 +2,7 @@
 // where What's new opens the lines of the waiting versions (nothing is remembered: the sheet shows once more after the
 // update, src/whatsNew/WhatsNewOnUpdate.tsx). Nothing at all while the changelog loads, offline, or when it has nothing after this build.
 import { useState } from 'react';
-import { summarise, UpdateSummary, WhatsNewSheet } from 'bsv-kit/whats-new';
+import { summarise, UpdateSummary, WhatsNewSheet } from 'pwa-kit/whats-new';
 import { APP_SEMVER, LAST_SEEN_VERSION_STORAGE_KEY } from '../config';
 import { useAppChangelog } from './useAppChangelog';
 

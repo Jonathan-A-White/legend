@@ -74,9 +74,10 @@ US Mint figures, ISO 4217): never copy in Numista, PCGS, NGC, ucoin or Colnect d
 
 ## Dependencies
 
-bsv-kit has no release tag: it is pinned by commit in `package.json` (a re-pin also bumps `package-lock.json`'s
-`node_modules/bsv-kit` version and drops its `integrity` by hand, or `npm ci` refuses). Import `bsv-kit/bsv`, `bsv-kit/grist`,
-`bsv-kit/whats-new`, never `@bsv-kit/*`. `package.json`'s `allowScripts` lets its prepare build run under npm 11.
+bsv-kit and pwa-kit have no release tag: each is pinned by commit in `package.json` (a re-pin also bumps `package-lock.json`'s
+`node_modules/<kit>` version and drops its `integrity` by hand, or `npm ci` refuses). Import `bsv-kit/bsv`, `bsv-kit/grist`,
+`pwa-kit/whats-new`, `pwa-kit/tips`, never `@bsv-kit/*` or `@pwa-kit/*`. `package.json`'s `allowScripts` lets each prepare build
+run under npm 11.
 
 ## Closing comment
 

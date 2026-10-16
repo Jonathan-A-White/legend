@@ -1,7 +1,7 @@
 Feature: One-time tips
   A tip is one quiet line with Got it, shown where it helps and never again once he has tapped Got it. There are three: the camera
   ('Front first, then back, in daylight'), the globe ('Drag to turn, pinch to zoom, tap a lit country') and the tutor ('Ask about the coin in
-  front of you'). The list and "dismissed for good" are bsv-kit's tips; the dismissals live in the phone's localStorage. Each tip
+  front of you'). The list and "dismissed for good" are pwa-kit's tips; the dismissals live in the phone's localStorage. Each tip
   shown and each tap is counted in the usage log by name, never by anything he typed.
 
   Scenario: The camera tip shows once on first open and never again

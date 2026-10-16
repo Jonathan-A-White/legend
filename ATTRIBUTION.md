@@ -8,10 +8,11 @@ licence and what we changed. Credit is owed whether or not a licence asks for it
 
 ## Libraries
 
-- **[bsv-kit](https://github.com/Jonathan-A-White/bsv-kit)** by Jonathan A. White, MIT. The shared libraries of his phone
-  apps: What's new (the update banner's summary and the sheet shown after an update), the licence check and the grist client
-  (Add sends the photos of a coin or a bill to the photo reader through it; they leave the phone only when he taps Name it);
-  one-time tips arrive with their story. Changes: none.
+- **[bsv-kit](https://github.com/Jonathan-A-White/bsv-kit)** by Jonathan A. White, MIT. The licence check and the grist client
+  (Add sends the photos of a coin or a bill to the photo reader through it; they leave the phone only when he taps Name it).
+  Changes: none.
+- **[pwa-kit](https://github.com/Jonathan-A-White/pwa-kit)** by Jonathan A. White, MIT. What every installed web app shows
+  about itself: What's new (the update banner's summary and the sheet shown after an update) and one-time tips. Changes: none.
 - **[React](https://react.dev)**, MIT. **[Dexie](https://dexie.org)**, Apache-2.0. **[Vite](https://vite.dev)**, MIT, with
   **[vite-plugin-pwa](https://vite-pwa-org.netlify.app)**, MIT, and **[Workbox](https://developer.chrome.com/docs/workbox)**,
   MIT. **[Tailwind CSS](https://tailwindcss.com)**, MIT. **[Ajv](https://ajv.js.org)**, MIT, checks the photo reader's answer against its schema.

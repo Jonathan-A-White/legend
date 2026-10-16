@@ -29,6 +29,7 @@
     "d3-geo": "^3.1.1",
     "dexie": "^4.3.0",
     "dexie-react-hooks": "^4.4.0",
+    "pwa-kit": "github:Jonathan-A-White/pwa-kit#a562ac18ae4322df542cab4988632a819bce1613",
     "qrcode": "^1.5.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -68,6 +69,7 @@
     "vitest": "^4.0.18"
   },
   "allowScripts": {
-    "github:Jonathan-A-White/bsv-kit#87b9c427ad851a764a9833928fc057588623ce31": true
+    "github:Jonathan-A-White/bsv-kit#87b9c427ad851a764a9833928fc057588623ce31": true,
+    "github:Jonathan-A-White/pwa-kit#a562ac18ae4322df542cab4988632a819bce1613": true
   }
 }

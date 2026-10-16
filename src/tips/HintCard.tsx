@@ -1,6 +1,6 @@
-// src/tips/HintCard.tsx: draws the tip bsv-kit says is next for an event (src/tips/hints.ts): one quiet line and Got it, which dismisses
+// src/tips/HintCard.tsx: draws the tip pwa-kit says is next for an event (src/tips/hints.ts): one quiet line and Got it, which dismisses
 // it for good. Nothing at all when there is none. It tells the bus when a tip is drawn and when it is tapped away (the usage log counts both).
-import type { tips } from 'bsv-kit/tips';
+import type { tips } from 'pwa-kit/tips';
 import { useEffect, useState } from 'react';
 import { publish } from '../events/bus';
 import { hints } from './hints';
