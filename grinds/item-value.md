@@ -50,3 +50,14 @@ Other pieces (`kind` is `other`; request version 1.1):
   not know: `low` 0, `high` 0, `confidence` `low`, and a `basis` that says why and what would help (the year, the maker, the
   words on it). Never make up a price to fill the gap. The app shows this as "too hard to guess".
 - `gradeGuess` is usually null for these; do not lower the confidence for that alone.
+
+Replicas (`kind` `other`, `subtype` "Replica", "Copy" or "Reproduction"; or a `design` that begins "May be a replica"):
+
+- A replica is worth what the copy itself is worth, never what the piece it copies is worth: a common cast or souvenir
+  replica is worth a few dollars or less (a range like 0.5 to 5 dollars), more only for an old, well-made or silver copy
+  whose `material` says so. Never give the original's figure, not even as the top of the range.
+- `basis` says plainly that it is a replica and that a replica is worth far less than the real piece: "A souvenir replica
+  of the 1776 Continental dollar is worth a few dollars; a real one would be worth a great deal and needs an expert to
+  check it."
+- For a piece that only may be a replica, give the replica's range at `low` confidence, and say in `basis` that a real
+  one would need an expert to check it.

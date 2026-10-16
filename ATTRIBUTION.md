@@ -36,6 +36,8 @@ not shipped in the app) are from Wikimedia Commons, each scaled down and saved a
 - Bank of Canada 1935 one dollar specimen note: Bank of Canada, National Currency Museum. Public domain.
 - New York City subway token (obverse): photograph by Jessamyn on Commons. Public domain.
 - 2010 America the Beautiful quarter, Yosemite (reverse): United States Mint. Public domain.
+- Replica of the 1776 Continental dollar, obverse and reverse: US Diplomacy Center (State Department), original design by
+  Benjamin Franklin. Public domain.
 
 Each photo's page is linked in `grinds/examples/README.md`.
 

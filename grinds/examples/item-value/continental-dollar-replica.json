@@ -1,0 +1,27 @@
+{
+  "description": "A pewter souvenir replica of the 1776 Continental dollar: the replica's own few dollars, never the real coin's worth, and a basis that says it is a replica.",
+  "schemaVersion": "1.1",
+  "request": {
+    "kind": "other",
+    "subtype": "Replica",
+    "country": "US",
+    "currency": null,
+    "denomination": "Continental dollar",
+    "faceValue": null,
+    "year": null,
+    "mintMark": null,
+    "series": null,
+    "design": "Replica of the 1776 Continental dollar. A sundial and the word FUGIO on the front, thirteen linked rings on the back.",
+    "material": "pewter",
+    "gradeGuess": null,
+    "gradeNotes": "",
+    "today": "2026-10-16"
+  },
+  "expect": {
+    "currency": "USD",
+    "low": { "between": [0, 5] },
+    "high": { "between": [0.5, 30] },
+    "basis": { "matches": "[Rr]eplica|[Cc]opy|[Rr]eproduction" },
+    "asOf": "2026-10-16"
+  }
+}

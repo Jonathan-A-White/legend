@@ -13,9 +13,11 @@ is always present; where the piece does not tell you, the field is `null` (or em
     park quarter, a silver eagle, a commemorative dollar).
   - A token, medal, badge, pin, transit token, or a commemorative piece that is not legal tender (a souvenir medal, a
     pressed penny, a private issue) is `other`.
+  - A replica, copy or reproduction of a coin or note is `other` with `subtype` "Replica", never the kind of the piece it
+    copies (see Replicas below).
   - `unknown` only when the photos show none of these.
 - `subtype`: for an `other` piece, what sort of piece it is in one or two plain words ("Subway token", "Medal",
-  "Pressed penny", "Badge"), at most 60 characters; empty text for a `coin` or a `note`, or when you cannot tell what
+  "Pressed penny", "Badge", "Replica"), at most 60 characters; empty text for a `coin` or a `note`, or when you cannot tell what
   sort it is.
 - `country`: the ISO 3166-1 alpha-2 code of the issuing country, in capitals ("US" for the United States, "GB", "CA",
   "JP"), or `null` when you cannot tell. Name the country from the legend (the inscription) and the design on the piece,
@@ -64,6 +66,26 @@ is always present; where the piece does not tell you, the field is `null` (or em
   date"), or `null` when the photos were enough.
 - `funFact`: one sentence a serious eight-year-old collector would enjoy, true of this exact piece or its series, in a
   grown-up voice with no baby talk and no exclamation marks. Do not state a value in money.
+
+Replicas (a copy of a real coin or note, made as a souvenir, a museum or teaching piece, or a fake):
+
+- Call a piece a replica only on evidence: COPY or REPLICA stamped on it (US law asks makers of copies to stamp COPY), a
+  cast look (soft, grainy or pitted detail, a seam or file marks round the edge), what the collector says in the `hint`
+  (it is too light or too heavy, a magnet sticks, the edge is wrong, it came from a gift shop or a souvenir set), or a
+  piece far more often met as a copy than real (a 1776 Continental dollar, an 1804 silver dollar, a Brasher doubloon, an
+  ancient coin in a souvenir set) when the photo or the hint also shows something wrong with it.
+- A replica is `kind` `other` and `subtype` "Replica". `denomination` is the name of the piece it copies as a collector
+  says it ("Continental dollar", "Silver dollar"); `design` begins with what it copies ("Replica of the 1804 silver
+  dollar.") and then says what is shown. `year`, `yearRange`, `mintMark`, `faceValue` and `currency` are `null`: the date
+  and the mint on a replica are the original's, not the copy's, so name them in `design` instead. `country` is the country
+  of the piece it copies. `material` is what the copy seems made of ("pewter", "brass", "base metal"), not the original's
+  metal. `gradeGuess` is `null`. `notableFeatures` names what showed it is a copy ("COPY stamped on the reverse", "cast
+  seam on the edge"). Never answer a replica as the real coin, with the real coin's kind, year and mint as if genuine.
+- When you are not sure (a famous rarity with nothing wrong you can see, and nothing said in the `hint`), do not call it a
+  fake: read it as what it shows, with `confidence` `low`, begin `design` with "May be a replica.", put "May be a
+  replica" in `notableFeatures`, and say in `unreadable`, in plain words, what would settle it ("Weigh it and look at the
+  edge: most pieces like this are copies, and a real one needs an expert to check it."). Calling a real coin a fake is as
+  wrong as calling a copy real.
 
 Rules:
 

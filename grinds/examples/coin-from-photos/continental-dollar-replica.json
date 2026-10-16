@@ -1,0 +1,14 @@
+{
+  "description": "A replica of the 1776 Continental dollar that he says is very light with a seam round the edge: the photo reader names it an Other with the subtype Replica, says what it copies, and gives no year, mint or face value as if it were genuine.",
+  "schemaVersion": "1.1",
+  "request": { "kind": "coin", "hint": "It feels very light and there is a thin seam all round the edge", "sides": ["obverse", "reverse"] },
+  "photos": ["continental-dollar-replica-obverse.jpg", "continental-dollar-replica-reverse.jpg"],
+  "expect": {
+    "kind": { "equals": "other" },
+    "subtype": { "matches": "[Rr]eplica" },
+    "year": { "is_null": true },
+    "mintMark": { "is_null": true },
+    "faceValue": { "is_null": true },
+    "design": { "all": [{ "matches": "[Rr]eplica|[Cc]opy" }, { "matches": "Continental|1776" }] }
+  }
+}

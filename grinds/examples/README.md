@@ -52,8 +52,8 @@ scenario or the unit test fails.
 
 ## coin-from-photos: where each photo comes from
 
-Every photo is on Wikimedia Commons and free to use; each was scaled down (long side 600 to 1000 px; the token and the
-Yosemite reverse are used at their own size) and saved as a JPEG under about 100 KB, nothing else changed. Credit is also in `ATTRIBUTION.md`.
+Every photo is on Wikimedia Commons and free to use; each was scaled down (long side 600 to 1000 px; the token, the
+Yosemite reverse and the Continental dollar replica are used at their own size) and saved as a JPEG under about 100 KB, nothing else changed. Credit is also in `ATTRIBUTION.md`.
 
 | File | Source and author | Licence |
 |---|---|---|
@@ -62,6 +62,7 @@ Yosemite reverse are used at their own size) and saved as a JPEG under about 100
 | `canada-dime-1955.jpg` | [Canada $0.1 1955](https://commons.wikimedia.org/wiki/File:Canada_$0.1_1955.jpg); photograph by Mister rf, coin design by Emanuel Hahn | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
 | `nyc-subway-token.jpg` | [Nyc transit authority token](https://commons.wikimedia.org/wiki/File:Nyc_transit_authority_token.png); photograph by Jessamyn; converted from PNG to JPEG at its own size (250 px) | Public domain |
 | `yosemite-quarter-2010-reverse.jpg` | [ATBQ 2010 CA Yosemite](https://commons.wikimedia.org/wiki/File:ATBQ_2010_CA_Yosemite.jpg); United States Mint | Public domain |
+| `continental-dollar-replica-obverse.jpg`, `continental-dollar-replica-reverse.jpg` | [1776 Continental Coin Obverse](https://commons.wikimedia.org/wiki/File:1776ContinentalCoinObverse.jpg) and [Reverse](https://commons.wikimedia.org/wiki/File:1776ContinentalCoinReverse.jpg); a replica of the 1776 Continental currency coin, from the US Diplomacy Center (State Department) poster Seals and Symbols in the American Colonies, original design by Benjamin Franklin; used at their own size (446 px), unchanged | Public domain |
 | `canada-1935-one-dollar-note.jpg` | [Obverse of $1 banknote, Canada 1935 Series, English version](https://commons.wikimedia.org/wiki/File:Obverse_of_$1_banknote,_Canada_1935_Series,_English_version.jpg); Bank of Canada, from the National Currency Museum. A specimen note: its number A0000003 is the specimen's, not a real note's | Public domain |
 
 ## legend-ask: the tutor's scenarios

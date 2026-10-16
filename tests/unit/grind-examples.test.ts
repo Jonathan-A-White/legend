@@ -88,8 +88,8 @@ describe('the grinds have scenarios', () => {
   it('covers an Other (a subway token, valid against the 1.1 answer) and a commemorative legal-tender quarter that is a coin', () => {
     const dir = 'grinds/examples/coin-from-photos';
     const examples = readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => readJson(`${dir}/${f}`) as unknown as GrindExample);
-    const token = examples.find((e) => asCheck(e.expect.kind).equals === 'other');
-    expect(token, 'a scenario answering other').toBeDefined();
+    const token = examples.find((e) => asCheck(e.expect.kind).equals === 'other' && /oken/.test(asCheck(e.expect.subtype ?? {}).matches ?? ''));
+    expect(token, 'a token scenario answering other').toBeDefined();
     expect(token!.schemaVersion).toBe('1.1');
     expect(token!.request.kind).toBe('other');
     expect(asCheck(token!.expect.subtype).matches).toMatch(/oken/);
@@ -194,6 +194,37 @@ describe('the appraiser and the tutor have their Other scenarios', () => {
     expect(context.item.subtype).toMatch(/oken/);
     expect(context.collectionSummary.others).toBeGreaterThan(0);
     expect(asks[0].photos ?? []).toEqual([]);
+  });
+});
+
+describe('a replica is read as a replica and valued as one', () => {
+  const load = (kind: string) => readdirSync(`grinds/examples/${kind}`).filter((f) => f.endsWith('.json')).map((f) => readJson(`grinds/examples/${kind}/${f}`) as unknown as GrindExample);
+
+  it('the photo reader answers other with the subtype Replica, never the real coin\'s year and mint', () => {
+    const replica = load('coin-from-photos').find((e) => new RegExp(asCheck(e.expect.subtype ?? {}).matches ?? '$^').test('Replica'));
+    expect(replica, 'a coin-from-photos scenario whose subtype reads Replica').toBeDefined();
+    expect(replica!.schemaVersion).toBe('1.1');
+    expect(asCheck(replica!.expect.kind).equals).toBe('other');
+    expect(asCheck(replica!.expect.year).is_null).toBe(true);
+    expect(asCheck(replica!.expect.mintMark).is_null).toBe(true);
+    expect(replica!.photos?.length).toBeGreaterThanOrEqual(1);
+  });
+
+  it('the appraiser gives a replica its own small range, never the original\'s', () => {
+    const replica = load('item-value').find((e) => e.request.kind === 'other' && /^Replica$/.test(String(e.request.subtype)));
+    expect(replica, 'an item-value scenario for a Replica').toBeDefined();
+    expect(replica!.schemaVersion).toBe('1.1');
+    const high = asCheck(replica!.expect.high).between as [number, number];
+    expect(high[1], 'a replica is worth a few dollars, not the original\'s thousands').toBeLessThanOrEqual(30);
+    expect(new RegExp(asCheck(replica!.expect.basis).matches ?? '$^').test('A replica is worth a few dollars.')).toBe(true);
+  });
+
+  it('the grinds teach it', () => {
+    const reader = readFileSync('grinds/coin-from-photos.md', 'utf8');
+    expect(reader).toMatch(/"Replica"/);
+    expect(reader).toMatch(/COPY/);
+    const appraiser = readFileSync('grinds/item-value.md', 'utf8');
+    expect(appraiser).toMatch(/[Rr]eplica/);
   });
 });
 
