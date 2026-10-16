@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.39
+_2026-10-16_
+- New: The photo reader now tells a replica or copy from the real coin, names it "Replica", and gives it a replica's worth, not the real coin's.
+
 ## 0.1.37
 _2026-10-13_
 - New: The smallest countries, such as Singapore, the Vatican, Monaco and Malta, are on the globe now: you can search for them and tap them.

@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.39",
+    "date": "2026-10-16",
+    "story": "mw-f9fv9f.9",
+    "kind": "new",
+    "text": "The photo reader now tells a replica or copy from the real coin, names it \"Replica\", and gives it a replica's worth, not the real coin's."
+  },
+  {
     "version": "0.1.37",
     "date": "2026-10-13",
     "story": "mw-bp317x",
