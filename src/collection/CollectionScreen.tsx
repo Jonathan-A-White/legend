@@ -2,7 +2,7 @@
 // country picker, and the items as a grid of obverse thumbnails or a list. Everything is filtered on the phone, as he types.
 import { useMemo, useState } from 'react';
 import type { Item } from '../data/db';
-import { KINDS as KIND_WORDS, KIND_ORDER, unnamedTitle } from '../data/kinds';
+import { KINDS as KIND_WORDS, KIND_ORDER, itemName } from '../data/kinds';
 import { useItems, useThumbs } from '../data/repositories';
 import { FeedbackButton } from '../feedback';
 import { ADD_HASH, WISHLIST_HASH, itemHash } from '../nav/route';
@@ -23,8 +23,6 @@ const KINDS: readonly { value: KindFilter; label: string }[] = [
 // How he last looked at it, kept while the app is open.
 const remembered: { mode: Mode; sort: SortBy } = { mode: 'grid', sort: 'newest' };
 
-const titleOf = (item: Item): string => item.denomination || unnamedTitle(item);
-
 const chip = (on: boolean) =>
   `flex min-h-11 items-center gap-1.5 rounded-full border px-3.5 text-base font-medium ${on ? 'border-accent bg-accent/15 text-accent' : 'border-line text-muted'}`;
 
@@ -32,7 +30,7 @@ function Caption({ item, ref_ }: { item: Item; ref_: Reference }) {
   return (
     <p className="truncate text-base text-ink">
       {item.country ? <span aria-hidden="true">{ref_.flag(item.country)} </span> : null}
-      <span className="font-medium">{titleOf(item)}</span>
+      <span className="font-medium">{itemName(item)}</span>
       {item.year !== null ? <span className="text-muted"> · {item.year}</span> : null}
     </p>
   );

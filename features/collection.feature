@@ -68,6 +68,14 @@ Feature: The Collection
     When he searches for "medal" instead
     Then the grid shows no tile
 
+  Scenario: A replica is found by replica and reads Replica, never as the real piece
+    Given a collection of a quarter and a replica of the 1776 Continental dollar, an Other with the subtype "Replica"
+    When the Collection opens
+    And he types "replica" in the search box
+    Then the replica is the only tile and it reads "Replica · Continental dollar"
+    When he opens the replica
+    Then the item view's title reads "Replica · Continental dollar" and its Subtype row reads "Replica"
+
   Scenario: Edit makes a piece an Other with a subtype
     Given a collection of 3 coins and 1 bill from 3 countries
     When he opens the Canada dime

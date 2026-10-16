@@ -44,3 +44,14 @@ export const countWords = (kind: ItemKind, n: number): string => `${n} ${n === 1
 
 /** What a piece with no denomination is called: an Other by its subtype, anything else by 'Unnamed coin' or 'Unnamed bill'. */
 export const unnamedTitle = (item: Pick<Item, 'kind' | 'subtype'>): string => (item.kind === 'other' && item.subtype?.trim()) || kindInfo(item.kind).unnamed;
+
+const REPLICA_WORDS = /\b(replica|copy|reproduction)\b/i;
+
+/** An Other the reader or he called a replica, copy or reproduction: never to be named as the real piece. */
+export const isReplica = (item: Pick<Item, 'kind' | 'subtype'>): boolean => item.kind === 'other' && REPLICA_WORDS.test(item.subtype ?? '');
+
+/** What a tile and the item view call a piece: its denomination, a replica's marked 'Replica · ' unless it says so already. */
+export function itemName(item: Pick<Item, 'kind' | 'subtype' | 'denomination'>): string {
+  if (!item.denomination) return unnamedTitle(item);
+  return isReplica(item) && !REPLICA_WORDS.test(item.denomination) ? `Replica · ${item.denomination}` : item.denomination;
+}

@@ -255,6 +255,31 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     });
   });
 
+  Scenario('A replica is found by replica and reads Replica, never as the real piece', ({ Given, When, And, Then }) => {
+    Given('a collection of a quarter and a replica of the 1776 Continental dollar, an Other with the subtype "Replica"', async () => {
+      await addItem({ kind: 'coin', country: 'US', denomination: 'Quarter dollar', year: 1964, status: 'confirmed' });
+      await addItem({ kind: 'other', subtype: 'Replica', country: 'US', denomination: 'Continental dollar', design: 'Replica of the 1776 Continental dollar', material: 'Pewter', status: 'confirmed' });
+    });
+    When('the Collection opens', theCollectionOpens);
+    And('he types "replica" in the search box', async () => {
+      await waitFor(() => expect(tiles()).toHaveLength(2));
+      await userEvent.type(screen.getByRole('searchbox', { name: 'Search your collection' }), 'replica');
+    });
+    Then('the replica is the only tile and it reads "Replica · Continental dollar"', async () => {
+      await waitFor(() => expect(tiles()).toHaveLength(1));
+      expect(tiles()[0]).toHaveTextContent('Replica · Continental dollar');
+    });
+    When('he opens the replica', async () => {
+      await userEvent.click(screen.getByRole('link', { name: /Replica/ }));
+    });
+    Then('the item view\'s title reads "Replica · Continental dollar" and its Subtype row reads "Replica"', async () => {
+      await screen.findByRole('heading', { level: 1, name: 'Replica · Continental dollar' });
+      const facts = await screen.findByRole('region', { name: 'Facts' });
+      const subtype = within(facts).getByText('Subtype', { selector: 'dt' });
+      expect(subtype.nextElementSibling).toHaveTextContent(/^Replica$/);
+    });
+  });
+
   Scenario('Edit makes a piece an Other with a subtype', ({ Given, When, And, Then }) => {
     const title = () => screen.findByRole('heading', { level: 1, name: 'Subway token' });
     const noCoinRows = async () => {

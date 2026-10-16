@@ -1,7 +1,7 @@
 // The one place the kinds' words live (src/data/kinds.ts): every ItemKind has an entry, and the helpers speak them.
 import { describe, expect, it } from 'vitest';
 import type { Item, ItemKind } from '../../src/data/db';
-import { KINDS, KIND_ORDER, countWords, kindInfo, unnamedTitle } from '../../src/data/kinds';
+import { KINDS, KIND_ORDER, countWords, isReplica, itemName, kindInfo, unnamedTitle } from '../../src/data/kinds';
 
 const every: Record<ItemKind, true> = { coin: true, note: true, other: true };
 
@@ -36,5 +36,25 @@ describe('the kinds table', () => {
     expect(unnamedTitle({ kind: 'other' })).toBe('Unnamed piece');
     expect(unnamedTitle({ kind: 'coin', subtype: 'Subway token' })).toBe('Unnamed coin');
     expect(unnamedTitle({ kind: 'note' })).toBe('Unnamed bill');
+  });
+
+  it('knows a replica by its subtype, and only an Other', () => {
+    expect(isReplica({ kind: 'other', subtype: 'Replica' })).toBe(true);
+    expect(isReplica({ kind: 'other', subtype: 'copy' })).toBe(true);
+    expect(isReplica({ kind: 'other', subtype: 'Reproduction' })).toBe(true);
+    expect(isReplica({ kind: 'other', subtype: 'Subway token' })).toBe(false);
+    expect(isReplica({ kind: 'other' })).toBe(false);
+    expect(isReplica({ kind: 'coin', subtype: 'Replica' })).toBe(false);
+  });
+
+  it('names a replica as a replica, never as the real piece', () => {
+    const replica = { kind: 'other', subtype: 'Replica', denomination: 'Continental dollar' } as const;
+    expect(itemName(replica)).toBe('Replica · Continental dollar');
+    expect(itemName({ ...replica, denomination: 'Replica of the 1804 silver dollar' })).toBe('Replica of the 1804 silver dollar');
+    expect(itemName({ ...replica, denomination: 'Copy of a Brasher doubloon' })).toBe('Copy of a Brasher doubloon');
+    expect(itemName({ ...replica, denomination: '' })).toBe('Replica');
+    expect(itemName({ kind: 'other', subtype: 'Subway token', denomination: 'NYC Transit token' })).toBe('NYC Transit token');
+    expect(itemName({ kind: 'coin', denomination: 'Quarter dollar' })).toBe('Quarter dollar');
+    expect(itemName({ kind: 'coin', denomination: '' })).toBe('Unnamed coin');
   });
 });

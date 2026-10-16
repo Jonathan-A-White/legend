@@ -192,3 +192,22 @@ describe('visibleItems and countryCounts', () => {
     expect(countryCounts(all, { query: 'dime', kind: 'coin' }, lookups).map((c) => [c.country, c.count])).toEqual([['CA', 1], ['US', 1]]);
   });
 });
+
+describe('Replicas', () => {
+  const replica = item({ kind: 'other', subtype: 'Replica', denomination: 'Continental dollar', year: null, mintMark: null, series: null, design: 'Replica of the 1776 Continental dollar', material: 'Pewter' });
+  const plain = item({ kind: 'other', subtype: 'Replica', denomination: 'Continental dollar', year: null, mintMark: null, series: null, design: null, inscription: '', material: '' });
+  it('are found by replica, copy and reproduction, from the subtype alone', () => {
+    for (const word of ['replica', 'REPLICA', 'copy', 'reproduction', 'continental replica']) expect(matchesQuery(plain, word, lookups), word).toBe(true);
+    expect(matchesQuery(replica, 'replica', lookups)).toBe(true);
+  });
+  it('a real piece is not found by replica or copy', () => {
+    const quarter = item({});
+    expect(matchesQuery(quarter, 'replica', lookups)).toBe(false);
+    expect(matchesQuery(quarter, 'copy', lookups)).toBe(false);
+    expect(matchesQuery(item({ kind: 'other', subtype: 'Subway token' }), 'replica', lookups)).toBe(false);
+  });
+  it('the search for replica leaves only the replica', () => {
+    expect(visibleItems([item({}), item({ kind: 'note' }), replica], { query: 'replica', kind: 'all', country: null, sort: 'newest' }, lookups)).toEqual([replica]);
+  });
+});
+

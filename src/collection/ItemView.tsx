@@ -4,7 +4,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { useEffect, useState, type ReactNode } from 'react';
 import type { Item, Photo } from '../data/db';
-import { kindInfo, unnamedTitle } from '../data/kinds';
+import { itemName, kindInfo } from '../data/kinds';
 import { getItem, removeItem, restoreItem, usePhotos } from '../data/repositories';
 import { ItemReading } from '../capture';
 import { askHash, isAsking, itemHash, navigate, useAddress } from '../nav/route';
@@ -138,7 +138,7 @@ export function ItemView({ id }: { id: string }) {
     );
   }
 
-  const title = item.denomination ? `${item.denomination}${item.year !== null ? `, ${item.year}` : ''}` : unnamedTitle(item);
+  const title = item.denomination && item.year !== null ? `${itemName(item)}, ${item.year}` : itemName(item);
   const photo = (side: 'obverse' | 'reverse') => photos?.find((p) => p.side === side);
 
   return (
