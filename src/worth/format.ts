@@ -42,3 +42,9 @@ export function sumRange(values: readonly Pick<ItemValue, 'low' | 'high'>[]): { 
   if (values.length === 0) return null;
   return { low: values.reduce((sum, v) => sum + v.low, 0), high: values.reduce((sum, v) => sum + v.high, 0) };
 }
+
+/** The rough worth of a set of pieces (a folder, or the whole Collection): the counted ranges of the pieces named by `ids`, added into one range, or null when none has a figure. */
+export function worthOf(ids: Iterable<string>, values: readonly ItemValue[]): { low: number; high: number } | null {
+  const wanted = new Set(ids);
+  return sumRange(countedValues(values.filter((v) => wanted.has(v.itemId))));
+}

@@ -1,7 +1,7 @@
 // Hash routes (src/nav/route.ts) and where Legend reopens (src/nav/lastRoute.ts).
 import { beforeEach, describe, expect, it } from 'vitest';
 import { KEPT_ADDRESSES, KEPT_PATHS, forgetTrail, isKeptHash, readLastRoute, restoreLastRoute, saveLastRoute } from '../../src/nav/lastRoute';
-import { countryOf, hashFor, itemIdOf, routeOf } from '../../src/nav/route';
+import { countryOf, folderIdOf, hashFor, itemIdOf, routeOf } from '../../src/nav/route';
 
 const visit = (hash: string) => {
   window.history.pushState(null, '', `/${hash}`);
@@ -25,6 +25,9 @@ describe('routes', () => {
     expect(routeOf('#/learn/nothing')).toBe('home');
     expect(routeOf('#/settings')).toBe('settings');
     expect(routeOf('#/wishlist')).toBe('wishlist');
+    expect(routeOf('#/folder/abc-123')).toBe('folder');
+    expect(folderIdOf('#/folder/abc-123')).toBe('abc-123');
+    expect(routeOf('#/folder/')).toBe('home');
     expect(routeOf('#/item/abc-123')).toBe('item');
     expect(itemIdOf('#/item/abc-123')).toBe('abc-123');
     expect(routeOf('#/country/us')).toBe('country');

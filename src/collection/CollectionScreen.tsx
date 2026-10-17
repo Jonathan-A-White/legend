@@ -3,15 +3,16 @@
 import { useMemo, useState } from 'react';
 import type { Item } from '../data/db';
 import { KINDS as KIND_WORDS, KIND_ORDER, itemName } from '../data/kinds';
-import { useItems, useThumbs } from '../data/repositories';
+import { useFolder, useItems, useThumbs } from '../data/repositories';
 import { FeedbackButton } from '../feedback';
 import { ADD_HASH, WISHLIST_HASH, itemHash } from '../nav/route';
 import { RoughWorth } from '../worth';
 import { CountrySheet } from './CountrySheet';
+import { DeleteFolder, FolderShelf } from './Folders';
 import { Thumb } from './Thumb';
 import { pickThumb, type ThumbPhoto } from './thumbs';
 import { useReference, type Reference } from './useReference';
-import { SORTS, countLine, countryCounts, visibleItems, type KindFilter, type SortBy } from './view';
+import { SORTS, countLine, countryCounts, pieces, visibleItems, type KindFilter, type SortBy } from './view';
 
 type Mode = 'grid' | 'list';
 
@@ -86,8 +87,11 @@ function LookingAt({ items, thumbs, ref_ }: { items: readonly Item[]; thumbs: re
   );
 }
 
-export function CollectionScreen() {
-  const items = useItems();
+/** The Collection, or with a `folderId` the same view of just that folder's pieces: its count, its worth together as one range, and Delete folder. */
+export function CollectionScreen({ folderId }: { folderId?: string }) {
+  const all = useItems();
+  const folder = useFolder(folderId ?? '');
+  const items = useMemo(() => (folderId ? (all && folder ? all.filter((i) => folder.itemIds.includes(i.id)) : undefined) : all), [all, folder, folderId]);
   const looking = useItems({ scope: 'looking' });
   const wished = useItems({ scope: 'wished' });
   const thumbs = useThumbs();
@@ -101,14 +105,36 @@ export function CollectionScreen() {
 
   const shown = useMemo(() => visibleItems(items ?? [], { query, kind, country, sort }, ref_), [items, query, kind, country, sort, ref_]);
   const counts = useMemo(() => countryCounts(items ?? [], { query, kind }, ref_), [items, query, kind, ref_]);
+  const hereIds = useMemo(() => new Set((all ?? []).map((i) => i.id)), [all]);
   const narrowed = query.trim() !== '' || kind !== 'all' || country !== null;
+
+  if (folderId && folder === null) {
+    return (
+      <main aria-label="Collection" className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+        <p className="text-2xl font-semibold text-ink">This folder is not here</p>
+        <a href="#/collection" className="mt-4 flex min-h-12 items-center rounded-xl bg-accent px-6 text-lg font-semibold text-accent-fg">
+          Back to the Collection
+        </a>
+      </main>
+    );
+  }
 
   return (
     <main aria-label="Collection" className="relative flex min-h-0 flex-1 flex-col px-4 pt-[max(env(safe-area-inset-top),1.25rem)]">
+      {folderId ? (
+        <a href="#/collection" className="-ml-3 flex min-h-12 w-fit items-center gap-1 rounded-xl px-3 text-lg font-medium text-accent">
+          <span aria-hidden="true">‹</span> Collection
+        </a>
+      ) : null}
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-semibold tracking-wide text-accent">Collection</h1>
+        <h1 className="text-3xl font-semibold tracking-wide text-accent">{folderId ? (folder?.name ?? '') : 'Collection'}</h1>
         <FeedbackButton screen="Collection" className="-mr-2" />
       </div>
+      {folderId ? (
+        <p data-testid="folder-count" className="text-lg text-ink">
+          {items ? pieces(items.length) : ''}
+        </p>
+      ) : null}
       <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
         {items ? countLine(shown) : ''}
       </p>
@@ -128,12 +154,17 @@ export function CollectionScreen() {
         className="mt-3 min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-lg text-ink placeholder:text-muted"
       />
 
-      <a href={WISHLIST_HASH} className="mt-3 flex min-h-12 items-center justify-between rounded-xl border border-line px-4 text-lg font-medium text-ink active:opacity-80">
-        <span>Wish list</span>
-        <span className="text-muted">{wished && wished.length > 0 ? `${wished.length} ›` : '›'}</span>
-      </a>
+      {folderId ? null : (
+        <>
+          <a href={WISHLIST_HASH} className="mt-3 flex min-h-12 items-center justify-between rounded-xl border border-line px-4 text-lg font-medium text-ink active:opacity-80">
+            <span>Wish list</span>
+            <span className="text-muted">{wished && wished.length > 0 ? `${wished.length} ›` : '›'}</span>
+          </a>
 
-      <LookingAt items={looking ?? []} thumbs={thumbs} ref_={ref_} />
+          <FolderShelf here={hereIds} />
+          <LookingAt items={looking ?? []} thumbs={thumbs} ref_={ref_} />
+        </>
+      )}
 
       <div className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1" role="radiogroup" aria-label="Show">
         {KINDS.map((k) => (
@@ -191,7 +222,12 @@ export function CollectionScreen() {
       </div>
 
       <div className="mt-3 min-h-0 flex-1 overflow-y-auto overscroll-contain pb-4">
-        {items && items.length === 0 ? (
+        {items && items.length === 0 && folderId ? (
+          <section className="flex flex-col items-center px-6 pt-10 text-center">
+            <p className="text-xl font-semibold text-ink">This folder is empty</p>
+            <p className="mt-2 text-lg text-muted">Open a piece in your Collection and tick this folder under Folders to put it in.</p>
+          </section>
+        ) : items && items.length === 0 ? (
           <section className="flex h-full flex-col items-center justify-center px-6 text-center">
             <p className="text-2xl font-semibold text-ink">Nothing collected yet</p>
             <p className="mt-2 max-w-prose text-lg text-muted">Tap the camera button to photograph a coin or a banknote. Legend names it, and it joins your collection here.</p>
@@ -224,6 +260,7 @@ export function CollectionScreen() {
             )}
           </ul>
         )}
+        {folder ? <DeleteFolder folder={folder} /> : null}
       </div>
 
       <a

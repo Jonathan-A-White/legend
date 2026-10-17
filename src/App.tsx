@@ -5,7 +5,7 @@ import { Gate, type GateProps } from './gate';
 import { UpdateBanner } from './UpdateBanner';
 import { CountrySheet, GlobeScreen } from './globe';
 import { BottomBar } from './nav/BottomBar';
-import { countryOf, itemIdOf, routeOf, useAddress } from './nav/route';
+import { countryOf, folderIdOf, itemIdOf, routeOf, useAddress } from './nav/route';
 import { useRouteEvents } from './nav/useRouteEvents';
 import { CaptureScreen, useNameQueue } from './capture';
 import { CollectionScreen, ItemView } from './collection';
@@ -23,6 +23,8 @@ function Screen({ hash }: { hash: string }) {
   switch (routeOf(hash)) {
     case 'collection':
       return <CollectionScreen />;
+    case 'folder':
+      return <CollectionScreen folderId={folderIdOf(hash)} />;
     case 'globe':
       return <GlobeScreen />;
     case 'quarters':

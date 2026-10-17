@@ -83,3 +83,30 @@ Feature: The Collection
     Then the item view shows "Subway token" as its title and no coin-only rows
     When the app is reloaded
     Then the item view still shows "Subway token" as its title
+
+  Scenario: A folder holds chosen pieces and shows their worth together as one range
+    Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
+    When he makes a folder "State quarters" on the Collection
+    And he puts the quarter and the dime in it from their item views
+    And he opens the folder "State quarters"
+    Then the folder lists only the quarter and the dime
+    And the folder says "2 pieces" and "Rough worth: about $1.25 to $4"
+    When he takes the dime out of it from its item view and opens the folder again
+    Then the folder lists only the quarter, says "1 piece", and the dime is still in the Collection
+
+  Scenario: A piece in two folders shows in both
+    Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
+    When he makes a folder "State quarters" on the Collection
+    And he makes a folder "Silver" on the Collection
+    And he puts the quarter in both folders from its item view
+    Then the folder "State quarters" lists the quarter
+    And the folder "Silver" lists the quarter
+
+  Scenario: Folders survive a reload and leaving a folder never deletes the piece
+    Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
+    When he makes a folder "State quarters" on the Collection
+    And he puts the quarter in it from its item view
+    And the app is reloaded on the Collection
+    Then the Collection shows the folder "State quarters" with 1 piece
+    When he holds Delete folder in the folder "State quarters"
+    Then the Collection shows no folder and all three pieces are still in it

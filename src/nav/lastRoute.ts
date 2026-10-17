@@ -31,7 +31,7 @@ function store(): Storage | undefined {
 /** Whether an address is somewhere to come back to. */
 export function isKeptHash(hash: string): boolean {
   const route = routeOf(hash);
-  return KEPT_PATHS.includes(hash.split('?')[0]) || route === 'item' || route === 'country' || route === 'learn' || route === 'wishlist';
+  return KEPT_PATHS.includes(hash.split('?')[0]) || route === 'item' || route === 'country' || route === 'learn' || route === 'wishlist' || route === 'folder';
 }
 
 /** Keeps `hash` as where they are, unless it is a place not worth returning to. */

@@ -193,6 +193,14 @@ export interface Saving {
   note: string;
 }
 
+/** A folder, like a coin album: a name and the pieces he put in it. A piece may be in several folders, and leaving or deleting a folder never touches the piece. */
+export interface Folder {
+  id: string;
+  name: string;
+  itemIds: string[];
+  createdAt: number;
+}
+
 export class LegendDb extends Dexie {
   items!: EntityTable<Item, 'id'>;
   photos!: EntityTable<Photo, 'id'>;
@@ -203,6 +211,7 @@ export class LegendDb extends Dexie {
   outbox!: EntityTable<OutboxRecord, 'id'>;
   usage!: EntityTable<UsageRow, 'key'>;
   savings!: EntityTable<Saving, 'id'>;
+  folders!: EntityTable<Folder, 'id'>;
 
   constructor(name = 'legend') {
     super(name);
@@ -253,6 +262,19 @@ export class LegendDb extends Dexie {
       outbox: 'id, kind, createdAt, seq',
       usage: 'key, day, name',
       savings: 'id, itemId, at',
+    });
+    // v5: folders of pieces.
+    this.version(5).stores({
+      items: 'id, kind, country, status, updatedAt, deletedAt',
+      photos: 'id, itemId',
+      settings: 'key',
+      meta: 'key',
+      asks: 'id, itemId, askedAt',
+      values: 'itemId',
+      outbox: 'id, kind, createdAt, seq',
+      usage: 'key, day, name',
+      savings: 'id, itemId, at',
+      folders: 'id, createdAt',
     });
   }
 }

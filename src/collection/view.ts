@@ -22,6 +22,9 @@ export const SORTS: readonly { value: SortBy; label: string }[] = [
 
 const plural = (n: number, one: string, many: string): string => `${n} ${n === 1 ? one : many}`;
 
+/** '1 piece', '2 pieces': how many a folder holds. */
+export const pieces = (n: number): string => plural(n, 'piece', 'pieces');
+
 /** '14 coins · 3 bills · 2 other pieces · 6 countries': what he has, leaving out what there is none of. An item of an unknown kind counts as a bill. */
 export function countLine(items: readonly Item[]): string {
   const countOf = (kind: ItemKind) => items.filter((i) => (KIND_ORDER.includes(i.kind) ? i.kind : 'note') === kind).length;

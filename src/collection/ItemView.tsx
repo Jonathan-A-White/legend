@@ -15,6 +15,7 @@ import { RarityLine } from '../rarity';
 import { WishedCard } from '../wishlist';
 import { WorthLine } from '../worth';
 import { EditSheet } from './EditSheet';
+import { ItemFolders } from './Folders';
 import { NotesField } from './NotesField';
 import { PhotoViewer } from './PhotoViewer';
 import { useObjectUrl } from '../ui/useObjectUrl';
@@ -182,6 +183,8 @@ export function ItemView({ id }: { id: string }) {
             <p className="mt-1 text-lg text-ink">{item.funFact}</p>
           </section>
         ) : null}
+
+        <ItemFolders item={item} />
 
         <NotesField key={item.id} itemId={item.id} initial={item.notes} />
 

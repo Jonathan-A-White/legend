@@ -8,7 +8,8 @@ import { loadFeature, describeFeature } from '@amiceli/vitest-cucumber';
 import { App } from '../../src/App';
 import { openGate } from '../../tests/support/open-gate';
 import { db } from '../../src/data/db';
-import { addItem, getItem } from '../../src/data/repositories';
+import { addItem, getItem, putValue } from '../../src/data/repositories';
+import { writeSetting } from '../../src/settings/registry';
 import { clearBus } from '../../src/events/bus';
 import { seedCollection, seedPhotos, serveReferenceData, type Seeded } from '../../tests/support/collection-fixtures';
 
@@ -315,6 +316,123 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     Then('the item view still shows "Subway token" as its title', async () => {
       await title();
       await noCoinRows();
+    });
+  });
+
+  // Folders: pieces with worth ranges, put in folders through the screens.
+  const worth = (itemId: string, low: number, high: number) =>
+    putValue({ itemId, low, high, currency: 'USD', asOf: Date.now(), basis: 'A rough guide.', source: 'item-value 1.1', forYear: null, forGrade: null, confidence: 'medium' });
+  const threePieces = async () => {
+    await writeSetting('showValues', true);
+    const quarter = await addItem({ kind: 'coin', country: 'US', denomination: 'Quarter dollar', year: 1999, status: 'confirmed' });
+    const dime = await addItem({ kind: 'coin', country: 'US', denomination: 'Dime', year: 1999, status: 'confirmed' });
+    const bill = await addItem({ kind: 'note', country: 'US', denomination: 'One dollar', year: 1935, status: 'confirmed' });
+    await worth(quarter.id, 0.25, 1);
+    await worth(dime.id, 1, 3);
+    await worth(bill.id, 50, 60);
+  };
+  const makeFolder = async (name: string) => {
+    if (!screen.queryByRole('button', { name: 'New folder' })) await open('#/collection');
+    await userEvent.click(await screen.findByRole('button', { name: 'New folder' }));
+    const sheet = await screen.findByRole('dialog', { name: 'New folder' });
+    await userEvent.type(within(sheet).getByRole('textbox', { name: 'Folder name' }), name);
+    await userEvent.click(within(sheet).getByRole('button', { name: 'Make folder' }));
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'New folder' })).toBeNull());
+    const folders = await screen.findByRole('region', { name: 'Folders' });
+    await within(folders).findByRole('link', { name: new RegExp(name) });
+  };
+  const openPiece = async (name: RegExp) => {
+    await open('#/collection');
+    await userEvent.click(await screen.findByRole('link', { name }));
+    await screen.findByRole('heading', { level: 1, name });
+  };
+  const folderBox = async (folder: string) => within(await screen.findByRole('region', { name: 'Folders' })).findByRole('checkbox', { name: folder });
+  /** Sets a piece's folder box to on or off, from its item view. */
+  const setIn = async (piece: RegExp, folder: string, on: boolean) => {
+    await openPiece(piece);
+    const box = await folderBox(folder);
+    if ((box.getAttribute('aria-checked') === 'true') !== on) await userEvent.click(box);
+    await waitFor(async () => expect((await folderBox(folder)).getAttribute('aria-checked')).toBe(String(on)));
+  };
+  const openFolder = async (name: string) => {
+    await open('#/collection');
+    const folders = await screen.findByRole('region', { name: 'Folders' });
+    await userEvent.click(await within(folders).findByRole('link', { name: new RegExp(name) }));
+    await screen.findByRole('heading', { level: 1, name });
+  };
+  const listed = () => tiles().map((t) => t.textContent ?? '');
+  const onlyListed = async (...names: string[]) => {
+    await waitFor(() => expect(tiles()).toHaveLength(names.length));
+    for (const n of names) expect(listed().join('|')).toContain(n);
+  };
+
+  Scenario('A folder holds chosen pieces and shows their worth together as one range', ({ Given, When, And, Then }) => {
+    Given('a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60', threePieces);
+    When('he makes a folder "State quarters" on the Collection', () => makeFolder('State quarters'));
+    And('he puts the quarter and the dime in it from their item views', async () => {
+      await setIn(/Quarter dollar/, 'State quarters', true);
+      await setIn(/Dime/, 'State quarters', true);
+    });
+    And('he opens the folder "State quarters"', () => openFolder('State quarters'));
+    Then('the folder lists only the quarter and the dime', () => onlyListed('Quarter dollar', 'Dime'));
+    And('the folder says "2 pieces" and "Rough worth: about $1.25 to $4"', async () => {
+      expect(screen.getByTestId('folder-count')).toHaveTextContent(/^2 pieces$/);
+      await waitFor(() => expect(screen.getByTestId('rough-worth')).toHaveTextContent('Rough worth: about $1.25 to $4'));
+    });
+    When('he takes the dime out of it from its item view and opens the folder again', async () => {
+      await setIn(/Dime/, 'State quarters', false);
+      await openFolder('State quarters');
+    });
+    Then('the folder lists only the quarter, says "1 piece", and the dime is still in the Collection', async () => {
+      await onlyListed('Quarter dollar');
+      expect(screen.getByTestId('folder-count')).toHaveTextContent(/^1 piece$/);
+      await waitFor(() => expect(screen.getByTestId('rough-worth')).toHaveTextContent('Rough worth: about $0.25 to $1'));
+      await open('#/collection');
+      await waitFor(() => expect(tiles()).toHaveLength(3));
+      expect(listed().join('|')).toContain('Dime');
+    });
+  });
+
+  Scenario('A piece in two folders shows in both', ({ Given, When, And, Then }) => {
+    Given('a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60', threePieces);
+    When('he makes a folder "State quarters" on the Collection', () => makeFolder('State quarters'));
+    And('he makes a folder "Silver" on the Collection', () => makeFolder('Silver'));
+    And('he puts the quarter in both folders from its item view', async () => {
+      await setIn(/Quarter dollar/, 'State quarters', true);
+      await setIn(/Quarter dollar/, 'Silver', true);
+    });
+    Then('the folder "State quarters" lists the quarter', async () => {
+      await openFolder('State quarters');
+      await onlyListed('Quarter dollar');
+    });
+    And('the folder "Silver" lists the quarter', async () => {
+      await openFolder('Silver');
+      await onlyListed('Quarter dollar');
+    });
+  });
+
+  Scenario('Folders survive a reload and leaving a folder never deletes the piece', ({ Given, When, And, Then }) => {
+    Given('a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60', threePieces);
+    When('he makes a folder "State quarters" on the Collection', () => makeFolder('State quarters'));
+    And('he puts the quarter in it from its item view', () => setIn(/Quarter dollar/, 'State quarters', true));
+    And('the app is reloaded on the Collection', async () => {
+      db.close();
+      await db.open();
+      await open('#/collection');
+    });
+    Then('the Collection shows the folder "State quarters" with 1 piece', async () => {
+      const folders = await screen.findByRole('region', { name: 'Folders' });
+      const link = await within(folders).findByRole('link', { name: /State quarters/ });
+      await waitFor(() => expect(link).toHaveTextContent('1 piece'));
+    });
+    When('he holds Delete folder in the folder "State quarters"', async () => {
+      await openFolder('State quarters');
+      press(screen.getByRole('button', { name: 'Delete folder' }));
+    });
+    Then('the Collection shows no folder and all three pieces are still in it', async () => {
+      await waitFor(() => expect(window.location.hash).toBe('#/collection'));
+      await waitFor(() => expect(tiles()).toHaveLength(3));
+      expect(screen.queryByRole('link', { name: /State quarters/ })).toBeNull();
     });
   });
 });
