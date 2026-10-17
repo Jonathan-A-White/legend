@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.42
+_2026-10-17_
+- Fixed: The Collection gives the coins more room: the Wish list sits on the folder shelf, Looking at is one row, and the camera button no longer covers a coin.
+
 ## 0.1.41
 _2026-10-17_
 - New: In your Collection, tap Select (or press and hold a coin) to choose coins and remove them, with Undo for five seconds.
