@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.40
+_2026-10-17_
+- New: Folders in the Collection, like a coin album: put coins in a folder and see their worth together as one rough range.
+
 ## 0.1.39
 _2026-10-16_
 - New: The photo reader now tells a replica or copy from the real coin, names it "Replica", and gives it a replica's worth, not the real coin's.
