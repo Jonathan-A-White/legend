@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.41
+_2026-10-17_
+- New: In your Collection, tap Select (or press and hold a coin) to choose coins and remove them, with Undo for five seconds.
+
 ## 0.1.40
 _2026-10-17_
 - New: Folders in the Collection, like a coin album: put coins in a folder and see their worth together as one rough range.
