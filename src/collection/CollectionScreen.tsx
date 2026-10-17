@@ -1,6 +1,7 @@
 // src/collection/CollectionScreen.tsx: the Collection at #/collection: a count line, a search box, chips for All / Coins / Bills / Other and a
 // country picker, and the items as a grid of obverse thumbnails or a list. Everything is filtered on the phone, as he types.
 // Select (or a long press on a piece) chooses pieces to remove with a held bar, and Undo (src/collection/Choose.tsx).
+// The screen scrolls as one, so the coins have the whole height once he scrolls; the room under the last one is the camera button's.
 import { useMemo, useState } from 'react';
 import type { Item } from '../data/db';
 import { KINDS as KIND_WORDS, KIND_ORDER, itemName } from '../data/kinds';
@@ -13,7 +14,7 @@ import { useChoosing, type Choosing } from './choosing';
 import { CountrySheet } from './CountrySheet';
 import { DeleteFolder, FolderShelf } from './Folders';
 import { Thumb } from './Thumb';
-import { pickThumb, type ThumbPhoto } from './thumbs';
+import { pickThumb, thumbCaption, type ThumbPhoto } from './thumbs';
 import { useReference, type Reference } from './useReference';
 import { SORTS, countLine, countryCounts, pieces, visibleItems, type KindFilter, type SortBy } from './view';
 
@@ -70,23 +71,27 @@ function ListRow({ item, thumbs, ref_, choosing }: TileProps) {
   );
 }
 
-/** The coins and bills he is only looking at (Just looking), above the collection and outside its counts. */
+/** The coins and bills he is only looking at (Just looking), above the collection and outside its counts: one row of small cards. */
 function LookingAt({ items, thumbs, ref_ }: { items: readonly Item[]; thumbs: readonly ThumbPhoto[] | undefined; ref_: Reference }) {
   if (items.length === 0) return null;
   return (
-    <section aria-label="Looking at" className="mt-3">
-      <h2 className="text-lg font-semibold text-ink">Looking at</h2>
-      <ul className="-mx-4 mt-1 flex gap-3 overflow-x-auto px-4 pb-1">
-        {items.map((item) => (
-          <li key={item.id} className="w-28 shrink-0">
-            <a href={itemHash(item.id)} className="block rounded-2xl active:opacity-80">
-              <Thumb item={item} blob={pickThumb(thumbs, item.id)} />
-              <div className="px-1 pt-1">
-                <Caption item={item} ref_={ref_} />
-              </div>
-            </a>
-          </li>
-        ))}
+    <section aria-label="Looking at" className="-mx-4 mt-2 flex items-center gap-3 overflow-x-auto px-4 pb-1">
+      <h2 className="shrink-0 text-lg font-semibold text-ink">Looking at</h2>
+      <ul className="flex gap-2">
+        {items.map((item) => {
+          const state = thumbCaption(item);
+          return (
+            <li key={item.id} className="w-52 shrink-0">
+              <a href={itemHash(item.id)} className="flex min-h-14 items-center gap-2.5 rounded-2xl border border-line p-1 pr-3 active:opacity-80">
+                <Thumb item={item} blob={pickThumb(thumbs, item.id)} small className="w-12 shrink-0" />
+                <div className="min-w-0">
+                  <Caption item={item} ref_={ref_} />
+                  {state ? <p className="truncate text-sm font-semibold text-accent">{state}</p> : null}
+                </div>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
@@ -132,156 +137,161 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
 
   return (
     <main aria-label="Collection" className="relative flex min-h-0 flex-1 flex-col px-4 pt-[max(env(safe-area-inset-top),1.25rem)]">
-      {folderId ? (
-        <a href="#/collection" className="-ml-3 flex min-h-12 w-fit items-center gap-1 rounded-xl px-3 text-lg font-medium text-accent">
-          <span aria-hidden="true">‹</span> Collection
-        </a>
-      ) : null}
-      <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-semibold tracking-wide text-accent">{folderId ? (folder?.name ?? '') : 'Collection'}</h1>
-        <FeedbackButton screen="Collection" className="-mr-2" />
-      </div>
-      {folderId ? (
-        <p data-testid="folder-count" className="text-lg text-ink">
-          {items ? pieces(items.length) : ''}
-        </p>
-      ) : null}
-      <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
-        {items ? countLine(shown) : ''}
-      </p>
-      <RoughWorth items={items} />
+      <div className="-mx-4 min-h-0 flex-1 overflow-y-auto overscroll-contain px-4">
+        <div className="flex min-h-full flex-col">
+          {folderId ? (
+            <a href="#/collection" className="-ml-3 flex min-h-12 w-fit items-center gap-1 rounded-xl px-3 text-lg font-medium text-accent">
+              <span aria-hidden="true">‹</span> Collection
+            </a>
+          ) : null}
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl font-semibold tracking-wide text-accent">{folderId ? (folder?.name ?? '') : 'Collection'}</h1>
+            <FeedbackButton screen="Collection" className="-mr-2" />
+          </div>
+          {folderId ? (
+            <p data-testid="folder-count" className="text-lg text-ink">
+              {items ? pieces(items.length) : ''}
+            </p>
+          ) : null}
+          <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
+            {items ? countLine(shown) : ''}
+          </p>
+          <RoughWorth items={items} />
 
-      <input
-        type="search"
-        role="searchbox"
-        aria-label="Search your collection"
-        placeholder="Search your collection…"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        autoCapitalize="none"
-        autoCorrect="off"
-        spellCheck={false}
-        enterKeyHint="search"
-        className="mt-3 min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-lg text-ink placeholder:text-muted"
-      />
+          <input
+            type="search"
+            role="searchbox"
+            aria-label="Search your collection"
+            placeholder="Search your collection…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            autoCapitalize="none"
+            autoCorrect="off"
+            spellCheck={false}
+            enterKeyHint="search"
+            className="mt-3 min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-lg text-ink placeholder:text-muted"
+          />
 
-      {folderId ? null : (
-        <>
-          <a href={WISHLIST_HASH} className="mt-3 flex min-h-12 items-center justify-between rounded-xl border border-line px-4 text-lg font-medium text-ink active:opacity-80">
-            <span>Wish list</span>
-            <span className="text-muted">{wished && wished.length > 0 ? `${wished.length} ›` : '›'}</span>
-          </a>
-
-          <FolderShelf here={hereIds} />
-          <LookingAt items={looking ?? []} thumbs={thumbs} ref_={ref_} />
-        </>
-      )}
-
-      <div className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1" role="radiogroup" aria-label="Show">
-        {KINDS.map((k) => (
-          <button key={k.value} type="button" role="radio" aria-checked={kind === k.value} onClick={() => setKind(k.value)} className={chip(kind === k.value)}>
-            {k.label}
-          </button>
-        ))}
-        <button type="button" aria-haspopup="dialog" onClick={() => setPicking(true)} className={`${chip(country !== null)} shrink-0`}>
-          {country ? (
+          {folderId ? null : (
             <>
-              <span aria-hidden="true">{ref_.flag(country)}</span> {ref_.countryName(country)}
-            </>
-          ) : (
-            <>
-              <span aria-hidden="true">🌍</span> All countries
+              <FolderShelf here={hereIds}>
+                <a href={WISHLIST_HASH} className="flex min-h-14 shrink-0 flex-col justify-center rounded-2xl border border-accent px-4 active:opacity-80">
+                  <span className="text-lg font-medium text-ink">Wish list</span>
+                  <span className="text-base text-muted">{wished && wished.length > 0 ? pieces(wished.length) : 'None yet'}</span>
+                </a>
+              </FolderShelf>
+              <LookingAt items={looking ?? []} thumbs={thumbs} ref_={ref_} />
             </>
           )}
-        </button>
-      </div>
 
-      {choosing.on ? <ChooseBar count={chosenIds.length} onDone={choosing.end} /> : null}
-      <div className={`mt-2 flex items-center gap-2 ${choosing.on ? 'hidden' : ''}`}>
-        <select
-          aria-label="Sort"
-          value={sort}
-          onChange={(e) => {
-            const next = e.target.value as SortBy;
-            remembered.sort = next;
-            setSort(next);
-          }}
-          className="min-h-11 flex-1 rounded-xl border border-line bg-surface px-3 text-base text-ink"
-        >
-          {SORTS.map((s) => (
-            <option key={s.value} value={s.value}>
-              {s.label}
-            </option>
-          ))}
-        </select>
-        <div role="radiogroup" aria-label="View" className="flex gap-1">
-          {(['grid', 'list'] as const).map((m) => (
-            <button
-              key={m}
-              type="button"
-              role="radio"
-              aria-checked={mode === m}
-              onClick={() => {
-                remembered.mode = m;
-                setMode(m);
-              }}
-              className={chip(mode === m)}
-            >
-              {m === 'grid' ? 'Grid' : 'List'}
+          <div className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1" role="radiogroup" aria-label="Show">
+            {KINDS.map((k) => (
+              <button key={k.value} type="button" role="radio" aria-checked={kind === k.value} onClick={() => setKind(k.value)} className={chip(kind === k.value)}>
+                {k.label}
+              </button>
+            ))}
+            <button type="button" aria-haspopup="dialog" onClick={() => setPicking(true)} className={`${chip(country !== null)} shrink-0`}>
+              {country ? (
+                <>
+                  <span aria-hidden="true">{ref_.flag(country)}</span> {ref_.countryName(country)}
+                </>
+              ) : (
+                <>
+                  <span aria-hidden="true">🌍</span> All countries
+                </>
+              )}
             </button>
-          ))}
-        </div>
-        {canChoose && items && items.length > 0 ? (
-          <button type="button" onClick={() => choosing.begin()} className={chip(false)}>
-            Select
-          </button>
-        ) : null}
-      </div>
+          </div>
 
-      <div className="mt-3 min-h-0 flex-1 overflow-y-auto overscroll-contain pb-4">
-        {items && items.length === 0 && folderId ? (
-          <section className="flex flex-col items-center px-6 pt-10 text-center">
-            <p className="text-xl font-semibold text-ink">This folder is empty</p>
-            <p className="mt-2 text-lg text-muted">Open a piece in your Collection and tick this folder under Folders to put it in.</p>
-          </section>
-        ) : items && items.length === 0 ? (
-          <section className="flex h-full flex-col items-center justify-center px-6 text-center">
-            <p className="text-2xl font-semibold text-ink">Nothing collected yet</p>
-            <p className="mt-2 max-w-prose text-lg text-muted">Tap the camera button to photograph a coin or a banknote. Legend names it, and it joins your collection here.</p>
-            <a href={ADD_HASH} className="mt-5 flex min-h-14 items-center rounded-2xl bg-accent px-8 text-xl font-semibold text-accent-fg">
-              Add your first one
-            </a>
-          </section>
-        ) : items && shown.length === 0 ? (
-          <section className="flex flex-col items-center px-6 pt-10 text-center">
-            <p className="text-xl font-semibold text-ink">Nothing matches</p>
-            <p className="mt-2 text-lg text-muted">Try fewer words, or show everything again.</p>
-            {narrowed ? (
-              <button
-                type="button"
-                onClick={() => {
-                  setQuery('');
-                  setKind('all');
-                  setCountry(null);
-                }}
-                className="mt-4 min-h-12 rounded-xl bg-accent px-6 text-lg font-semibold text-accent-fg"
-              >
-                Show everything
+          {choosing.on ? <ChooseBar count={chosenIds.length} onDone={choosing.end} /> : null}
+          <div className={`mt-2 flex items-center gap-2 ${choosing.on ? 'hidden' : ''}`}>
+            <select
+              aria-label="Sort"
+              value={sort}
+              onChange={(e) => {
+                const next = e.target.value as SortBy;
+                remembered.sort = next;
+                setSort(next);
+              }}
+              className="min-h-11 flex-1 rounded-xl border border-line bg-surface px-3 text-base text-ink"
+            >
+              {SORTS.map((s) => (
+                <option key={s.value} value={s.value}>
+                  {s.label}
+                </option>
+              ))}
+            </select>
+            <div role="radiogroup" aria-label="View" className="flex gap-1">
+              {(['grid', 'list'] as const).map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  role="radio"
+                  aria-checked={mode === m}
+                  onClick={() => {
+                    remembered.mode = m;
+                    setMode(m);
+                  }}
+                  className={chip(mode === m)}
+                >
+                  {m === 'grid' ? 'Grid' : 'List'}
+                </button>
+              ))}
+            </div>
+            {canChoose && items && items.length > 0 ? (
+              <button type="button" onClick={() => choosing.begin()} className={chip(false)}>
+                Select
               </button>
             ) : null}
-          </section>
-        ) : (
-          <ul aria-label="Your collection" className={mode === 'grid' ? 'grid grid-cols-2 gap-x-3 gap-y-4' : 'flex flex-col gap-1'}>
-            {shown.map((item) =>
-              mode === 'grid' ? (
-                <GridTile key={item.id} item={item} thumbs={thumbs} ref_={ref_} choosing={canChoose} />
-              ) : (
-                <ListRow key={item.id} item={item} thumbs={thumbs} ref_={ref_} choosing={canChoose} />
-              ),
+          </div>
+
+          {/* the room under the last piece: the camera button (h-16) and its margin (bottom-4), and a little more */}
+          <div className="mt-3 flex flex-1 flex-col pb-24">
+            {items && items.length === 0 && folderId ? (
+              <section className="flex flex-col items-center px-6 pt-10 text-center">
+                <p className="text-xl font-semibold text-ink">This folder is empty</p>
+                <p className="mt-2 text-lg text-muted">Open a piece in your Collection and tick this folder under Folders to put it in.</p>
+              </section>
+            ) : items && items.length === 0 ? (
+              <section className="flex flex-1 flex-col items-center justify-center px-6 text-center">
+                <p className="text-2xl font-semibold text-ink">Nothing collected yet</p>
+                <p className="mt-2 max-w-prose text-lg text-muted">Tap the camera button to photograph a coin or a banknote. Legend names it, and it joins your collection here.</p>
+                <a href={ADD_HASH} className="mt-5 flex min-h-14 items-center rounded-2xl bg-accent px-8 text-xl font-semibold text-accent-fg">
+                  Add your first one
+                </a>
+              </section>
+            ) : items && shown.length === 0 ? (
+              <section className="flex flex-col items-center px-6 pt-10 text-center">
+                <p className="text-xl font-semibold text-ink">Nothing matches</p>
+                <p className="mt-2 text-lg text-muted">Try fewer words, or show everything again.</p>
+                {narrowed ? (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setQuery('');
+                      setKind('all');
+                      setCountry(null);
+                    }}
+                    className="mt-4 min-h-12 rounded-xl bg-accent px-6 text-lg font-semibold text-accent-fg"
+                  >
+                    Show everything
+                  </button>
+                ) : null}
+              </section>
+            ) : (
+              <ul aria-label="Your collection" className={mode === 'grid' ? 'grid grid-cols-2 gap-x-3 gap-y-4' : 'flex flex-col gap-1'}>
+                {shown.map((item) =>
+                  mode === 'grid' ? (
+                    <GridTile key={item.id} item={item} thumbs={thumbs} ref_={ref_} choosing={canChoose} />
+                  ) : (
+                    <ListRow key={item.id} item={item} thumbs={thumbs} ref_={ref_} choosing={canChoose} />
+                  ),
+                )}
+              </ul>
             )}
-          </ul>
-        )}
-        {folder ? <DeleteFolder folder={folder} /> : null}
+            {folder ? <DeleteFolder folder={folder} /> : null}
+          </div>
+    </div>
       </div>
 
       {choosing.on ? (

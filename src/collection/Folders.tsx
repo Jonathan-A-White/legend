@@ -1,6 +1,6 @@
-// src/collection/Folders.tsx: the Collection's folders, like a coin album. The shelf on the Collection (a link to each folder, and New folder),
+// src/collection/Folders.tsx: the Collection's folders, like a coin album. The shelf on the Collection (the Wish list, a link to each folder, New folder),
 // the New folder sheet, the Folders box on a piece (tick the folders it is in), and the Delete folder bar on a folder (the pieces stay).
-import { useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import type { Folder, Item } from '../data/db';
 import { addFolder, deleteFolder, putInFolder, takeOutOfFolder, useFolders } from '../data/repositories';
 import { folderHash, navigate } from '../nav/route';
@@ -80,26 +80,30 @@ function NewFolder({ onMade, className }: { onMade?: (folder: Folder) => void; c
   );
 }
 
-/** On the Collection: a link to each folder with how many pieces it holds, and New folder. `here` is the ids of the pieces in the collection. */
-export function FolderShelf({ here }: { here: ReadonlySet<string> }) {
+/** On the Collection, one shelf row: `children` first (the Wish list), then a link to each folder with how many pieces it holds, and New folder.
+ * `here` is the ids of the pieces in the collection. */
+export function FolderShelf({ here, children }: { here: ReadonlySet<string>; children?: ReactNode }) {
   const folders = useFolders();
   return (
-    <section aria-label="Folders" className="mt-3">
-      <h2 className="text-lg font-semibold text-ink">Folders</h2>
-      <ul className="-mx-4 mt-1 flex gap-2 overflow-x-auto px-4 pb-1">
-        {(folders ?? []).map((folder) => (
-          <li key={folder.id} className="shrink-0">
-            <a href={folderHash(folder.id)} className="flex min-h-14 flex-col justify-center rounded-2xl border border-line px-4 active:opacity-80">
-              <span className="text-lg font-medium text-ink">{folder.name}</span>
-              <span className="text-base text-muted">{pieces(countIn(folder, here))}</span>
-            </a>
+    <div className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1">
+      {children}
+      <section aria-label="Folders" className="shrink-0">
+        <h2 className="sr-only">Folders</h2>
+        <ul className="flex gap-2">
+          {(folders ?? []).map((folder) => (
+            <li key={folder.id} className="shrink-0">
+              <a href={folderHash(folder.id)} className="flex min-h-14 flex-col justify-center rounded-2xl border border-line px-4 active:opacity-80">
+                <span className="text-lg font-medium text-ink">{folder.name}</span>
+                <span className="text-base text-muted">{pieces(countIn(folder, here))}</span>
+              </a>
+            </li>
+          ))}
+          <li className="shrink-0">
+            <NewFolder className="flex min-h-14 items-center rounded-2xl border border-dashed border-accent px-4 text-lg font-medium text-accent active:opacity-80" />
           </li>
-        ))}
-        <li className="shrink-0">
-          <NewFolder className="flex min-h-14 items-center rounded-2xl border border-dashed border-accent px-4 text-lg font-medium text-accent active:opacity-80" />
-        </li>
-      </ul>
-    </section>
+        </ul>
+      </section>
+    </div>
   );
 }
 

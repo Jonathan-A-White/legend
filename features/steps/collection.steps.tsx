@@ -563,4 +563,31 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
       expect(screen.queryByRole('link', { name: /State quarters/ })).toBeNull();
     });
   });
+
+  Scenario('The Wish list leads the shelf of folders, and a coin he is only looking at is a small card', ({ Given, And, When, Then }) => {
+    Given('a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60', threePieces);
+    And('a wished 1916 quarter, a 1939 nickel he is only looking at and a coin he is only looking at still at the factory', async () => {
+      await addItem({ kind: 'coin', country: 'US', denomination: 'Quarter dollar', year: 1916, status: 'wished', askingPrice: 12 });
+      await addItem({ kind: 'coin', country: 'US', denomination: 'Nickel', year: 1939, status: 'considering' });
+      await addItem({ kind: 'coin', country: null, denomination: '', year: null, status: 'considering', reading: { state: 'sent', txid: null, sentAt: Date.now(), sendId: 's1', message: null } });
+    });
+    When('he makes a folder "State quarters" on the Collection', () => makeFolder('State quarters'));
+    Then('the Wish list, saying "1 piece", is on one shelf with the folder "State quarters" and New folder', async () => {
+      const wish = await screen.findByRole('link', { name: /Wish list/ });
+      await waitFor(() => expect(wish).toHaveTextContent('1 piece'));
+      const shelf = within(wish.parentElement!);
+      expect(shelf.getByRole('region', { name: 'Folders' })).toBeInTheDocument();
+      expect(shelf.getByRole('link', { name: /State quarters/ })).toBeInTheDocument();
+      expect(shelf.getByRole('button', { name: 'New folder' })).toBeInTheDocument();
+    });
+    And('under Looking at the nickel\'s card reads "Nickel · 1939" and the other card says "At the factory" once, beside its photo', async () => {
+      const looking = await screen.findByRole('region', { name: 'Looking at' });
+      const cards = await within(looking).findAllByRole('link');
+      expect(cards).toHaveLength(2);
+      const nickel = cards.find((c) => /Nickel/.test(c.textContent ?? ''))!;
+      expect(nickel).toHaveTextContent('Nickel · 1939');
+      const other = cards.find((c) => c !== nickel)!;
+      expect(within(other).getAllByText('At the factory')).toHaveLength(1);
+    });
+  });
 });

@@ -142,3 +142,10 @@ Feature: The Collection
     Then the Collection shows the folder "State quarters" with 1 piece
     When he holds Delete folder in the folder "State quarters"
     Then the Collection shows no folder and all three pieces are still in it
+
+  Scenario: The Wish list leads the shelf of folders, and a coin he is only looking at is a small card
+    Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
+    And a wished 1916 quarter, a 1939 nickel he is only looking at and a coin he is only looking at still at the factory
+    When he makes a folder "State quarters" on the Collection
+    Then the Wish list, saying "1 piece", is on one shelf with the folder "State quarters" and New folder
+    And under Looking at the nickel's card reads "Nickel · 1939" and the other card says "At the factory" once, beside its photo
