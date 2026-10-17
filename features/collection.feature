@@ -1,5 +1,5 @@
 Feature: The Collection
-  Everything he has collected, to look through and search: a count line, a grid of photographs, filters, and one item opened large with its facts, notes, and Remove.
+  Everything he has collected, to look through and search: a count line, a grid of photographs, filters, and one item opened large with its facts, notes, and Remove. Pieces are also removed from the Collection itself: Select, or a long press on a piece, chooses them.
 
   Scenario: the count line counts coins, bills and countries
     Given a collection of 3 coins and 1 bill from 3 countries
@@ -37,7 +37,8 @@ Feature: The Collection
   Scenario: Remove needs a hold and can be undone within five seconds
     Given a collection of 3 coins and 1 bill from 3 countries
     When he opens the United States quarter
-    And he taps Remove
+    Then the Remove bar reads "Hold to remove"
+    When he taps Remove
     Then the item is still in the collection
     When he holds Remove
     Then the item is removed and Undo is offered
@@ -46,6 +47,37 @@ Feature: The Collection
     When he holds Remove again
     And five seconds pass
     Then the item stays removed and Undo is gone
+
+  Scenario: Select on the Collection removes the chosen pieces and Undo puts them back
+    Given a collection of 3 coins and 1 bill from 3 countries
+    When the Collection opens
+    And he taps Select
+    Then the Remove bar reads "Choose pieces to remove"
+    When he chooses the United States quarter and the Canada dime
+    Then the Collection says "2 chosen" and the Remove bar reads "Hold to remove 2 pieces"
+    When he taps Remove
+    Then nothing is removed and he is told to hold it
+    When he holds Remove
+    Then the quarter and the dime are removed, Select is over and Undo is offered
+    When he taps Undo
+    Then the quarter and the dime are back in the Collection
+
+  Scenario: A long press on a piece starts Select with it chosen, and Undo lasts five seconds
+    Given a collection of 3 coins and 1 bill from 3 countries
+    When the Collection opens
+    And he long-presses the United States quarter
+    Then Select is on with only the quarter chosen and the item view did not open
+    When he holds Remove
+    And five seconds pass
+    Then the quarter stays removed and Undo is gone
+
+  Scenario: Done leaves Select without removing anything
+    Given a collection of 3 coins and 1 bill from 3 countries
+    When the Collection opens
+    And he taps Select
+    And he chooses the United States quarter and the Canada dime
+    And he taps Done
+    Then the four pieces are links again and none was removed
 
   Scenario: Back closes the item view
     Given a collection of 3 coins and 1 bill from 3 countries

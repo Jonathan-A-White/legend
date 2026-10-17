@@ -1,5 +1,6 @@
 // src/collection/CollectionScreen.tsx: the Collection at #/collection: a count line, a search box, chips for All / Coins / Bills / Other and a
 // country picker, and the items as a grid of obverse thumbnails or a list. Everything is filtered on the phone, as he types.
+// Select (or a long press on a piece) chooses pieces to remove with a held bar, and Undo (src/collection/Choose.tsx).
 import { useMemo, useState } from 'react';
 import type { Item } from '../data/db';
 import { KINDS as KIND_WORDS, KIND_ORDER, itemName } from '../data/kinds';
@@ -7,6 +8,8 @@ import { useFolder, useItems, useThumbs } from '../data/repositories';
 import { FeedbackButton } from '../feedback';
 import { ADD_HASH, WISHLIST_HASH, itemHash } from '../nav/route';
 import { RoughWorth } from '../worth';
+import { ChooseBar, ChooseTile, RemoveChosen, RemovedToast } from './Choose';
+import { useChoosing, type Choosing } from './choosing';
 import { CountrySheet } from './CountrySheet';
 import { DeleteFolder, FolderShelf } from './Folders';
 import { Thumb } from './Thumb';
@@ -37,30 +40,32 @@ function Caption({ item, ref_ }: { item: Item; ref_: Reference }) {
   );
 }
 
-function GridTile({ item, thumbs, ref_ }: { item: Item; thumbs: readonly ThumbPhoto[] | undefined; ref_: Reference }) {
+type TileProps = { item: Item; thumbs: readonly ThumbPhoto[] | undefined; ref_: Reference; choosing: Choosing | null };
+
+function GridTile({ item, thumbs, ref_, choosing }: TileProps) {
   return (
     <li>
-      <a href={itemHash(item.id)} className="block rounded-2xl active:opacity-80">
+      <ChooseTile item={item} choosing={choosing} className="block rounded-2xl active:opacity-80">
         <Thumb item={item} blob={pickThumb(thumbs, item.id)} />
         <div className="px-1 pt-1.5">
           <Caption item={item} ref_={ref_} />
         </div>
-      </a>
+      </ChooseTile>
     </li>
   );
 }
 
-function ListRow({ item, thumbs, ref_ }: { item: Item; thumbs: readonly ThumbPhoto[] | undefined; ref_: Reference }) {
+function ListRow({ item, thumbs, ref_, choosing }: TileProps) {
   const where = [item.country ? ref_.countryName(item.country) : '', item.mintMark ? `mint ${item.mintMark}` : ''].filter(Boolean).join(' · ');
   return (
     <li>
-      <a href={itemHash(item.id)} className="flex min-h-20 items-center gap-4 rounded-2xl p-1.5 active:opacity-80">
+      <ChooseTile item={item} choosing={choosing} className="flex min-h-20 items-center gap-4 rounded-2xl p-1.5 active:opacity-80">
         <Thumb item={item} blob={pickThumb(thumbs, item.id)} className="w-20 shrink-0" />
-        <div className="min-w-0 flex-1">
+        <div className="min-w-0 flex-1 pr-10">
           <Caption item={item} ref_={ref_} />
           {where ? <p className="truncate text-base text-muted">{where}</p> : null}
         </div>
-      </a>
+      </ChooseTile>
     </li>
   );
 }
@@ -102,11 +107,17 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
   const [sort, setSort] = useState<SortBy>(remembered.sort);
   const [mode, setMode] = useState<Mode>(remembered.mode);
   const [picking, setPicking] = useState(false);
+  const choosing = useChoosing();
+  const [removed, setRemoved] = useState<readonly string[] | null>(null);
 
   const shown = useMemo(() => visibleItems(items ?? [], { query, kind, country, sort }, ref_), [items, query, kind, country, sort, ref_]);
   const counts = useMemo(() => countryCounts(items ?? [], { query, kind }, ref_), [items, query, kind, ref_]);
   const hereIds = useMemo(() => new Set((all ?? []).map((i) => i.id)), [all]);
   const narrowed = query.trim() !== '' || kind !== 'all' || country !== null;
+  // Select is on the whole Collection only: in a folder, removing a piece could be taken for taking it out of the folder.
+  const canChoose = folderId ? null : choosing;
+  // what Remove takes: the chosen pieces he can see
+  const chosenIds = useMemo(() => shown.filter((i) => choosing.chosen.has(i.id)).map((i) => i.id), [shown, choosing.chosen]);
 
   if (folderId && folder === null) {
     return (
@@ -185,7 +196,8 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
         </button>
       </div>
 
-      <div className="mt-2 flex items-center gap-2">
+      {choosing.on ? <ChooseBar count={chosenIds.length} onDone={choosing.end} /> : null}
+      <div className={`mt-2 flex items-center gap-2 ${choosing.on ? 'hidden' : ''}`}>
         <select
           aria-label="Sort"
           value={sort}
@@ -219,6 +231,11 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
             </button>
           ))}
         </div>
+        {canChoose && items && items.length > 0 ? (
+          <button type="button" onClick={() => choosing.begin()} className={chip(false)}>
+            Select
+          </button>
+        ) : null}
       </div>
 
       <div className="mt-3 min-h-0 flex-1 overflow-y-auto overscroll-contain pb-4">
@@ -256,23 +273,40 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
         ) : (
           <ul aria-label="Your collection" className={mode === 'grid' ? 'grid grid-cols-2 gap-x-3 gap-y-4' : 'flex flex-col gap-1'}>
             {shown.map((item) =>
-              mode === 'grid' ? <GridTile key={item.id} item={item} thumbs={thumbs} ref_={ref_} /> : <ListRow key={item.id} item={item} thumbs={thumbs} ref_={ref_} />,
+              mode === 'grid' ? (
+                <GridTile key={item.id} item={item} thumbs={thumbs} ref_={ref_} choosing={canChoose} />
+              ) : (
+                <ListRow key={item.id} item={item} thumbs={thumbs} ref_={ref_} choosing={canChoose} />
+              ),
             )}
           </ul>
         )}
         {folder ? <DeleteFolder folder={folder} /> : null}
       </div>
 
-      <a
-        href={ADD_HASH}
-        aria-label="Add a coin or bill"
-        className="absolute right-4 bottom-4 flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-fg shadow-lg active:opacity-80"
-      >
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3V19H4V8.5Z" />
-          <circle cx="12" cy="13.5" r="3.4" />
-        </svg>
-      </a>
+      {choosing.on ? (
+        <RemoveChosen
+          ids={chosenIds}
+          onRemoved={(ids) => {
+            choosing.end();
+            setRemoved(ids);
+          }}
+        />
+      ) : null}
+      {removed ? <RemovedToast ids={removed} onDone={() => setRemoved(null)} /> : null}
+
+      {choosing.on || removed ? null : (
+        <a
+          href={ADD_HASH}
+          aria-label="Add a coin or bill"
+          className="absolute right-4 bottom-4 flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-fg shadow-lg active:opacity-80"
+        >
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3V19H4V8.5Z" />
+            <circle cx="12" cy="13.5" r="3.4" />
+          </svg>
+        </a>
+      )}
 
       {picking ? (
         <CountrySheet

@@ -156,7 +156,10 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     const gone = async () => (await getItem(seeded.usQuarter.id))?.deletedAt ?? null;
     Given('a collection of 3 coins and 1 bill from 3 countries', aCollection);
     When('he opens the United States quarter', openTheQuarter);
-    And('he taps Remove', async () => {
+    Then('the Remove bar reads "Hold to remove"', async () => {
+      expect(screen.getByRole('button', { name: 'Remove' })).toHaveTextContent(/^Hold to remove$/);
+    });
+    When('he taps Remove', async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Remove' }));
     });
     Then('the item is still in the collection', async () => {
@@ -202,6 +205,131 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
       expect(screen.queryByRole('button', { name: 'Undo' })).toBeNull();
       expect(await gone()).not.toBeNull();
       await waitFor(() => expect(window.location.hash).toBe('#/collection'));
+    });
+  });
+
+  const removeBar = () => screen.getByRole('button', { name: 'Remove' });
+  const tile = (name: RegExp) => within(grid()).getByRole('button', { name });
+  const deletedAt = async (id: string) => (await getItem(id))?.deletedAt ?? null;
+  const tapSelect = async () => {
+    await waitFor(() => expect(tiles()).toHaveLength(4));
+    await userEvent.click(screen.getByRole('button', { name: 'Select' }));
+  };
+  const chooseQuarterAndDime = async () => {
+    await userEvent.click(tile(/Quarter dollar/));
+    await userEvent.click(tile(/Dime/));
+  };
+
+  Scenario('Select on the Collection removes the chosen pieces and Undo puts them back', ({ Given, When, And, Then }) => {
+    Given('a collection of 3 coins and 1 bill from 3 countries', aCollection);
+    When('the Collection opens', theCollectionOpens);
+    And('he taps Select', tapSelect);
+    Then('the Remove bar reads "Choose pieces to remove"', () => {
+      expect(removeBar()).toHaveTextContent(/^Choose pieces to remove$/);
+      expect(removeBar()).toBeDisabled();
+      for (const t of within(grid()).getAllByRole('button')) expect(t).toHaveAttribute('aria-pressed', 'false');
+      expect(within(grid()).queryAllByRole('link')).toHaveLength(0);
+    });
+    When('he chooses the United States quarter and the Canada dime', chooseQuarterAndDime);
+    Then('the Collection says "2 chosen" and the Remove bar reads "Hold to remove 2 pieces"', () => {
+      expect(screen.getByTestId('chosen-line')).toHaveTextContent(/^2 chosen$/);
+      expect(tile(/Quarter dollar/)).toHaveAttribute('aria-pressed', 'true');
+      expect(tile(/Dime/)).toHaveAttribute('aria-pressed', 'true');
+      expect(tile(/Two marks/)).toHaveAttribute('aria-pressed', 'false');
+      expect(removeBar()).toHaveTextContent(/^Hold to remove 2 pieces$/);
+      expect(removeBar()).toBeEnabled();
+    });
+    When('he taps Remove', async () => {
+      await userEvent.click(removeBar());
+    });
+    Then('nothing is removed and he is told to hold it', async () => {
+      expect(await deletedAt(seeded.usQuarter.id)).toBeNull();
+      expect(await deletedAt(seeded.caDime.id)).toBeNull();
+      expect(screen.getByRole('status')).toHaveTextContent(/hold/i);
+    });
+    When('he holds Remove', () => {
+      press(removeBar());
+    });
+    Then('the quarter and the dime are removed, Select is over and Undo is offered', async () => {
+      await waitFor(async () => expect(await deletedAt(seeded.usQuarter.id)).not.toBeNull());
+      expect(await deletedAt(seeded.caDime.id)).not.toBeNull();
+      expect(await deletedAt(seeded.deMark.id)).toBeNull();
+      expect(await screen.findByRole('button', { name: 'Undo' })).toBeInTheDocument();
+      expect(screen.getByRole('status')).toHaveTextContent('Removed 2 pieces from your collection');
+      await waitFor(() => expect(tiles()).toHaveLength(2));
+      expect(within(grid()).getAllByRole('link')).toHaveLength(2);
+      expect(screen.queryByRole('button', { name: 'Remove' })).toBeNull();
+    });
+    When('he taps Undo', async () => {
+      await userEvent.click(screen.getByRole('button', { name: 'Undo' }));
+    });
+    Then('the quarter and the dime are back in the Collection', async () => {
+      await waitFor(() => expect(tiles()).toHaveLength(4));
+      expect(await deletedAt(seeded.usQuarter.id)).toBeNull();
+      expect(await deletedAt(seeded.caDime.id)).toBeNull();
+      expect(screen.queryByRole('button', { name: 'Undo' })).toBeNull();
+    });
+  });
+
+  Scenario('A long press on a piece starts Select with it chosen, and Undo lasts five seconds', ({ Given, When, And, Then }) => {
+    Given('a collection of 3 coins and 1 bill from 3 countries', aCollection);
+    When('the Collection opens', theCollectionOpens);
+    And('he long-presses the United States quarter', async () => {
+      await waitFor(() => expect(tiles()).toHaveLength(4));
+      const link = within(grid()).getByRole('link', { name: /Quarter dollar/ });
+      press(link);
+      await waitFor(() => expect(tile(/Quarter dollar/)).toHaveAttribute('aria-pressed', 'true'), { timeout: 2000 });
+      // the finger lifts: the click that ends the long press neither opens the piece nor unchooses it
+      fireEvent.pointerUp(tile(/Quarter dollar/), { button: 0, pointerId: 1 });
+      fireEvent.click(tile(/Quarter dollar/));
+    });
+    Then('Select is on with only the quarter chosen and the item view did not open', () => {
+      expect(window.location.hash).toBe('#/collection');
+      expect(tile(/Quarter dollar/)).toHaveAttribute('aria-pressed', 'true');
+      expect(tile(/Dime/)).toHaveAttribute('aria-pressed', 'false');
+      expect(screen.getByTestId('chosen-line')).toHaveTextContent(/^1 chosen$/);
+      expect(removeBar()).toHaveTextContent(/^Hold to remove 1 piece$/);
+    });
+    When('he holds Remove', async () => {
+      // from here the clock is the test's, so five seconds take no time
+      vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+      press(removeBar());
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(1000);
+      });
+      await vi.waitFor(async () => expect(await deletedAt(seeded.usQuarter.id)).not.toBeNull(), { interval: 5 });
+      await vi.waitFor(() => expect(screen.getByRole('button', { name: 'Undo' })).toBeInTheDocument(), { interval: 5 });
+    });
+    And('five seconds pass', async () => {
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(4000);
+      });
+      expect(screen.getByRole('button', { name: 'Undo' }), 'still offered at four seconds').toBeInTheDocument();
+      await act(async () => {
+        await vi.advanceTimersByTimeAsync(1100);
+      });
+    });
+    Then('the quarter stays removed and Undo is gone', async () => {
+      vi.useRealTimers();
+      expect(screen.queryByRole('button', { name: 'Undo' })).toBeNull();
+      expect(await deletedAt(seeded.usQuarter.id)).not.toBeNull();
+      await waitFor(() => expect(tiles()).toHaveLength(3));
+    });
+  });
+
+  Scenario('Done leaves Select without removing anything', ({ Given, When, And, Then }) => {
+    Given('a collection of 3 coins and 1 bill from 3 countries', aCollection);
+    When('the Collection opens', theCollectionOpens);
+    And('he taps Select', tapSelect);
+    And('he chooses the United States quarter and the Canada dime', chooseQuarterAndDime);
+    And('he taps Done', async () => {
+      await userEvent.click(screen.getByRole('button', { name: 'Done' }));
+    });
+    Then('the four pieces are links again and none was removed', async () => {
+      expect(within(grid()).getAllByRole('link')).toHaveLength(4);
+      expect(screen.queryByRole('button', { name: 'Remove' })).toBeNull();
+      expect(screen.queryByTestId('chosen-line')).toBeNull();
+      for (const id of [seeded.usQuarter.id, seeded.caDime.id]) expect(await deletedAt(id)).toBeNull();
     });
   });
 

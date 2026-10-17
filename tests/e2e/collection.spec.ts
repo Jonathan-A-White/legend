@@ -191,3 +191,39 @@ test('an item opens with both photos, zooms, and is removed only by a hold', asy
   await page.getByRole('link', { name: /Collection/ }).first().click();
   await expect(page.getByTestId('count-line')).toHaveText('5 coins · 1 bill · 4 countries');
 });
+
+test('a long press on a piece starts Select, and a held Remove takes the chosen pieces out with an Undo', async ({ page }) => {
+  await seed(page, '/#/collection');
+  const grid = page.getByRole('list', { name: 'Your collection' });
+  await expect(grid.getByRole('listitem')).toHaveCount(6);
+  await expect(page.getByRole('button', { name: 'Select' })).toBeInViewport();
+
+  // a long press: the click that ends it neither opens the piece nor unchooses it
+  await grid.getByRole('link', { name: /Quarter dollar/ }).scrollIntoViewIfNeeded();
+  const quarter = (await grid.getByRole('link', { name: /Quarter dollar/ }).boundingBox())!;
+  await page.mouse.move(quarter.x + quarter.width / 2, quarter.y + quarter.height / 2);
+  await page.mouse.down();
+  await page.waitForTimeout(800);
+  await page.mouse.up();
+  await expect(grid.getByRole('button', { name: /Quarter dollar/ })).toHaveAttribute('aria-pressed', 'true');
+  expect(new URL(page.url()).hash).toBe('#/collection');
+
+  await grid.getByRole('button', { name: /Dime/ }).click();
+  await expect(page.getByTestId('chosen-line')).toHaveText('2 chosen');
+  const remove = page.getByRole('button', { name: 'Remove' });
+  await expect(remove).toHaveText('Hold to remove 2 pieces');
+  await expect(remove).toBeInViewport({ ratio: 1 });
+  expect(await pageScrolls(page)).toBe(false);
+  await shot(page, 'collection-select');
+
+  const box = (await remove.boundingBox())!;
+  await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
+  await page.mouse.down();
+  await page.waitForTimeout(1000);
+  await page.mouse.up();
+  await expect(page.getByText('Removed 2 pieces from your collection')).toBeVisible();
+  await expect(grid.getByRole('listitem')).toHaveCount(4);
+  await page.getByRole('button', { name: 'Undo' }).click();
+  await expect(grid.getByRole('listitem')).toHaveCount(6);
+  await expect(page.getByTestId('count-line')).toHaveText('5 coins · 1 bill · 4 countries');
+});
