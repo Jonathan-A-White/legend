@@ -12,7 +12,7 @@ import { RoughWorth } from '../worth';
 import { ChooseBar, ChooseTile, RemoveChosen, RemovedToast } from './Choose';
 import { useChoosing, type Choosing } from './choosing';
 import { CountrySheet } from './CountrySheet';
-import { DeleteFolder, FolderShelf } from './Folders';
+import { DeleteFolder, FolderShelf, RenameFolder } from './Folders';
 import { Thumb } from './Thumb';
 import { pickThumb, thumbCaption, type ThumbPhoto } from './thumbs';
 import { useReference, type Reference } from './useReference';
@@ -97,7 +97,7 @@ function LookingAt({ items, thumbs, ref_ }: { items: readonly Item[]; thumbs: re
   );
 }
 
-/** The Collection, or with a `folderId` the same view of just that folder's pieces: its count, its worth together as one range, and Delete folder. */
+/** The Collection, or with a `folderId` the same view of just that folder's pieces: its count, Rename, its worth together as one range, and Delete folder. */
 export function CollectionScreen({ folderId }: { folderId?: string }) {
   const all = useItems();
   const folder = useFolder(folderId ?? '');
@@ -149,9 +149,12 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
             <FeedbackButton screen="Collection" className="-mr-2" />
           </div>
           {folderId ? (
-            <p data-testid="folder-count" className="text-lg text-ink">
-              {items ? pieces(items.length) : ''}
-            </p>
+            <div className="flex items-center justify-between">
+              <p data-testid="folder-count" className="text-lg text-ink">
+                {items ? pieces(items.length) : ''}
+              </p>
+              {folder ? <RenameFolder folder={folder} className="-mr-3 flex min-h-12 items-center rounded-xl px-3 text-lg font-medium text-accent" /> : null}
+            </div>
           ) : null}
           <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
             {items ? countLine(shown) : ''}

@@ -564,6 +564,56 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     });
   });
 
+  const openRename = async () => {
+    await userEvent.click(await screen.findByRole('button', { name: 'Rename' }));
+    return screen.findByRole('dialog', { name: 'Rename folder' });
+  };
+
+  Scenario('A folder can be renamed from its page and the new name shows everywhere', ({ Given, When, And, Then }) => {
+    Given('a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60', threePieces);
+    When('he makes a folder "New folder" on the Collection', () => makeFolder('New folder'));
+    And('he puts the quarter in it from its item view', () => setIn(/Quarter dollar/, 'New folder', true));
+    And('he opens the folder "New folder"', () => openFolder('New folder'));
+    And('he taps Rename on its page, types "Coins" and taps Save', async () => {
+      const sheet = await openRename();
+      const input = within(sheet).getByRole('textbox', { name: 'Folder name' });
+      expect(input).toHaveValue('New folder');
+      await userEvent.clear(input);
+      await userEvent.type(input, 'Coins');
+      await userEvent.click(within(sheet).getByRole('button', { name: 'Save' }));
+      await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Rename folder' })).toBeNull());
+    });
+    Then('the page title, the Collection shelf row and the quarter\'s Folders box all read "Coins" and the quarter is still in it', async () => {
+      await screen.findByRole('heading', { level: 1, name: 'Coins' });
+      await onlyListed('Quarter dollar');
+      await open('#/collection');
+      const folders = await screen.findByRole('region', { name: 'Folders' });
+      const link = await within(folders).findByRole('link', { name: /Coins/ });
+      expect(within(folders).queryByRole('link', { name: /New folder/ })).toBeNull();
+      await waitFor(() => expect(link).toHaveTextContent('1 piece'));
+      await openPiece(/Quarter dollar/);
+      expect((await folderBox('Coins')).getAttribute('aria-checked')).toBe('true');
+    });
+  });
+
+  Scenario('A folder cannot be renamed to nothing', ({ Given, When, And, Then }) => {
+    Given('a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60', threePieces);
+    When('he makes a folder "New folder" on the Collection', () => makeFolder('New folder'));
+    And('he opens the folder "New folder"', () => openFolder('New folder'));
+    And('he taps Rename on its page and clears the name', async () => {
+      const sheet = await openRename();
+      await userEvent.clear(within(sheet).getByRole('textbox', { name: 'Folder name' }));
+    });
+    Then('Save is off, and after Cancel the folder is still called "New folder"', async () => {
+      const sheet = screen.getByRole('dialog', { name: 'Rename folder' });
+      expect(within(sheet).getByRole('button', { name: 'Save' })).toBeDisabled();
+      await userEvent.click(within(sheet).getByRole('button', { name: 'Cancel' }));
+      await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Rename folder' })).toBeNull());
+      expect(screen.getByRole('heading', { level: 1, name: 'New folder' })).toBeInTheDocument();
+      expect((await db.folders.toArray()).map((f) => f.name)).toEqual(['New folder']);
+    });
+  });
+
   Scenario('The Wish list leads the shelf of folders, and a coin he is only looking at is a small card', ({ Given, And, When, Then }) => {
     Given('a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60', threePieces);
     And('a wished 1916 quarter, a 1939 nickel he is only looking at and a coin he is only looking at still at the factory', async () => {

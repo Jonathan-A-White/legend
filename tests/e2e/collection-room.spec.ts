@@ -144,3 +144,21 @@ for (const [name, hash] of [['Globe', '#/globe'], ['Quarters', '#/quarters'], ['
     expect(floating).toEqual([]);
   });
 }
+
+test('in a folder Rename opens a sheet filled with its name, and Save shows the new name on the page and the shelf', async ({ page }) => {
+  await seed(page);
+  await page.getByRole('link', { name: /State quarters/ }).click();
+  await page.getByRole('button', { name: 'Rename' }).click();
+  const sheet = page.getByRole('dialog', { name: 'Rename folder' });
+  const name = sheet.getByRole('textbox', { name: 'Folder name' });
+  await expect(name).toHaveValue('State quarters');
+  await name.fill('');
+  await expect(sheet.getByRole('button', { name: 'Save' })).toBeDisabled();
+  await name.fill('Coins');
+  await shot(page, 'folder-rename');
+  await sheet.getByRole('button', { name: 'Save' }).click();
+  await expect(sheet).toBeHidden();
+  await expect(page.getByRole('heading', { level: 1, name: 'Coins' })).toBeVisible();
+  await page.getByRole('link', { name: /Collection/ }).first().click();
+  await expect(page.getByRole('region', { name: 'Folders' }).getByRole('link', { name: /Coins/ })).toBeVisible();
+});

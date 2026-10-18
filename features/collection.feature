@@ -143,6 +143,21 @@ Feature: The Collection
     When he holds Delete folder in the folder "State quarters"
     Then the Collection shows no folder and all three pieces are still in it
 
+  Scenario: A folder can be renamed from its page and the new name shows everywhere
+    Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
+    When he makes a folder "New folder" on the Collection
+    And he puts the quarter in it from its item view
+    And he opens the folder "New folder"
+    And he taps Rename on its page, types "Coins" and taps Save
+    Then the page title, the Collection shelf row and the quarter's Folders box all read "Coins" and the quarter is still in it
+
+  Scenario: A folder cannot be renamed to nothing
+    Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
+    When he makes a folder "New folder" on the Collection
+    And he opens the folder "New folder"
+    And he taps Rename on its page and clears the name
+    Then Save is off, and after Cancel the folder is still called "New folder"
+
   Scenario: The Wish list leads the shelf of folders, and a coin he is only looking at is a small card
     Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
     And a wished 1916 quarter, a 1939 nickel he is only looking at and a coin he is only looking at still at the factory

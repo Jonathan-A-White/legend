@@ -10,7 +10,7 @@ export { addAsk, answerAsk, decideSuggestion, listAsks, listAsksIn, removeAsk, u
 export type { AnswerMore, NewAsk } from './asks';
 export { putValue, getValue, listValues, useValue, useValues } from './values';
 export { addSaving, listSavings, useSavings, getGoal, setGoal, useGoal } from './savings';
-export { addFolder, deleteFolder, listFolders, putInFolder, takeOutOfFolder, useFolder, useFolders } from './folders';
+export { addFolder, deleteFolder, listFolders, putInFolder, renameFolder, takeOutOfFolder, useFolder, useFolders } from './folders';
 export { enqueue, listOutbox, removeFromOutbox } from './outbox';
 export type { Item, ItemKind, ItemRarity, ItemStatus, Reading, ReadingState, Confidence, Photo, PhotoSide, Ask, SettingsChange, SuggestedSetting, ItemValue, OutboxRecord, Saving, Folder, StoredValue } from '../db';
 export { dayOf, listUsage, recordUsage } from './usage';

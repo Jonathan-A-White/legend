@@ -9,6 +9,12 @@ export async function addFolder(name: string): Promise<Folder> {
   return folder;
 }
 
+/** Gives a folder a new name; the pieces in it stay. An empty name changes nothing. */
+export async function renameFolder(folderId: string, name: string): Promise<void> {
+  const trimmed = name.trim();
+  if (trimmed !== '') await db.folders.update(folderId, { name: trimmed });
+}
+
 export async function listFolders(): Promise<Folder[]> {
   return db.folders.orderBy('createdAt').toArray();
 }

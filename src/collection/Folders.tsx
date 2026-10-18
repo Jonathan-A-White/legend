@@ -1,8 +1,8 @@
 // src/collection/Folders.tsx: the Collection's folders, like a coin album. The shelf on the Collection (the Wish list, a link to each folder, New folder),
-// the New folder sheet, the Folders box on a piece (tick the folders it is in), and the Delete folder bar on a folder (the pieces stay).
+// the New folder sheet, the Folders box on a piece (tick the folders it is in), and Rename and the Delete folder bar on a folder (the pieces stay).
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import type { Folder, Item } from '../data/db';
-import { addFolder, deleteFolder, putInFolder, takeOutOfFolder, useFolders } from '../data/repositories';
+import { addFolder, deleteFolder, putInFolder, renameFolder, takeOutOfFolder, useFolders } from '../data/repositories';
 import { folderHash, navigate } from '../nav/route';
 import { HoldBar } from '../ui/HoldBar';
 import { useSheetBack } from '../ui/sheetBack';
@@ -12,27 +12,28 @@ const NAME_MAX = 40;
 /** How many of a folder's pieces are in the collection now (a removed piece, or one he is only looking at, is not counted). */
 const countIn = (folder: Folder, here: ReadonlySet<string>): number => folder.itemIds.filter((id) => here.has(id)).length;
 
-function NewFolderSheet({ onMade, onClose }: { onMade: (folder: Folder) => void; onClose: () => void }) {
+/** The sheet that asks for a folder's name: New folder (empty) or Rename (filled with the name it has). `onSave` keeps the name. */
+function FolderNameSheet({ title, initial, action, onSave, onClose }: { title: string; initial: string; action: string; onSave: (name: string) => Promise<void>; onClose: () => void }) {
   useSheetBack(onClose);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && onClose();
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
-  const [name, setName] = useState('');
+  const [name, setName] = useState(initial);
   const [busy, setBusy] = useState(false);
   const ready = name.trim() !== '' && !busy;
-  const make = async (e: FormEvent) => {
+  const save = async (e: FormEvent) => {
     e.preventDefault();
     if (!ready) return;
     setBusy(true);
-    onMade(await addFolder(name));
+    await onSave(name);
   };
   return (
     <div className="fixed inset-0 z-20 flex items-end bg-black/60" onClick={onClose}>
-      <form role="dialog" aria-modal="true" aria-label="New folder" onSubmit={make} className="w-full rounded-t-3xl border-t border-line bg-surface px-4 pt-3 pb-[max(env(safe-area-inset-bottom),1rem)]" onClick={(e) => e.stopPropagation()}>
+      <form role="dialog" aria-modal="true" aria-label={title} onSubmit={save} className="w-full rounded-t-3xl border-t border-line bg-surface px-4 pt-3 pb-[max(env(safe-area-inset-bottom),1rem)]" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between pb-2">
-          <h2 className="text-xl font-semibold text-accent">New folder</h2>
+          <h2 className="text-xl font-semibold text-accent">{title}</h2>
           <button type="button" onClick={onClose} className="min-h-12 rounded-xl px-4 text-base font-medium text-muted">
             Cancel
           </button>
@@ -52,7 +53,7 @@ function NewFolderSheet({ onMade, onClose }: { onMade: (folder: Folder) => void;
           className="min-h-12 w-full rounded-xl border border-line bg-canvas px-4 text-lg text-ink placeholder:text-muted"
         />
         <button type="submit" disabled={!ready} className="mt-3 min-h-14 w-full rounded-2xl bg-accent text-lg font-semibold text-accent-fg disabled:opacity-45">
-          Make folder
+          {action}
         </button>
       </form>
     </div>
@@ -68,10 +69,38 @@ function NewFolder({ onMade, className }: { onMade?: (folder: Folder) => void; c
         New folder
       </button>
       {open ? (
-        <NewFolderSheet
-          onMade={(folder) => {
+        <FolderNameSheet
+          title="New folder"
+          initial=""
+          action="Make folder"
+          onSave={async (name) => {
+            const folder = await addFolder(name);
             setOpen(false);
             onMade?.(folder);
+          }}
+          onClose={() => setOpen(false)}
+        />
+      ) : null}
+    </>
+  );
+}
+
+/** On a folder: Rename opens the same kind of sheet as New folder, filled with its name. Everywhere the folder shows reads the new name. */
+export function RenameFolder({ folder, className }: { folder: Folder; className: string }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button type="button" aria-haspopup="dialog" onClick={() => setOpen(true)} className={className}>
+        Rename
+      </button>
+      {open ? (
+        <FolderNameSheet
+          title="Rename folder"
+          initial={folder.name}
+          action="Save"
+          onSave={async (name) => {
+            await renameFolder(folder.id, name);
+            setOpen(false);
           }}
           onClose={() => setOpen(false)}
         />
