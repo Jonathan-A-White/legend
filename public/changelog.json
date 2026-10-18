@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.44",
+    "date": "2026-10-18",
+    "story": "mw-f9fv9f.14",
+    "kind": "new",
+    "text": "A folder can be renamed: open it and tap Rename."
+  },
+  {
     "version": "0.1.43",
     "date": "2026-10-18",
     "story": "mw-b2jk0h",

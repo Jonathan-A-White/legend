@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.44
+_2026-10-18_
+- New: A folder can be renamed: open it and tap Rename.
+
 ## 0.1.43
 _2026-10-18_
 - Fixed: Tapping Update now always finishes by reloading the app, instead of sometimes sitting on "Updating…".
