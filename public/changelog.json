@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.45",
+    "date": "2026-10-18",
+    "story": "mw-f9fv9f.15",
+    "kind": "new",
+    "text": "Changed: Folders are now called coin folders everywhere in the Collection."
+  },
+  {
     "version": "0.1.44",
     "date": "2026-10-18",
     "story": "mw-f9fv9f.14",

@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.45
+_2026-10-18_
+- New: Changed: Folders are now called coin folders everywhere in the Collection.
+
 ## 0.1.44
 _2026-10-18_
 - New: A folder can be renamed: open it and tap Rename.
