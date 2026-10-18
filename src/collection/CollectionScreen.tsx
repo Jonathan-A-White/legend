@@ -127,7 +127,7 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
   if (folderId && folder === null) {
     return (
       <main aria-label="Collection" className="flex flex-1 flex-col items-center justify-center px-6 text-center">
-        <p className="text-2xl font-semibold text-ink">This folder is not here</p>
+        <p className="text-2xl font-semibold text-ink">This coin folder is not here</p>
         <a href="#/collection" className="mt-4 flex min-h-12 items-center rounded-xl bg-accent px-6 text-lg font-semibold text-accent-fg">
           Back to the Collection
         </a>
@@ -252,8 +252,8 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
           <div className="mt-3 flex flex-1 flex-col pb-24">
             {items && items.length === 0 && folderId ? (
               <section className="flex flex-col items-center px-6 pt-10 text-center">
-                <p className="text-xl font-semibold text-ink">This folder is empty</p>
-                <p className="mt-2 text-lg text-muted">Open a piece in your Collection and tick this folder under Folders to put it in.</p>
+                <p className="text-xl font-semibold text-ink">This coin folder is empty</p>
+                <p className="mt-2 text-lg text-muted">Open a piece in your Collection and tick this coin folder under Coin folders to put it in.</p>
               </section>
             ) : items && items.length === 0 ? (
               <section className="flex flex-1 flex-col items-center justify-center px-6 text-center">

@@ -39,7 +39,7 @@ function FolderNameSheet({ title, initial, action, onSave, onClose }: { title: s
           </button>
         </div>
         <label htmlFor="folder-name" className="mb-1 block text-base font-medium text-muted">
-          Folder name
+          Coin folder name
         </label>
         <input
           id="folder-name"
@@ -66,13 +66,13 @@ function NewFolder({ onMade, className }: { onMade?: (folder: Folder) => void; c
   return (
     <>
       <button type="button" aria-haspopup="dialog" onClick={() => setOpen(true)} className={className}>
-        New folder
+        New coin folder
       </button>
       {open ? (
         <FolderNameSheet
-          title="New folder"
+          title="New coin folder"
           initial=""
-          action="Make folder"
+          action="Make coin folder"
           onSave={async (name) => {
             const folder = await addFolder(name);
             setOpen(false);
@@ -95,7 +95,7 @@ export function RenameFolder({ folder, className }: { folder: Folder; className:
       </button>
       {open ? (
         <FolderNameSheet
-          title="Rename folder"
+          title="Rename coin folder"
           initial={folder.name}
           action="Save"
           onSave={async (name) => {
@@ -116,8 +116,8 @@ export function FolderShelf({ here, children }: { here: ReadonlySet<string>; chi
   return (
     <div className="-mx-4 mt-3 flex gap-2 overflow-x-auto px-4 pb-1">
       {children}
-      <section aria-label="Folders" className="shrink-0">
-        <h2 className="sr-only">Folders</h2>
+      <section aria-label="Coin folders" className="shrink-0">
+        <h2 className="sr-only">Coin folders</h2>
         <ul className="flex gap-2">
           {(folders ?? []).map((folder) => (
             <li key={folder.id} className="shrink-0">
@@ -141,8 +141,8 @@ export function ItemFolders({ item }: { item: Item }) {
   const folders = useFolders();
   if (!folders) return null;
   return (
-    <section aria-label="Folders">
-      <h2 className="text-lg font-semibold text-ink">Folders</h2>
+    <section aria-label="Coin folders">
+      <h2 className="text-lg font-semibold text-ink">Coin folders</h2>
       <div className="mt-2 flex flex-wrap gap-2">
         {folders.map((folder) => {
           const inside = folder.itemIds.includes(item.id);
@@ -174,11 +174,11 @@ export function DeleteFolder({ folder }: { folder: Folder }) {
   return (
     <div className="pt-4">
       <HoldBar
-        name="Delete folder"
+        name="Delete coin folder"
         danger
         holding={holding}
         holdMs={DELETE_HOLD_MS}
-        label={holding ? 'Keep holding…' : 'Hold to delete this folder'}
+        label={holding ? 'Keep holding…' : 'Hold to delete this coin folder'}
         hold={{
           onPress: () => setTapped(false),
           onTap: () => setTapped(true),
@@ -194,7 +194,7 @@ export function DeleteFolder({ folder }: { folder: Folder }) {
         }}
       />
       <p role="status" className="pt-2 text-center text-base text-muted">
-        {tapped ? 'Press and hold the button to delete this folder. ' : ''}The pieces in it stay in your Collection.
+        {tapped ? 'Press and hold the button to delete this coin folder. ' : ''}The pieces in it stay in your Collection.
       </p>
     </div>
   );

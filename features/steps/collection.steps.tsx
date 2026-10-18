@@ -460,13 +460,13 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     await worth(bill.id, 50, 60);
   };
   const makeFolder = async (name: string) => {
-    if (!screen.queryByRole('button', { name: 'New folder' })) await open('#/collection');
-    await userEvent.click(await screen.findByRole('button', { name: 'New folder' }));
-    const sheet = await screen.findByRole('dialog', { name: 'New folder' });
-    await userEvent.type(within(sheet).getByRole('textbox', { name: 'Folder name' }), name);
-    await userEvent.click(within(sheet).getByRole('button', { name: 'Make folder' }));
-    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'New folder' })).toBeNull());
-    const folders = await screen.findByRole('region', { name: 'Folders' });
+    if (!screen.queryByRole('button', { name: 'New coin folder' })) await open('#/collection');
+    await userEvent.click(await screen.findByRole('button', { name: 'New coin folder' }));
+    const sheet = await screen.findByRole('dialog', { name: 'New coin folder' });
+    await userEvent.type(within(sheet).getByRole('textbox', { name: 'Coin folder name' }), name);
+    await userEvent.click(within(sheet).getByRole('button', { name: 'Make coin folder' }));
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'New coin folder' })).toBeNull());
+    const folders = await screen.findByRole('region', { name: 'Coin folders' });
     await within(folders).findByRole('link', { name: new RegExp(name) });
   };
   const openPiece = async (name: RegExp) => {
@@ -474,7 +474,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     await userEvent.click(await screen.findByRole('link', { name }));
     await screen.findByRole('heading', { level: 1, name });
   };
-  const folderBox = async (folder: string) => within(await screen.findByRole('region', { name: 'Folders' })).findByRole('checkbox', { name: folder });
+  const folderBox = async (folder: string) => within(await screen.findByRole('region', { name: 'Coin folders' })).findByRole('checkbox', { name: folder });
   /** Sets a piece's folder box to on or off, from its item view. */
   const setIn = async (piece: RegExp, folder: string, on: boolean) => {
     await openPiece(piece);
@@ -484,7 +484,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
   };
   const openFolder = async (name: string) => {
     await open('#/collection');
-    const folders = await screen.findByRole('region', { name: 'Folders' });
+    const folders = await screen.findByRole('region', { name: 'Coin folders' });
     await userEvent.click(await within(folders).findByRole('link', { name: new RegExp(name) }));
     await screen.findByRole('heading', { level: 1, name });
   };
@@ -549,13 +549,13 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
       await open('#/collection');
     });
     Then('the Collection shows the folder "State quarters" with 1 piece', async () => {
-      const folders = await screen.findByRole('region', { name: 'Folders' });
+      const folders = await screen.findByRole('region', { name: 'Coin folders' });
       const link = await within(folders).findByRole('link', { name: /State quarters/ });
       await waitFor(() => expect(link).toHaveTextContent('1 piece'));
     });
-    When('he holds Delete folder in the folder "State quarters"', async () => {
+    When('he holds Delete coin folder in the folder "State quarters"', async () => {
       await openFolder('State quarters');
-      press(screen.getByRole('button', { name: 'Delete folder' }));
+      press(screen.getByRole('button', { name: 'Delete coin folder' }));
     });
     Then('the Collection shows no folder and all three pieces are still in it', async () => {
       await waitFor(() => expect(window.location.hash).toBe('#/collection'));
@@ -566,7 +566,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
 
   const openRename = async () => {
     await userEvent.click(await screen.findByRole('button', { name: 'Rename' }));
-    return screen.findByRole('dialog', { name: 'Rename folder' });
+    return screen.findByRole('dialog', { name: 'Rename coin folder' });
   };
 
   Scenario('A folder can be renamed from its page and the new name shows everywhere', ({ Given, When, And, Then }) => {
@@ -576,18 +576,18 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     And('he opens the folder "New folder"', () => openFolder('New folder'));
     And('he taps Rename on its page, types "Coins" and taps Save', async () => {
       const sheet = await openRename();
-      const input = within(sheet).getByRole('textbox', { name: 'Folder name' });
+      const input = within(sheet).getByRole('textbox', { name: 'Coin folder name' });
       expect(input).toHaveValue('New folder');
       await userEvent.clear(input);
       await userEvent.type(input, 'Coins');
       await userEvent.click(within(sheet).getByRole('button', { name: 'Save' }));
-      await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Rename folder' })).toBeNull());
+      await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Rename coin folder' })).toBeNull());
     });
-    Then('the page title, the Collection shelf row and the quarter\'s Folders box all read "Coins" and the quarter is still in it', async () => {
+    Then('the page title, the Collection shelf row and the quarter\'s Coin folders box all read "Coins" and the quarter is still in it', async () => {
       await screen.findByRole('heading', { level: 1, name: 'Coins' });
       await onlyListed('Quarter dollar');
       await open('#/collection');
-      const folders = await screen.findByRole('region', { name: 'Folders' });
+      const folders = await screen.findByRole('region', { name: 'Coin folders' });
       const link = await within(folders).findByRole('link', { name: /Coins/ });
       expect(within(folders).queryByRole('link', { name: /New folder/ })).toBeNull();
       await waitFor(() => expect(link).toHaveTextContent('1 piece'));
@@ -602,15 +602,35 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     And('he opens the folder "New folder"', () => openFolder('New folder'));
     And('he taps Rename on its page and clears the name', async () => {
       const sheet = await openRename();
-      await userEvent.clear(within(sheet).getByRole('textbox', { name: 'Folder name' }));
+      await userEvent.clear(within(sheet).getByRole('textbox', { name: 'Coin folder name' }));
     });
     Then('Save is off, and after Cancel the folder is still called "New folder"', async () => {
-      const sheet = screen.getByRole('dialog', { name: 'Rename folder' });
+      const sheet = screen.getByRole('dialog', { name: 'Rename coin folder' });
       expect(within(sheet).getByRole('button', { name: 'Save' })).toBeDisabled();
       await userEvent.click(within(sheet).getByRole('button', { name: 'Cancel' }));
-      await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Rename folder' })).toBeNull());
+      await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Rename coin folder' })).toBeNull());
       expect(screen.getByRole('heading', { level: 1, name: 'New folder' })).toBeInTheDocument();
       expect((await db.folders.toArray()).map((f) => f.name)).toEqual(['New folder']);
+    });
+  });
+
+  Scenario('A folder made before the words changed shows as a coin folder with its pieces', ({ Given, And, When, Then }) => {
+    Given('a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60', threePieces);
+    And('a folder "Old album" already stored with the quarter in it', async () => {
+      const quarter = (await db.items.toArray()).find((i) => i.denomination === 'Quarter dollar')!;
+      await db.folders.add({ id: 'old-1', name: 'Old album', itemIds: [quarter.id], createdAt: 1 });
+    });
+    When('he opens the Collection', () => open('#/collection'));
+    Then('the Coin folders shelf shows "Old album" with 1 piece and New coin folder', async () => {
+      const folders = await screen.findByRole('region', { name: 'Coin folders' });
+      const link = await within(folders).findByRole('link', { name: /Old album/ });
+      await waitFor(() => expect(link).toHaveTextContent('1 piece'));
+      expect(within(folders).getByRole('button', { name: 'New coin folder' })).toBeInTheDocument();
+    });
+    When('he opens the folder "Old album"', () => openFolder('Old album'));
+    Then('the folder lists only the quarter and offers Delete coin folder', async () => {
+      await onlyListed('Quarter dollar');
+      expect(screen.getByRole('button', { name: 'Delete coin folder' })).toBeInTheDocument();
     });
   });
 
@@ -622,13 +642,13 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
       await addItem({ kind: 'coin', country: null, denomination: '', year: null, status: 'considering', reading: { state: 'sent', txid: null, sentAt: Date.now(), sendId: 's1', message: null } });
     });
     When('he makes a folder "State quarters" on the Collection', () => makeFolder('State quarters'));
-    Then('the Wish list, saying "1 piece", is on one shelf with the folder "State quarters" and New folder', async () => {
+    Then('the Wish list, saying "1 piece", is on one shelf with the folder "State quarters" and New coin folder', async () => {
       const wish = await screen.findByRole('link', { name: /Wish list/ });
       await waitFor(() => expect(wish).toHaveTextContent('1 piece'));
       const shelf = within(wish.parentElement!);
-      expect(shelf.getByRole('region', { name: 'Folders' })).toBeInTheDocument();
+      expect(shelf.getByRole('region', { name: 'Coin folders' })).toBeInTheDocument();
       expect(shelf.getByRole('link', { name: /State quarters/ })).toBeInTheDocument();
-      expect(shelf.getByRole('button', { name: 'New folder' })).toBeInTheDocument();
+      expect(shelf.getByRole('button', { name: 'New coin folder' })).toBeInTheDocument();
     });
     And('under Looking at the nickel\'s card reads "Nickel · 1939" and the other card says "At the factory" once, beside its photo', async () => {
       const looking = await screen.findByRole('region', { name: 'Looking at' });

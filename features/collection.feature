@@ -140,7 +140,7 @@ Feature: The Collection
     And he puts the quarter in it from its item view
     And the app is reloaded on the Collection
     Then the Collection shows the folder "State quarters" with 1 piece
-    When he holds Delete folder in the folder "State quarters"
+    When he holds Delete coin folder in the folder "State quarters"
     Then the Collection shows no folder and all three pieces are still in it
 
   Scenario: A folder can be renamed from its page and the new name shows everywhere
@@ -149,7 +149,7 @@ Feature: The Collection
     And he puts the quarter in it from its item view
     And he opens the folder "New folder"
     And he taps Rename on its page, types "Coins" and taps Save
-    Then the page title, the Collection shelf row and the quarter's Folders box all read "Coins" and the quarter is still in it
+    Then the page title, the Collection shelf row and the quarter's Coin folders box all read "Coins" and the quarter is still in it
 
   Scenario: A folder cannot be renamed to nothing
     Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
@@ -158,9 +158,17 @@ Feature: The Collection
     And he taps Rename on its page and clears the name
     Then Save is off, and after Cancel the folder is still called "New folder"
 
+  Scenario: A folder made before the words changed shows as a coin folder with its pieces
+    Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
+    And a folder "Old album" already stored with the quarter in it
+    When he opens the Collection
+    Then the Coin folders shelf shows "Old album" with 1 piece and New coin folder
+    When he opens the folder "Old album"
+    Then the folder lists only the quarter and offers Delete coin folder
+
   Scenario: The Wish list leads the shelf of folders, and a coin he is only looking at is a small card
     Given a collection of a quarter worth $0.25 to $1, a dime worth $1 to $3 and a bill worth $50 to $60
     And a wished 1916 quarter, a 1939 nickel he is only looking at and a coin he is only looking at still at the factory
     When he makes a folder "State quarters" on the Collection
-    Then the Wish list, saying "1 piece", is on one shelf with the folder "State quarters" and New folder
+    Then the Wish list, saying "1 piece", is on one shelf with the folder "State quarters" and New coin folder
     And under Looking at the nickel's card reads "Nickel · 1939" and the other card says "At the factory" once, beside its photo

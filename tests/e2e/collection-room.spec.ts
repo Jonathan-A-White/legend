@@ -75,7 +75,7 @@ async function scrollToEnd(list: Locator): Promise<number> {
 
 test('on first open a full row of coins shows under everything above it, and the camera button covers none of it', async ({ page }) => {
   await seed(page);
-  for (const shown of [page.getByTestId('rough-worth'), page.getByRole('link', { name: /Wish list/ }), page.getByRole('region', { name: 'Folders' }), page.getByRole('region', { name: 'Looking at' })]) {
+  for (const shown of [page.getByTestId('rough-worth'), page.getByRole('link', { name: /Wish list/ }), page.getByRole('region', { name: 'Coin folders' }), page.getByRole('region', { name: 'Looking at' })]) {
     await expect(shown).toBeVisible();
   }
   const grid = page.getByRole('list', { name: 'Your collection' });
@@ -111,10 +111,10 @@ for (const view of ['Grid', 'List'] as const) {
   });
 }
 
-test('in a folder the Delete folder bar ends above the camera button', async ({ page }) => {
+test('in a folder the Delete coin folder bar ends above the camera button', async ({ page }) => {
   await seed(page);
   await page.getByRole('link', { name: /Europe/ }).click();
-  const del = page.getByRole('button', { name: 'Delete folder' });
+  const del = page.getByRole('button', { name: 'Delete coin folder' });
   await del.scrollIntoViewIfNeeded();
   await page.getByRole('list', { name: 'Your collection' }).evaluate((el) => {
     let scroller: HTMLElement | null = el.parentElement;
@@ -149,8 +149,8 @@ test('in a folder Rename opens a sheet filled with its name, and Save shows the 
   await seed(page);
   await page.getByRole('link', { name: /State quarters/ }).click();
   await page.getByRole('button', { name: 'Rename' }).click();
-  const sheet = page.getByRole('dialog', { name: 'Rename folder' });
-  const name = sheet.getByRole('textbox', { name: 'Folder name' });
+  const sheet = page.getByRole('dialog', { name: 'Rename coin folder' });
+  const name = sheet.getByRole('textbox', { name: 'Coin folder name' });
   await expect(name).toHaveValue('State quarters');
   await name.fill('');
   await expect(sheet.getByRole('button', { name: 'Save' })).toBeDisabled();
@@ -160,5 +160,5 @@ test('in a folder Rename opens a sheet filled with its name, and Save shows the 
   await expect(sheet).toBeHidden();
   await expect(page.getByRole('heading', { level: 1, name: 'Coins' })).toBeVisible();
   await page.getByRole('link', { name: /Collection/ }).first().click();
-  await expect(page.getByRole('region', { name: 'Folders' }).getByRole('link', { name: /Coins/ })).toBeVisible();
+  await expect(page.getByRole('region', { name: 'Coin folders' }).getByRole('link', { name: /Coins/ })).toBeVisible();
 });
