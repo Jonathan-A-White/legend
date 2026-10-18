@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.43",
+    "date": "2026-10-18",
+    "story": "mw-b2jk0h",
+    "kind": "fixed",
+    "text": "Tapping Update now always finishes by reloading the app, instead of sometimes sitting on \"Updating…\"."
+  },
+  {
     "version": "0.1.42",
     "date": "2026-10-17",
     "story": "mw-f9fv9f.11",

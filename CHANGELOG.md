@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.43
+_2026-10-18_
+- Fixed: Tapping Update now always finishes by reloading the app, instead of sometimes sitting on "Updating…".
+
 ## 0.1.42
 _2026-10-17_
 - Fixed: The Collection gives the coins more room: the Wish list sits on the folder shelf, Looking at is one row, and the camera button no longer covers a coin.
