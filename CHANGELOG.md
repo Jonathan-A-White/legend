@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.47
+_2026-10-19_
+- New: You can add a coin straight from a coin folder: tap Add a coin, photograph the front and back, and it goes into that folder.
+
 ## 0.1.45
 _2026-10-18_
 - New: Changed: Folders are now called coin folders everywhere in the Collection.
