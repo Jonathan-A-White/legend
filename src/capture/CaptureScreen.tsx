@@ -2,11 +2,11 @@
 // gallery and 'Name it'. No tap waits: the shutter grabs the frame and is ready again at once while the photo is kept behind it, and
 // Name it hands the photos on (startItemWhenKept stores the item once they are kept, then the queue, src/services/nameQueue.ts,
 // sends it), so a pile of coins is photograph, photograph, Name it, next. A switch says whether it is for the collection or only
-// Just looking. Everything he needs is in reach of the thumb at the bottom.
+// Just looking (not offered when Add was opened from a coin folder at #/add?folder=<id>: its coins go into that folder). Everything he needs is in reach of the thumb at the bottom.
 import { useRef, useState } from 'react';
 import type { ItemKind } from '../data/db';
-import { restoreItem, useItems } from '../data/repositories';
-import { navigate } from '../nav/route';
+import { restoreItem, useFolder, useItems } from '../data/repositories';
+import { addFolderIdOf, folderHash, navigate, useAddress } from '../nav/route';
 import { nameQueue } from '../services/nameQueue';
 import { readSetting } from '../settings/registry';
 import { grabFrame, stillFromFile, stillFromFrame, MAX_LONG_SIDE, type Still, type StillOptions } from './captureStill';
@@ -61,7 +61,11 @@ export function CaptureScreen() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const { ready, error } = useCamera(videoRef);
   const [kind, setKind] = useState<ItemKind>('coin');
-  const [mode, setMode] = useState<AddMode>('collect');
+  // opened from a coin folder (#/add?folder=<id>): the coins named here go into it, and Close goes back to it
+  const folderId = addFolderIdOf(useAddress());
+  const folder = useFolder(folderId ?? '');
+  const [modeChosen, setMode] = useState<AddMode>('collect');
+  const mode: AddMode = folderId ? 'collect' : modeChosen;
   const [shots, setShots] = useState<Shot[]>([]);
   const [problem, setProblem] = useState<string | null>(null);
   const [made, setMade] = useState<string[]>([]);
@@ -112,7 +116,7 @@ export function CaptureScreen() {
     setShots([]);
     setProblem(null);
     setKeeping((k) => k + 1);
-    startItemWhenKept(kind, mode, shots.map((shot) => shot.still)).then(
+    startItemWhenKept(kind, mode, shots.map((shot) => shot.still), folderId).then(
       (item) => {
         setMade((m) => [...m, item.id]);
         setKeeping((k) => k - 1);
@@ -140,7 +144,7 @@ export function CaptureScreen() {
             </p>
             <p className="text-base text-white/80">{both ? 'Tap Name it to send them.' : FRAMES[kind].caption}</p>
           </div>
-          <button type="button" aria-label="Close" onClick={() => navigate('#/collection', { replace: true })} className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black/60 text-2xl">
+          <button type="button" aria-label="Close" onClick={() => navigate(folderId && folder !== null ? folderHash(folderId) : '#/collection', { replace: true })} className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black/60 text-2xl">
             <span aria-hidden="true">✕</span>
           </button>
         </div>
@@ -179,15 +183,17 @@ export function CaptureScreen() {
             ))}
           </ul>
         ) : null}
-        <Choice<AddMode>
-          label="What to do with it"
-          value={mode}
-          onChange={setMode}
-          options={[
-            { value: 'collect', text: 'Add to my collection' },
-            { value: 'look', text: 'Just looking' },
-          ]}
-        />
+        {folderId ? null : (
+          <Choice<AddMode>
+            label="What to do with it"
+            value={mode}
+            onChange={setMode}
+            options={[
+              { value: 'collect', text: 'Add to my collection' },
+              { value: 'look', text: 'Just looking' },
+            ]}
+          />
+        )}
         <Choice<ItemKind>
           label="What it is"
           value={kind}

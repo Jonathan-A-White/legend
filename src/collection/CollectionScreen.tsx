@@ -7,7 +7,7 @@ import type { Item } from '../data/db';
 import { KINDS as KIND_WORDS, KIND_ORDER, itemName } from '../data/kinds';
 import { useFolder, useItems, useThumbs } from '../data/repositories';
 import { FeedbackButton } from '../feedback';
-import { ADD_HASH, WISHLIST_HASH, itemHash } from '../nav/route';
+import { ADD_HASH, WISHLIST_HASH, addToFolderHash, itemHash } from '../nav/route';
 import { RoughWorth } from '../worth';
 import { ChooseBar, ChooseTile, RemoveChosen, RemovedToast } from './Choose';
 import { useChoosing, type Choosing } from './choosing';
@@ -97,6 +97,15 @@ function LookingAt({ items, thumbs, ref_ }: { items: readonly Item[]; thumbs: re
   );
 }
 
+function CameraIcon({ size }: { size: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3V19H4V8.5Z" />
+      <circle cx="12" cy="13.5" r="3.4" />
+    </svg>
+  );
+}
+
 /** The Collection, or with a `folderId` the same view of just that folder's pieces: its count, Rename, its worth together as one range, and Delete folder. */
 export function CollectionScreen({ folderId }: { folderId?: string }) {
   const all = useItems();
@@ -155,6 +164,11 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
               </p>
               {folder ? <RenameFolder folder={folder} className="-mr-3 flex min-h-12 items-center rounded-xl px-3 text-lg font-medium text-accent" /> : null}
             </div>
+          ) : null}
+          {folderId && folder ? (
+            <a href={addToFolderHash(folderId)} className="mt-1 flex min-h-12 w-fit items-center gap-2 rounded-xl border border-accent px-4 text-lg font-medium text-accent active:opacity-80">
+              <CameraIcon size={22} /> Add a coin
+            </a>
           ) : null}
           <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
             {items ? countLine(shown) : ''}
@@ -253,7 +267,7 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
             {items && items.length === 0 && folderId ? (
               <section className="flex flex-col items-center px-6 pt-10 text-center">
                 <p className="text-xl font-semibold text-ink">This coin folder is empty</p>
-                <p className="mt-2 text-lg text-muted">Open a piece in your Collection and tick this coin folder under Coin folders to put it in.</p>
+                <p className="mt-2 text-lg text-muted">Tap Add a coin to photograph one into it, or open a piece in your Collection and tick this coin folder under Coin folders.</p>
               </section>
             ) : items && items.length === 0 ? (
               <section className="flex flex-1 flex-col items-center justify-center px-6 text-center">
@@ -310,14 +324,11 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
 
       {choosing.on || removed ? null : (
         <a
-          href={ADD_HASH}
+          href={folderId ? addToFolderHash(folderId) : ADD_HASH}
           aria-label="Add a coin or bill"
           className="absolute right-4 bottom-4 flex h-16 w-16 items-center justify-center rounded-full bg-accent text-accent-fg shadow-lg active:opacity-80"
         >
-          <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-            <path d="M4 8.5h3l1.6-2.5h6.8L17 8.5h3V19H4V8.5Z" />
-            <circle cx="12" cy="13.5" r="3.4" />
-          </svg>
+          <CameraIcon size={30} />
         </a>
       )}
 

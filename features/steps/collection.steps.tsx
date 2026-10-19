@@ -8,10 +8,14 @@ import { loadFeature, describeFeature } from '@amiceli/vitest-cucumber';
 import { App } from '../../src/App';
 import { openGate } from '../../tests/support/open-gate';
 import { db } from '../../src/data/db';
-import { addItem, getItem, putValue } from '../../src/data/repositories';
+import { addItem, deleteFolder, getItem, listFolders, putValue } from '../../src/data/repositories';
 import { writeSetting } from '../../src/settings/registry';
 import { clearBus } from '../../src/events/bus';
 import { seedCollection, seedPhotos, serveReferenceData, type Seeded } from '../../tests/support/collection-fixtures';
+import { installFakeCamera, type FakeCamera } from '../../tests/support/fake-camera';
+import { fakeGrist } from '../../tests/support/fake-grist';
+import { setGristPort } from '../../src/services/nameItem';
+import { nameQueue } from '../../src/services/nameQueue';
 
 beforeAll(() => {
   serveReferenceData((name, fake) => vi.stubGlobal(name, fake));
@@ -38,8 +42,10 @@ const open = async (hash: string) => {
 /** The press of a finger on a hold bar, as the browser sends it. */
 const press = (el: HTMLElement) => fireEvent.pointerDown(el, { button: 0, pointerId: 1, clientX: 5, clientY: 5 });
 
-describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
+describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) => {
   let seeded: Seeded;
+  /** the fake camera, installed by the scenarios that open Add */
+  let camera: FakeCamera | null = null;
 
   BeforeEachScenario(async () => {
     cleanup();
@@ -47,6 +53,15 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
     vi.useRealTimers();
     await db.open();
     await Promise.all(db.tables.map((t) => t.clear()));
+  });
+  AfterEachScenario(() => {
+    cleanup();
+    if (camera) {
+      nameQueue.stop();
+      setGristPort(null);
+      camera.restore();
+      camera = null;
+    }
   });
 
   const aCollection = async () => {
@@ -658,6 +673,96 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario }) => {
       expect(nickel).toHaveTextContent('Nickel · 1939');
       const other = cards.find((c) => c !== nickel)!;
       expect(within(other).getAllByText('At the factory')).toHaveLength(1);
+    });
+  });
+
+  // Add from a coin folder: the camera opened from a folder's page puts what it names into that folder.
+  const installCamera = () => {
+    camera = installFakeCamera();
+    setGristPort(fakeGrist().port); // the factory never answers: the coin stays pending in the Collection
+    nameQueue.stop();
+  };
+  const emptyFolder = async (name: string) => {
+    installCamera();
+    await open('#/collection');
+    await makeFolder(name);
+  };
+  const addACoinFromFolder = async (name: string) => {
+    await openFolder(name);
+    await userEvent.click(screen.getByRole('link', { name: 'Add a coin' }));
+    await screen.findByTestId('prompt');
+    await waitFor(() => expect(screen.getByRole('button', { name: 'Take photo' })).toBeEnabled());
+  };
+  const takeBothSides = async () => {
+    const shutter = () => screen.getByRole('button', { name: 'Take photo' });
+    await userEvent.click(shutter());
+    await waitFor(() => expect(screen.getByTestId('prompt')).toHaveTextContent('Back'));
+    camera!.video.height = 600;
+    await userEvent.click(shutter());
+    await waitFor(() => expect(screen.getAllByRole('button', { name: /^Retake/ })).toHaveLength(2));
+  };
+  const nameIt = async () => {
+    await userEvent.click(screen.getByRole('button', { name: 'Name it' }));
+    await waitFor(() => expect(screen.getByTestId('prompt')).toHaveTextContent('Front'));
+    camera!.video.height = 720;
+  };
+  const closeCamera = async () => userEvent.click(screen.getByRole('button', { name: 'Close' }));
+  const folderNamed = async (name: string) => (await listFolders()).find((f) => f.name === name)!;
+
+  Scenario("A coin added from a coin folder's camera goes into that folder, and the camera from the Collection puts nothing in a folder", ({ Given, When, And, Then }) => {
+    Given('a coin folder "State quarters" that is empty', () => emptyFolder('State quarters'));
+    When('he opens the folder "State quarters" and taps Add a coin', () => addACoinFromFolder('State quarters'));
+    And('he photographs the Front and the Back and taps Name it', async () => {
+      await takeBothSides();
+      await nameIt();
+    });
+    And('he closes the camera', closeCamera);
+    Then('he is back on the folder "State quarters" and it lists the new coin, which is also in the Collection', async () => {
+      await screen.findByRole('heading', { level: 1, name: 'State quarters' });
+      await waitFor(() => expect(screen.getByTestId('folder-count')).toHaveTextContent(/^1 piece$/));
+      expect(window.location.hash).toBe(`#/folder/${(await folderNamed('State quarters')).id}`);
+      expect(tiles()).toHaveLength(1);
+      expect(await db.items.count()).toBe(1);
+    });
+    When('he opens the camera from the Collection and photographs a second coin, Front and Back', async () => {
+      await open('#/collection');
+      await userEvent.click(await screen.findByRole('link', { name: 'Add a coin or bill' }));
+      await waitFor(() => expect(screen.getByRole('button', { name: 'Take photo' })).toBeEnabled());
+      await takeBothSides();
+      await nameIt();
+    });
+    Then('the second coin is in the Collection and the folder "State quarters" still holds only the first', async () => {
+      await waitFor(async () => expect(await db.items.count()).toBe(2));
+      const folder = await folderNamed('State quarters');
+      expect(folder.itemIds).toHaveLength(1);
+    });
+  });
+
+  Scenario("Backing out of a coin folder's camera adds nothing, and a coin added after its folder is deleted is still saved", ({ Given, When, Then }) => {
+    Given('a coin folder "State quarters" that is empty', () => emptyFolder('State quarters'));
+    When('he opens the folder "State quarters", taps Add a coin and closes the camera', async () => {
+      await addACoinFromFolder('State quarters');
+      await closeCamera();
+    });
+    Then('he is back on the folder "State quarters" and it is still empty', async () => {
+      await screen.findByRole('heading', { level: 1, name: 'State quarters' });
+      expect(window.location.hash).toBe(`#/folder/${(await folderNamed('State quarters')).id}`);
+      await waitFor(() => expect(screen.getByTestId('folder-count')).toHaveTextContent(/^0 pieces$/));
+      expect(await db.items.count()).toBe(0);
+    });
+    When("he opens the folder's camera again and the folder is deleted before he names the coin", async () => {
+      await userEvent.click(screen.getByRole('link', { name: 'Add a coin' }));
+      await waitFor(() => expect(screen.getByRole('button', { name: 'Take photo' })).toBeEnabled());
+      await takeBothSides();
+      await deleteFolder((await folderNamed('State quarters')).id);
+      await nameIt();
+    });
+    Then('the coin is saved in the Collection and nothing failed', async () => {
+      await waitFor(async () => expect(await db.items.count()).toBe(1));
+      expect(screen.queryByRole('alert')).toBeNull();
+      expect(await db.folders.count()).toBe(0);
+      await closeCamera();
+      await screen.findByRole('heading', { level: 1, name: 'Collection' });
     });
   });
 });

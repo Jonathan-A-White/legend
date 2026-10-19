@@ -172,3 +172,19 @@ Feature: The Collection
     When he makes a folder "State quarters" on the Collection
     Then the Wish list, saying "1 piece", is on one shelf with the folder "State quarters" and New coin folder
     And under Looking at the nickel's card reads "Nickel · 1939" and the other card says "At the factory" once, beside its photo
+
+  Scenario: A coin added from a coin folder's camera goes into that folder, and the camera from the Collection puts nothing in a folder
+    Given a coin folder "State quarters" that is empty
+    When he opens the folder "State quarters" and taps Add a coin
+    And he photographs the Front and the Back and taps Name it
+    And he closes the camera
+    Then he is back on the folder "State quarters" and it lists the new coin, which is also in the Collection
+    When he opens the camera from the Collection and photographs a second coin, Front and Back
+    Then the second coin is in the Collection and the folder "State quarters" still holds only the first
+
+  Scenario: Backing out of a coin folder's camera adds nothing, and a coin added after its folder is deleted is still saved
+    Given a coin folder "State quarters" that is empty
+    When he opens the folder "State quarters", taps Add a coin and closes the camera
+    Then he is back on the folder "State quarters" and it is still empty
+    When he opens the folder's camera again and the folder is deleted before he names the coin
+    Then the coin is saved in the Collection and nothing failed

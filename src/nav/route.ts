@@ -1,5 +1,5 @@
 // src/nav/route.ts: the screens, told apart by the address hash, so the phone's Back button walks them. A hash is one of
-// #/collection, #/globe, #/quarters, #/learn (and #/learn/grading, /mints, /years, /path), #/settings, #/wishlist and #/folder/<id> (from the Collection), #/item/<id>, #/country/<cc> or #/add (the camera); '#/' and any hash it does not know
+// #/collection, #/globe, #/quarters, #/learn (and #/learn/grading, /mints, /years, /path), #/settings, #/wishlist and #/folder/<id> (from the Collection), #/item/<id>, #/country/<cc> or #/add (the camera; #/add?folder=<id> from a coin folder, which puts what it names into that folder); '#/' and any hash it does not know
 // are Home. src/nav/lastRoute.ts keeps these addresses across a close.
 import { useSyncExternalStore } from 'react';
 
@@ -37,6 +37,10 @@ export const countryOf = (hash: string): string | undefined => COUNTRY.exec(hash
 export const hashFor = (route: Tab | 'home'): string => (route === 'home' ? '#/' : `#/${route}`);
 export const ADD_HASH = '#/add';
 export const WISHLIST_HASH = '#/wishlist';
+/** The Add address opened from a coin folder: what the camera names there goes into that folder. */
+export const addToFolderHash = (folderId: string): string => `${ADD_HASH}?folder=${folderId}`;
+/** The folder an Add address was opened from, or undefined (Add opened anywhere else). */
+export const addFolderIdOf = (hash: string): string | undefined => /^folder=([A-Za-z0-9-]+)$/.exec(hash.split('?')[1] ?? '')?.[1];
 export const itemHash = (id: string): string => `#/item/${id}`;
 export const folderHash = (id: string): string => `#/folder/${id}`;
 export const countryHash = (cc: string): string => `#/country/${cc.toUpperCase()}`;
