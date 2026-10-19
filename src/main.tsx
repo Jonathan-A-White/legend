@@ -5,7 +5,7 @@ import 'pwa-kit/whats-new/styles.css';
 import { registerSW } from 'virtual:pwa-register';
 import { App } from './App';
 import { restoreLastRoute } from './nav/lastRoute';
-import { startAppUpdates } from './services/appUpdate';
+import { startAppUpdates } from 'pwa-kit/app-update';
 import { installScrollGuard } from './ui/scrollGuard';
 
 installScrollGuard();
@@ -20,7 +20,7 @@ createRoot(document.getElementById('root')!).render(
 
 // vite.config.ts: registerType 'prompt', so a new build waits for the collector's tap on the banner. The registration
 // goes to the update logic, which shows the banner, sends SKIP_WAITING on the tap, reloads once, and
-// looks for a new build (src/services/appUpdate.ts).
+// looks for a new build (pwa-kit/app-update).
 registerSW({
   immediate: true,
   onRegisteredSW(_url, registration) {

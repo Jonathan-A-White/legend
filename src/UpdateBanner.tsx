@@ -1,7 +1,7 @@
 // src/UpdateBanner.tsx: 'Update ready, tap to reload', above the content while a newer build waits, with a line under it
 // naming the waiting version and what is in it (src/whatsNew/BannerSummary.tsx).
 // The tap goes dead and says 'Updating…' until the page reloads.
-import { applyUpdate, useUpdateState } from './services/appUpdate';
+import { applyUpdate, useUpdateState } from 'pwa-kit/app-update';
 import { BannerSummary } from './whatsNew/BannerSummary';
 
 export function UpdateBanner() {

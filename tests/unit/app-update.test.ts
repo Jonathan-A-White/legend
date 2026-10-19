@@ -2,7 +2,7 @@
 // it has not within the patience (the class from TradeTracker mw-iy99ci.20, Postern mw-he81zu).
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { fakeSetup, fakeWorker } from '../support/fake-registration';
-import { startAppUpdates, TAKE_OVER_PATIENCE_MS, type AppUpdates } from '../../src/services/appUpdate';
+import { startAppUpdates, TAKE_OVER_PATIENCE_MS, type AppUpdates } from 'pwa-kit/app-update';
 
 let updates: AppUpdates | undefined;
 
