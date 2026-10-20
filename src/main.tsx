@@ -2,6 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import 'pwa-kit/whats-new/styles.css';
+import 'voice-kit/composer/styles.css';
 import { registerSW } from 'virtual:pwa-register';
 import { App } from './App';
 import { restoreLastRoute } from './nav/lastRoute';

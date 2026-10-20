@@ -27,6 +27,28 @@
   --lg-bad-fg: #1f0b07;
 }
 
+/* voice-kit's Composer (the tutor box, Tell the maker) wears the app's colours. */
+:root {
+  --bk-composer-surface: var(--lg-surface);
+  --bk-composer-fg: var(--lg-ink);
+  --bk-composer-muted: var(--lg-muted);
+  --bk-composer-faint: var(--lg-muted);
+  --bk-composer-line: var(--lg-line);
+  --bk-composer-sunken: var(--lg-canvas);
+  --bk-composer-accent: var(--lg-accent);
+  --bk-composer-accent-fg: var(--lg-accent-fg);
+  --bk-composer-danger: var(--lg-bad);
+  --bk-composer-on-strong: var(--lg-bad-fg);
+  --bk-composer-font-size: 1.125rem;
+  --bk-composer-bar-height: 5rem;
+  --bk-composer-button-size: 3rem;
+  --bk-composer-mic-size: 3rem;
+}
+/* Type a question / Type it here is a quiet link under the bar; keep it a full thumb-sized target. */
+.bk-composer__type-instead {
+  min-height: 3rem;
+}
+
 /* The Theme setting (src/settings/useAppearance.ts): 'light' is a parchment palette; 'system' follows the phone and is dark
  * when the phone says nothing. The manifest and index.html keep the dark canvas as the launch colour. */
 :root[data-theme="light"] {

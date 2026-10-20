@@ -89,9 +89,13 @@ test('a question about his quarter is answered under the box on a phone', async 
 
   const suggested = sheet.getByRole('list', { name: 'Suggested questions' }).getByRole('button');
   await expect(suggested).toHaveCount(3);
-  for (const target of [sheet.getByRole('button', { name: 'Ask', exact: true }), suggested.first()]) {
+  // the box opens on the hold bar; Type a question brings out the field, and Ask
+  for (const target of [sheet.getByRole('button', { name: 'Hold to ask' }), sheet.getByRole('button', { name: 'Type a question' }), suggested.first()]) {
     expect((await target.boundingBox())?.height).toBeGreaterThanOrEqual(44);
   }
+  await sheet.getByRole('button', { name: 'Type a question' }).click();
+  await sheet.getByRole('textbox', { name: 'Your question' }).fill('Why?');
+  expect((await sheet.getByRole('button', { name: 'Ask', exact: true }).boundingBox())?.height).toBeGreaterThanOrEqual(44);
   await suggested.filter({ hasText: 'How do I grade this one?' }).click();
   await expect(sheet.getByText('Waiting for the tutor…')).toBeVisible();
 

@@ -63,6 +63,9 @@ test('the live tutor answers where the mint mark is on the example quarter', asy
   const gotIt = sheet.getByRole('button', { name: 'Got it' });
   if (await gotIt.isVisible()) await gotIt.click();
 
+  // the box opens on the hold bar when the phone can listen; Type a question brings out the field
+  const typeInstead = sheet.getByRole('button', { name: 'Type a question' });
+  if (await typeInstead.isVisible()) await typeInstead.click();
   await sheet.getByRole('textbox', { name: 'Your question' }).fill(QUESTION);
   const startedAt = Date.now();
   await sheet.getByRole('button', { name: 'Ask', exact: true }).click();
