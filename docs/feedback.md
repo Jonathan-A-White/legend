@@ -5,8 +5,8 @@
 A small **…** on the Collection, Globe, Quarters and Learn bars, and **Tell the maker** in Settings (Feedback row), open one
 sheet (`src/feedback/FeedbackSheet.tsx`). Two big entries: **Can I add this?** (kind `add`) and **Something's wrong** (kind
 `wrong`); neither tapped, the words go as kind `other`. A box for their words (1200 characters at most), an optional
-**Attach a screenshot** (one JPEG, PNG or WebP, 8 MB at most) and **Send**, which waits for words. A hold-to-talk will mount in
-the sheet's `voice` slot, under the box.
+**Attach a screenshot** (one JPEG, PNG or WebP, 8 MB at most) and **Send**, which waits for words. Under the box sits voice-kit's Composer (**Hold to talk**, or
+**Type it here**, then **Send these words**): its words go with the box's, as the feedback.
 
 ### What is sent
 

@@ -1,5 +1,5 @@
 // Tell the maker at phone width: the '…' on the Globe bar opens the sheet, Something's wrong and his words go as one feedback grist
-// naming the Globe, and the sheet thanks him. Ends with a shot of the sent sheet. The mill is a fake Postern in this process.
+// naming the Globe, and the sheet thanks him. Shots of the sheet being written (its Composer under the box) and of the sent sheet. The mill is a fake Postern in this process.
 import { expect, test } from '@playwright/test';
 import { makeFakePostern } from '../support/fake-postern';
 import { routePostern } from '../support/playwright-postern';
@@ -30,6 +30,12 @@ test('Something is wrong from the Globe sends one feedback grist and thanks him'
     expect((entry?.x ?? 0) + (entry?.width ?? 0)).toBeLessThanOrEqual(390);
   }
   await expect(sheet.getByRole('button', { name: 'Send' })).toBeDisabled();
+  // the Composer in the voice slot: a hold bar and Type it here, both thumb-sized, and nothing past the sheet's edge
+  const hold = await sheet.getByRole('button', { name: 'Hold to talk' }).boundingBox();
+  expect(hold?.height ?? 0).toBeGreaterThanOrEqual(56);
+  expect((hold?.x ?? 0) + (hold?.width ?? 0)).toBeLessThanOrEqual(390);
+  expect((await sheet.getByRole('button', { name: 'Type it here' }).boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
+  await shot(page, 'feedback-edit');
   await sheet.getByRole('radio', { name: "Something's wrong" }).click();
   await sheet.getByRole('textbox', { name: 'Your message' }).fill('Brazil does not light up');
   await sheet.getByRole('button', { name: 'Send' }).click();
