@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.48",
+    "date": "2026-10-20",
+    "story": "mw-06ggew.10",
+    "kind": "new",
+    "text": "You can now hold a button and talk to the tutor or to the maker instead of typing."
+  },
+  {
     "version": "0.1.47",
     "date": "2026-10-19",
     "story": "mw-f9fv9f.16",

@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.48
+_2026-10-20_
+- New: You can now hold a button and talk to the tutor or to the maker instead of typing.
+
 ## 0.1.47
 _2026-10-19_
 - New: You can add a coin straight from a coin folder: tap Add a coin, photograph the front and back, and it goes into that folder.
