@@ -13,6 +13,8 @@ licence and what we changed. Credit is owed whether or not a licence asks for it
   Changes: none.
 - **[pwa-kit](https://github.com/Jonathan-A-White/pwa-kit)** by Jonathan A. White, MIT. What every installed web app shows
   about itself: What's new (the update banner's summary and the sheet shown after an update) and one-time tips. Changes: none.
+- **[voice-kit](https://github.com/Jonathan-A-White/voice-kit)** by Jonathan A. White, MIT. The hold-to-talk composer in the tutor box
+  and in Tell the maker (the phone's own speech recogniser hears him; nothing is recorded or sent but the words he sends). Changes: none.
 - **[React](https://react.dev)**, MIT. **[Dexie](https://dexie.org)**, Apache-2.0. **[Vite](https://vite.dev)**, MIT, with
   **[vite-plugin-pwa](https://vite-pwa-org.netlify.app)**, MIT, and **[Workbox](https://developer.chrome.com/docs/workbox)**,
   MIT. **[Tailwind CSS](https://tailwindcss.com)**, MIT. **[Ajv](https://ajv.js.org)**, MIT, checks the photo reader's answer against its schema.
