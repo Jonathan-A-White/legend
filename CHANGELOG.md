@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.49
+_2026-10-20_
+- Fixed: A long message to the maker is no longer cut off silently; the box now counts the characters and Send waits until the message is short enough.
+
 ## 0.1.48
 _2026-10-20_
 - New: You can now hold a button and talk to the tutor or to the maker instead of typing.

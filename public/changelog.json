@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.49",
+    "date": "2026-10-20",
+    "story": "mw-tn5rp1",
+    "kind": "fixed",
+    "text": "A long message to the maker is no longer cut off silently; the box now counts the characters and Send waits until the message is short enough."
+  },
+  {
     "version": "0.1.48",
     "date": "2026-10-20",
     "story": "mw-06ggew.10",
