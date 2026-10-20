@@ -11,6 +11,8 @@ import { isWaiting, queueFeedback, sendWaiting } from './outbox';
 
 export const SENT_LINE = 'Sent, thank you: the factory reads these';
 export const SAVED_LINE = 'Saved on this phone. It goes when you are online.';
+/** The live 'N of 1200' shows from here on, so a long paste or dictation is never cut without a word. */
+const COUNT_FROM = Math.floor(MAX_FEEDBACK_CHARS * 0.8);
 const PICTURE_LINE = 'Pick a JPEG, PNG or WebP picture under 8 MB.';
 
 const CHOICES: readonly { kind: Exclude<FeedbackKind, 'other'>; label: string; hint: string }[] = [
@@ -52,7 +54,10 @@ export function FeedbackSheet({ screen, onClose }: { screen: string; onClose: ()
     };
   }, []);
 
-  const ready = text.trim().length > 0 && phase === 'editing';
+  const length = text.trim().length;
+  const over = length > MAX_FEEDBACK_CHARS;
+  const nearing = length >= COUNT_FROM;
+  const ready = length > 0 && !over && phase === 'editing';
 
   function choose(files: FileList | null): void {
     const file = files?.[0];
@@ -124,12 +129,17 @@ export function FeedbackSheet({ screen, onClose }: { screen: string; onClose: ()
                 <textarea
                   id={textId}
                   rows={5}
-                  maxLength={MAX_FEEDBACK_CHARS}
+                  aria-invalid={over}
                   value={text}
                   disabled={phase !== 'editing'}
                   onChange={(e) => setText(e.target.value)}
-                  className="block w-full resize-none rounded-xl border border-line bg-canvas px-3 py-2 text-lg text-ink disabled:opacity-60"
+                  className={`block w-full resize-none rounded-xl border bg-canvas px-3 py-2 text-lg text-ink disabled:opacity-60 ${over ? 'border-bad' : 'border-line'}`}
                 />
+                {nearing ? (
+                  <p role={over ? 'alert' : undefined} className={`pt-1 text-base ${over ? 'text-bad' : 'text-muted'}`}>
+                    {over ? `${length} of ${MAX_FEEDBACK_CHARS}: too long to send. Shorten it; nothing has been cut.` : `${length} of ${MAX_FEEDBACK_CHARS}`}
+                  </p>
+                ) : null}
                 <Composer
                   settings={LEGEND_COMPOSER_SETTINGS}
                   labels={VOICE_LABELS}

@@ -48,3 +48,14 @@ Feature: Tell the maker
     When he opens the feedback sheet from the bar
     Then Send is not available
     And the mill received nothing
+
+  Scenario: A long paste is never cut: the box shows how long it is and Send waits until it is short enough
+    Given Legend is open on the Collection behind a fake Postern
+    When he opens the feedback sheet from the bar
+    And he pastes 1500 characters into the message
+    Then the message box still holds all 1500 characters
+    And the sheet says "1500 of 1200"
+    And Send is not available
+    When he cuts the message down to 1100 characters
+    Then the sheet no longer says it is too long
+    And Send is available

@@ -181,4 +181,33 @@ describeFeature(feature, ({ Scenario }) => {
       expect(fake.received).toEqual([]);
     });
   });
+
+  Scenario('A long paste is never cut: the box shows how long it is and Send waits until it is short enough', ({ Given, When, Then, And }) => {
+    const box = () => within(sheet()).getByRole('textbox', { name: 'Your message' }) as HTMLTextAreaElement;
+    Given('Legend is open on the Collection behind a fake Postern', () => openAt('#/collection', 'Collection'));
+    When('he opens the feedback sheet from the bar', openFromBar);
+    And('he pastes {int} characters into the message', async (_, count: number) => {
+      await user.click(box());
+      await user.paste('a'.repeat(count));
+    });
+    Then('the message box still holds all {int} characters', (_, count: number) => {
+      expect(box().value).toHaveLength(count);
+    });
+    And('the sheet says {string}', (_, line: string) => {
+      expect(within(sheet()).getByText(new RegExp(line))).toBeInTheDocument();
+    });
+    And('Send is not available', () => {
+      expect(within(sheet()).getByRole('button', { name: 'Send' })).toBeDisabled();
+    });
+    When('he cuts the message down to {int} characters', async (_, count: number) => {
+      await user.clear(box());
+      await user.paste('a'.repeat(count));
+    });
+    Then('the sheet no longer says it is too long', () => {
+      expect(within(sheet()).queryByText(/too long/)).toBeNull();
+    });
+    And('Send is available', () => {
+      expect(within(sheet()).getByRole('button', { name: 'Send' })).toBeEnabled();
+    });
+  });
 });
