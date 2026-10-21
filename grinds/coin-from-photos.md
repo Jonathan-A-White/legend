@@ -81,10 +81,14 @@ Replicas (a copy of a real coin or note, made as a souvenir, a museum or teachin
   of the piece it copies. `material` is what the copy seems made of ("pewter", "brass", "base metal"), not the original's
   metal. `gradeGuess` is `null`. `notableFeatures` names what showed it is a copy ("COPY stamped on the reverse", "cast
   seam on the edge"). Never answer a replica as the real coin, with the real coin's kind, year and mint as if genuine.
-- When you are not sure (a famous rarity with nothing wrong you can see, and nothing said in the `hint`), do not call it a
-  fake: read it as what it shows, with `confidence` `low`, begin `design` with "May be a replica.", put "May be a
-  replica" in `notableFeatures`, and say in `unreadable`, in plain words, what would settle it ("Weigh it and look at the
-  edge: most pieces like this are copies, and a real one needs an expert to check it."). Calling a real coin a fake is as
+- When you are not sure about a piece far more often met as a copy than real (the pieces named above, a 1776 Continental
+  dollar, an 1804 silver dollar, a Brasher doubloon, an ancient coin in a souvenir set, and the like), with nothing wrong
+  you can see and nothing said in the `hint`, do not call it a fake: read it as what it shows, with `confidence` `low`,
+  begin `design` with "May be a replica.", put "May be a replica" in `notableFeatures`, and say in `unreadable`, in plain
+  words, what would settle it ("Weigh it and look at the edge: most pieces like this are copies, and a real one needs an
+  expert to check it."). This rule never covers a key date or scarce issue that is commonly found genuine (a 1909-S cent,
+  a 1916-D dime): when nothing on the photo or in the `hint` is wrong with it, read it as the real coin, with the
+  `confidence` its legibility earns, and no "May be a replica" anywhere in the answer. Calling a real coin a fake is as
   wrong as calling a copy real.
 
 Rules:

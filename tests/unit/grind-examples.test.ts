@@ -226,6 +226,20 @@ describe('a replica is read as a replica and valued as one', () => {
     const appraiser = readFileSync('grinds/item-value.md', 'utf8');
     expect(appraiser).toMatch(/[Rr]eplica/);
   });
+
+  // mw-fm7wmn.30: the smoke read a plain 1909-S cent as "May be a replica" at low confidence, because the doubt rule's
+  // "famous rarity" named no pieces. The rule is scoped to a piece far more often met as a copy than real, and says a key
+  // date commonly found genuine is read at the confidence its legibility earns.
+  it('the reader\'s doubt rule covers only pieces far more often met as a copy, never a key date found genuine', () => {
+    const reader = readFileSync('grinds/coin-from-photos.md', 'utf8').replace(/\s+/g, ' ');
+    const rule = reader.slice(reader.indexOf('- When you are not sure'), reader.indexOf('Rules:'));
+    expect(rule, 'the doubt rule is there').toContain('May be a replica');
+    expect(rule, 'unscoped "famous rarity" is the fault').not.toMatch(/famous rarity/);
+    expect(rule, 'names the pieces it covers').toMatch(/far more often met as a copy than real/);
+    expect(rule, 'excludes a key date commonly found genuine').toMatch(/key date[^.]*commonly found genuine/);
+    expect(rule, 'names the 1909-S cent').toContain('1909-S cent');
+    expect(rule, 'reads it at its legibility confidence').toMatch(/legib[a-z]* earns|confidence its legib/);
+  });
 });
 
 describe('the scenarios use the names mw grist smoke checks', () => {
