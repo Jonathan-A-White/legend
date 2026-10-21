@@ -16,10 +16,17 @@ const ANSWER = {
   funFact: 'Until 1964 this quarter was made of silver, which is why many are still saved.',
 };
 
-/** The factory, injected where bsv-kit/grist would be (docs/testing.md): sends are counted, the answer comes after a moment. */
-async function fakeFactory(page: Page): Promise<void> {
-  await page.addInitScript((answer) => {
-    const w = window as unknown as { __sent: { app: string; kind: string; photos: number }[]; __legendGrist: unknown };
+/**
+ * The factory, injected where bsv-kit/grist would be (docs/testing.md): sends are counted. The answer comes when the spec says so, not
+ * after a fixed wait a loaded host could outrun: `held` keeps it back until releaseAnswer(page), otherwise it comes at once.
+ */
+async function fakeFactory(page: Page, { held = false } = {}): Promise<void> {
+  await page.addInitScript(({ answer, held }) => {
+    const w = window as unknown as { __sent: { app: string; kind: string; photos: number }[]; __legendGrist: unknown; __releaseAnswer: () => void };
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => (release = resolve));
+    w.__releaseAnswer = release;
+    if (!held) release();
     w.__sent = [];
     w.__legendGrist = {
       sendGrist: async (p: { app: string; kind: string; photos: unknown[] }) => {
@@ -27,19 +34,22 @@ async function fakeFactory(page: Page): Promise<void> {
         return 'direct:e2e';
       },
       awaitAnswer: async (txid: string) => {
-        await new Promise((r) => setTimeout(r, 1200));
+        await gate;
         return { re: txid, status: 'answered', answer, grind: { app: 'legend', kind: 'coin-from-photos', v: '1.0' } };
       },
     };
-  }, ANSWER);
+  }, { answer: ANSWER, held });
 }
+
+/** Lets a held answer come (fakeFactory's `held`). */
+const releaseAnswer = (page: Page) => page.evaluate(() => (window as unknown as { __releaseAnswer: () => void }).__releaseAnswer());
 
 const pageScrolls = (page: Page) => page.evaluate(() => document.documentElement.scrollHeight > window.innerHeight || document.documentElement.scrollWidth > window.innerWidth);
 
 test('two photos, Name it, and the answer is checked on a phone', async ({ page }) => {
   await openUnlocked(page);
   await fakeCamera(page);
-  await fakeFactory(page);
+  await fakeFactory(page, { held: true });
   await page.goto('/#/collection');
   await page.getByRole('heading', { name: 'Collection' }).waitFor();
 
@@ -76,7 +86,8 @@ test('two photos, Name it, and the answer is checked on a phone', async ({ page 
   await expect(page.getByText('1 at the factory')).toBeVisible();
   expect(await page.evaluate(() => (window as unknown as { __sent: unknown[] }).__sent)).toEqual([{ app: 'legend', kind: 'coin-from-photos', photos: 2 }]);
 
-  // the answer arrives while he could be photographing the next one
+  // the answer arrives while he could be photographing the next one: the spec lets it come, after the checks above
+  await releaseAnswer(page);
   const check = page.getByRole('button', { name: /Check it/ });
   await expect(check).toBeVisible();
   await check.click();

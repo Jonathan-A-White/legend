@@ -19,10 +19,13 @@ const ANSWER = {
 
 const photo = (side: string) => readFileSync(`grinds/examples/legend-ask/washington-quarter-1944s-${side}.jpg`).toString('base64');
 
-/** The tutor, injected where bsv-kit/grist would be: what is sent is kept, the answer comes after a moment. */
+/** The tutor, injected where bsv-kit/grist would be: what is sent is kept, and the answer is held back until the spec calls releaseAnswer(page), so no wait a loaded host could outrun sits under the 'Waiting for the tutor…' check. */
 async function fakeTutor(page: Page): Promise<void> {
   await page.addInitScript((answer) => {
-    const w = window as unknown as { __sent: { kind: string; files: number; input: unknown }[]; __legendGrist: unknown };
+    const w = window as unknown as { __sent: { kind: string; files: number; input: unknown }[]; __legendGrist: unknown; __releaseAnswer: () => void };
+    let release!: () => void;
+    const gate = new Promise<void>((resolve) => (release = resolve));
+    w.__releaseAnswer = release;
     w.__sent = [];
     w.__legendGrist = {
       sendGrist: async (p: { kind: string; attachments?: unknown[]; input: unknown }) => {
@@ -32,12 +35,15 @@ async function fakeTutor(page: Page): Promise<void> {
       awaitAnswer: async (txid: string) => {
         // a named item's rough worth is asked on open: refused, so only the tutor answers
         if (txid === 'direct:e2e-item-value') return { re: txid, status: 'refused', reason: 'not in this test', grind: { app: 'legend', kind: 'item-value', v: '1.0' } };
-        await new Promise((r) => setTimeout(r, 800));
+        await gate;
         return { re: txid, status: 'answered', answer, grind: { app: 'legend', kind: 'legend-ask', v: '1.0' } };
       },
     };
   }, ANSWER);
 }
+
+/** Lets the held answer come. */
+const releaseAnswer = (page: Page) => page.evaluate(() => (window as unknown as { __releaseAnswer: () => void }).__releaseAnswer());
 
 /** One quarter with its two photos, put straight into the app's database. */
 async function seedQuarter(page: Page): Promise<void> {
@@ -98,6 +104,7 @@ test('a question about his quarter is answered under the box on a phone', async 
   expect((await sheet.getByRole('button', { name: 'Ask', exact: true }).boundingBox())?.height).toBeGreaterThanOrEqual(44);
   await suggested.filter({ hasText: 'How do I grade this one?' }).click();
   await expect(sheet.getByText('Waiting for the tutor…')).toBeVisible();
+  await releaseAnswer(page);
 
   const answers = sheet.getByRole('list', { name: 'Answers' });
   await expect(answers.locator('strong', { hasText: 'Extremely Fine (XF)' })).toBeVisible();

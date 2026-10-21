@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import { playwrightTimeouts, playwrightTimingFilter } from 'pwa-kit/test-preset';
 import { browserEnv } from './tests/support/browser-env';
 import { previewPort, reuseExistingPreview } from './tests/support/preview-port';
 
@@ -14,9 +15,14 @@ const LIVE_SPEC = '**/*-live.spec.ts';
 const LIVE_BASE_URL = process.env.LEGEND_LIVE_URL || 'https://legend.allmymind.org';
 const LIVE_RUN = process.env.LEGEND_E2E === 'live';
 
+// Playwright's own default for testMatch. MW_TIMING=skip|only and MW_TIMING_TESTS (pwa-kit/test-preset) narrow it; a project's own
+// testMatch and testIgnore beat the config's, so each gate project spreads the filter itself. The live project is in no gate.
+const SPECS = ['**/*.@(spec|test).?(c|m)[jt]s?(x)'];
+
 export default defineConfig({
   testDir: './tests/e2e',
-  timeout: 60_000,
+  // The preset's timeout and expect.timeout, sized for a loaded host.
+  ...playwrightTimeouts,
   fullyParallel: false,
   reporter: 'list',
   use: {
@@ -29,14 +35,14 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      testIgnore: LIVE_SPEC,
+      ...playwrightTimingFilter({ testMatch: SPECS, testIgnore: [LIVE_SPEC] }),
       use: { ...devices['Desktop Chrome'], channel: 'chromium', launchOptions: { env: browserEnv } },
     },
     // `npm run shots` (--project=shots): every spec's end-of-test screenshot (tests/e2e/shot.ts)
     // is taken at a 390x844 phone width.
     {
       name: 'shots',
-      testIgnore: LIVE_SPEC,
+      ...playwrightTimingFilter({ testMatch: SPECS, testIgnore: [LIVE_SPEC] }),
       use: {
         ...devices['Desktop Chrome'],
         channel: 'chromium',

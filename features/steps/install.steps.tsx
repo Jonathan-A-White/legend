@@ -10,6 +10,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, expect, vi } from 'vitest';
 import { loadFeature, describeFeature } from '@amiceli/vitest-cucumber';
+import { HOOK_TIMEOUT_MS } from 'pwa-kit/test-preset';
 import { UpdateBanner } from '../../src/UpdateBanner';
 import { startAppUpdates, type AppUpdates } from 'pwa-kit/app-update';
 import { Home } from '../../src/screens/home';
@@ -35,7 +36,8 @@ interface Manifest {
 
 const outDir = mkdtempSync(join(tmpdir(), 'legend-build-'));
 let built = false;
-afterAll(() => rmSync(outDir, { recursive: true, force: true }));
+// Removing a full vite build's output outran vitest's 10 s hook default on a loaded host: the preset's budget for such a hook.
+afterAll(() => rmSync(outDir, { recursive: true, force: true }), HOOK_TIMEOUT_MS);
 
 // vite's own CLI in a child process: esbuild refuses to run inside this jsdom test environment.
 function buildOnce(): void {
