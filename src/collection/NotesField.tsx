@@ -1,11 +1,13 @@
 // src/collection/NotesField.tsx: an item's notes. There is no Save button to forget: what he types is kept a moment after he stops,
 // when he leaves the box, and when he leaves the screen; 'Saved' says so (PWA best practices, section 16).
 import { useEffect, useRef, useState } from 'react';
+import { useAlive } from 'pwa-kit/alive';
 import { updateItem } from '../data/repositories';
 
 export const NOTES_SAVE_MS = 600;
 
 export function NotesField({ itemId, initial }: { itemId: string; initial: string }) {
+  const alive = useAlive();
   const [text, setText] = useState(initial);
   const [state, setState] = useState<'idle' | 'saving' | 'saved'>('idle');
   const pending = useRef<string | null>(null);
@@ -16,7 +18,9 @@ export function NotesField({ itemId, initial }: { itemId: string; initial: strin
     const value = pending.current;
     if (value === null) return;
     pending.current = null;
-    void updateItem(itemId, { notes: value }).then(() => setState('saved'));
+    void updateItem(itemId, { notes: value }).then(() => {
+      if (alive()) setState('saved');
+    });
   };
   // leaving the screen keeps what was typed
   const flushOnLeave = useRef(flush);

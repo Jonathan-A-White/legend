@@ -2,6 +2,7 @@
 // (the default is on). A tap makes the picture and offers it to the share sheet; a phone without one gets a 'Save picture' link
 // instead. Under it, until he has used it once, one line says what leaves the phone.
 import { useEffect, useRef, useState } from 'react';
+import { useAlive } from 'pwa-kit/alive';
 import { putMeta, useMetaFlag } from '../data/repositories';
 import { useSettings } from '../settings/useSettings';
 import type { Shared } from './send';
@@ -17,6 +18,7 @@ interface Props {
 }
 
 export function ShareButton({ which, make, className }: Props) {
+  const alive = useAlive();
   const settings = useSettings();
   const seen = useMetaFlag(`share-note-${which}`);
   const [busy, setBusy] = useState(false);
@@ -40,15 +42,16 @@ export function ShareButton({ which, make, className }: Props) {
     forget();
     try {
       const shared = await make();
-      if (shared.outcome === 'save') {
+      // a screen that went while the picture was made makes no address (nothing would let it go) and sets nothing; the note is still marked seen
+      if (shared.outcome === 'save' && alive()) {
         url.current = URL.createObjectURL(shared.picture.blob);
         setSave({ url: url.current, fileName: shared.fileName });
       }
       await putMeta(`share-note-${which}`, true);
     } catch {
-      setFailed(true);
+      if (alive()) setFailed(true);
     } finally {
-      setBusy(false);
+      if (alive()) setBusy(false);
     }
   };
 

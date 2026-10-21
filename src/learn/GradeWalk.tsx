@@ -1,6 +1,7 @@
 // src/learn/GradeWalk.tsx: "Grade one of yours". He picks a coin, answers three plain questions, and gets a band with a reminder that
 // it is a guess. The guess is written to the coin only when he taps Keep.
 import { useState } from 'react';
+import { useAlive } from 'pwa-kit/alive';
 import type { Item } from '../data/db';
 import type { Grade } from '../data/us';
 import { updateItem } from '../data/repositories';
@@ -10,6 +11,7 @@ import { titleOf } from './titleOf';
 type Partial3 = Partial<Record<keyof Answers, string>>;
 
 export function GradeWalk({ coins, grades }: { coins: readonly Item[]; grades: readonly Grade[] }) {
+  const alive = useAlive();
   const [coinId, setCoinId] = useState<string | null>(null);
   const [answers, setAnswers] = useState<Partial3>({});
   const [kept, setKept] = useState<string | null>(null);
@@ -95,7 +97,9 @@ export function GradeWalk({ coins, grades }: { coins: readonly Item[]; grades: r
               disabled={!band || kept === band}
               onClick={() => {
                 if (!band) return;
-                void updateItem(coin.id, { gradeGuess: band }).then(() => setKept(band));
+                void updateItem(coin.id, { gradeGuess: band }).then(() => {
+                  if (alive()) setKept(band);
+                });
               }}
               className="min-h-14 flex-1 rounded-2xl bg-accent text-lg font-semibold text-accent-fg disabled:opacity-40"
             >
