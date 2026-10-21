@@ -1,6 +1,8 @@
 // The queue of grists to the photo reader (src/services/nameQueue.ts): when it sends, when it waits, and the words it leaves on an
 // item that could not be read. The scenarios in features/add.feature cover the flow through the screen.
 import { Blob as NodeBlob } from 'node:buffer';
+import { waitFor } from '@testing-library/dom';
+import { ASYNC_WAIT_MS } from 'pwa-kit/test-preset';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { db } from '../../src/data/db';
 import { addItem, addItemWithPhotos, getItem, getValue, updateItem } from '../../src/data/repositories';
@@ -15,14 +17,36 @@ const photo = { side: 'obverse' as const, blob: new NodeBlob([new Uint8Array(9)]
 
 const waitingItem = () => addItemWithPhotos({ kind: 'coin', reading: { state: 'waiting', txid: null, sentAt: null, sendId: 's1', message: null } }, [photo]);
 const sentItem = (sentAt = Date.now()) => addItemWithPhotos({ kind: 'coin', reading: { state: 'sent', txid: 'direct:old', sentAt, sendId: 's1', message: null } }, [photo]);
-const settled = async (id: string, check: (reading: unknown, status: string) => boolean) => {
-  for (let i = 0; i < 100; i++) {
+
+/** Waits for what a test waits for, as long as the preset gives a loaded host (it polls on the condition itself); resolves with the probe's answer. */
+const until = <T>(what: string, probe: () => Promise<T | undefined | false> | T | undefined | false): Promise<T> =>
+  waitFor(
+    async () => {
+      const found = await probe();
+      if (!found) throw new Error(`still waiting for ${what}`);
+      return found;
+    },
+    { timeout: ASYNC_WAIT_MS },
+  );
+const settled = (id: string, check: (reading: unknown, status: string) => boolean) =>
+  until('the item to settle', async () => {
     const item = await getItem(id);
-    if (item && check(item.reading, item.status)) return item;
-    await new Promise((r) => setTimeout(r, 10));
-  }
-  throw new Error('the item never settled');
-};
+    return item && check(item.reading, item.status) ? item : undefined;
+  });
+const valueKept = (id: string) => until('the value to be kept', () => getValue(id));
+const valueAsked = () => until('a value request to be sent', () => factory.sentOf('item-value').length > 0);
+
+/** The queue has looked, and is waiting for nothing: no pass running or due, no value answer outstanding. A "nothing was sent" check waits for this, so it is made after the queue decided, not after a guess at how long that takes. */
+interface QueueState {
+  pumping: boolean;
+  valuesRunning: boolean;
+  valueRuns: Map<string, unknown>;
+}
+const quiet = () =>
+  until('the queue to finish looking', () => {
+    const state = nameQueue as unknown as QueueState;
+    return !state.pumping && !state.valuesRunning && state.valueRuns.size === 0;
+  });
 
 beforeEach(async () => {
   await db.open();
@@ -46,7 +70,7 @@ describe('the name queue', () => {
     nameQueue.setOnline(false);
     const item = await waitingItem();
     nameQueue.start();
-    await new Promise((r) => setTimeout(r, 50));
+    await quiet();
     expect(factory.sent).toHaveLength(0);
     nameQueue.setOnline(true);
     await settled(item.id, (reading) => (reading as { state: string }).state === 'sent');
@@ -58,11 +82,13 @@ describe('the name queue', () => {
     const item = await sentItem();
     factory.onAnswer(async () => answered(quarterAnswer()));
     nameQueue.start();
-    await new Promise((r) => setTimeout(r, 50));
+    await quiet();
     expect(factory.awaited).toHaveLength(0);
     nameQueue.setVisible(true);
     await settled(item.id, (reading) => reading === null);
-    expect(factory.awaited).toEqual(['direct:old']);
+    // the photo's answer is waited for once, and first; once the item is named its value is asked for and waited for too (direct:tx1)
+    expect(factory.awaited[0]).toBe('direct:old');
+    expect(factory.awaited.filter((txid) => txid === 'direct:old')).toHaveLength(1);
   });
 
   it('gives up on an answer that takes too long and says so', async () => {
@@ -109,7 +135,7 @@ describe('the name queue asks for values', () => {
     const item = await waitingItem();
     nameQueue.start();
     await settled(item.id, (reading) => reading === null);
-    for (let i = 0; i < 100 && !(await getValue(item.id)); i++) await new Promise((r) => setTimeout(r, 10));
+    await valueKept(item.id);
     expect(factory.sent.map((p) => p.kind)).toEqual(['coin-from-photos', 'item-value']);
     expect(factory.sentOf('item-value')[0]).toMatchObject({ v: '1.1', photos: [] });
     expect(await getValue(item.id)).toMatchObject({ low: 1, high: 3, forYear: 1944, forGrade: 'AU' });
@@ -120,10 +146,10 @@ describe('the name queue asks for values', () => {
     await writeSetting('showValues', false);
     const item = await addItem({ kind: 'coin', status: 'confirmed', denomination: 'Quarter dollar', year: 1944 });
     nameQueue.start();
-    await new Promise((r) => setTimeout(r, 60));
+    await quiet();
     expect(factory.sent).toHaveLength(0);
     await writeSetting('showValues', true);
-    for (let i = 0; i < 100 && !(await getValue(item.id)); i++) await new Promise((r) => setTimeout(r, 10));
+    await valueKept(item.id);
     expect(factory.sentOf('item-value')).toHaveLength(1);
   });
 
@@ -132,20 +158,22 @@ describe('the name queue asks for values', () => {
     await addItem({ kind: 'coin', status: 'confirmed', denomination: 'Quarter dollar', year: 1944 });
     nameQueue.setVisible(false);
     nameQueue.start();
-    await new Promise((r) => setTimeout(r, 60));
-    nameQueue.setVisible(true);
+    await quiet();
+    expect(factory.sent).toHaveLength(0);
     nameQueue.setOnline(false);
-    await new Promise((r) => setTimeout(r, 60));
+    nameQueue.setVisible(true);
+    await quiet();
     expect(factory.sent).toHaveLength(0);
   });
 
   it('does not ask again for an item it already holds a value for, nor for the same item twice at once', async () => {
     answers();
-    await addItem({ kind: 'coin', status: 'confirmed', denomination: 'Quarter dollar', year: 1944 });
+    const item = await addItem({ kind: 'coin', status: 'confirmed', denomination: 'Quarter dollar', year: 1944 });
     nameQueue.start();
     nameQueue.kick();
     nameQueue.kick();
-    await new Promise((r) => setTimeout(r, 120));
+    await valueKept(item.id);
+    await quiet();
     expect(factory.sentOf('item-value')).toHaveLength(1);
   });
 
@@ -153,7 +181,7 @@ describe('the name queue asks for values', () => {
     factory.onSend(async (params, n) => (params.kind === 'item-value' ? new Promise<string>(() => undefined) : `direct:tx${n}`));
     await addItem({ kind: 'coin', status: 'confirmed', denomination: 'Quarter dollar', year: 1944 });
     nameQueue.start();
-    for (let i = 0; i < 100 && factory.sentOf('item-value').length === 0; i++) await new Promise((r) => setTimeout(r, 10));
+    await valueAsked();
     const item = await waitingItem();
     nameQueue.kick();
     await settled(item.id, (reading) => (reading as { state: string }).state === 'sent');
@@ -164,9 +192,10 @@ describe('the name queue asks for values', () => {
     factory.onAnswer(async (txid) => ({ re: txid, status: 'refused', reason: 'no', grind: { app: 'legend', kind: 'item-value', v: '1.0' } }));
     await addItem({ kind: 'coin', status: 'confirmed', denomination: 'Quarter dollar', year: 1944 });
     nameQueue.start();
-    await new Promise((r) => setTimeout(r, 100));
+    await quiet();
+    expect(factory.sentOf('item-value')).toHaveLength(1);
     nameQueue.kick();
-    await new Promise((r) => setTimeout(r, 100));
+    await quiet();
     expect(factory.sentOf('item-value')).toHaveLength(1);
   });
 
@@ -175,10 +204,10 @@ describe('the name queue asks for values', () => {
     factory.onAnswer(async (txid, sentAs) => (sentAs?.kind !== 'item-value' ? answered(quarterAnswer()) : sentAs.input && (sentAs.input as { gradeGuess: string }).gradeGuess === 'VF' ? first.promise : { ...value(txid), answer: { ...(value(txid).answer as object), low: 4, high: 6 } }));
     const item = await addItem({ kind: 'coin', status: 'confirmed', denomination: 'Quarter dollar', year: 1944, gradeGuess: 'VF' });
     nameQueue.start();
-    for (let i = 0; i < 100 && factory.sentOf('item-value').length === 0; i++) await new Promise((r) => setTimeout(r, 10));
+    await valueAsked();
     await updateItem(item.id, { gradeGuess: 'XF' });
     first.resolve(value('direct:tx1'));
-    for (let i = 0; i < 100 && !(await getValue(item.id)); i++) await new Promise((r) => setTimeout(r, 10));
+    await valueKept(item.id);
     expect(factory.sentOf('item-value').map((p) => (p.input as { gradeGuess: string }).gradeGuess)).toEqual(['VF', 'XF']);
     expect(await getValue(item.id)).toMatchObject({ low: 4, high: 6, forGrade: 'XF' });
   });
