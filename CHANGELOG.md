@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.52
+_2026-10-21_
+- Fixed: A plain 1909 Lincoln cent (and other scarce but common-enough coins) is no longer sometimes flagged as a possible replica.
+
 ## 0.1.49
 _2026-10-20_
 - Fixed: A long message to the maker is no longer cut off silently; the box now counts the characters and Send waits until the message is short enough.
