@@ -135,7 +135,8 @@ const checkKeys = (check: unknown): string[] => {
 describe('the tutor has its two scenarios', () => {
   const dir = 'grinds/examples/legend-ask';
   const examples = existsSync(dir) ? readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => readJson(`${dir}/${f}`) as unknown as GrindExample) : [];
-  const context = (e: GrindExample) => e.request.context as { screen: string; item: { year: number | null; mintMark: string | null } | null; country: { code: string } | null };
+  // a form scenario has no context: the tutor is then helping with a form, not looking at a piece or a country
+  const context = (e: GrindExample) => (e.request.context ?? { screen: 'form', item: null, country: null }) as { screen: string; item: { year: number | null; mintMark: string | null } | null; country: { code: string } | null };
 
   it('asks how to grade the Washington quarter, with its two photos', () => {
     const grading = examples.find((e) => context(e).screen === 'item' && /grade/i.test(String(e.request.question)));
@@ -164,6 +165,34 @@ describe('the tutor has its two scenarios', () => {
   });
 });
 
+describe('the tutor has its two form scenarios', () => {
+  const dir = 'grinds/examples/legend-ask';
+  const forms = readdirSync(dir)
+    .filter((f) => f.startsWith('form-') && f.endsWith('.json'))
+    .map((f) => readJson(`${dir}/${f}`) as unknown as GrindExample);
+  const formOf = (e: GrindExample) => e.request.form as { name: string; command: string; fields: { name: string }[] };
+
+  it('has one for Tell the maker and one for the asking price, each with the command that sends the form and no context', () => {
+    expect(forms.map((e) => formOf(e).name).sort()).toEqual(['Tell the maker', 'What is the asking price?']);
+    expect(forms.map((e) => formOf(e).command).sort()).toEqual(['tell-the-maker', 'wish-for']);
+    for (const e of forms) {
+      expect(e.request).not.toHaveProperty('context');
+      expect(e.request.sides).toEqual([]);
+      expect(e.photos ?? []).toEqual([]);
+    }
+  });
+
+  it('wants one question, the field it asks about, and nothing the tutor may not do', () => {
+    for (const e of forms) {
+      const keys = Object.keys(e.expect);
+      expect(keys).toContain('answer');
+      expect(keys).toContain('form_ask');
+      const asks = asCheck(e.expect.form_ask).equals as string;
+      expect(formOf(e).fields.map((f) => f.name)).toContain(asks);
+    }
+  });
+});
+
 describe('the appraiser and the tutor have their Other scenarios', () => {
   const load = (kind: string) => readdirSync(`grinds/examples/${kind}`).filter((f) => f.endsWith('.json')).map((f) => readJson(`grinds/examples/${kind}/${f}`) as unknown as GrindExample);
 
@@ -187,7 +216,7 @@ describe('the appraiser and the tutor have their Other scenarios', () => {
   });
 
   it('asks the tutor about a token, with a subtype and the others counted', () => {
-    const asks = load('legend-ask').filter((e) => (e.request.context as { item: { kind: string } | null }).item?.kind === 'other');
+    const asks = load('legend-ask').filter((e) => (e.request.context as { item: { kind: string } | null } | undefined)?.item?.kind === 'other');
     expect(asks).toHaveLength(1);
     const { context } = asks[0].request as { context: { item: { subtype: string }; collectionSummary: { others: number } } };
     expect(asks[0].schemaVersion).toBe('1.1');

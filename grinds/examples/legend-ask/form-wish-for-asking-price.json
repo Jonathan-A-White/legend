@@ -1,0 +1,26 @@
+{
+  "description": "On the What is the asking price? form he says about four fifty: the tutor puts 4.50 in the Asking price field and asks where he saw it, one question, the Where? field next.",
+  "schemaVersion": "1.2",
+  "request": {
+    "question": "About four dollars fifty.",
+    "sides": [],
+    "settings": {},
+    "history": [
+      { "question": "Help me fill this in.", "answer": "What is the shop asking for it?" }
+    ],
+    "form": {
+      "name": "What is the asking price?",
+      "command": "wish-for",
+      "fields": [
+        { "name": "asking", "label": "Asking price (US dollars)", "hint": "Required: dollars, such as 4.50.", "required": true, "kind": "text", "value": "" },
+        { "name": "store", "label": "Where? (the store’s name, if you like)", "required": false, "kind": "text", "value": "" }
+      ]
+    }
+  },
+  "expect": {
+    "answer": { "matches": "^[^\\n]{10,200}\\?$" },
+    "form_values": { "present": true },
+    "form_ask": { "equals": "store" },
+    "settingsChanges": { "equals": [] }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "description": "He tapped Let the tutor do it on the empty Tell the maker form: the first reply is ONE short question on one line, aimed at the required message, and nothing is filled yet.",
+  "schemaVersion": "1.2",
+  "request": {
+    "question": "Help me fill this in.",
+    "sides": [],
+    "settings": {},
+    "history": [],
+    "form": {
+      "name": "Tell the maker",
+      "command": "tell-the-maker",
+      "fields": [
+        { "name": "kind", "label": "What is it?", "required": false, "kind": "choice", "value": "", "options": ["Can I add this?", "Something's wrong"] },
+        { "name": "message", "label": "Your message", "required": true, "kind": "text", "value": "" },
+        { "name": "screenshot", "label": "Attach a screenshot", "required": false, "kind": "pictures", "value": "" }
+      ]
+    }
+  },
+  "expect": {
+    "answer": { "matches": "^[^\\n]{10,200}\\?$" },
+    "form_ask": { "equals": "message" },
+    "form_values": { "present": false },
+    "settingsChanges": { "equals": [] },
+    "teachMore": { "is_null": true }
+  }
+}

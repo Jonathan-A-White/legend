@@ -4,7 +4,7 @@
   "title": "Legend Ask input 1.2",
   "type": "object",
   "additionalProperties": false,
-  "required": ["question", "sides", "context", "settings", "history"],
+  "required": ["question", "sides", "settings", "history"],
   "properties": {
     "question": { "type": "string", "minLength": 1, "maxLength": 400 },
     "sides": {
@@ -14,6 +14,7 @@
       "items": { "enum": ["obverse", "reverse", "other"] }
     },
     "context": {
+      "description": "What the screen knows. Missing while he is being helped to fill in a form (`form` is present then).",
       "type": "object",
       "additionalProperties": false,
       "required": ["screen", "item", "country", "collectionSummary"],
@@ -91,6 +92,34 @@
                   "others": { "type": "integer", "minimum": 0 }
                 }
               }
+            }
+          }
+        }
+      }
+    },
+    "form": {
+      "description": "Optional. Present while he is being helped to fill in a form of the app (the button 'Let the tutor do it'): the form's name and its fields in screen order, each with the name you answer with, the label he sees, the hint under it if any, whether it is required, its kind, what it holds now ('' when empty; for pictures, how many he has added) and, for a choice, its options; and `command`, the name of the command that sends the form, when the app shows a Send button once every required field holds something. `context` is missing then, `sides` and `settings` are empty.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "fields"],
+      "properties": {
+        "name": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "command": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "fields": {
+          "type": "array",
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "label", "required", "kind", "value"],
+            "properties": {
+              "name": { "description": "The field's key: the name `form_values` and `form_ask` use.", "type": "string", "minLength": 1, "maxLength": 30 },
+              "label": { "description": "What the form calls the field on screen.", "type": "string", "minLength": 1, "maxLength": 80 },
+              "hint": { "description": "The line under the field, when the form has one.", "type": "string", "minLength": 1, "maxLength": 120 },
+              "required": { "description": "Whether the form cannot be sent without it.", "type": "boolean" },
+              "kind": { "description": "text: any words; link: a web address; choice: one of `options`, exactly as written; pictures: screenshots or photos, which only he can add (you cannot fill them).", "type": "string", "enum": ["text", "link", "choice", "pictures"] },
+              "value": { "description": "What the field holds now, cut at 600 characters; empty when nothing is in it. For pictures, a count such as '2 pictures added'.", "type": "string", "maxLength": 600 },
+              "options": { "description": "For a choice: what it can be.", "type": "array", "maxItems": 12, "items": { "type": "string", "minLength": 1, "maxLength": 80 } }
             }
           }
         }

@@ -71,6 +71,16 @@ describe('the legend-ask grind', () => {
     expect(validate10(request(coin, { items: 1, coins: 1, notes: 0, countries: [{ code: 'US', coins: 1, notes: 0 }] })), JSON.stringify(validate10.errors)).toBe(true);
   });
 
+  it('carries voice-kit forms\' fragment Helping him fill in a form, word for word, and takes `form` in its input and form_values and form_ask in its answer', () => {
+    const fragment = readFileSync('node_modules/voice-kit/packages/forms/grind/helping-with-a-form.md', 'utf8').trim();
+    expect(instructions).toContain(fragment);
+    const input = JSON.parse(readFileSync(grind.inputSchema as string, 'utf8')) as { required: string[]; properties: Record<string, unknown> };
+    expect(input.properties).toHaveProperty('form');
+    expect(input.required).not.toContain('context');
+    expect(Object.keys(answerSchema.properties as object)).toEqual(expect.arrayContaining(['form_values', 'form_ask']));
+    expect(answerSchema.required).toEqual(['answer', 'followUps', 'settingsChanges', 'teachMore']);
+  });
+
   it('tells the tutor how to speak of an Other', () => {
     expect(instructions).toMatch(/`other`/);
     expect(instructions).toMatch(/subtype/);

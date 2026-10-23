@@ -2,6 +2,7 @@
 // (grinds/legend-ask.json) through grist.ts's askGrind, from Lampas's askTutor (src/services/tutor.ts there). The request carries what
 // the screen knows (src/tutor/request.ts builds it) and, about an item, its photos; the answer is checked here before anything is kept.
 import type { grist } from 'bsv-kit/grist';
+import type { FormRequest, FormValue } from 'voice-kit/forms';
 import type { ItemKind, PhotoSide, StoredValue } from '../data/db';
 import { getDeviceKeyBytes } from './deviceKey';
 import { askGrind, currentGristPort, GristError, type GristFailure } from './grist';
@@ -73,6 +74,16 @@ export interface LegendAskRequest {
   history: { question: string; answer: string }[];
 }
 
+/** What the grind is sent while the tutor helps with a form (the same input schema, with `form` and no `context`): no photos, no facts of his
+ * collection, only the form's fields and what they hold. */
+export interface LegendFormRequest {
+  question: string;
+  sides: [];
+  settings: Record<string, StoredValue>;
+  history: { question: string; answer: string }[];
+  form: FormRequest;
+}
+
 /** A setting the tutor suggests; nothing changes unless he taps Apply. */
 export interface SuggestedChange {
   key: string;
@@ -87,18 +98,27 @@ export interface LegendAnswer {
   followUps: string[];
   settingsChanges: SuggestedChange[];
   teachMore: { topic: string; why: string } | null;
+  /** only while he is being helped with a form: the values to put in its fields, and the field the question is about */
+  form_values?: FormValue[];
+  form_ask?: string;
 }
 
 const isObject = (value: unknown): value is Record<string, unknown> => typeof value === 'object' && value !== null && !Array.isArray(value);
 const isText = (value: unknown, max: number): value is string => typeof value === 'string' && value.length > 0 && value.length <= max;
-const onlyKeys = (value: Record<string, unknown>, keys: string[]): boolean => Object.keys(value).every((k) => keys.includes(k)) && keys.every((k) => k in value);
+const onlyKeys = (value: Record<string, unknown>, keys: string[], optional: string[] = []): boolean =>
+  Object.keys(value).every((k) => keys.includes(k) || optional.includes(k)) && keys.every((k) => k in value);
+
+const isFormValue = (value: unknown): boolean =>
+  isObject(value) && onlyKeys(value, ['field', 'value']) && isText(value.field, 30) && isText(value.value, 1200);
 
 const isSuggestion = (value: unknown): boolean =>
   isObject(value) && onlyKeys(value, ['key', 'value', 'why']) && isText(value.key, 40) && ['string', 'number', 'boolean'].includes(typeof value.value) && isText(value.why, 200);
 
 /** The app's own check of an answer, run before anything is kept (the schema's limits; which settings are allowed is the registry's). */
 export function isLegendAnswer(value: unknown): value is LegendAnswer {
-  if (!isObject(value) || !onlyKeys(value, ['answer', 'followUps', 'settingsChanges', 'teachMore']) || !isText(value.answer, 2400)) return false;
+  if (!isObject(value) || !onlyKeys(value, ['answer', 'followUps', 'settingsChanges', 'teachMore'], ['form_values', 'form_ask']) || !isText(value.answer, 2400)) return false;
+  if ('form_ask' in value && !isText(value.form_ask, 30)) return false;
+  if ('form_values' in value && !(Array.isArray(value.form_values) && value.form_values.length <= 8 && value.form_values.every(isFormValue))) return false;
   if (!Array.isArray(value.followUps) || value.followUps.length > 3 || !value.followUps.every((q) => isText(q, 120))) return false;
   if (!Array.isArray(value.settingsChanges) || value.settingsChanges.length > 3 || !value.settingsChanges.every(isSuggestion)) return false;
   const more = value.teachMore;
@@ -121,7 +141,7 @@ export interface AskTutorOptions {
 }
 
 /** Sends the question and waits for the answer. Throws a GristError in the tutor's words. */
-export async function askTutor(request: LegendAskRequest, options: AskTutorOptions = {}): Promise<LegendAnswer> {
+export async function askTutor(request: LegendAskRequest | LegendFormRequest, options: AskTutorOptions = {}): Promise<LegendAnswer> {
   try {
     return await askGrind(ASK_KIND, request, isLegendAnswer, {
       key: getDeviceKeyBytes(),
