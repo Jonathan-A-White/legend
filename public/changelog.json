@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.53",
+    "date": "2026-10-23",
+    "story": "mw-cb24ai.1",
+    "kind": "new",
+    "text": "The tutor can now help fill in Tell the maker and the asking price form by asking one question at a time, and you still tap Send yourself."
+  },
+  {
     "version": "0.1.52",
     "date": "2026-10-21",
     "story": "mw-fm7wmn.30",

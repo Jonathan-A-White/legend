@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.53
+_2026-10-23_
+- New: The tutor can now help fill in Tell the maker and the asking price form by asking one question at a time, and you still tap Send yourself.
+
 ## 0.1.52
 _2026-10-21_
 - Fixed: A plain 1909 Lincoln cent (and other scarce but common-enough coins) is no longer sometimes flagged as a possible replica.
