@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.54",
+    "date": "2026-10-23",
+    "story": "mw-cb24ai.2",
+    "kind": "new",
+    "text": "The tutor can now fill in the Edit and Change what is wrong sheets with you, one question at a time, and you tap Send to save."
+  },
+  {
     "version": "0.1.53",
     "date": "2026-10-23",
     "story": "mw-cb24ai.1",

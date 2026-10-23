@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.54
+_2026-10-23_
+- New: The tutor can now fill in the Edit and Change what is wrong sheets with you, one question at a time, and you tap Send to save.
+
 ## 0.1.53
 _2026-10-23_
 - New: The tutor can now help fill in Tell the maker and the asking price form by asking one question at a time, and you still tap Send yourself.
