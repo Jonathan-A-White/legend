@@ -1,0 +1,32 @@
+{
+  "description": "On the Edit form he says the piece is a banknote: the tutor puts Banknote, exactly as the option reads, in the Kind field and asks the next question, about the country.",
+  "schemaVersion": "1.2",
+  "request": {
+    "question": "It is a bill, not a coin.",
+    "sides": [],
+    "settings": {},
+    "history": [
+      { "question": "Help me fill this in.", "answer": "Is this a coin, a banknote or something else?" }
+    ],
+    "form": {
+      "name": "Edit",
+      "command": "edit-coin",
+      "fields": [
+        { "name": "kind", "label": "Kind", "required": true, "kind": "choice", "value": "Coin", "options": ["Coin", "Banknote", "Other"] },
+        { "name": "country", "label": "Country", "required": false, "kind": "choice", "value": "", "options": ["Canada", "Mexico", "United Kingdom", "United States"] },
+        { "name": "denomination", "label": "Denomination", "hint": "Such as Quarter dollar or Five pounds.", "required": false, "kind": "text", "value": "One dollar" },
+        { "name": "year", "label": "Year", "hint": "Four digits, such as 1964.", "required": false, "kind": "text", "value": "1935" },
+        { "name": "mintMark", "label": "Mint mark", "hint": "A letter such as D, S or P, if there is one.", "required": false, "kind": "text", "value": "" },
+        { "name": "grade", "label": "Grade guess", "required": false, "kind": "choice", "value": "", "options": ["P · Poor", "G · Good", "F · Fine", "VF · Very Fine", "XF · Extremely Fine", "MS · Mint State"] },
+        { "name": "inscription", "label": "Inscription", "hint": "The words on the piece.", "required": false, "kind": "text", "value": "" },
+        { "name": "tags", "label": "Tags", "hint": "Words separated by commas, such as silver, gift.", "required": false, "kind": "text", "value": "" }
+      ]
+    }
+  },
+  "expect": {
+    "answer": { "matches": "^[^\\n]{10,200}\\?$" },
+    "form_values": { "present": true },
+    "form_ask": { "equals": "country" },
+    "settingsChanges": { "equals": [] }
+  }
+}

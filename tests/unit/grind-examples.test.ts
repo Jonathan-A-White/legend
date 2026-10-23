@@ -165,16 +165,16 @@ describe('the tutor has its two scenarios', () => {
   });
 });
 
-describe('the tutor has its two form scenarios', () => {
+describe('the tutor has its form scenarios', () => {
   const dir = 'grinds/examples/legend-ask';
   const forms = readdirSync(dir)
     .filter((f) => f.startsWith('form-') && f.endsWith('.json'))
     .map((f) => readJson(`${dir}/${f}`) as unknown as GrindExample);
   const formOf = (e: GrindExample) => e.request.form as { name: string; command: string; fields: { name: string }[] };
 
-  it('has one for Tell the maker and one for the asking price, each with the command that sends the form and no context', () => {
-    expect(forms.map((e) => formOf(e).name).sort()).toEqual(['Tell the maker', 'What is the asking price?']);
-    expect(forms.map((e) => formOf(e).command).sort()).toEqual(['tell-the-maker', 'wish-for']);
+  it('has one for each of the four Legend forms, each with the command that sends the form and no context', () => {
+    expect(forms.map((e) => formOf(e).name).sort()).toEqual(['Change what is wrong', 'Edit', 'Tell the maker', 'What is the asking price?']);
+    expect(forms.map((e) => formOf(e).command).sort()).toEqual(['confirm-coin', 'edit-coin', 'tell-the-maker', 'wish-for']);
     for (const e of forms) {
       expect(e.request).not.toHaveProperty('context');
       expect(e.request.sides).toEqual([]);

@@ -1,0 +1,32 @@
+{
+  "description": "On the Change what is wrong form he says the coin is from Canada: the tutor puts Canada, exactly as the option reads, in the Country field and asks about the next field that is still empty, the mint mark, one question.",
+  "schemaVersion": "1.2",
+  "request": {
+    "question": "It is from Canada.",
+    "sides": [],
+    "settings": {},
+    "history": [
+      { "question": "Help me fill this in.", "answer": "Which country is the coin from?" }
+    ],
+    "form": {
+      "name": "Change what is wrong",
+      "command": "confirm-coin",
+      "fields": [
+        { "name": "country", "label": "Country", "required": false, "kind": "choice", "value": "United States", "options": ["Canada", "Mexico", "United Kingdom", "United States"] },
+        { "name": "denomination", "label": "Denomination", "hint": "Such as Quarter dollar or Five pounds.", "required": false, "kind": "text", "value": "Dime" },
+        { "name": "year", "label": "Year", "hint": "Four digits, such as 1964.", "required": false, "kind": "text", "value": "1955" },
+        { "name": "mintMark", "label": "Mint mark", "hint": "A letter such as D, S or P, if the coin has one.", "required": false, "kind": "text", "value": "" },
+        { "name": "series", "label": "Series", "required": false, "kind": "text", "value": "" },
+        { "name": "design", "label": "Design", "required": false, "kind": "text", "value": "" },
+        { "name": "grade", "label": "Grade guess", "required": false, "kind": "choice", "value": "", "options": ["P · Poor", "G · Good", "F · Fine", "VF · Very Fine", "XF · Extremely Fine", "MS · Mint State"] },
+        { "name": "inscription", "label": "Inscription", "hint": "The words on the coin.", "required": false, "kind": "text", "value": "LIBERTY" }
+      ]
+    }
+  },
+  "expect": {
+    "answer": { "matches": "^[^\\n]{10,200}\\?$" },
+    "form_values": { "present": true },
+    "form_ask": { "equals": "mintMark" },
+    "settingsChanges": { "equals": [] }
+  }
+}
