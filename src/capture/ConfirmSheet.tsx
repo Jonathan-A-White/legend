@@ -1,14 +1,19 @@
 // src/capture/ConfirmSheet.tsx: the photo reader's answer for him to check, in large type: country with its flag, denomination, year,
 // mint mark, series and design, the grade (marked as a guess), the inscription and the fun fact. "That's right" confirms it; "Not
 // quite" opens every field to change and then confirms. An item he is only looking at offers "Add it", "Wish for it" (the asking price, src/wishlist/) and "Let it go" instead.
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { argsOf } from 'voice-kit/forms';
+import { defineRegistry } from 'voice-kit/talks';
 import type { Item } from '../data/db';
 import { GRADES } from '../data/grades';
 import { removeItem, updateItem, usePhotos, type ItemChanges } from '../data/repositories';
+import { FormDoor } from '../tutor';
+import { confirmCoinCommand, countryLabel, countryOfLabel, gradeLabel, gradeOfLabel } from '../tutor/formCommands';
 import { useSheetBack } from '../ui/sheetBack';
 import { WorthLine } from '../worth';
 import { WishSheet } from '../wishlist';
 import { useObjectUrl } from '../ui/useObjectUrl';
+import { CONFIRM_COMMAND, confirmForm } from './confirmForm';
 import { useCountries } from './useCountries';
 
 const field = 'min-h-12 w-full rounded-xl border border-line bg-canvas px-4 text-lg text-ink';
@@ -66,6 +71,7 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
   const [design, setDesign] = useState(item.design ?? '');
   const [grade, setGrade] = useState(item.gradeGuess ?? '');
   const [inscription, setInscription] = useState(item.inscription);
+  const [problem, setProblem] = useState<string | null>(null);
 
   const flagOf = (code: string) => countries.find((c) => c.code === code)?.flag ?? '';
   const nameOf = (code: string) => countries.find((c) => c.code === code)?.name ?? code;
@@ -77,17 +83,37 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
     await updateItem(item.id, { ...changes, status: 'confirmed' });
     onClose();
   };
-  const save = () =>
-    confirm({
-      country: country || null,
-      denomination: denomination.trim(),
-      year: year === '' ? null : Number(year),
-      mintMark: mintMark.trim() || null,
-      series: series.trim() || null,
-      design: design.trim() || null,
-      gradeGuess: grade || null,
-      inscription: inscription.trim(),
-    });
+  // the one save: Save and confirm and the tutor's door both run confirm-coin (src/tutor/formCommands.ts)
+  const form = useMemo(() => confirmForm(countries, item), [countries, item]);
+  const registry = defineRegistry({
+    commands: [confirmCoinCommand(form, { itemId: item.id, countries, onSaving: () => setBusy(true), onDone: onClose, onFailed: () => setBusy(false) })],
+  });
+  const values = {
+    country: countryLabel(countries, country),
+    denomination,
+    year,
+    mintMark,
+    series,
+    design,
+    grade: grade ? gradeLabel(grade) : '',
+    inscription,
+  };
+  const save = async () => {
+    if (busy) return;
+    setProblem(null);
+    const ran = await registry.run(CONFIRM_COMMAND, argsOf(form, values));
+    if (!ran.ok) setProblem(ran.why);
+  };
+  const fill = (name: string, value: string) => {
+    if (name === 'country') setCountry(countryOfLabel(countries, value));
+    else if (name === 'denomination') setDenomination(value);
+    else if (name === 'year') setYear(value.replace(/\D/g, ''));
+    else if (name === 'mintMark') setMintMark(value);
+    else if (name === 'series') setSeries(value);
+    else if (name === 'design') setDesign(value);
+    else if (name === 'grade') setGrade(gradeOfLabel(value));
+    else if (name === 'inscription') setInscription(value);
+  };
   const letGo = async () => {
     setBusy(true);
     // the host shows Undo at once, so the screen never flashes 'not in your collection' between the removal and the Undo
@@ -174,6 +200,11 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
             <Input label="Inscription" id="confirm-inscription">
               <input id="confirm-inscription" value={inscription} onChange={(e) => setInscription(e.target.value)} className={field} />
             </Input>
+            {problem ? (
+              <p role="alert" className="text-base text-bad">
+                {problem}
+              </p>
+            ) : null}
           </form>
         ) : (
           <dl className="space-y-4">
@@ -196,10 +227,11 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
         {!editing && !looking ? <WorthLine itemId={item.id} /> : null}
       </div>
 
+      {editing ? <FormDoor form={form} values={values} onFill={fill} registry={registry} command={CONFIRM_COMMAND} disabled={busy} /> : null}
       <div className="flex shrink-0 flex-col gap-2 border-t border-line px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
         {editing ? (
           <>
-            <button type="button" disabled={busy} onClick={save} className={`${big} bg-accent text-accent-fg`}>
+            <button type="button" disabled={busy} onClick={() => void save()} className={`${big} bg-accent text-accent-fg`}>
               {looking ? 'Save and add it' : 'Save and confirm'}
             </button>
             <button type="button" disabled={busy} onClick={() => setEditing(false)} className={`${big} border border-line text-muted`}>

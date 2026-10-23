@@ -3,12 +3,16 @@
 // Send runs. The grind is faked at bsv-kit/grist's two calls; the hand path of each sheet is checked by its own feature and unit tests.
 import { cleanup, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ConfirmSheet } from '../../src/capture/ConfirmSheet';
+import { EditSheet } from '../../src/collection/EditSheet';
+import type { Reference } from '../../src/collection/useReference';
+import { serveReferenceData } from '../support/collection-fixtures';
 import { FeedbackSheet, SENT_LINE } from '../../src/feedback/FeedbackSheet';
 import * as outbox from '../../src/feedback/outbox';
 import { setGristPort, gristTimings } from '../../src/services/grist';
 import { WishSheet } from '../../src/wishlist/WishSheet';
-import { wishFor } from '../../src/data/repositories';
+import { updateItem, wishFor } from '../../src/data/repositories';
 import type { Item } from '../../src/data/db';
 import { answered, fakeGrist, type FakeGrist } from '../support/fake-grist';
 
@@ -17,7 +21,12 @@ vi.mock('../../src/feedback/outbox', () => ({
   sendWaiting: vi.fn(async () => undefined),
   isWaiting: vi.fn(async () => false),
 }));
-vi.mock('../../src/data/repositories', () => ({ usePhotos: () => undefined, wishFor: vi.fn(async () => ({})) }));
+vi.mock('../../src/data/repositories', async (original) => ({
+  ...(await original<typeof import('../../src/data/repositories')>()),
+  usePhotos: () => undefined,
+  wishFor: vi.fn(async () => ({})),
+  updateItem: vi.fn(async () => ({})),
+}));
 
 const user = userEvent.setup();
 let grist: FakeGrist;
@@ -159,5 +168,106 @@ describe('Let the tutor do it on What is the asking price?', () => {
     await within(panel()).findByText('What is the asking price?');
     expect(within(panel()).queryByRole('button', { name: /^Send/ })).toBeNull();
     expect(screen.getByRole('button', { name: 'Add to Wish list' })).toBeDisabled();
+  });
+});
+
+describe('Let the tutor do it on Change what is wrong and on Edit', () => {
+  const coin = { id: 'item-2', kind: 'coin', country: 'US', currency: 'USD', denomination: 'Dime', faceValue: 0.1, year: 1955, mintMark: null, series: null, design: null, material: 'Silver', inscription: 'LIBERTY', funFact: '', gradeGuess: 'VF', gradeNotes: '', notes: '', tags: ['silver'], status: 'named', confidence: null, createdAt: 1, updatedAt: 1 } as unknown as Item;
+  const reference = {
+    countryName: (cc: string) => cc,
+    mintCity: () => null,
+    flag: () => '',
+    countryList: [
+      { code: 'CA', name: 'Canada', flag: '🇨🇦' },
+      { code: 'US', name: 'United States', flag: '🇺🇸' },
+    ],
+  } as unknown as Reference;
+
+  beforeAll(() => serveReferenceData((name, fake) => vi.stubGlobal(name, fake)));
+
+  it('Not quite: the tutor fills Country from a spoken country name and Send saves and confirms as Save and confirm does', async () => {
+    replies = [reply('Which country is the coin from?', { form_ask: 'country' }), reply('Everything is filled in.', { form_values: [{ field: 'country', value: 'Canada' }] })];
+    const onClose = vi.fn();
+    render(<ConfirmSheet item={coin} onClose={onClose} onLetGo={vi.fn()} />);
+    await user.click(screen.getByRole('button', { name: 'Not quite' }));
+    await screen.findByRole('option', { name: /Canada/ });
+    await user.click(screen.getByRole('button', { name: 'Let the tutor do it' }));
+    await within(panel()).findByText('Which country is the coin from?');
+    expect(asked(0).form.name).toBe('Change what is wrong');
+    expect(asked(0).form.command).toBe('confirm-coin');
+    expect(asked(0).form.fields.map((f) => f.name)).toEqual(['country', 'denomination', 'year', 'mintMark', 'series', 'design', 'grade', 'inscription']);
+    expect(asked(0).form.fields.find((f) => f.name === 'denomination')?.value).toBe('Dime');
+
+    await user.type(within(panel()).getByRole('textbox', { name: 'Your answer' }), 'it is from Canada');
+    await user.click(within(panel()).getByRole('button', { name: 'Reply' }));
+    await within(panel()).findByText('Everything is filled in.');
+    expect(screen.getByLabelText('Country')).toHaveValue('CA');
+    expect(updateItem).not.toHaveBeenCalled();
+    expect(within(panel()).getByText('Save these changes and confirm: Dime, 1955, Canada?')).toBeInTheDocument();
+
+    await user.click(within(panel()).getByRole('button', { name: 'Send Change what is wrong' }));
+    await waitFor(() => expect(onClose).toHaveBeenCalledOnce());
+    expect(updateItem).toHaveBeenCalledExactlyOnceWith('item-2', {
+      country: 'CA', denomination: 'Dime', year: 1955, mintMark: null, series: null, design: null, gradeGuess: 'VF', inscription: 'LIBERTY', status: 'confirmed',
+    });
+  });
+
+  it('Not quite: the sheet\'s own Save and confirm still saves through the same command, and a year of five digits cannot be typed', async () => {
+    const onClose = vi.fn();
+    render(<ConfirmSheet item={coin} onClose={onClose} onLetGo={vi.fn()} />);
+    await user.click(screen.getByRole('button', { name: 'Not quite' }));
+    expect(screen.getByLabelText('Year')).toHaveAttribute('maxlength', '4');
+    await user.click(screen.getByRole('button', { name: 'Save and confirm' }));
+    await waitFor(() => expect(onClose).toHaveBeenCalledOnce());
+    expect(updateItem).toHaveBeenCalledExactlyOnceWith('item-2', expect.objectContaining({ country: 'US', year: 1955, status: 'confirmed' }));
+  });
+
+  it('draws no door until Not quite is tapped', () => {
+    render(<ConfirmSheet item={coin} onClose={vi.fn()} onLetGo={vi.fn()} />);
+    expect(screen.queryByRole('button', { name: 'Let the tutor do it' })).toBeNull();
+  });
+
+  it('Edit: the tutor fills the kind, the country and the grade from what he says, and Send saves the fields the form lacks as they are', async () => {
+    replies = [
+      reply('What kind of piece is it?', { form_ask: 'kind' }),
+      reply('Everything is filled in.', {
+        form_values: [
+          { field: 'kind', value: 'Banknote' },
+          { field: 'country', value: 'Canada' },
+          { field: 'grade', value: 'XF · Extremely Fine' },
+        ],
+      }),
+    ];
+    const onClose = vi.fn();
+    render(<EditSheet item={coin} reference={reference} onClose={onClose} />);
+    await user.type(screen.getByLabelText('Design'), 'Schooner');
+    await user.click(screen.getByRole('button', { name: 'Let the tutor do it' }));
+    await within(panel()).findByText('What kind of piece is it?');
+    expect(asked(0).form.name).toBe('Edit');
+    expect(asked(0).form.command).toBe('edit-coin');
+    expect(asked(0).form.fields.map((f) => f.name)).toEqual(['kind', 'country', 'denomination', 'year', 'mintMark', 'grade', 'inscription', 'tags']);
+    expect(asked(0).form.fields.find((f) => f.name === 'tags')?.value).toBe('silver');
+
+    await user.type(within(panel()).getByRole('textbox', { name: 'Your answer' }), 'a bill from Canada, extremely fine');
+    await user.click(within(panel()).getByRole('button', { name: 'Reply' }));
+    await within(panel()).findByText('Everything is filled in.');
+    expect(screen.getByRole('radio', { name: 'Banknote' })).toBeChecked();
+    expect(screen.getByLabelText('Country')).toHaveValue('CA');
+    expect(screen.getByLabelText('Grade guess')).toHaveValue('XF');
+    expect(updateItem).not.toHaveBeenCalled();
+
+    await user.click(within(panel()).getByRole('button', { name: 'Send Edit' }));
+    await waitFor(() => expect(onClose).toHaveBeenCalledOnce());
+    expect(updateItem).toHaveBeenCalledExactlyOnceWith('item-2', {
+      kind: 'note', subtype: null, country: 'CA', denomination: 'Dime', year: 1955, mintMark: null, series: null, design: 'Schooner', material: 'Silver', gradeGuess: 'XF', inscription: 'LIBERTY', tags: ['silver'],
+    });
+  });
+
+  it('Edit: the sheet\'s own Save saves through the same command', async () => {
+    const onClose = vi.fn();
+    render(<EditSheet item={coin} reference={reference} onClose={onClose} />);
+    await user.click(screen.getByRole('button', { name: 'Save' }));
+    await waitFor(() => expect(onClose).toHaveBeenCalledOnce());
+    expect(updateItem).toHaveBeenCalledExactlyOnceWith('item-2', expect.objectContaining({ kind: 'coin', country: 'US', year: 1955, gradeGuess: 'VF', tags: ['silver'] }));
   });
 });

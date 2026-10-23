@@ -1,11 +1,15 @@
 // src/collection/EditSheet.tsx: Edit, every field of an item in one sheet. The country is chosen from a list with flags and the year
 // from a number pad, so a wrong entry is hard to make. Save writes through the repository; Cancel and Back leave it as it was.
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useMemo, useState, type ReactNode } from 'react';
+import { argsOf } from 'voice-kit/forms';
+import { defineRegistry } from 'voice-kit/talks';
 import type { Item, ItemKind } from '../data/db';
 import { KINDS, KIND_ORDER } from '../data/kinds';
-import { updateItem, type ItemChanges } from '../data/repositories';
+import { FormDoor } from '../tutor';
+import { countryLabel, countryOfLabel, editCoinCommand, gradeLabel, gradeOfLabel, kindLabel, kindOfLabel } from '../tutor/formCommands';
 import { useSheetBack } from '../ui/sheetBack';
-import { GRADES, parseTags } from './fields';
+import { EDIT_COMMAND, editForm } from './editForm';
+import { GRADES } from './fields';
 import type { Reference } from './useReference';
 
 const field = 'min-h-12 w-full rounded-xl border border-line bg-canvas px-4 text-lg text-ink';
@@ -42,27 +46,49 @@ export function EditSheet({ item, reference, onClose }: { item: Item; reference:
   const [inscription, setInscription] = useState(item.inscription ?? '');
   const [tags, setTags] = useState(item.tags.join(', '));
   const [saving, setSaving] = useState(false);
+  const [problem, setProblem] = useState<string | null>(null);
 
   const countries = reference.countryList.some((c) => c.code === country) || !country ? reference.countryList : [...reference.countryList, { code: country, name: country, flag: '' }];
 
+  // the one save: Save and the tutor's door both run edit-coin (src/tutor/formCommands.ts); the four fields the form lacks go as the sheet holds them
+  const form = useMemo(() => editForm(reference.countryList, item), [reference.countryList, item]);
+  const registry = defineRegistry({
+    commands: [
+      editCoinCommand(form, {
+        itemId: item.id,
+        countries: reference.countryList,
+        rest: () => ({ subtype, series, design, material }),
+        onSaving: () => setSaving(true),
+        onDone: onClose,
+        onFailed: () => setSaving(false),
+      }),
+    ],
+  });
+  const values = {
+    kind: kindLabel(kind),
+    country: countryLabel(reference.countryList, country),
+    denomination,
+    year,
+    mintMark,
+    grade: grade ? gradeLabel(grade) : '',
+    inscription,
+    tags,
+  };
   const save = async () => {
-    setSaving(true);
-    const changes: ItemChanges = {
-      kind,
-      subtype: kind === 'other' ? subtype.trim() || null : null,
-      country: country || null,
-      denomination: denomination.trim(),
-      year: year === '' ? null : Number(year),
-      mintMark: mintMark.trim() || null,
-      series: series.trim() || null,
-      design: design.trim() || null,
-      material: material.trim(),
-      gradeGuess: grade || null,
-      inscription: inscription.trim(),
-      tags: parseTags(tags),
-    };
-    await updateItem(item.id, changes);
-    onClose();
+    if (saving) return;
+    setProblem(null);
+    const ran = await registry.run(EDIT_COMMAND, argsOf(form, values));
+    if (!ran.ok) setProblem(ran.why);
+  };
+  const fill = (name: string, value: string) => {
+    if (name === 'kind') setKind(kindOfLabel(value));
+    else if (name === 'country') setCountry(countryOfLabel(reference.countryList, value));
+    else if (name === 'denomination') setDenomination(value);
+    else if (name === 'year') setYear(value.replace(/\D/g, ''));
+    else if (name === 'mintMark') setMintMark(value);
+    else if (name === 'grade') setGrade(gradeOfLabel(value));
+    else if (name === 'inscription') setInscription(value);
+    else if (name === 'tags') setTags(value);
   };
 
   return (
@@ -72,7 +98,7 @@ export function EditSheet({ item, reference, onClose }: { item: Item; reference:
           Cancel
         </button>
         <h2 className="text-xl font-semibold text-accent">Edit</h2>
-        <button type="button" disabled={saving} onClick={save} className="min-h-12 rounded-xl bg-accent px-6 text-lg font-semibold text-accent-fg disabled:opacity-50">
+        <button type="button" disabled={saving} onClick={() => void save()} className="min-h-12 rounded-xl bg-accent px-6 text-lg font-semibold text-accent-fg disabled:opacity-50">
           Save
         </button>
       </div>
@@ -156,7 +182,13 @@ export function EditSheet({ item, reference, onClose }: { item: Item; reference:
         <Field label="Tags" id="edit-tags">
           <input id="edit-tags" value={tags} onChange={(e) => setTags(e.target.value)} placeholder="silver, gift, from grandpa" className={field} />
         </Field>
+        {problem ? (
+          <p role="alert" className="text-base text-bad">
+            {problem}
+          </p>
+        ) : null}
       </form>
+      <FormDoor form={form} values={values} onFill={fill} registry={registry} command={EDIT_COMMAND} disabled={saving} />
     </div>
   );
 }
