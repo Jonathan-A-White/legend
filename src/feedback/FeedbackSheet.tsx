@@ -4,21 +4,19 @@
 // Under the box sits voice-kit's Composer (Hold to talk, or Type it here): what it sends is the box's words and its own, as the feedback.
 import { useEffect, useId, useRef, useState } from 'react';
 import { Composer, type ComposerLabels, type ComposerMessage } from 'voice-kit/composer';
+import { argsOf } from 'voice-kit/forms';
+import { defineRegistry } from 'voice-kit/talks';
 import { MAX_FEEDBACK_CHARS, MAX_SCREENSHOT_BYTES, SCREENSHOT_MIMES, type FeedbackKind } from '../services/feedback';
+import { FormDoor } from '../tutor';
 import { LEGEND_COMPOSER_SETTINGS } from '../ui/legendComposer';
+import { useAlive } from '../ui/useAlive';
 import { useSheetBack } from '../ui/sheetBack';
-import { isWaiting, queueFeedback, sendWaiting } from './outbox';
+import { FEEDBACK_CHOICES, FEEDBACK_COMMAND, FEEDBACK_FORM, labelOfKind, SAVED_LINE, SENT_LINE, tellTheMaker } from './feedbackForm';
 
-export const SENT_LINE = 'Sent, thank you: the factory reads these';
-export const SAVED_LINE = 'Saved on this phone. It goes when you are online.';
+export { SAVED_LINE, SENT_LINE };
 /** The live 'N of 1200' shows from here on, so a long paste or dictation is never cut without a word. */
 const COUNT_FROM = Math.floor(MAX_FEEDBACK_CHARS * 0.8);
 const PICTURE_LINE = 'Pick a JPEG, PNG or WebP picture under 8 MB.';
-
-const CHOICES: readonly { kind: Exclude<FeedbackKind, 'other'>; label: string; hint: string }[] = [
-  { kind: 'add', label: 'Can I add this?', hint: 'Something you wish the app did' },
-  { kind: 'wrong', label: "Something's wrong", hint: 'Something that broke or looks off' },
-];
 
 const VOICE_LABELS: Partial<ComposerLabels> = {
   hold: 'Hold to talk',
@@ -39,20 +37,30 @@ export function FeedbackSheet({ screen, onClose }: { screen: string; onClose: ()
     return () => window.removeEventListener('keydown', onKey);
   }, [onClose]);
 
+  const stillHere = useAlive();
   const [kind, setKind] = useState<Exclude<FeedbackKind, 'other'> | null>(null);
   const [text, setText] = useState('');
   const [picture, setPicture] = useState<File | null>(null);
   const [notice, setNotice] = useState<string | null>(null);
   const [phase, setPhase] = useState<Phase>('editing');
   const textId = useId();
+  // the one send: the Send button and the tutor's door both run tell-the-maker (feedbackForm.ts); made again each render, so it holds the picture now
+  const registry = defineRegistry({
+    commands: [
+      tellTheMaker({
+        screen,
+        picture: () => picture ?? undefined,
+        onSending: () => setPhase('sending'),
+        onOutcome: (outcome) => {
+          if (stillHere()) setPhase(outcome);
+        },
+        onFailed: () => {
+          if (stillHere()) setPhase('editing');
+        },
+      }),
+    ],
+  });
   const picker = useRef<HTMLInputElement>(null);
-  const alive = useRef(true);
-  useEffect(() => {
-    alive.current = true;
-    return () => {
-      alive.current = false;
-    };
-  }, []);
 
   const length = text.trim().length;
   const over = length > MAX_FEEDBACK_CHARS;
@@ -75,11 +83,14 @@ export function FeedbackSheet({ screen, onClose }: { screen: string; onClose: ()
     const words = [text.trim(), spoken.trim()].filter(Boolean).join('\n');
     if (!words || phase !== 'editing') return;
     if (words.length > MAX_FEEDBACK_CHARS) throw new Error(`${words.length} of ${MAX_FEEDBACK_CHARS}: the message is too long to send. Shorten it; nothing has been cut.`);
-    setPhase('sending');
-    const record = await queueFeedback(kind ?? 'other', screen, words, picture ?? undefined);
-    await sendWaiting();
-    const waiting = await isWaiting(record.id);
-    if (alive.current) setPhase(waiting ? 'saved' : 'sent');
+    const ran = await registry.run(FEEDBACK_COMMAND, argsOf(FEEDBACK_FORM, { kind: labelOfKind(kind), message: words }));
+    if (!ran.ok && stillHere()) setNotice(ran.why);
+  }
+
+  /** The tutor's door fills the fields the way he would. */
+  function fill(field: string, value: string): void {
+    if (field === 'message') setText(value);
+    if (field === 'kind') setKind(FEEDBACK_CHOICES.find((c) => c.label === value)?.kind ?? null);
   }
 
   const done = phase === 'sent' || phase === 'saved';
@@ -103,7 +114,7 @@ export function FeedbackSheet({ screen, onClose }: { screen: string; onClose: ()
           <>
             <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain border-t border-line px-4 py-4">
               <div role="radiogroup" aria-label="What is it?" className="grid gap-3">
-                {CHOICES.map((choice) => {
+                {FEEDBACK_CHOICES.map((choice) => {
                   const on = kind === choice.kind;
                   return (
                     <button
@@ -169,6 +180,15 @@ export function FeedbackSheet({ screen, onClose }: { screen: string; onClose: ()
                 ) : null}
               </div>
             </div>
+            <FormDoor
+              form={FEEDBACK_FORM}
+              values={{ kind: labelOfKind(kind), message: text, screenshot: picture ? '1 picture added' : '' }}
+              onFill={fill}
+              registry={registry}
+              command={FEEDBACK_COMMAND}
+              onPicker={() => picker.current?.click()}
+              disabled={phase !== 'editing'}
+            />
             <div className="shrink-0 border-t border-line px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
               <button type="button" disabled={!ready} onClick={() => void send()} className="min-h-14 w-full rounded-2xl bg-accent text-xl font-semibold text-accent-fg disabled:opacity-50">
                 {phase === 'sending' ? 'Sending…' : 'Send'}

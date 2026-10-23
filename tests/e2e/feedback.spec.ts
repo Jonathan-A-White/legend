@@ -60,3 +60,44 @@ test('the globe tip shows once', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Globe', level: 1 })).toBeVisible();
   await expect(page.getByRole('note')).toHaveCount(0);
 });
+
+test('Let the tutor do it opens a panel under the fields, fills the message, and leaves both Sends on the screen', async ({ page }) => {
+  const fake = makeFakePostern();
+  fake.kindReplies.feedback = { status: 'answered', answer: { status: 'sent' } };
+  fake.kindReplies['legend-ask'] = {
+    status: 'answered',
+    answer: {
+      answer: 'Everything is filled in.',
+      followUps: [],
+      settingsChanges: [],
+      teachMore: null,
+      form_values: [{ field: 'message', value: 'A place for notes about where I found a coin' }],
+    },
+  };
+  await routePostern(page, fake);
+  await openUnlocked(page);
+  await page.goto('/#/globe');
+  await page.getByRole('button', { name: 'Tell the maker' }).click();
+  const sheet = page.getByRole('dialog', { name: 'Tell the maker' });
+  const door = sheet.getByRole('button', { name: 'Let the tutor do it' });
+  expect((await door.boundingBox())?.height ?? 0).toBeGreaterThanOrEqual(44);
+  await shot(page, 'feedback-door');
+  await door.click();
+
+  const panel = sheet.getByRole('region', { name: 'The tutor is helping with this form' });
+  await expect(panel.getByText('Everything is filled in.')).toBeVisible();
+  await expect(sheet.getByRole('textbox', { name: 'Your message' })).toHaveValue('A place for notes about where I found a coin');
+  const send = await panel.getByRole('button', { name: 'Send Tell the maker' }).boundingBox();
+  expect(send?.height ?? 0).toBeGreaterThanOrEqual(56);
+  expect((send?.y ?? 0) + (send?.height ?? 0)).toBeLessThanOrEqual(844);
+  const own = await sheet.getByRole('button', { name: 'Send', exact: true }).boundingBox();
+  expect((own?.y ?? 0) + (own?.height ?? 0)).toBeLessThanOrEqual(844);
+  const { scrollWidth, clientWidth } = await page.evaluate(() => ({ scrollWidth: document.documentElement.scrollWidth, clientWidth: document.documentElement.clientWidth }));
+  expect(scrollWidth).toBeLessThanOrEqual(clientWidth);
+  await shot(page, 'feedback-door-open');
+  expect(fake.received.map((g) => g.grist.kind)).toEqual(['legend-ask']);
+
+  await panel.getByRole('button', { name: 'Send Tell the maker' }).click();
+  await expect(sheet.getByText('Sent, thank you: the factory reads these')).toBeVisible();
+  expect(fake.received.map((g) => g.grist.kind)).toEqual(['legend-ask', 'feedback']);
+});
