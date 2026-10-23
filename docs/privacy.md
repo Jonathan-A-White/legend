@@ -11,6 +11,9 @@ Nothing is sent anywhere unless he asks for it, and only these things ever leave
   rarity line, the same words the item shows) and its two photos; on a country, the country and no photo; always a count of his collection by country and kind, the settings the
   tutor may suggest, and the last three questions asked there with their answers. The tutor can suggest a setting, never
   change one: it changes only when he taps Apply.
+- **Let the tutor do it.** On Tell the maker and What is the asking price?, tapping this button sends the tutor the form's name and
+  fields with what each holds so far (his message, the price, the store), one request for each answer he gives, and the last
+  three of the exchange; nothing of his collection and no photo goes (`src/tutor/formRequest.ts`). The tutor never sends the form: only his tap on Send does.
 - **A rough worth.** Once an item is named, its facts and grade guess (never its photos, notes or tags) go to the mill to ask
   what it might roughly be worth, once, and again after 30 days or when its grade guess or year changes (`src/services/value.ts`).
   A coin he is only looking at asks at once. Turning Show values off in Settings, Collection, stops the asking and hides the figures.
@@ -33,7 +36,8 @@ Nothing is sent anywhere unless he asks for it, and only these things ever leave
 - His notes, tags, estimates of worth, wear notes, the fun fact, and any text that looks like a serial number (a run of eight
   or more digits): a card never carries them (`src/share/text.ts` leaves them out, and a test fails if one gets in).
 - The Wish list: a wished coin's asking price, store and savings stay on the phone (no card or picture carries them, and a
-  wished coin is not in the globe's count). Nothing is sent for them but the rough worth the factory is asked for.
+  wished coin is not in the globe's count). Nothing is sent for them but the rough worth the factory is asked for, and the price and
+  store he types or says while the tutor helps fill in that form.
 - The collection as a whole, the photos he did not share, and what he searched for or looked at.
 - Anything at all while **Sharing** is off in Settings, Privacy: no Share button is drawn then. The tutor cannot turn Sharing
   on; only he can.

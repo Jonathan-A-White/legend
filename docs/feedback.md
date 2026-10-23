@@ -44,3 +44,13 @@ drawn by the stories that build those screens.
 The usage log (`src/tips/usageLog.ts`) counts, per local day, every bus event kind, `screen:<route>` and `tip.shown:<id>` /
 `tip.dismissed:<id>`, in the `usage` store. Counts only; it never keeps an event's other fields or anything they typed, and it never
 leaves the phone.
+
+## Let the tutor do it
+
+Under the fields of Tell the maker (and of What is the asking price?, `src/wishlist/wishForm.ts`) sits the button **Let the tutor do
+it** (`src/tutor/FormDoor.tsx`). It opens a panel where the tutor asks one question at a time (the `legend-ask` grind with `form` in
+its request, `src/tutor/formRequest.ts`; voice-kit's `forms` describes the form) and each answer fills the matching field: *What is it?*
+(the two kinds), *Your message*, and a *screenshot* only he can add (the panel offers Choose a picture or No picture). When the required
+field holds something the panel shows the question `tell-the-maker` puts ("Send to the maker (Can I add this?): ...?") and a **Send**
+that runs that same confirm command (`src/feedback/feedbackForm.ts`): the sheet's own Send runs it too, so there is one path into the
+outbox. The tutor never sends; Stop helping closes the panel and keeps what is filled. `wish-for` is the same for **Add to Wish list**.
