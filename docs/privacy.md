@@ -11,9 +11,9 @@ Nothing is sent anywhere unless he asks for it, and only these things ever leave
   rarity line, the same words the item shows) and its two photos; on a country, the country and no photo; always a count of his collection by country and kind, the settings the
   tutor may suggest, and the last three questions asked there with their answers. The tutor can suggest a setting, never
   change one: it changes only when he taps Apply.
-- **Let the tutor do it.** On Tell the maker and What is the asking price?, tapping this button sends the tutor the form's name and
-  fields with what each holds so far (his message, the price, the store), one request for each answer he gives, and the last
-  three of the exchange; nothing of his collection and no photo goes (`src/tutor/formRequest.ts`). The tutor never sends the form: only his tap on Send does.
+- **Let the tutor do it.** On Tell the maker, What is the asking price?, Change what is wrong and Edit, tapping this button sends the tutor the form's name and
+  fields with what each holds so far (his message, the price, the store, the coin's country, denomination, year and the like), one request for each answer he gives, and the last
+  three of the exchange; nothing of the rest of his collection and no photo goes (`src/tutor/formRequest.ts`). The tutor never sends the form: only his tap on Send does.
 - **A rough worth.** Once an item is named, its facts and grade guess (never its photos, notes or tags) go to the mill to ask
   what it might roughly be worth, once, and again after 30 days or when its grade guess or year changes (`src/services/value.ts`).
   A coin he is only looking at asks at once. Turning Show values off in Settings, Collection, stops the asking and hides the figures.

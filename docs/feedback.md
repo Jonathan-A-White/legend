@@ -47,10 +47,24 @@ leaves the phone.
 
 ## Let the tutor do it
 
-Under the fields of Tell the maker (and of What is the asking price?, `src/wishlist/wishForm.ts`) sits the button **Let the tutor do
+Under the fields of Tell the maker (and of the three other Legend forms below) sits the button **Let the tutor do
 it** (`src/tutor/FormDoor.tsx`). It opens a panel where the tutor asks one question at a time (the `legend-ask` grind with `form` in
 its request, `src/tutor/formRequest.ts`; voice-kit's `forms` describes the form) and each answer fills the matching field: *What is it?*
 (the two kinds), *Your message*, and a *screenshot* only he can add (the panel offers Choose a picture or No picture). When the required
 field holds something the panel shows the question `tell-the-maker` puts ("Send to the maker (Can I add this?): ...?") and a **Send**
 that runs that same confirm command (`src/feedback/feedbackForm.ts`): the sheet's own Send runs it too, so there is one path into the
-outbox. The tutor never sends; Stop helping closes the panel and keeps what is filled. `wish-for` is the same for **Add to Wish list**.
+outbox. The tutor never sends; Stop helping closes the panel and keeps what is filled.
+
+The four Legend forms, each with one confirm command that the sheet's own button and the tutor's Send both run:
+
+| Form | Where | Spec | Command (runs) |
+| --- | --- | --- | --- |
+| Tell the maker | the feedback sheet | `src/feedback/feedbackForm.ts` | `tell-the-maker` (Send) |
+| What is the asking price? | Wish for it | `src/wishlist/wishForm.ts` | `wish-for` (Add to Wish list) |
+| Change what is wrong | Confirm sheet, Not quite | `src/capture/confirmForm.ts` | `confirm-coin` (Save and confirm, status `confirmed`) |
+| Edit | an item's Edit sheet | `src/collection/editForm.ts` | `edit-coin` (Save) |
+
+`confirm-coin` and `edit-coin` live in `src/tutor/formCommands.ts`. Country and Grade guess (and Edit's Kind) are choices: the
+tutor answers with a country's name or a grade such as `VF · Very Fine`, the sheet shows it picked, and the year is bounded at four
+characters. The kit takes at most eight fields and Edit has twelve, so Edit's form is Kind, Country, Denomination, Year, Mint mark,
+Grade guess, Inscription and Tags; Subtype, Series, Design and Material stay his by hand and `edit-coin` saves them as the sheet holds them.
