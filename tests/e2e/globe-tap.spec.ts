@@ -6,7 +6,8 @@ import { projectionFor, type Rotation } from '../../src/globe/render';
 import { shot } from './shot';
 import { openUnlocked } from './unlocked';
 
-test.use({ hasTouch: true });
+// 844 visible plus the 48 px the bottom bar keeps clear for the phone's navigation bar (mw-jpxyd3)
+test.use({ hasTouch: true, viewport: { width: 390, height: 892 } });
 
 const globe = (page: Page) => page.getByRole('img', { name: /^The globe/ });
 

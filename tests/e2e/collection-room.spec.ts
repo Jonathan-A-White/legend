@@ -6,7 +6,8 @@ import { expect, test, type Locator, type Page } from '@playwright/test';
 import { shot } from './shot';
 import { openUnlocked } from './unlocked';
 
-test.use({ colorScheme: 'dark', viewport: { width: 390, height: 844 } });
+// 844 visible plus the 48 px the bottom bar keeps clear for the phone's navigation bar (mw-jpxyd3)
+test.use({ colorScheme: 'dark', viewport: { width: 390, height: 892 } });
 
 const COINS = [
   ['q64', 'Quarter dollar', 1964, 'US'],
