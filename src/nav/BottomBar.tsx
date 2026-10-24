@@ -58,24 +58,28 @@ const TAB_FACE: Record<Tab, { label: string; icon: ReactElement }> = {
 export function BottomBar() {
   const active = tabOf(routeOf(useAddress()));
   return (
-    <nav aria-label="Screens" className="shrink-0 select-none border-t border-line bg-surface pb-[env(safe-area-inset-bottom)]">
-      <ul className="flex">
-        {TABS.map((tab) => {
-          const on = tab === active;
-          return (
-            <li key={tab} className="flex-1">
-              <a
-                href={hashFor(tab)}
-                aria-current={on ? 'page' : undefined}
-                className={`flex min-h-16 flex-col items-center justify-center gap-0.5 px-1 text-sm font-medium ${on ? 'text-accent' : 'text-muted'}`}
-              >
-                <span className={`rounded-full px-4 py-0.5 ${on ? 'bg-accent/15' : ''}`}>{TAB_FACE[tab].icon}</span>
-                <span>{TAB_FACE[tab].label}</span>
-              </a>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+    // The floor under the nav: Android Chrome with three-button navigation draws its 48 px bar over the page's foot and reports
+    // no inset for it (mw-jpxyd3; the same floor as Lampas's --lp-bar-inset), so the page keeps that room clear itself.
+    <div className="shrink-0 bg-surface pb-[max(env(safe-area-inset-bottom),48px)]">
+      <nav aria-label="Screens" className="select-none border-t border-line">
+        <ul className="flex">
+          {TABS.map((tab) => {
+            const on = tab === active;
+            return (
+              <li key={tab} className="flex-1">
+                <a
+                  href={hashFor(tab)}
+                  aria-current={on ? 'page' : undefined}
+                  className={`flex min-h-16 flex-col items-center justify-center gap-0.5 px-1 text-sm font-medium ${on ? 'text-accent' : 'text-muted'}`}
+                >
+                  <span className={`rounded-full px-4 py-0.5 ${on ? 'bg-accent/15' : ''}`}>{TAB_FACE[tab].icon}</span>
+                  <span>{TAB_FACE[tab].label}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
   );
 }
