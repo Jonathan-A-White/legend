@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.56
+_2026-10-24_
+- Fixed: When you let the tutor fill in a form for you, it now says the form is ready as soon as the must-have box is filled, instead of asking about the optional boxes.
+
 ## 0.1.54
 _2026-10-23_
 - New: The tutor can now fill in the Edit and Change what is wrong sheets with you, one question at a time, and you tap Send to save.

@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.56",
+    "date": "2026-10-24",
+    "story": "mw-63u3pr.3",
+    "kind": "fixed",
+    "text": "When you let the tutor fill in a form for you, it now says the form is ready as soon as the must-have box is filled, instead of asking about the optional boxes."
+  },
+  {
     "version": "0.1.54",
     "date": "2026-10-23",
     "story": "mw-cb24ai.2",
