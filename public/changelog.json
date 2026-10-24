@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.59",
+    "date": "2026-10-24",
+    "story": "mw-jpxyd3",
+    "kind": "fixed",
+    "text": "the row of screens at the bottom (Collection, Globe, Quarters, Learn, Settings) now sits above your phone's own buttons so you can reach all of it."
+  },
+  {
     "version": "0.1.56",
     "date": "2026-10-24",
     "story": "mw-63u3pr.3",

@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.59
+_2026-10-24_
+- Fixed: the row of screens at the bottom (Collection, Globe, Quarters, Learn, Settings) now sits above your phone's own buttons so you can reach all of it.
+
 ## 0.1.56
 _2026-10-24_
 - Fixed: When you let the tutor fill in a form for you, it now says the form is ready as soon as the must-have box is filled, instead of asking about the optional boxes.
