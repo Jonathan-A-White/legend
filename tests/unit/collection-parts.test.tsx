@@ -73,7 +73,7 @@ describe('Edit', () => {
     await userEvent.click(within(sheet).getByRole('button', { name: 'Save' }));
 
     await waitFor(async () => expect(await getItem(usQuarter.id)).toMatchObject({ year: 1965, country: 'CA', denomination: 'Quarter', gradeGuess: 'XF', tags: ['silver', 'gift'], kind: 'note' }));
-    expect(screen.queryByRole('dialog', { name: 'Edit' })).toBeNull();
+    await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Edit' })).toBeNull());
   });
 
   it('leaves the item as it was on Cancel', async () => {

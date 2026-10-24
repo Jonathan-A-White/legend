@@ -178,6 +178,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
       expect(sent).toMatchObject({ app: 'legend', kind: 'coin-from-photos', v: '1.1', input: { kind: 'coin', hint: null, sides: ['obverse', 'reverse'] } });
       expect(Array.from(sent.key)).toEqual(Array.from(getDeviceKeyBytes()));
       expect(sent.photos).toHaveLength(2);
+      await waitFor(() => expect(atSend).toHaveLength(1));
       const stored = atSend[0].photos;
       const front = stored.find((p) => p.side === 'obverse')!;
       const back = stored.find((p) => p.side === 'reverse')!;
