@@ -34,7 +34,7 @@
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "topojson-client": "^3.1.0",
-    "voice-kit": "github:Jonathan-A-White/voice-kit#a3cd22da2f6dd388a37515bb44d7f700d8fa98f8",
+    "voice-kit": "github:Jonathan-A-White/voice-kit#d87188227886ec15e7c34f674992f4a63ea69215",
     "workbox-precaching": "7.4.1",
     "workbox-routing": "^7.4.1",
     "workbox-strategies": "7.4.1"
@@ -72,6 +72,6 @@
   "allowScripts": {
     "github:Jonathan-A-White/bsv-kit#87b9c427ad851a764a9833928fc057588623ce31": true,
     "github:Jonathan-A-White/pwa-kit#7ad2a9dac500c495648291102e9c613e60a3277d": true,
-    "github:Jonathan-A-White/voice-kit#a3cd22da2f6dd388a37515bb44d7f700d8fa98f8": true
+    "github:Jonathan-A-White/voice-kit#d87188227886ec15e7c34f674992f4a63ea69215": true
   }
 }
