@@ -74,6 +74,9 @@ describe('the legend-ask grind', () => {
   it('carries voice-kit forms\' fragment Helping him fill in a form, word for word, and takes `form` in its input and form_values and form_ask in its answer', () => {
     const fragment = readFileSync('node_modules/voice-kit/packages/forms/grind/helping-with-a-form.md', 'utf8').trim();
     expect(instructions).toContain(fragment);
+    // mw-63u3pr.3: the one optional-field rule; the old "then optional ones" clause is gone, in the kit's text and here
+    expect(instructions).not.toContain('then optional ones');
+    expect(instructions).toContain('- Optional fields: ask about one (once at most) only while a required field is still empty');
     const input = JSON.parse(readFileSync(grind.inputSchema as string, 'utf8')) as { required: string[]; properties: Record<string, unknown> };
     expect(input.properties).toHaveProperty('form');
     expect(input.required).not.toContain('context');

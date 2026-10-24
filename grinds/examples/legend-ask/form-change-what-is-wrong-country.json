@@ -1,5 +1,5 @@
 {
-  "description": "On the Change what is wrong form he says the coin is from Canada: the tutor puts Canada, exactly as the option reads, in the Country field and asks about the next field that is still empty, the mint mark, one question.",
+  "description": "On the Change what is wrong form he says the coin is from Canada: the tutor puts Canada, exactly as the option reads, in the Country field and, with no required field empty, says the form is ready and asks nothing more.",
   "schemaVersion": "1.2",
   "request": {
     "question": "It is from Canada.",
@@ -24,9 +24,9 @@
     }
   },
   "expect": {
-    "answer": { "matches": "^[^\\n]{10,200}\\?$" },
+    "answer": { "matches": "^[^\\n?]{10,300}$" },
     "form_values": { "present": true },
-    "form_ask": { "equals": "mintMark" },
+    "form_ask": { "present": false },
     "settingsChanges": { "equals": [] }
   }
 }
