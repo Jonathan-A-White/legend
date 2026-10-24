@@ -1,5 +1,5 @@
 {
-  "description": "On the Edit form he says the piece is a banknote: the tutor puts Banknote, exactly as the option reads, in the Kind field and asks the next question, about the country.",
+  "description": "On the Edit form he says the piece is a banknote: the tutor puts Banknote, exactly as the option reads, in the Kind field and, with the only required field held, says the form is ready and asks nothing more.",
   "schemaVersion": "1.2",
   "request": {
     "question": "It is a bill, not a coin.",
@@ -24,9 +24,9 @@
     }
   },
   "expect": {
-    "answer": { "matches": "^[^\\n]{10,200}\\?$" },
+    "answer": { "matches": "^[^\\n?]{10,300}$" },
     "form_values": { "present": true },
-    "form_ask": { "equals": "country" },
+    "form_ask": { "present": false },
     "settingsChanges": { "equals": [] }
   }
 }

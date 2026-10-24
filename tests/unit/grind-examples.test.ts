@@ -182,14 +182,46 @@ describe('the tutor has its form scenarios', () => {
     }
   });
 
-  it('wants one question, the field it asks about, and nothing the tutor may not do', () => {
+  type Field = { name: string; required: boolean; value: string };
+  const fieldsOf = (e: GrindExample) => (e.request.form as { fields: Field[] }).fields;
+
+  it('wants one question and the field it asks about, or the form said to be ready and no form_ask', () => {
     for (const e of forms) {
       const keys = Object.keys(e.expect);
       expect(keys).toContain('answer');
       expect(keys).toContain('form_ask');
-      const asks = asCheck(e.expect.form_ask).equals as string;
-      expect(formOf(e).fields.map((f) => f.name)).toContain(asks);
+      const ask = asCheck(e.expect.form_ask);
+      if (ask.equals !== undefined) {
+        expect(fieldsOf(e).map((f) => f.name)).toContain(ask.equals as string);
+        const answer = new RegExp(asCheck(e.expect.answer).matches ?? '$^');
+        expect(answer.test('Which country is it from?'), 'wants a question').toBe(true);
+        expect(answer.test('The form is ready, so read it and tap Send.'), 'a statement fails').toBe(false);
+      } else {
+        expect(ask.present, `${e.description}: form_ask left out`).toBe(false);
+        const answer = new RegExp(asCheck(e.expect.answer).matches ?? '$^');
+        expect(answer.test('The form is ready, so read it and tap Send.'), 'wants one line that is not a question').toBe(true);
+        expect(answer.test('Which country is it from?'), 'a question fails').toBe(false);
+      }
     }
+  });
+
+  // mw-63u3pr.3: the kit's one optional-field rule. Once every required field holds something the turn says the form is
+  // ready and leaves form_ask out; an optional field is asked about only while a required one is still empty.
+  it('never asks about an optional field when every required field already holds something', () => {
+    for (const e of forms) {
+      const requiredHeld = fieldsOf(e).filter((f) => f.required).every((f) => f.value !== '');
+      const asked = asCheck(e.expect.form_ask).equals;
+      if (requiredHeld) expect(asked, `${e.description}: the required fields are held, so the form is ready`).toBeUndefined();
+      else {
+        const field = fieldsOf(e).find((f) => f.name === asked);
+        if (field) expect(field.value, 'a field that is still empty').toBe('');
+      }
+    }
+  });
+
+  it('has the ready scenarios for Edit, Change what is wrong and the asking price, and the first question for Tell the maker', () => {
+    const ready = forms.filter((e) => asCheck(e.expect.form_ask).present === false).map((e) => formOf(e).name).sort();
+    expect(ready).toEqual(['Change what is wrong', 'Edit', 'What is the asking price?']);
   });
 });
 
