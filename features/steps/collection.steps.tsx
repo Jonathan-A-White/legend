@@ -117,7 +117,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     Then('the grid shows only the Canada dime', async () => {
       await waitFor(() => expect(tiles()).toHaveLength(1));
       expect(tiles()[0]).toHaveTextContent('Dime');
-      expect(screen.queryByRole('dialog', { name: 'Countries' })).toBeNull();
+      await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Countries' })).toBeNull());
     });
   });
 
@@ -519,7 +519,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     And('he opens the folder "State quarters"', () => openFolder('State quarters'));
     Then('the folder lists only the quarter and the dime', () => onlyListed('Quarter dollar', 'Dime'));
     And('the folder says "2 pieces" and "Rough worth: about $1.25 to $4"', async () => {
-      expect(screen.getByTestId('folder-count')).toHaveTextContent(/^2 pieces$/);
+      await waitFor(() => expect(screen.getByTestId('folder-count')).toHaveTextContent(/^2 pieces$/));
       await waitFor(() => expect(screen.getByTestId('rough-worth')).toHaveTextContent('Rough worth: about $1.25 to $4'));
     });
     When('he takes the dime out of it from its item view and opens the folder again', async () => {
@@ -528,7 +528,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     });
     Then('the folder lists only the quarter, says "1 piece", and the dime is still in the Collection', async () => {
       await onlyListed('Quarter dollar');
-      expect(screen.getByTestId('folder-count')).toHaveTextContent(/^1 piece$/);
+      await waitFor(() => expect(screen.getByTestId('folder-count')).toHaveTextContent(/^1 piece$/));
       await waitFor(() => expect(screen.getByTestId('rough-worth')).toHaveTextContent('Rough worth: about $0.25 to $1'));
       await open('#/collection');
       await waitFor(() => expect(tiles()).toHaveLength(3));
@@ -575,7 +575,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     Then('the Collection shows no folder and all three pieces are still in it', async () => {
       await waitFor(() => expect(window.location.hash).toBe('#/collection'));
       await waitFor(() => expect(tiles()).toHaveLength(3));
-      expect(screen.queryByRole('link', { name: /State quarters/ })).toBeNull();
+      await waitFor(() => expect(screen.queryByRole('link', { name: /State quarters/ })).toBeNull());
     });
   });
 
@@ -602,10 +602,12 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
       await screen.findByRole('heading', { level: 1, name: 'Coins' });
       await onlyListed('Quarter dollar');
       await open('#/collection');
-      const folders = await screen.findByRole('region', { name: 'Coin folders' });
-      const link = await within(folders).findByRole('link', { name: /Coins/ });
-      expect(within(folders).queryByRole('link', { name: /New folder/ })).toBeNull();
-      await waitFor(() => expect(link).toHaveTextContent('1 piece'));
+      // the shelf is drawn once the screen has read its folders and pieces: wait for it, on a busy host too
+      const slow = { timeout: 5000 };
+      const folders = await screen.findByRole('region', { name: 'Coin folders' }, slow);
+      const link = await within(folders).findByRole('link', { name: /Coins/ }, slow);
+      await waitFor(() => expect(within(folders).queryByRole('link', { name: /New folder/ })).toBeNull());
+      await waitFor(() => expect(link).toHaveTextContent('1 piece'), slow);
       await openPiece(/Quarter dollar/);
       expect((await folderBox('Coins')).getAttribute('aria-checked')).toBe('true');
     });
