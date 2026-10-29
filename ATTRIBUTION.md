@@ -6,6 +6,15 @@
 Legend stands on other people's work, so it names every library, dataset, font, service and idea it builds on, with its
 licence and what we changed. Credit is owed whether or not a licence asks for it.
 
+<!-- toc -->
+
+- [Libraries](#libraries)
+- [Data](#data)
+- [Worth](#worth)
+- [Ideas](#ideas)
+
+<!-- /toc -->
+
 ## Libraries
 
 - **[bsv-kit](https://github.com/Jonathan-A-White/bsv-kit)** by Jonathan A. White, MIT. The licence check and the grist client

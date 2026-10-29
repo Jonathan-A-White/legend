@@ -4,6 +4,18 @@ Legend opens on an Unlock screen until the phone's key holds a `legend` licence 
 shell in `src/App.tsx`). The gate is not switched off for tests: a test that needs the app either answers the licence lookup
 or starts from a key it knows. This page names the one place the key lives and how a test seeds it.
 
+<!-- toc -->
+
+- [The device key's storage (the test seam)](#the-device-keys-storage-the-test-seam)
+  - [Seeding a known key in Playwright](#seeding-a-known-key-in-playwright)
+  - [Seeding a key in a Gherkin step](#seeding-a-key-in-a-gherkin-step)
+- [The camera and the factory (Add)](#the-camera-and-the-factory-add)
+- [The tutor (Ask)](#the-tutor-ask)
+- [Live check (not in the gate)](#live-check-not-in-the-gate)
+- [Settings (`src/config.ts`)](#settings-srcconfigts)
+
+<!-- /toc -->
+
 ## The device key's storage (the test seam)
 
 - Place: `window.localStorage`, under the key **`legend.deviceKey`** (`DEVICE_KEY_STORAGE_KEY` in `src/config.ts`).

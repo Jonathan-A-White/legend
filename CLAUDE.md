@@ -7,6 +7,19 @@ so. Never bump `package.json`'s version (`mw next` does). No AI attribution line
 
 VISION.md is the Governor's vision for this app: a change that would cross one of its lines stops and says so.
 
+<!-- toc -->
+
+- [Gate command](#gate-command)
+- [Read first](#read-first)
+- [Scripts](#scripts)
+- [Tests](#tests)
+- [Live tests](#live-tests)
+- [Docs stay true](#docs-stay-true)
+- [Dependencies](#dependencies)
+- [Closing comment](#closing-comment)
+
+<!-- /toc -->
+
 ## Gate command
 
 ```bash

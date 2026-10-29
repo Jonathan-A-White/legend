@@ -1,4 +1,5 @@
 # Legend module map
+<!-- toc: none -->
 
 A module is a folder under `src/` with one job and one entry; import that.
 
@@ -13,7 +14,7 @@ A module is a folder under `src/` with one job and one entry; import that.
 | data/us | The US reference data (quarters, mints, grades, key dates, mintages, the states map) and its loaders; sources in `docs/data.md` | `src/data/us.ts` | built |
 | rarity | How rare a coin is: pure rules (`findRow`, `placeInSeries`), `rarityWords` (for the tutor), `RarityLine`, `Strip`; `TutorRarity` asks on a tap (`item.rarity`); `keyDateStruck` | `src/rarity/index.ts` | built |
 | services | What leaves the phone: `grist.ts`, `feedback.ts`, tutor `ask.ts`, licence, device key, app update (pwa-kit), the photo reader `nameItem.ts` (on a worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time), `itemAnswer.ts`, `value.ts`, `rarity.ts` | `src/UpdateBanner.tsx` | built |
-| events | The typed bus screens talk through; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
+| events | The typed bus screens use; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared: scroll guard, build stamp, `HoldBar`, `legendComposer.ts` (Composer settings), `useSheetBack`, `useObjectUrl` | `src/ui/` | built |
@@ -39,7 +40,7 @@ A module is a folder under `src/` with one job and one entry; import that.
 
 The bottom bar has Collection, Globe,
 Quarters, Learn and Settings (`src/settings/SettingsScreen.tsx`); `home` is `#/`; `item` (`#/item/<id>`) and `country`
-(`#/country/<cc>`) are reached from them. Those live in their module folders above; `add` (`#/add`, `src/capture/`) opens over the bar.
+(`#/country/<cc>`) are reached from them. Those live in the modules above; `add` (`#/add`, `src/capture/`) opens over the bar.
 
 **A new screen is a new folder.** Never grow a screen's file with another screen's code, and never import
 from inside another module's folder, only its entry.

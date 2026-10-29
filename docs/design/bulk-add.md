@@ -10,6 +10,17 @@ The rule above all others, from his words and the Governor's principle ("easy to
 incorrectly"): **a wrong pair is never saved unasked.** Everything below is built so the app either pairs surely, or says
 it is unsure and shows him, and nothing is stored until he taps Save.
 
+<!-- toc -->
+
+- [What the code gives today](#what-the-code-gives-today)
+- [1. The flow at 390x844](#1-the-flow-at-390x844)
+- [2. How coins are found and cut out](#2-how-coins-are-found-and-cut-out)
+- [3. How pairs are matched, and what shows when unsure](#3-how-pairs-are-matched-and-what-shows-when-unsure)
+- [4. Slice plan](#4-slice-plan)
+- [5. For the Governor](#5-for-the-governor)
+
+<!-- /toc -->
+
 ## What the code gives today
 
 (The story named `src/add/`; the camera is `src/capture/`.)
