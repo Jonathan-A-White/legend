@@ -33,6 +33,8 @@ export interface FakePostern {
   received: ReceivedGrist[];
   /** every sealed upload the phone made to POST /api/blobs: its hash and byte length (a grist's attachments name them) */
   blobs: { hash: string; size: number }[];
+  /** the query string of each GET /api/messages, in order ('?since=0', '?txid=direct:...'): what a wait reads, and from where */
+  messageQueries: string[];
   /** the Authorization header of each signed call */
   authorizations: string[];
   /** Answers a grist as soon as it arrives with this reply; undefined holds every grist until `answer` is called. */
@@ -74,6 +76,7 @@ export function makeFakePostern(): FakePostern {
     calls: [],
     received: [],
     blobs: [],
+    messageQueries: [],
     authorizations: [],
     autoReply: undefined,
     
@@ -141,6 +144,11 @@ export function makeFakePostern(): FakePostern {
       return json(201, { txid, seq: records.length });
     }
     if (url.pathname === '/api/messages' && method === 'GET') {
+      fake.messageQueries.push(url.search);
+      const mine = (r: (typeof records)[number]) => r.payload.to === pubkey || r.payload.from === pubkey;
+      // Postern's ?txid=: just that transaction's records, however much history the key holds (bsv-kit/grist's wait starts from the grist's seq).
+      const wanted = url.searchParams.get('txid');
+      if (wanted !== null) return json(200, { records: records.filter((r) => r.txid === wanted && mine(r)), next: records.length, more: false });
       const since = Number(url.searchParams.get('since') ?? '0');
       const visible = records.filter((r) => r.seq > since && (r.payload.to === pubkey || r.payload.from === pubkey));
       return json(200, { records: visible, next: records.length });
