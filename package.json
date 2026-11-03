@@ -25,7 +25,7 @@
   "dependencies": {
     "@bsv/sdk": "^2.8.11",
     "ajv": "^8.20.0",
-    "bsv-kit": "github:Jonathan-A-White/bsv-kit#87b9c427ad851a764a9833928fc057588623ce31",
+    "bsv-kit": "github:Jonathan-A-White/bsv-kit#24a5e297c48175fafaefa399772a15f316ab365f",
     "d3-geo": "^3.1.1",
     "dexie": "^4.3.0",
     "dexie-react-hooks": "^4.4.0",
@@ -70,7 +70,7 @@
     "vitest": "^4.0.18"
   },
   "allowScripts": {
-    "github:Jonathan-A-White/bsv-kit#87b9c427ad851a764a9833928fc057588623ce31": true,
+    "github:Jonathan-A-White/bsv-kit#24a5e297c48175fafaefa399772a15f316ab365f": true,
     "github:Jonathan-A-White/pwa-kit#7ad2a9dac500c495648291102e9c613e60a3277d": true,
     "github:Jonathan-A-White/voice-kit#d87188227886ec15e7c34f674992f4a63ea69215": true
   }
