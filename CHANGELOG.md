@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.62
+_2026-11-05_
+- New: About Legend now shows the credits, starting with Newton's line about standing on the shoulders of giants, reached from Settings.
+
 ## 0.1.59
 _2026-10-24_
 - Fixed: the row of screens at the bottom (Collection, Globe, Quarters, Learn, Settings) now sits above your phone's own buttons so you can reach all of it.
