@@ -1,9 +1,9 @@
 // src/nav/route.ts: the screens, told apart by the address hash, so the phone's Back button walks them. A hash is one of
-// #/collection, #/globe, #/quarters, #/learn (and #/learn/grading, /mints, /years, /path), #/settings, #/wishlist and #/folder/<id> (from the Collection), #/item/<id>, #/country/<cc> or #/add (the camera; #/add?folder=<id> from a coin folder, which puts what it names into that folder); '#/' and any hash it does not know
+// #/collection, #/globe, #/quarters, #/learn (and #/learn/grading, /mints, /years, /path), #/settings, #/about (the credits, from Settings), #/wishlist and #/folder/<id> (from the Collection), #/item/<id>, #/country/<cc> or #/add (the camera; #/add?folder=<id> from a coin folder, which puts what it names into that folder); '#/' and any hash it does not know
 // are Home. src/nav/lastRoute.ts keeps these addresses across a close.
 import { useSyncExternalStore } from 'react';
 
-export type Route = 'home' | 'collection' | 'globe' | 'quarters' | 'learn' | 'settings' | 'item' | 'country' | 'add' | 'wishlist' | 'folder';
+export type Route = 'home' | 'collection' | 'globe' | 'quarters' | 'learn' | 'settings' | 'item' | 'country' | 'add' | 'wishlist' | 'folder' | 'about';
 
 /** The five screens of the bottom bar, in the order it shows them. */
 export const TABS = ['collection', 'globe', 'quarters', 'learn', 'settings'] as const;
@@ -16,7 +16,7 @@ const COUNTRY = /^#\/country\/([A-Za-z]{2})$/;
 
 export function routeOf(hash: string): Route {
   const path = hash.split('?')[0];
-  if (path === '#/collection' || path === '#/globe' || path === '#/quarters' || path === '#/learn' || path === '#/settings' || path === '#/add' || path === '#/wishlist') return path.slice(2) as Route;
+  if (path === '#/collection' || path === '#/globe' || path === '#/quarters' || path === '#/learn' || path === '#/settings' || path === '#/add' || path === '#/wishlist' || path === '#/about') return path.slice(2) as Route;
   if (LEARN_PAGE.test(path)) return 'learn';
   if (ITEM_ID.test(path)) return 'item';
   if (FOLDER_ID.test(path)) return 'folder';
@@ -37,6 +37,7 @@ export const countryOf = (hash: string): string | undefined => COUNTRY.exec(hash
 export const hashFor = (route: Tab | 'home'): string => (route === 'home' ? '#/' : `#/${route}`);
 export const ADD_HASH = '#/add';
 export const WISHLIST_HASH = '#/wishlist';
+export const ABOUT_HASH = '#/about';
 /** The Add address opened from a coin folder: what the camera names there goes into that folder. */
 export const addToFolderHash = (folderId: string): string => `${ADD_HASH}?folder=${folderId}`;
 /** The folder an Add address was opened from, or undefined (Add opened anywhere else). */
@@ -48,10 +49,11 @@ export const countryHash = (cc: string): string => `#/country/${cc.toUpperCase()
 export const askHash = (hash: string): string => `${hash.split('?')[0]}?ask`;
 export const isAsking = (hash: string): boolean => hash.split('?')[1] === 'ask';
 
-/** The bottom-bar screen an address belongs to: an item is in the Collection (so are Add and the Wish list, which open from it), a country on the Globe. */
+/** The bottom-bar screen an address belongs to: an item is in the Collection (so are Add and the Wish list, which open from it), a country on the Globe, About in Settings. */
 export function tabOf(route: Route): Tab | undefined {
   if (route === 'item' || route === 'add' || route === 'wishlist' || route === 'folder') return 'collection';
   if (route === 'country') return 'globe';
+  if (route === 'about') return 'settings';
   return route === 'home' ? undefined : route;
 }
 

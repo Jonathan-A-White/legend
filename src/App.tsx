@@ -7,6 +7,7 @@ import { CountrySheet, GlobeScreen } from './globe';
 import { BottomBar } from './nav/BottomBar';
 import { countryOf, folderIdOf, itemIdOf, routeOf, useAddress } from './nav/route';
 import { useRouteEvents } from './nav/useRouteEvents';
+import { About } from './About';
 import { CaptureScreen, useNameQueue } from './capture';
 import { CollectionScreen, ItemView } from './collection';
 import { useSendWaiting } from './feedback';
@@ -33,6 +34,8 @@ function Screen({ hash }: { hash: string }) {
       return <Learn />;
     case 'settings':
       return <SettingsScreen />;
+    case 'about':
+      return <About />;
     case 'item':
       return <ItemView id={itemIdOf(hash)!} />;
     case 'country':

@@ -25,6 +25,8 @@ describe('routes', () => {
     expect(routeOf('#/learn/nothing')).toBe('home');
     expect(routeOf('#/settings')).toBe('settings');
     expect(routeOf('#/wishlist')).toBe('wishlist');
+    expect(routeOf('#/about')).toBe('about');
+    expect(isKeptHash('#/about')).toBe(true);
     expect(routeOf('#/folder/abc-123')).toBe('folder');
     expect(folderIdOf('#/folder/abc-123')).toBe('abc-123');
     expect(routeOf('#/folder/')).toBe('home');
