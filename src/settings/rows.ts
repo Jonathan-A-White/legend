@@ -36,8 +36,8 @@ const ABOUT: InfoRow = {
   key: 'about',
   kind: 'about',
   label: 'About Legend',
-  hint: 'Which build this is, and where the data comes from.',
-  help: 'Every list of countries, currencies and coins Legend ships is free to reuse, and the credits are in ATTRIBUTION.md in the source.',
+  hint: 'Which build this is, and who and what Legend stands on.',
+  help: 'Every list of countries, currencies and coins Legend ships is free to reuse, and the credits are one tap away, under Credits and sources.',
   section: 'about',
   talkable: false,
 };

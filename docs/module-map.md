@@ -7,7 +7,7 @@ A module is a folder under `src/` with one job and one entry; import that.
 |---|---|---|---|
 | App shell | Start the app: scroll guard, banner, worker | `src/main.tsx`, `src/App.tsx`, `src/config.ts`, `src/sw.ts` | built |
 | Update flow | Banner, What's new | `src/UpdateBanner.tsx`, `src/whatsNew/` | built |
-| gate | Hold the app shut until the phone's key holds a licence: `Gate` wraps the shell | `src/gate/index.ts` | built |
+| gate | Shut until the key holds a licence: `Gate` wraps the shell | `src/gate/index.ts` | built |
 | data | The local store (Dexie: items, photos, settings, meta, asks, values, outbox, usage, savings, folders) and types; `kinds.ts` the kinds' words | `src/data/db.ts` | built |
 | data/world | Countries (TopoJSON, names, flags) and currencies by date, in `public/data/world/` | `src/data/world.ts` | built |
 | data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
@@ -18,7 +18,7 @@ A module is a folder under `src/` with one job and one entry; import that.
 | settings | The registry (a setting is declared once), the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared: scroll guard, build stamp, `HoldBar`, `legendComposer.ts` (Composer settings), `useSheetBack`, `useObjectUrl` | `src/ui/` | built |
-| globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): a canvas globe; `render.ts` draws, `controller.ts` loops and pinches, `pick.ts` picks near a tap | `src/globe/index.ts` | built |
+| globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): a canvas globe; `render.ts` draws, `controller.ts` loops, `pick.ts` picks | `src/globe/index.ts` | built |
 | quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist; `match.ts` (pure) names an item's design, `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
 | collection | The Collection (`#/collection`: count, search, filters, Looking at, Folders, Select: `Choose.tsx`; `#/folder/<id>` one folder) and one item (`#/item/<id>`: photos, facts, rarity, notes, Edit, Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
 | share | Share: a globe picture or item card, else Save picture; `text.ts` says what a card may say (Other: subtype) | `src/share/index.ts` | built |
@@ -39,8 +39,8 @@ A module is a folder under `src/` with one job and one entry; import that.
 ## Screens
 
 The bottom bar has Collection, Globe,
-Quarters, Learn and Settings (`src/settings/SettingsScreen.tsx`); `home` is `#/`; `item` (`#/item/<id>`) and `country`
-(`#/country/<cc>`) are reached from them. Those live in the modules above; `add` (`#/add`, `src/capture/`) opens over the bar.
+Quarters, Learn and Settings (`src/settings/SettingsScreen.tsx`); About (`#/about`, `src/About.tsx`) opens from its About row; `home` is `#/`; `item` (`#/item/<id>`) and `country`
+(`#/country/<cc>`) are reached from them. `add` (`#/add`, `src/capture/`) opens over the bar.
 
 **A new screen is a new folder.** Never grow a screen's file with another screen's code, and never import
 from inside another module's folder, only its entry.

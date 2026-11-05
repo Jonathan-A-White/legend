@@ -9,11 +9,11 @@ and what they choose to share: `docs/privacy.md`.
 
 ## Screens planned
 
-Built: the licence gate (`docs/testing.md`), the shell, Settings, Home (`#/`), the Collection (count line, rough worth, search,
+Built: the licence gate (`docs/testing.md`), the shell, Settings (its About row opens `#/about`: the credits, built from ATTRIBUTION.md), Home (`#/`), the Collection (count line, rough worth, search,
 filters, Looking at, coin folders, Select to remove) and one item (photos, facts, rarity, notes, Edit, hold to Remove), Add (`#/add`: photo front and back, a queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Wish list (`#/wishlist`: Wish for it at the store's price, a saving goal, Got it!), the Globe (`#/globe`: a globe turned with one
-finger, lit where the items come from; Not yet lists the countries with nothing) and the
+finger, lit where the items come from) and the
 Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map lit with the quarters they
-have, a checklist), Share (a picture of the globe, a card of one item), Tell the maker (`docs/feedback.md`), tips. Learn (grading, mint marks, years, Your path). The tutor (`?ask` on an item or a country: his questions, its answers, settings only on his Apply).
+have, a checklist), Share, Tell the maker (`docs/feedback.md`), tips, Learn (grading, mint marks, years, Your path). The tutor (`?ask` on an item or a country: his questions, its answers, settings only on his Apply).
 
 ## Where things live
 

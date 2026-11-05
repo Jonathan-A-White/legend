@@ -4,6 +4,7 @@
 // A new setting is one entry in the registry; a new kind of setting is one entry in CONTROLS (the type checker asks for it).
 import { useId, useState, type ReactNode } from 'react';
 import { TellTheMakerButton } from '../feedback';
+import { ABOUT_HASH } from '../nav/route';
 import { BuildVersion } from '../ui/BuildVersion';
 import { writeSetting, type SettingEntry, type SettingKind, type SettingValue } from './registry';
 import { SECTIONS, visibleRows, type InfoRow, type SettingsRow } from './rows';
@@ -157,7 +158,19 @@ function SettingRowView({ row, value }: { row: SettingEntry; value: SettingValue
 }
 
 function AboutRow({ row }: { row: InfoRow }) {
-  return <Row row={row} below={<BuildVersion className="mt-2 !text-left" />} />;
+  return (
+    <Row
+      row={row}
+      below={
+        <>
+          <BuildVersion className="mt-2 !text-left" />
+          <a href={ABOUT_HASH} className="mt-2 flex min-h-12 items-center justify-between rounded-xl border border-line px-4 text-lg font-medium text-accent">
+            Credits and sources <span aria-hidden="true">›</span>
+          </a>
+        </>
+      }
+    />
+  );
 }
 
 const isInfo = (row: SettingsRow): row is InfoRow => row.kind === 'about' || row.kind === 'tell';
