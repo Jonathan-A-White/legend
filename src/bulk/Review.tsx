@@ -4,8 +4,7 @@
 // swaps it. Swap (then the other pair's back), Leave out and Looks right are one tap each, and Undo takes the last one back. The pair
 // never changes without his tap. Save stores each kept pair as the item Add makes (saveBatch.ts); Close asks first.
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { Still } from '../capture/captureStill';
-import { stillOptions } from '../capture/startItem';
+import { stillOptions, type Still } from '../capture';
 import { useAlive } from '../ui/useAlive';
 import { useObjectUrl } from '../ui/useObjectUrl';
 import type { Group } from './BulkScreen';

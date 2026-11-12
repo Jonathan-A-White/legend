@@ -4,8 +4,7 @@
 // sends them oldest first). Saving the same batch twice, as a double tap does, stores it once.
 import type { Item } from '../data/db';
 import { addItemsWithPhotos } from '../data/repositories';
-import { photosOf, waitingItem } from '../capture/startItem';
-import type { Still } from '../capture/captureStill';
+import { photosOf, waitingItem, type Still } from '../capture';
 import { nameQueue } from '../services/nameQueue';
 
 /** One coin of the batch: its front's cut-out and the cut-out of the back paired with it. */

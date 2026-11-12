@@ -4,7 +4,7 @@
 import type { FormField, FormSpec } from 'voice-kit/forms';
 import type { Item } from '../data/db';
 import { GRADES } from '../data/grades';
-import { CONFIRM_COMMAND, countryLabel, gradeLabel } from '../tutor/formCommands';
+import { CONFIRM_COMMAND, countryLabel, gradeLabel } from '../tutor';
 import type { CountryOption } from './useCountries';
 
 export { CONFIRM_COMMAND };
