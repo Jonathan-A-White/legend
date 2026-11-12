@@ -175,7 +175,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     Then('the grist is sent as app legend, kind coin-from-photos, with the device key and the two photos in order', async () => {
       await waitFor(() => expect(factory.sent).toHaveLength(1));
       const [sent] = factory.sent;
-      expect(sent).toMatchObject({ app: 'legend', kind: 'coin-from-photos', v: '1.1', input: { kind: 'coin', hint: null, sides: ['obverse', 'reverse'] } });
+      expect(sent).toMatchObject({ app: 'legend', kind: 'coin-from-photos', v: '1.2', input: { kind: 'coin', hint: null, sides: ['obverse', 'reverse'] } });
       expect(Array.from(sent.key)).toEqual(Array.from(getDeviceKeyBytes()));
       expect(sent.photos).toHaveLength(2);
       await waitFor(() => expect(atSend).toHaveLength(1));
@@ -472,7 +472,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
       // the named piece is then valued on its own grist (item-value), so look at the photo reader's only
       await waitFor(() => expect(factory.sentOf('coin-from-photos')).toHaveLength(1));
       const [sent] = factory.sentOf('coin-from-photos');
-      expect(sent).toMatchObject({ kind: 'coin-from-photos', v: '1.1', input: { kind: 'other', hint: null, sides: ['obverse', 'reverse'] } });
+      expect(sent).toMatchObject({ kind: 'coin-from-photos', v: '1.2', input: { kind: 'other', hint: null, sides: ['obverse', 'reverse'] } });
       expect(sent.photos).toHaveLength(2);
     });
     And('the item is kept as an Other with the subtype Subway token and the country US', async () => {
