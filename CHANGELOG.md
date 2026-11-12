@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.66
+_2026-11-12_
+- New: When the photo reader thinks the back belongs to a different coin than the front, the check sheet now says so and lets you retake the back.
+
 ## 0.1.62
 _2026-11-05_
 - New: About Legend now shows the credits, starting with Newton's line about standing on the shoulders of giants, reached from Settings.

@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.66",
+    "date": "2026-11-12",
+    "story": "mw-tmsafpc.6",
+    "kind": "new",
+    "text": "When the photo reader thinks the back belongs to a different coin than the front, the check sheet now says so and lets you retake the back."
+  },
+  {
     "version": "0.1.62",
     "date": "2026-11-05",
     "story": "mw-vtjxh4.49",
