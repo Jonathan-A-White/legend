@@ -29,7 +29,7 @@ A module is a folder under `src/` with one job and one entry; import that.
 | capture | Add (`#/add`): viewfinder (`CaptureScreen`: Coin, Bill, Other; `useCamera`), `captureStill` (1600 px, <1 MB, 320 px thumb), `startItem` (stores, queues), Confirm sheet, `useNameQueue` | `src/capture/index.ts` | built |
 | worth | A rough worth, never a price (an Other's guess counts at medium+): `WorthLine`, `RoughWorth`, `format.ts` (`worthOf` adds a set's ranges); Show values hides it | `src/worth/index.ts` | built |
 | wishlist | The Wish list (`#/wishlist`, from the Collection): goal card, wished coins, Got it!, Let it go; `WishSheet` is Wish for it on the Confirm sheet; `tally.ts` (pure) the money | `src/wishlist/index.ts` | built |
-| bulk | Bulk add: `findCoins` (pure) gives each coin a circle; `cutCoins` cuts each out, grey outside; `coinSize` rules; `docs/design/bulk-add.md` | `src/bulk/index.ts` | built |
+| bulk | Add many (`#/add/many`, `BulkScreen`: Fronts, Flip, Backs): `findCoins`, `cutCoins`, `coinSize`, `pairCoins`; `docs/design/bulk-add.md` | `src/bulk/index.ts` | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
 
 ## Grinds
