@@ -18,6 +18,7 @@ import { Quarters } from './quarters';
 import { SettingsScreen } from './settings/SettingsScreen';
 import { useAppearance } from './settings/useAppearance';
 import { useUsageLog } from './tips';
+import { Notice } from './ui/notice';
 import { WishListScreen } from './wishlist';
 import { WhatsNewOnUpdate } from './whatsNew/WhatsNewOnUpdate';
 
@@ -66,6 +67,7 @@ function Shell() {
       <Screen hash={hash} />
       <BottomBar />
       <WhatsNewOnUpdate />
+      <Notice />
     </div>
   );
 }

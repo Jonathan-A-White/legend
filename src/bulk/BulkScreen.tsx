@@ -1,8 +1,8 @@
 // src/bulk/BulkScreen.tsx: Add many at once, at #/add/many (#/add/many?folder=<id> from a coin folder). Full-screen like Add, the step
 // name as the prompt: Fronts (one photo of the coins laid out, the coins found outlined and numbered), Flip (a card: turn each coin
 // over where it lies) and Backs (the fronts' circles as ghost rings to hold the phone by, then the same check, and the count must
-// equal the fronts'). Then Review, a stub for now: it says how many coins and stores nothing. The group photos are held in memory
-// only; nothing is stored or sent here.
+// equal the fronts'). Then Review (Review.tsx), where nothing is stored until Save. The group photos are held in memory
+// only; nothing is stored or sent before Save.
 import { useRef, useState } from 'react';
 import { grabFrame, useCamera } from '../capture';
 import { useFolder } from '../data/repositories';
@@ -11,7 +11,11 @@ import { useAlive } from '../ui/useAlive';
 import { useObjectUrl } from '../ui/useObjectUrl';
 import type { Circle } from './find';
 import { lookAtPhoto, type Look } from './look';
-import { BACKS_CAPTION, FLIP_TEXT, FRONTS_CAPTION, MOST_COINS, STEP_NAME, judge, type Step } from './steps';
+import { Header } from './Header';
+import { Review } from './Review';
+import { savedWords } from './saveBatch';
+import { showNotice } from '../ui/noticeStore';
+import { BACKS_CAPTION, FLIP_TEXT, FRONTS_CAPTION, MOST_COINS, judge, type Step } from './steps';
 
 /** A group photo kept for the next steps: the picture at full size and what is in it. Memory only. */
 export interface Group {
@@ -22,26 +26,6 @@ export interface Group {
 /** A photo just taken: kept with its look and the preview the outlines are drawn on. */
 interface Taken extends Group {
   preview: Blob | null;
-}
-
-const CLOSE = 'flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-black/60 text-2xl';
-
-function Header({ step, caption, onClose }: { step: Step; caption: string; onClose: () => void }) {
-  return (
-    <div className="relative z-10 bg-gradient-to-b from-black/80 to-transparent pt-[max(env(safe-area-inset-top),0.75rem)] pb-3">
-      <div className="flex items-start justify-between gap-3 px-4">
-        <div>
-          <p data-testid="prompt" aria-live="polite" className="text-4xl font-semibold tracking-wide">
-            {STEP_NAME[step]}
-          </p>
-          <p className="text-base text-white/80">{caption}</p>
-        </div>
-        <button type="button" aria-label="Close" onClick={onClose} className={CLOSE}>
-          <span aria-hidden="true">✕</span>
-        </button>
-      </div>
-    </div>
-  );
 }
 
 /** Rings drawn over a picture of `look`'s size, which is shown whole (contain) the way the picture is, so a ring sits on its coin and no coin is cropped away. */
@@ -260,20 +244,6 @@ function Flip({ onBacks, onClose }: { onBacks: () => void; onClose: () => void }
   );
 }
 
-/** Review, for now a stub: how many coins, and nothing stored. The next story builds the pairs, the swaps and Save. */
-function ReviewStub({ coins, onClose }: { coins: number; onClose: () => void }) {
-  return (
-    <>
-      <Header step="review" caption="" onClose={onClose} />
-      <div className="relative z-10 flex flex-1 items-center justify-center px-6">
-        <p data-testid="review-count" className="text-5xl font-semibold">
-          {coins} {coins === 1 ? 'coin' : 'coins'}
-        </p>
-      </div>
-    </>
-  );
-}
-
 export function BulkScreen() {
   const folderId = addFolderIdOf(useAddress());
   const folder = useFolder(folderId ?? '');
@@ -311,7 +281,27 @@ export function BulkScreen() {
           }}
         />
       ) : null}
-      {step === 'review' && backsPhoto ? <ReviewStub coins={backsPhoto.look.coins.length} onClose={close} /> : null}
+      {step === 'review' && frontsPhoto && backsPhoto ? (
+        <Review
+          fronts={frontsPhoto}
+          backs={backsPhoto}
+          folderId={folderId && folder !== null ? folderId : undefined}
+          onRetakeBacks={() => {
+            setBacksPhoto(null);
+            setStep('backs');
+          }}
+          onStartOver={() => {
+            setFrontsPhoto(null);
+            setBacksPhoto(null);
+            setStep('fronts');
+          }}
+          onClose={close}
+          onSaved={(saved) => {
+            showNotice(savedWords(saved));
+            close();
+          }}
+        />
+      ) : null}
     </main>
   );
 }
