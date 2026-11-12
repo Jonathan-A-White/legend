@@ -7,7 +7,7 @@ import type { Item } from '../data/db';
 import { KINDS as KIND_WORDS, KIND_ORDER, itemName } from '../data/kinds';
 import { useFolder, useItems, useThumbs } from '../data/repositories';
 import { FeedbackButton } from '../feedback';
-import { ADD_HASH, WISHLIST_HASH, addToFolderHash, itemHash } from '../nav/route';
+import { ADD_HASH, WISHLIST_HASH, addManyHash, addToFolderHash, itemHash } from '../nav/route';
 import { RoughWorth } from '../worth';
 import { ChooseBar, ChooseTile, RemoveChosen, RemovedToast } from './Choose';
 import { useChoosing, type Choosing } from './choosing';
@@ -30,6 +30,8 @@ const remembered: { mode: Mode; sort: SortBy } = { mode: 'grid', sort: 'newest' 
 
 const chip = (on: boolean) =>
   `flex min-h-11 items-center gap-1.5 rounded-full border px-3.5 text-base font-medium ${on ? 'border-accent bg-accent/15 text-accent' : 'border-line text-muted'}`;
+
+const addLink = 'flex min-h-12 w-fit items-center gap-2 rounded-xl border border-accent px-4 text-lg font-medium text-accent active:opacity-80';
 
 function Caption({ item, ref_ }: { item: Item; ref_: Reference }) {
   return (
@@ -166,10 +168,20 @@ export function CollectionScreen({ folderId }: { folderId?: string }) {
             </div>
           ) : null}
           {folderId && folder ? (
-            <a href={addToFolderHash(folderId)} className="mt-1 flex min-h-12 w-fit items-center gap-2 rounded-xl border border-accent px-4 text-lg font-medium text-accent active:opacity-80">
-              <CameraIcon size={22} /> Add a coin
-            </a>
+            <div className="mt-1 flex flex-wrap gap-2">
+              <a href={addToFolderHash(folderId)} className={addLink}>
+                <CameraIcon size={22} /> Add a coin
+              </a>
+              <a href={addManyHash(folderId)} className={addLink}>
+                Add many at once
+              </a>
+            </div>
           ) : null}
+          {folderId ? null : (
+            <a href={addManyHash()} className={`mt-1 ${addLink}`}>
+              Add many at once
+            </a>
+          )}
           <p data-testid="count-line" aria-live="polite" className="min-h-6 text-base text-muted">
             {items ? countLine(shown) : ''}
           </p>
