@@ -1,0 +1,12 @@
+{
+  "description": "Both sides of the 1909-S Lincoln cent scaled to 600 px, the size of a coin cut from a group photo that the app calls small: the year and the S must still be read.",
+  "schemaVersion": "1.0",
+  "request": { "kind": "coin", "hint": null, "sides": ["obverse", "reverse"] },
+  "photos": ["lincoln-600px-obverse.jpg", "lincoln-600px-reverse.jpg"],
+  "expect": {
+    "kind": { "equals": "coin" },
+    "country": { "equals": "US" },
+    "year": { "equals": 1909 },
+    "mintMark": { "equals": "S" }
+  }
+}
