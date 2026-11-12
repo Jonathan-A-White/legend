@@ -1,5 +1,5 @@
 {
-  "description": "A circulated 1964 Washington quarter, still 90% silver: worth its silver, so a low above three dollars.",
+  "description": "A circulated 1964 Washington quarter, still 90% silver: worth its melt, 0.1808 troy oz of silver (US Mint figure: 0.18084 oz in a 6.25 g coin of 90% silver) times the price of the day. The range holds for silver from 18 to 110 dollars an ounce (the mill priced it at about 28 to 90 on 2026-11-12): a low from 3.25 to 20, a high to 35.",
   "schemaVersion": "1.0",
   "request": {
     "kind": "coin",
@@ -18,8 +18,8 @@
   },
   "expect": {
     "currency": "USD",
-    "low": { "between": [3.25, 15] },
-    "high": { "between": [3.5, 30] },
+    "low": { "between": [3.25, 20] },
+    "high": { "between": [3.5, 35] },
     "basis": { "matches": "[Ss]ilver" },
     "asOf": "2026-10-10"
   }

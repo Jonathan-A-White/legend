@@ -379,6 +379,27 @@ describe('the item-value scenarios give a price as a range', () => {
     const quarter = examples.find(({ f }) => f === 'washington-quarter-1964-silver.json')!.e;
     expect(checkExpect({ high: quarter.expect.high }, { high: 18 })).toEqual([]);
   });
+
+  // mw-tkszyqr: the smoke missed 1 in 3 (low 16 against a cap of 15). The grind named no silver price, so the appraiser
+  // guessed one: the lows of 20 live answers ran 5 to 16, silver at about 28 to 90 dollars an ounce. A 1964 quarter holds
+  // 0.1808 troy oz of silver, so its melt is that times the price; the example's range follows a stated band of prices.
+  it('keeps the 1964 silver quarter\'s low inside its melt at silver from 18 to 110 dollars an ounce', () => {
+    const quarter = examples.find(({ f }) => f === 'washington-quarter-1964-silver.json')!.e;
+    const troyOz = 0.1808;
+    for (const price of [18, 30, 50, 70, 90, 100, 110]) {
+      const melt = Math.round(troyOz * price * 4) / 4;
+      expect(checkExpect({ low: quarter.expect.low }, { low: melt }), `melt ${melt} at ${price} an ounce`).toEqual([]);
+    }
+    expect(quarter.description, 'the band and its source are written down').toMatch(/18.*110.*troy|troy.*18.*110/s);
+  });
+
+  it('teaches the appraiser to price bullion coins by melt, at the silver price of today, and to say so in basis', () => {
+    const grind = readFileSync('grinds/item-value.md', 'utf8');
+    expect(grind).toMatch(/melt/i);
+    expect(grind).toMatch(/troy/i);
+    expect(grind).toMatch(/price of silver (on|for|near) `today`/i);
+    expect(grind).toMatch(/`basis`.*(price|ounce)/is);
+  });
 });
 
 describe('the scenario checks', () => {
