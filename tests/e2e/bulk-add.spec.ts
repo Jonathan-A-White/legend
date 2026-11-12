@@ -2,7 +2,8 @@
 // table with coins on it (four across, three down), as a phone's own camera app would give. Fronts shows the 4x3 guide and, after a
 // photo, the coins found outlined and numbered; Next shows the Flip card; Backs shows the fronts as ghost rings; eleven backs against
 // twelve fronts offers only Retake; two coins touching and coins under 500 px are not gone on with. The page never scrolls.
-// The camera is released when the screen closes (and for the Flip card): the same pattern as tests/unit/use-camera.test.tsx and Add's,
+// The Review lists all twelve pairs (the two the size check doubts first, in amber, and Save waits for them), inside a box that scrolls
+// while the page does not, and Save stores each coin as the item Add makes. The camera is released when the screen closes (and for the Flip card): the same pattern as tests/unit/use-camera.test.tsx and Add's,
 // here counted on the tracks the page was handed.
 import { expect, test, type Page } from '@playwright/test';
 import { fakeCamera } from './camera';
@@ -163,15 +164,20 @@ test('Fronts, Flip, Backs: twelve coins found and numbered, turned over, and twe
   expect(await pageScrolls(page)).toBe(false);
   await shot(page, 'bulk-backs-short');
 
-  // Retake, twelve backs: Next goes to the Review stub, which stores nothing
+  // Retake, twelve backs: Next goes to the Review, which stores nothing
   await page.getByRole('button', { name: 'Retake' }).click();
   await expect(page.getByTestId('ghost-ring')).toHaveCount(12);
   await usePhoto(page, layout(12, GOOD, 12));
   await expect(line(page)).toHaveText('12 coins found');
   await page.getByRole('button', { name: 'Next' }).click();
   await expect(page.getByTestId('prompt')).toHaveText('Review');
-  await expect(page.getByTestId('review-count')).toHaveText('12 coins');
-  const stored = await page.evaluate(
+  await expect(page.getByTestId('review-count')).toHaveText('12 coins to save');
+  expect(await stored(page)).toEqual([0, 0]);
+});
+
+/** How many items and photos the phone has stored. */
+const stored = (page: Page) =>
+  page.evaluate(
     () =>
       new Promise<number[]>((resolve, reject) => {
         const open = indexedDB.open('legend');
@@ -188,7 +194,58 @@ test('Fronts, Flip, Backs: twelve coins found and numbered, turned over, and twe
         };
       }),
   );
-  expect(stored).toEqual([0, 0]);
+
+test('Review: twelve pairs, the two to check first in amber, scrolling inside the box, and Save stores each coin', async ({ page }) => {
+  await openBulk(page);
+  await usePhoto(page, layout(12, GOOD));
+  await expect(line(page)).toHaveText('12 coins found');
+  await page.getByRole('button', { name: 'Next' }).click();
+  await page.getByRole('button', { name: 'Backs' }).click();
+  await expect(page.getByTestId('ghost-ring')).toHaveCount(12);
+  // the backs of coins 4 and 9 are a tenth smaller than their fronts
+  const backs = layout(12, GOOD, 12).map((d, i) => (i === 3 || i === 8 ? { ...d, r: GOOD * 0.9 } : d));
+  await usePhoto(page, backs);
+  await expect(line(page)).toHaveText('12 coins found');
+  await page.getByRole('button', { name: 'Next' }).click();
+
+  await expect(page.getByTestId('prompt')).toHaveText('Review');
+  await expect(page.getByTestId('review-count')).toHaveText('12 coins to save');
+  await expect(page.getByTestId('review-check')).toHaveText('2 to check');
+  const pairs = page.getByTestId('pair');
+  await expect(pairs).toHaveCount(12);
+  await expect(page.getByRole('img', { name: /^Front of coin/ })).toHaveCount(12);
+  await expect(page.getByRole('button', { name: 'Check 2 first' })).toBeDisabled();
+
+  // the amber pairs come first
+  expect(await pairs.evaluateAll((els) => els.map((el) => [el.getAttribute('aria-label'), el.getAttribute('data-amber')]))).toEqual([
+    ['Coin 4', 'true'],
+    ['Coin 9', 'true'],
+    ...[1, 2, 3, 5, 6, 7, 8, 10, 11, 12].map((n) => [`Coin ${n}`, 'false']),
+  ]);
+  await expect(pairs.first().getByTestId('pair-why')).toContainText('The back is smaller than the front');
+
+  // all twelve are reachable by scrolling inside the box; the page never scrolls
+  const list = page.getByTestId('review-list');
+  expect(await list.evaluate((el) => el.scrollHeight > el.clientHeight)).toBe(true);
+  expect(await pageScrolls(page)).toBe(false);
+  await pairs.last().scrollIntoViewIfNeeded();
+  const [box, last] = await Promise.all([list.boundingBox(), pairs.last().boundingBox()]);
+  expect(last!.y + last!.height).toBeLessThanOrEqual(box!.y + box!.height + 1);
+  expect(await pageScrolls(page)).toBe(false);
+  await list.evaluate((el) => (el.scrollTop = 0));
+  for (const button of ['Swap', 'Leave out', 'Looks right']) expect((await pairs.first().getByRole('button', { name: button }).boundingBox())?.height).toBeGreaterThanOrEqual(44);
+  expect((await page.getByRole('button', { name: 'Check 2 first' }).boundingBox())?.height).toBeGreaterThanOrEqual(56);
+  await shot(page, 'bulk-review');
+  expect(await stored(page)).toEqual([0, 0]);
+
+  // Looks right on both, then Save: twelve coins, each with its two cut-outs
+  await pairs.nth(0).getByRole('button', { name: 'Looks right' }).click();
+  await pairs.nth(0).getByRole('button', { name: 'Looks right' }).click();
+  await expect(page.getByTestId('review-check')).toHaveCount(0);
+  await page.getByRole('button', { name: 'Save 12 coins' }).click();
+  await expect(page).toHaveURL(/#\/collection$/);
+  await expect(page.getByTestId('notice')).toHaveText('12 coins saved. The factory is reading them.');
+  expect(await stored(page)).toEqual([12, 24]);
 });
 
 test('two coins touching are not gone on with', async ({ page }) => {
