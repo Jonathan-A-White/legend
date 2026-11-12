@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.69
+_2026-11-12_
+- Fixed: The value guess for old silver coins now works from the silver in the coin and says what silver price it used.
+
 ## 0.1.68
 _2026-11-12_
 - New: Add many at once now has a Review step that shows every front and back pair, flags the ones it is unsure of, lets you swap, leave out or undo, and saves them all when you tap Save.

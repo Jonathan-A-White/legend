@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.69",
+    "date": "2026-11-12",
+    "story": "mw-tkszyqr",
+    "kind": "fixed",
+    "text": "The value guess for old silver coins now works from the silver in the coin and says what silver price it used."
+  },
+  {
     "version": "0.1.68",
     "date": "2026-11-12",
     "story": "mw-tmsafpc.5",
