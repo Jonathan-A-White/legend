@@ -149,7 +149,35 @@ test('the Collection counts, searches and filters six items on a phone', async (
   await expect(grid.getByRole('link').first()).toBeVisible();
   await page.getByRole('radio', { name: 'Grid' }).click();
   expect(await pageScrolls(page)).toBe(false);
+  await expectAddMany(page, '#/add/many');
   await shot(page, 'collection');
+});
+
+/** The Add many at once link is whole on the phone's width, a large target, and opens `hash`. */
+async function expectAddMany(page: Page, hash: string): Promise<void> {
+  const link = page.getByRole('link', { name: 'Add many at once' });
+  await expect(link).toBeVisible();
+  await expect(link).toHaveAttribute('href', hash);
+  const box = (await link.boundingBox())!;
+  expect(box.height).toBeGreaterThanOrEqual(44);
+  expect(box.x).toBeGreaterThanOrEqual(0);
+  expect(box.x + box.width).toBeLessThanOrEqual(390);
+  // the words fit inside the link: nothing is cut off
+  expect(await link.evaluate((el) => el.scrollWidth <= el.clientWidth)).toBe(true);
+}
+
+test('a coin folder offers Add a coin and Add many at once, whole on a phone', async ({ page }) => {
+  await seed(page, '/#/collection');
+  await page.getByRole('button', { name: 'New coin folder' }).click();
+  await page.getByRole('textbox', { name: 'Coin folder name' }).fill('State quarters');
+  await page.getByRole('button', { name: 'Make coin folder' }).click();
+  await page.getByRole('link', { name: /State quarters/ }).click();
+  await expect(page.getByRole('heading', { name: 'State quarters' })).toBeVisible();
+  await expect(page.getByRole('link', { name: 'Add a coin', exact: true })).toBeVisible();
+  const id = new URL(page.url()).hash.replace('#/folder/', '');
+  await expectAddMany(page, `#/add/many?folder=${id}`);
+  expect(await pageScrolls(page)).toBe(false);
+  await shot(page, 'folder-add-many');
 });
 
 test('an item opens with both photos, zooms, and is removed only by a hold', async ({ page }) => {

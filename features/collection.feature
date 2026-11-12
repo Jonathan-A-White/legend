@@ -188,3 +188,10 @@ Feature: The Collection
     Then he is back on the folder "State quarters" and it is still empty
     When he opens the folder's camera again and the folder is deleted before he names the coin
     Then the coin is saved in the Collection and nothing failed
+
+  Scenario: Add many at once opens from the Collection and from a coin folder
+    Given a coin folder "State quarters" that is empty
+    When he opens the Collection and taps Add many at once
+    Then the address is the Add many address with no folder
+    When he opens the folder "State quarters" and taps Add many at once
+    Then the address is the Add many address for the folder "State quarters"

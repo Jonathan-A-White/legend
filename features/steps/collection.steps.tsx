@@ -767,4 +767,25 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
       await screen.findByRole('heading', { level: 1, name: 'Collection' });
     });
   });
+
+  Scenario('Add many at once opens from the Collection and from a coin folder', ({ Given, When, Then }) => {
+    Given('a coin folder "State quarters" that is empty', () => emptyFolder('State quarters'));
+    When('he opens the Collection and taps Add many at once', async () => {
+      await open('#/collection');
+      await userEvent.click(await screen.findByRole('link', { name: 'Add many at once' }));
+    });
+    Then('the address is the Add many address with no folder', async () => {
+      await waitFor(() => expect(window.location.hash).toBe('#/add/many'));
+      await screen.findByTestId('prompt');
+    });
+    When('he opens the folder "State quarters" and taps Add many at once', async () => {
+      await openFolder('State quarters');
+      await userEvent.click(screen.getByRole('link', { name: 'Add many at once' }));
+    });
+    Then('the address is the Add many address for the folder "State quarters"', async () => {
+      const folder = await folderNamed('State quarters');
+      await waitFor(() => expect(window.location.hash).toBe(`#/add/many?folder=${folder.id}`));
+      await screen.findByTestId('prompt');
+    });
+  });
 });

@@ -10,8 +10,7 @@ and what they choose to share: `docs/privacy.md`.
 ## Screens planned
 
 Built: the licence gate (`docs/testing.md`), the shell, Settings (its About row opens `#/about`: the credits, built from ATTRIBUTION.md), Home (`#/`), the Collection (count line, rough worth, search,
-filters, Looking at, coin folders, Select to remove) and one item (photos, facts, rarity, notes, Edit, hold to Remove), Add (`#/add`: photo front and back, a queue names it, the Confirm sheet checks; Just looking stays out of the counts), the Wish list (`#/wishlist`: Wish for it at the store's price, a saving goal, Got it!), the Globe (`#/globe`: a globe turned with one
-finger, lit where the items come from) and the
+filters, Looking at, coin folders, Select to remove) and one item (photos, facts, rarity, notes, Edit, hold to Remove), Add (`#/add`: photo front and back, a queue names it, the Confirm sheet checks; Just looking stays out of the counts; Add many at once, `#/add/many`), the Wish list (`#/wishlist`: Wish for it at a price, a saving goal, Got it!), the Globe (`#/globe`: a globe turned with a finger, lit where items come from) and the
 Country sheet (`#/country/<cc>`: the items from there, the money now and before), Quarters (a US map lit with the quarters they
 have, a checklist), Share, Tell the maker (`docs/feedback.md`), tips, Learn (grading, mint marks, years, Your path). The tutor (`?ask` on an item or a country: his questions, its answers, settings only on his Apply).
 
@@ -33,4 +32,4 @@ have, a checklist), Share, Tell the maker (`docs/feedback.md`), tips, Learn (gra
 - The page never scrolls and never zooms; a screen scrolls inside its own box.
 - A new build waits for a tap (the Update banner); it never reloads under them.
 - Data that ships in the repo must be free to redistribute and credited in `ATTRIBUTION.md`.
-- Never bump the version by hand; `mw next` does.
+- Never bump the version; `mw next` does.
