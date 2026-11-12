@@ -8,12 +8,11 @@ import type { ItemKind } from '../data/db';
 import { restoreItem, useFolder, useItems } from '../data/repositories';
 import { addFolderIdOf, folderHash, navigate, useAddress } from '../nav/route';
 import { nameQueue } from '../services/nameQueue';
-import { readSetting } from '../settings/registry';
-import { grabFrame, stillFromFile, stillFromFrame, MAX_LONG_SIDE, type Still, type StillOptions } from './captureStill';
+import { grabFrame, stillFromFile, stillFromFrame, type Still, type StillOptions } from './captureStill';
 import { ConfirmSheet } from './ConfirmSheet';
 import { Preview } from './Preview';
 import { Tray } from './Tray';
-import { startItemWhenKept, type AddMode } from './startItem';
+import { startItemWhenKept, stillOptions, type AddMode } from './startItem';
 import { useCamera } from './useCamera';
 import { useUndoToast } from './useUndoToast';
 
@@ -43,11 +42,6 @@ function Choice<T extends string>({ label, value, options, onChange }: { label: 
       ))}
     </div>
   );
-}
-
-async function stillOptions(): Promise<StillOptions> {
-  const cap = await readSetting('sizeCap').catch(() => MAX_LONG_SIDE);
-  return { maxLongSide: typeof cap === 'number' ? cap : MAX_LONG_SIDE };
 }
 
 /** A photo taken: kept in the background (`still`), its thumbnail shown once it is. */

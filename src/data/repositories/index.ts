@@ -1,6 +1,6 @@
 // The only way UI reaches the local store (src/data/db.ts): each repository is one file beside this one, and its
 // functions and types are re-exported here, one file per block.
-export { addItem, addItemWithPhotos, getItem, listItems, listReading, updateItem, wishFor, gotIt, nameItem, setReading, setRarity, removeItem, restoreItem, useItems, useItem } from './items';
+export { addItem, addItemWithPhotos, addItemsWithPhotos, getItem, listItems, listReading, updateItem, wishFor, gotIt, nameItem, setReading, setRarity, removeItem, restoreItem, useItems, useItem } from './items';
 export type { NewItem, ItemChanges, ItemFilter } from './items';
 export { addPhoto, listPhotos, removePhoto, usePhotos, useThumbs } from './photos';
 export type { NewPhoto, Thumb } from './photos';

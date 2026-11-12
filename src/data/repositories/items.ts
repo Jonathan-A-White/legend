@@ -3,6 +3,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db, type Item, type ItemKind, type ItemRarity, type Photo, type Reading } from '../db';
 import { publish } from '../../events/bus';
+import { putInFolder } from './folders';
 
 /** What a new item needs: its kind. Everything else starts empty and is filled as it is named. */
 export type NewItem = Partial<Omit<Item, 'id' | 'kind' | 'createdAt' | 'updatedAt' | 'deletedAt'>> & { kind: ItemKind };
@@ -64,6 +65,24 @@ export async function addItemWithPhotos(input: NewItem, photos: Omit<Photo, 'id'
   });
   publish({ kind: 'item.added', id: item.id });
   return item;
+}
+
+/** Many new items and their photos stored together, in order, one write each, in one transaction: if any write is refused none of the batch is kept.
+ * With a `folderId` every piece also joins that folder (a folder deleted meanwhile is skipped). The bus is told only once all are stored. */
+export async function addItemsWithPhotos(batch: { input: NewItem; photos: Omit<Photo, 'id' | 'itemId'>[] }[], folderId?: string): Promise<Item[]> {
+  const items = await db.transaction('rw', db.items, db.photos, db.folders, async () => {
+    const stored: Item[] = [];
+    for (const { input, photos } of batch) {
+      const item = build(input);
+      await db.items.add(item);
+      await db.photos.bulkAdd(photos.map((p) => ({ ...p, id: crypto.randomUUID(), itemId: item.id })));
+      if (folderId) await putInFolder(folderId, item.id);
+      stored.push(item);
+    }
+    return stored;
+  });
+  for (const item of items) publish({ kind: 'item.added', id: item.id });
+  return items;
 }
 
 export async function getItem(id: string): Promise<Item | undefined> {

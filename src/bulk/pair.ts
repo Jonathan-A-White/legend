@@ -45,6 +45,12 @@ function middleOf(fronts: Circle[], backs: Circle[]): number {
   return (left + right) / 2;
 }
 
+/** Why a back of this size does not suit this front, or null when it does: more than 5% off the front's radius. */
+export function sizeReason(front: Circle, back: Circle): string | null {
+  const gap = (back.r - front.r) / front.r;
+  return Math.abs(gap) > SIZE_GAP ? (gap < 0 ? SIZE_SMALLER : SIZE_LARGER) : null;
+}
+
 /** The one-to-one assignment of least total cost (the Hungarian method, O(n^3)): row i is given column result[i]. */
 function assign(costs: number[][]): number[] {
   const n = costs.length;
@@ -114,8 +120,8 @@ export function pairCoins(fronts: Circle[], backs: Circle[], options: PairOption
   const pairs = fronts.map((front, i): Pair => {
     const back = chosen[i];
     const reasons: string[] = [];
-    const gap = (placed[back].r - front.r) / front.r;
-    if (Math.abs(gap) > SIZE_GAP) reasons.push(gap < 0 ? SIZE_SMALLER : SIZE_LARGER);
+    const size = sizeReason(front, placed[back]);
+    if (size) reasons.push(size);
     const others = costs[i].filter((_, j) => j !== back);
     if (others.length > 0 && Math.min(...others) < MARGIN * costs[i][back]) reasons.push(CLOSE_TO_ANOTHER);
     return { front: i, back, reasons };

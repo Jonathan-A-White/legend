@@ -2,20 +2,34 @@
 // closed app loses nothing once it is stored; the item is 'pending' (or 'considering' when he is only looking) with its reading
 // waiting to be sent. Name it does not wait for the photos to be kept (startItemWhenKept): the viewfinder is ready for the next coin
 // at once, and each coin is stored as soon as its photos are, in the order he named them.
-import type { Item, ItemKind } from '../data/db';
-import { addItemWithPhotos, putInFolder } from '../data/repositories';
+import type { Item, ItemKind, Photo } from '../data/db';
+import { addItemWithPhotos, putInFolder, type NewItem } from '../data/repositories';
+import { readSetting } from '../settings/registry';
 import { nameQueue } from '../services/nameQueue';
-import type { Still } from './captureStill';
+import { MAX_LONG_SIDE, type Still, type StillOptions } from './captureStill';
 
 export type AddMode = 'collect' | 'look';
 
+/** The photo size limit setting as the options a photo is kept with. */
+export async function stillOptions(): Promise<StillOptions> {
+  const cap = await readSetting('sizeCap').catch(() => MAX_LONG_SIDE);
+  return { maxLongSide: typeof cap === 'number' ? cap : MAX_LONG_SIDE };
+}
+
+/** The item a new piece starts as: pending (or considering when he is only looking), its reading waiting to be sent. Add and Add many at once make it the same way. */
+export function waitingItem(kind: ItemKind, mode: AddMode): NewItem {
+  return { kind, status: mode === 'look' ? 'considering' : 'pending', reading: { state: 'waiting', txid: null, sentAt: null, sendId: crypto.randomUUID(), message: null } };
+}
+
+/** The photos of a piece, front first: the first shot is its obverse, the second its reverse. */
+export function photosOf(shots: readonly Still[]): Omit<Photo, 'id' | 'itemId'>[] {
+  const sides = ['obverse', 'reverse'] as const;
+  return shots.slice(0, 2).map((s, i) => ({ side: sides[i], blob: s.blob, thumb: s.thumb, width: s.width, height: s.height }));
+}
+
 /** The item for these shots (front first, then back), waiting in the queue; with a `folderId` it is also put in that folder. */
 export async function startItem(kind: ItemKind, mode: AddMode, shots: readonly Still[], folderId?: string): Promise<Item> {
-  const sides = ['obverse', 'reverse'] as const;
-  const item = await addItemWithPhotos(
-    { kind, status: mode === 'look' ? 'considering' : 'pending', reading: { state: 'waiting', txid: null, sentAt: null, sendId: crypto.randomUUID(), message: null } },
-    shots.slice(0, 2).map((s, i) => ({ side: sides[i], blob: s.blob, thumb: s.thumb, width: s.width, height: s.height })),
-  );
+  const item = await addItemWithPhotos(waitingItem(kind, mode), photosOf(shots));
   // a coin folder's camera: the piece joins that folder as it is stored (a folder deleted meanwhile is skipped, the piece stays)
   if (folderId) await putInFolder(folderId, item.id);
   nameQueue.kick();
