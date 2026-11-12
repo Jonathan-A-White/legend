@@ -129,3 +129,28 @@ describe('mapAnswerToItem', () => {
     expect(item.mintMark).toBe('D');
   });
 });
+
+describe('sidesAgree (coin-from-photos 1.2): the reader says whether the two sides are one coin', () => {
+  const asked = (sidesAgree: boolean | null) => ({ ...quarterAnswer(), sidesAgree });
+
+  it('keeps false on the item fields and writes it on the item', () => {
+    expect(mapped(asked(false)).sidesAgree).toBe(false);
+    expect(itemChanges(mapped(asked(false)), 'coin').sidesAgree).toBe(false);
+  });
+
+  it('keeps true and null as they are', () => {
+    expect(itemChanges(mapped(asked(true)), 'coin').sidesAgree).toBe(true);
+    expect(itemChanges(mapped(asked(null)), 'coin').sidesAgree).toBeNull();
+  });
+
+  it('reads an answer of 1.1 shape (no sidesAgree) and keeps null: not a warning', () => {
+    const parsed = parseCoinAnswer(quarterAnswer());
+    expect(parsed.ok).toBe(true);
+    expect(itemChanges(mapped(quarterAnswer()), 'coin').sidesAgree).toBeNull();
+    expect(itemChanges(mapped(quarterAnswer10()), 'coin').sidesAgree).toBeNull();
+  });
+
+  it('refuses a sidesAgree that is not true, false or null', () => {
+    for (const bad of ['no', 0, 1, []]) expect(parseCoinAnswer({ ...quarterAnswer(), sidesAgree: bad })).toEqual({ ok: false, error: ANSWER_NOT_IN_SHAPE });
+  });
+});

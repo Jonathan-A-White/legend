@@ -26,3 +26,23 @@ Feature: The photo reader's answer is checked before anything is kept
     Given the photo reader answers with a year range that runs backwards
     When Legend reads the answer
     Then it is refused and nothing is kept
+
+  Scenario: The Confirm sheet warns when the reader says the back belongs to a different coin
+    Given a named coin whose answer said the two sides do not agree
+    When he opens the Confirm sheet
+    Then it says "The back may belong to a different coin" with the buttons Retake the back and That's right
+
+  Scenario: The Confirm sheet says nothing when the reader says the two sides agree
+    Given a named coin whose answer said the two sides agree
+    When he opens the Confirm sheet
+    Then it has no warning about the back and shows the usual That's right
+
+  Scenario: The Confirm sheet says nothing when the reader could not tell
+    Given a named coin whose answer said it could not tell whether the sides agree
+    When he opens the Confirm sheet
+    Then it has no warning about the back and shows the usual That's right
+
+  Scenario: The Confirm sheet says nothing for a coin read before the check existed
+    Given a named coin read before the reader checked the sides
+    When he opens the Confirm sheet
+    Then it has no warning about the back and shows the usual That's right
