@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.68",
+    "date": "2026-11-12",
+    "story": "mw-tmsafpc.5",
+    "kind": "new",
+    "text": "Add many at once now has a Review step that shows every front and back pair, flags the ones it is unsure of, lets you swap, leave out or undo, and saves them all when you tap Save."
+  },
+  {
     "version": "0.1.66",
     "date": "2026-11-12",
     "story": "mw-tmsafpc.6",

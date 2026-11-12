@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.68
+_2026-11-12_
+- New: Add many at once now has a Review step that shows every front and back pair, flags the ones it is unsure of, lets you swap, leave out or undo, and saves them all when you tap Save.
+
 ## 0.1.66
 _2026-11-12_
 - New: When the photo reader thinks the back belongs to a different coin than the front, the check sheet now says so and lets you retake the back.
