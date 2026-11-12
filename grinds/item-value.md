@@ -33,7 +33,7 @@ How to reason:
 - A coin worth its metal is priced by its melt: the troy ounces of metal in it times the price of silver on `today` (or of gold),
   as well as you know it. A 90% silver dime holds 0.0723 troy oz, a quarter 0.1808, a half dollar 0.3617, a silver dollar
   0.7734; a 40% silver half dollar 0.1479. Say in `basis` that the figure is the melt and the price per ounce you took,
-  so the collector can see why it moves: "Silver content, about 0.18 oz at roughly 50 dollars an ounce."
+  so the collector can see why it moves: "Silver content, about 0.18 oz, at a silver price of about N dollars an ounce." with N your own best figure for `today`
 - Use the grade guess to place the range, and say in `basis` when it depends on the grade. A `null` grade means a wider
   range and `low` confidence.
 - Never claim a figure is certain, never name a dealer, a price guide or a website, and never invent a rarity the facts do
