@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.70
+_2026-11-12_
+- New: Add many at once is now a button on the Collection and on each coin folder.
+
 ## 0.1.69
 _2026-11-12_
 - Fixed: The value guess for old silver coins now works from the silver in the coin and says what silver price it used.
