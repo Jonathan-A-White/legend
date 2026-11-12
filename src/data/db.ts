@@ -75,6 +75,8 @@ export interface Item {
   confidence: Confidence | null;
   /** the tutor's estimate of its rarity, asked on his tap for a piece the tables do not cover */
   rarity?: ItemRarity | null;
+  /** the photo reader's check that the front and the back are one coin: false puts a warning on the Confirm sheet; null, true or missing (read before it existed) none */
+  sidesAgree?: boolean | null;
   /** present from Name it until the photo reader's answer is kept */
   reading?: Reading | null;
   /** a wished coin's price at the store (US dollars), where he saw it (his words) and when he wished for it */

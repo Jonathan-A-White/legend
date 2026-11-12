@@ -1,7 +1,8 @@
 // src/capture/ConfirmSheet.tsx: the photo reader's answer for him to check, in large type: country with its flag, denomination, year,
 // mint mark, series and design, the grade (marked as a guess), the inscription and the fun fact. "That's right" confirms it; "Not
-// quite" opens every field to change and then confirms. An item he is only looking at offers "Add it", "Wish for it" (the asking price, src/wishlist/) and "Let it go" instead.
-import { useEffect, useMemo, useState, type ReactNode } from 'react';
+// quite" opens every field to change and then confirms. When the reader says the back may belong to a different coin (sidesAgree false),
+// a notice with "Retake the back" (the phone's camera, one new back photo, read again) and "That's right" comes first. An item he is only looking at offers "Add it", "Wish for it" (the asking price, src/wishlist/) and "Let it go" instead.
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
 import { argsOf } from 'voice-kit/forms';
 import { defineRegistry } from 'voice-kit/talks';
 import type { Item } from '../data/db';
@@ -14,6 +15,8 @@ import { WorthLine } from '../worth';
 import { WishSheet } from '../wishlist';
 import { useObjectUrl } from '../ui/useObjectUrl';
 import { CONFIRM_COMMAND, confirmForm } from './confirmForm';
+import { MAX_LONG_SIDE, stillFromFile } from './captureStill';
+import { retakeBack } from './retakeBack';
 import { useCountries } from './useCountries';
 
 const field = 'min-h-12 w-full rounded-xl border border-line bg-canvas px-4 text-lg text-ink';
@@ -72,6 +75,10 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
   const [grade, setGrade] = useState(item.gradeGuess ?? '');
   const [inscription, setInscription] = useState(item.inscription);
   const [problem, setProblem] = useState<string | null>(null);
+  // the reader's check of the two sides: shown until he says the pair is right; true, null and a coin read before it existed show nothing
+  const [sidesOk, setSidesOk] = useState(false);
+  const backInput = useRef<HTMLInputElement>(null);
+  const doubtful = item.sidesAgree === false && !sidesOk && !editing;
 
   const flagOf = (code: string) => countries.find((c) => c.code === code)?.flag ?? '';
   const nameOf = (code: string) => countries.find((c) => c.code === code)?.name ?? code;
@@ -114,6 +121,18 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
     else if (name === 'grade') setGrade(gradeOfLabel(value));
     else if (name === 'inscription') setInscription(value);
   };
+  const newBack = async (file: File | undefined) => {
+    if (!file || busy) return;
+    setBusy(true);
+    setProblem(null);
+    try {
+      await retakeBack(item.id, await stillFromFile(file, { maxLongSide: MAX_LONG_SIDE }));
+      onClose();
+    } catch {
+      setProblem('Could not keep that photo. Try again.');
+      setBusy(false);
+    }
+  };
   const letGo = async () => {
     setBusy(true);
     // the host shows Undo at once, so the screen never flashes 'not in your collection' between the removal and the Undo
@@ -137,6 +156,40 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
           <Side blob={photos?.find((p) => p.side === 'obverse')?.blob} label="Front" />
           <Side blob={photos?.find((p) => p.side === 'reverse')?.blob} label="Back" />
         </div>
+
+        {doubtful ? (
+          <section aria-label="Check the back" className="rounded-2xl border border-bad px-4 py-3">
+            <h3 className="text-xl font-semibold text-bad">The back may belong to a different coin</h3>
+            <p className="mt-1 text-lg text-ink">The photo reader does not think the front and the back are the same coin.</p>
+            {problem ? (
+              <p role="alert" className="mt-1 text-base text-bad">
+                {problem}
+              </p>
+            ) : null}
+            <input
+              ref={backInput}
+              type="file"
+              accept="image/*"
+              capture="environment"
+              data-testid="retake-back-input"
+              className="sr-only"
+              tabIndex={-1}
+              onChange={(e) => {
+                const file = e.target.files?.[0];
+                e.target.value = '';
+                void newBack(file);
+              }}
+            />
+            <div className="mt-3 flex flex-col gap-2">
+              <button type="button" disabled={busy} onClick={() => backInput.current?.click()} className={`${big} bg-accent text-accent-fg`}>
+                Retake the back
+              </button>
+              <button type="button" disabled={busy} onClick={() => setSidesOk(true)} className={`${big} border border-accent text-accent`}>
+                That's right
+              </button>
+            </div>
+          </section>
+        ) : null}
 
         {!editing && looking ? (
           <section aria-label="Is it a good one?" className="rounded-2xl border border-accent/40 bg-accent/10 px-4 py-3">
@@ -240,10 +293,12 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
           </>
         ) : (
           <>
-            <button type="button" disabled={busy} onClick={() => confirm()} className={`${big} bg-accent text-accent-fg`}>
-              {looking ? 'Add it' : "That's right"}
-            </button>
-            {looking ? (
+            {doubtful ? null : (
+              <button type="button" disabled={busy} onClick={() => confirm()} className={`${big} bg-accent text-accent-fg`}>
+                {looking ? 'Add it' : "That's right"}
+              </button>
+            )}
+            {looking && !doubtful ? (
               <button type="button" disabled={busy} onClick={() => setWishing(true)} className={`${big} border border-accent text-accent`}>
                 Wish for it
               </button>

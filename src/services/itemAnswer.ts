@@ -2,7 +2,8 @@
 // back a record; this file checks it against the app's own schema before anything is kept, and maps it to the item fields
 // the collection stores (`itemChanges`). The queue in nameQueue.ts is what uses it.
 import Ajv from 'ajv';
-import answerSchema from '../../schemas/coin-from-photos-answer-1.1.schema.json';
+import answerSchema from '../../schemas/coin-from-photos-answer-1.2.schema.json';
+import answerSchema11 from '../../schemas/coin-from-photos-answer-1.1.schema.json';
 import answerSchema10 from '../../schemas/coin-from-photos-answer-1.0.schema.json';
 import type { ItemChanges } from '../data/repositories';
 import type { ItemKind as StoredKind } from '../data/db';
@@ -11,7 +12,7 @@ export type ItemKind = 'coin' | 'note' | 'other' | 'unknown';
 export type Grade = 'P' | 'FR' | 'AG' | 'G' | 'VG' | 'F' | 'VF' | 'XF' | 'AU' | 'MS';
 export type Confidence = 'high' | 'medium' | 'low';
 
-/** One answer of the grind, exactly as schemas/coin-from-photos-answer-1.1.schema.json allows it (a 1.0 answer has no subtype: it reads as ''). */
+/** One answer of the grind, exactly as schemas/coin-from-photos-answer-1.2.schema.json allows it (a 1.1 answer has no sidesAgree, a 1.0 answer no subtype either: they read as null and ''). */
 export interface CoinAnswer {
   kind: ItemKind;
   /** what sort of Other it is ('Subway token'); empty for a coin or a note, or when unsure */
@@ -35,6 +36,8 @@ export interface CoinAnswer {
   confidence: Confidence;
   unreadable: string | null;
   funFact: string;
+  /** true when the obverse and the reverse are the two sides of one coin, false when they are not, null when the reader cannot tell */
+  sidesAgree: boolean | null;
 }
 
 /** What the collection keeps of a read item. The items store adopts this shape. */
@@ -61,12 +64,14 @@ export interface ItemFields {
   confidence: Confidence;
   unreadable: string | null;
   funFact: string;
+  sidesAgree: boolean | null;
 }
 
 const ajv = new Ajv({ allErrors: true, strict: true });
 const validate = ajv.compile<CoinAnswer>(answerSchema);
-// an answer the mill gave under 1.0 (a grist sent by an older app) has no subtype and cannot say other
-const validate10 = ajv.compile<Omit<CoinAnswer, 'subtype'>>(answerSchema10);
+// an answer the mill gave under 1.1 (a grist sent by an older app) has no sidesAgree; under 1.0 no subtype either and it cannot say other
+const validate11 = ajv.compile<Omit<CoinAnswer, 'sidesAgree'>>(answerSchema11);
+const validate10 = ajv.compile<Omit<CoinAnswer, 'subtype' | 'sidesAgree'>>(answerSchema10);
 
 export const ANSWER_NOT_IN_SHAPE = "The photo reader's answer was not in the expected shape, so it was not used.";
 
@@ -74,7 +79,7 @@ export type ParsedCoinAnswer = { ok: true; answer: CoinAnswer } | { ok: false; e
 
 /** Checks an answer against the schema (no extra key, so no serial number) and that a year range runs forwards. */
 export function parseCoinAnswer(value: unknown): ParsedCoinAnswer {
-  const answer: CoinAnswer | null = validate(value) ? value : validate10(value) ? { ...value, subtype: '' } : null;
+  const answer: CoinAnswer | null = validate(value) ? value : validate11(value) ? { ...value, sidesAgree: null } : validate10(value) ? { ...value, subtype: '', sidesAgree: null } : null;
   if (!answer || (answer.yearRange && answer.yearRange[0] > answer.yearRange[1])) return { ok: false, error: ANSWER_NOT_IN_SHAPE };
   return { ok: true, answer };
 }
@@ -116,6 +121,7 @@ export function itemChanges(fields: ItemFields, chosen: StoredKind): ItemChanges
     material: fields.material,
     inscription: fields.inscription,
     funFact: fields.funFact,
+    sidesAgree: fields.sidesAgree,
     gradeGuess: fields.grade,
     gradeNotes: fields.gradeNotes,
     confidence: fields.confidence,
