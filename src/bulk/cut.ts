@@ -2,7 +2,7 @@
 // dark grey (so a neighbour's rim never peeks into a corner and the picture looks like just one front, one back), then shrunk the way
 // every kept photo is (captureStill.ts: the long side at most the Photo size limit, under 1 MB, plus the 320 px thumbnail).
 // The size rule for the coins of a whole photo (the median diameter, good, small or refused) is here too, as pure functions.
-import { MAX_LONG_SIDE, THUMB_LONG_SIDE, fitWithin, shrinkToLimit, type Still, type StillOptions } from '../capture/captureStill';
+import { MAX_LONG_SIDE, THUMB_LONG_SIDE, fitWithin, shrinkToLimit, type Still, type StillOptions } from '../capture';
 import type { Circle } from './find';
 
 /** The side of the square cut out, in coin radii: the coin's diameter and a 4% margin each side. */
