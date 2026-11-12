@@ -22,7 +22,7 @@ export const COIN_TOO_SMALL_MESSAGE = 'Too small to read a date';
 export type CoinSize = { verdict: 'good'; message: null } | { verdict: 'small'; message: string } | { verdict: 'refuse'; message: string };
 
 /** The middle diameter of the circles, in their own pixels; 0 when there are none. */
-export function medianDiameter(circles: Pick<Circle, 'r'>[]): number {
+export function medianDiameter(circles: Circle[]): number {
   if (circles.length === 0) return 0;
   const sorted = circles.map((c) => c.r * 2).sort((a, b) => a - b);
   const mid = sorted.length >> 1;
