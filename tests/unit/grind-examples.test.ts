@@ -282,7 +282,7 @@ describe('the photo reader says when the two sides do not agree (sidesAgree, 1.2
 
   it('expects sidesAgree true or null, never false, on every old pair of one coin', () => {
     const pairs = load().filter(([f, e]) => f !== 'sides-disagree.json' && (e.photos ?? []).length === 2);
-    expect(pairs.length, 'the three old two-photo scenarios').toBeGreaterThanOrEqual(3);
+    expect(pairs.length, 'the old two-photo scenarios').toBeGreaterThanOrEqual(4);
     for (const [f, e] of pairs) {
       expect(e.schemaVersion, f).toBe('1.2');
       expect(asCheck(e.expect.sidesAgree).one_of, f).toEqual([true, null]);
