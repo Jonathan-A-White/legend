@@ -16,7 +16,7 @@ import {
   type GrindExample,
   type Schema,
 } from '../support/grind-examples';
-import { tokenAnswer } from '../support/coin-answers';
+import { quarterAnswer, tokenAnswer } from '../support/coin-answers';
 
 const readJson = (rel: string): Record<string, unknown> => JSON.parse(readFileSync(rel, 'utf8')) as Record<string, unknown>;
 
@@ -258,13 +258,51 @@ describe('the appraiser and the tutor have their Other scenarios', () => {
   });
 });
 
+describe('the photo reader says when the two sides do not agree (sidesAgree, 1.2)', () => {
+  const dir = 'grinds/examples/coin-from-photos';
+  const load = () => readdirSync(dir).filter((f) => f.endsWith('.json')).map((f) => [f, readJson(`${dir}/${f}`) as unknown as GrindExample] as const);
+  const own = new Ajv({ allErrors: true, strict: true });
+
+  it('is version 1.2 of the grind, and the 1.2 answer requires sidesAgree as true, false or null', () => {
+    expect(readJson('grinds/coin-from-photos.json').versions).toContain('1.2');
+    expect(readJson('grinds/coin-from-photos.json').answerSchema).toBe('schemas/coin-from-photos-answer-1.2.schema.json');
+    expect(readJson('grinds/coin-from-photos.json').inputSchema).toBe('schemas/coin-from-photos-input-1.2.schema.json');
+    const fits = own.compile(readJson('schemas/coin-from-photos-answer-1.2.schema.json'));
+    for (const value of [true, false, null]) expect(fits({ ...quarterAnswer(), sidesAgree: value }), JSON.stringify(fits.errors)).toBe(true);
+    expect(fits(quarterAnswer()), 'sidesAgree is always present').toBe(false);
+    expect(fits({ ...quarterAnswer(), sidesAgree: 'yes' })).toBe(false);
+  });
+
+  it('has the sides-disagree scenario: the 1909-S front with the 1944-S quarter back, sidesAgree false', () => {
+    const e = readJson(`${dir}/sides-disagree.json`) as unknown as GrindExample;
+    expect(e.schemaVersion).toBe('1.2');
+    expect(e.photos).toEqual(['lincoln-1909s-obverse.jpg', 'washington-quarter-1944s-reverse.jpg']);
+    expect(asCheck(e.expect.sidesAgree).equals).toBe(false);
+  });
+
+  it('expects sidesAgree true or null, never false, on every old pair of one coin', () => {
+    const pairs = load().filter(([f, e]) => f !== 'sides-disagree.json' && (e.photos ?? []).length === 2);
+    expect(pairs.length, 'the three old two-photo scenarios').toBeGreaterThanOrEqual(3);
+    for (const [f, e] of pairs) {
+      expect(e.schemaVersion, f).toBe('1.2');
+      expect(asCheck(e.expect.sidesAgree).one_of, f).toEqual([true, null]);
+    }
+  });
+
+  it('is taught in the instructions', () => {
+    const reader = readFileSync('grinds/coin-from-photos.md', 'utf8').replace(/\s+/g, ' ');
+    expect(reader).toContain('`sidesAgree`');
+    expect(reader).toMatch(/Lincoln cent front over a Washington quarter back/);
+  });
+});
+
 describe('a replica is read as a replica and valued as one', () => {
   const load = (kind: string) => readdirSync(`grinds/examples/${kind}`).filter((f) => f.endsWith('.json')).map((f) => readJson(`grinds/examples/${kind}/${f}`) as unknown as GrindExample);
 
   it('the photo reader answers other with the subtype Replica, never the real coin\'s year and mint', () => {
     const replica = load('coin-from-photos').find((e) => new RegExp(asCheck(e.expect.subtype ?? {}).matches ?? '$^').test('Replica'));
     expect(replica, 'a coin-from-photos scenario whose subtype reads Replica').toBeDefined();
-    expect(replica!.schemaVersion).toBe('1.1');
+    expect(replica!.schemaVersion).toBe('1.2');
     expect(asCheck(replica!.expect.kind).equals).toBe('other');
     expect(asCheck(replica!.expect.year).is_null).toBe(true);
     expect(asCheck(replica!.expect.mintMark).is_null).toBe(true);

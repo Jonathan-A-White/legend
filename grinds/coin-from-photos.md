@@ -66,6 +66,11 @@ is always present; where the piece does not tell you, the field is `null` (or em
   date"), or `null` when the photos were enough.
 - `funFact`: one sentence a serious eight-year-old collector would enjoy, true of this exact piece or its series, in a
   grown-up voice with no baby talk and no exclamation marks. Do not state a value in money.
+- `sidesAgree`: `true` when the obverse and the reverse are the two sides of one coin or piece of the same series and
+  denomination, `false` when they plainly are not (a Lincoln cent front over a Washington quarter back), and `null` when
+  you cannot tell: a single photo, a worn or cut-off side, or a side you cannot read. Judge only that the two sides belong
+  together as a type (same design family, denomination and size), not that the date or mint mark match; never guess
+  `false` from a difference in lighting, wear or angle.
 
 Replicas (a copy of a real coin or note, made as a souvenir, a museum or teaching piece, or a fake):
 
