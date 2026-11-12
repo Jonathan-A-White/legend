@@ -13,6 +13,8 @@ export interface Encode {
 
 export interface FakeCamera {
   encodes: Encode[];
+  /** what getUserMedia was asked for, each time */
+  asked: MediaStreamConstraints[];
   /** how many tracks have been stopped */
   stops: () => number;
   /** the size the video reports; change it to make the next frame a different one */
@@ -36,7 +38,8 @@ export function installFakeCamera(size = { width: 1280, height: 720 }): FakeCame
   let stopped = 0;
   const gallery = { width: 4000, height: 3000 };
   const track = { stop: () => void stopped++ };
-  const stream = { getTracks: () => [track] } as unknown as MediaStream;
+  const asked: MediaStreamConstraints[] = [];
+  const stream = { getTracks: () => [track], getVideoTracks: () => [track] } as unknown as MediaStream;
 
   const saved = {
     mediaDevices: Object.getOwnPropertyDescriptor(navigator, 'mediaDevices'),
@@ -45,7 +48,11 @@ export function installFakeCamera(size = { width: 1280, height: 720 }): FakeCame
     toBlob: HTMLCanvasElement.prototype.toBlob,
     createImageBitmap: globalThis.createImageBitmap,
   };
-  Object.defineProperty(navigator, 'mediaDevices', { configurable: true, value: { getUserMedia: async () => stream } });
+  const getUserMedia = async (constraints: MediaStreamConstraints) => {
+    asked.push(constraints);
+    return stream;
+  };
+  Object.defineProperty(navigator, 'mediaDevices', { configurable: true, value: { getUserMedia } });
   HTMLMediaElement.prototype.play = () => Promise.resolve();
   Object.defineProperty(HTMLVideoElement.prototype, 'videoWidth', { configurable: true, get: () => video.width });
   Object.defineProperty(HTMLVideoElement.prototype, 'videoHeight', { configurable: true, get: () => video.height });
@@ -63,6 +70,7 @@ export function installFakeCamera(size = { width: 1280, height: 720 }): FakeCame
 
   return {
     encodes,
+    asked,
     stops: () => stopped,
     video,
     gallery,

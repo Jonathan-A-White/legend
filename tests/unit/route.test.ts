@@ -1,7 +1,7 @@
 // Hash routes (src/nav/route.ts) and where Legend reopens (src/nav/lastRoute.ts).
 import { beforeEach, describe, expect, it } from 'vitest';
 import { KEPT_ADDRESSES, KEPT_PATHS, forgetTrail, isKeptHash, readLastRoute, restoreLastRoute, saveLastRoute } from '../../src/nav/lastRoute';
-import { countryOf, folderIdOf, hashFor, itemIdOf, routeOf } from '../../src/nav/route';
+import { addFolderIdOf, addManyHash, countryOf, folderIdOf, hashFor, itemIdOf, routeOf, tabOf } from '../../src/nav/route';
 
 const visit = (hash: string) => {
   window.history.pushState(null, '', `/${hash}`);
@@ -42,6 +42,21 @@ describe('routes', () => {
     expect(routeOf('#/nowhere')).toBe('home');
     expect(routeOf('#/item/')).toBe('home');
     expect(routeOf('#/country/usa')).toBe('home');
+  });
+
+  it('tells Add many at once from Add, with or without a coin folder, and keeps neither as a place to come back to', () => {
+    expect(routeOf('#/add/many')).toBe('bulk');
+    expect(routeOf('#/add/many?folder=abc-123')).toBe('bulk');
+    expect(addManyHash()).toBe('#/add/many');
+    expect(addManyHash('abc-123')).toBe('#/add/many?folder=abc-123');
+    expect(addFolderIdOf(addManyHash('abc-123'))).toBe('abc-123');
+    expect(addFolderIdOf(addManyHash())).toBeUndefined();
+    expect(routeOf('#/add')).toBe('add');
+    expect(routeOf('#/add/other')).toBe('home');
+    // like Add, a camera is not somewhere to wake up on; it sits under the Collection in the bar
+    expect(isKeptHash('#/add/many')).toBe(false);
+    expect(isKeptHash('#/add/many?folder=abc-123')).toBe(false);
+    expect(tabOf('bulk')).toBe('collection');
   });
 
   it('builds the hash of a screen', () => {
