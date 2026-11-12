@@ -13,6 +13,18 @@ describe('docs budgets', () => {
     expect(size('docs/module-map.md')).toBeLessThan(6144);
   });
 
+  // A story that documents a screen must not have to trim first (mw-tmsafpc.10): keep room for the next row.
+  it('docs/overview.md and docs/module-map.md keep 100 bytes of room', () => {
+    expect(3072 - size('docs/overview.md')).toBeGreaterThanOrEqual(100);
+    expect(6144 - size('docs/module-map.md')).toBeGreaterThanOrEqual(100);
+  });
+
+  it('docs/module-map.md names the back retake and the Confirm sheet', () => {
+    const map = readFileSync('docs/module-map.md', 'utf8');
+    expect(map).toContain('src/capture/retakeBack.ts');
+    expect(map).toMatch(/Retake the back/);
+  });
+
   it('CLAUDE.md is under 6144 bytes', () => {
     expect(size('CLAUDE.md')).toBeLessThan(6144);
   });

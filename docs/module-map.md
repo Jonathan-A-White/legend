@@ -13,35 +13,34 @@ A module is a folder under `src/` with one job and one entry; import that.
 | data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, mintages, the states map) and its loaders | `src/data/us.ts` | built |
 | rarity | How rare a coin is: pure rules (`findRow`, `placeInSeries`), `rarityWords` (for the tutor), `RarityLine`, `Strip`; `TutorRarity` asks on a tap (`item.rarity`) | `src/rarity/index.ts` | built |
-| services | What leaves the phone: `grist.ts`, `feedback.ts`, tutor `ask.ts`, licence, device key, app update (pwa-kit), the photo reader `nameItem.ts` (on a worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time), `itemAnswer.ts`, `value.ts`, `rarity.ts` | `src/UpdateBanner.tsx` | built |
+| services | What leaves the phone: `grist.ts`, `feedback.ts`, tutor `ask.ts`, licence, device key, app update, photo reader `nameItem.ts` (worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time), `itemAnswer.ts`, `value.ts`, `rarity.ts` | `src/UpdateBanner.tsx` | built |
 | events | The typed bus screens use; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry, the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
 | ui | Shared: scroll guard, build stamp, `HoldBar`, `legendComposer.ts` (Composer settings), `useSheetBack`, `useObjectUrl` | `src/ui/` | built |
-| globe | The Globe (`#/globe`) and Country sheet (`#/country/<cc>`): `render.ts` draws, `controller.ts` loops, `pick.ts` picks | `src/globe/index.ts` | built |
+| globe | The Globe (`#/globe`), Country sheet (`#/country/<cc>`): `render.ts` draws, `controller.ts` loops, `pick.ts` picks | `src/globe/index.ts` | built |
 | quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist; `match.ts` (pure) names an item's design, `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
-| collection | The Collection (`#/collection`: count, search, filters, Looking at, Folders, Select: `Choose.tsx`; `#/folder/<id>` one folder) and one item (`#/item/<id>`: photos, facts, rarity, notes, Edit, Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
+| collection | The Collection (`#/collection`: count, search, filters, Looking at, Folders, Select: `Choose.tsx`; `#/folder/<id>`) and an item (`#/item/<id>`: photos, facts, rarity, notes, Edit, Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
 | share | Share: a globe picture or item card, else Save picture; `text.ts` says what a card may say | `src/share/index.ts` | built |
 | learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`); pure: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
 | feedback | Tell the maker: `FeedbackButton`, `TellTheMakerButton` open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
 | tips | One-time `HintCard` tips (`hints.ts`), the usage log (`usageLog.ts`) | `src/tips/index.ts` | built |
 | tutor | The Ask sheet over an item or country (`?ask`): `AskBox`, `suggestions.ts`, answers kept in asks, settings cards; `request.ts` says what goes; `FormDoor`: Let the tutor do it on a form (`docs/feedback.md`) | `src/tutor/index.ts` | built |
-| capture | Add (`#/add`): viewfinder (`CaptureScreen`: Coin, Bill, Other; `useCamera`), `captureStill` (1600 px, <1 MB, 320 px thumb), `startItem` (stores, queues), Confirm sheet, `useNameQueue` | `src/capture/index.ts` | built |
+| capture | Add (`#/add`): viewfinder (`CaptureScreen`: Coin, Bill, Other; `useCamera`), `captureStill` (1600 px, <1 MB, 320 px thumb), `startItem` (stores, queues), Confirm sheet ("Retake the back": `src/capture/retakeBack.ts` swaps the reverse, reads again), `useNameQueue` | `src/capture/index.ts` | built |
 | worth | A rough worth, never a price (an Other's guess counts at medium+): `WorthLine`, `RoughWorth`, `format.ts` (`worthOf` adds a set's ranges); Show values hides it | `src/worth/index.ts` | built |
-| wishlist | The Wish list (`#/wishlist`, from the Collection): goal card, wished coins, Got it!, Let it go; `WishSheet` is Wish for it on the Confirm sheet; `tally.ts` (pure) the money | `src/wishlist/index.ts` | built |
+| wishlist | The Wish list (`#/wishlist`): goal card, wished coins, Got it!, Let it go; `WishSheet` is Wish for it on the Confirm sheet; `tally.ts` the money | `src/wishlist/index.ts` | built |
 | bulk | Add many (`#/add/many`, `BulkScreen`: Fronts, Flip, Backs, `Review`): `findCoins`, `cutCoins`, `pairCoins`, `saveBatch`; `docs/design/bulk-add.md` | `src/bulk/index.ts` | built |
 | screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
 
 ## Grinds
 
-`grinds/<kind>.json` with `.md` instructions, `schemas/<kind>-{input,answer}-<v>.schema.json` and scenarios in
-`grinds/examples/<kind>/` (`grinds/examples/README.md`; `mw grist smoke legend` runs them). A grind change updates its scenarios.
+`grinds/<kind>.json` with `.md` instructions, `schemas/<kind>-{input,answer}-<v>.schema.json`, scenarios in
+`grinds/examples/<kind>/` (`mw grist smoke legend` runs them). A grind change updates its scenarios.
 
 ## Screens
 
-The bottom bar has Collection, Globe,
-Quarters, Learn and Settings (`src/settings/SettingsScreen.tsx`); About (`#/about`, `src/About.tsx`) opens from its About row; `home` is `#/`; `item` (`#/item/<id>`) and `country`
-(`#/country/<cc>`) are reached from them. `add` (`#/add`, `src/capture/`) opens over the bar.
+The bottom bar has Collection, Globe, Quarters, Learn and Settings; About (`#/about`, `src/About.tsx`) opens from
+Settings' About row; `home` is `#/`; `item` and `country` are reached from them. `add` (`#/add`) opens over the bar.
 
 **A new screen is a new folder.** Never grow a screen's file with another screen's code, and never import
 from inside another module's folder, only its entry.
@@ -54,7 +53,7 @@ from inside another module's folder, only its entry.
 - `src/data/db.ts`: a change adds `this.version(n)`, never edits an old one.
 - `src/data/repositories/index.ts`: re-exports, one name a line.
 - `package.json`, `package-lock.json`: keep to your own lines.
-- `ATTRIBUTION.md`, `CHANGELOG.md`, `public/changelog.json`: credits and What's new (`mw next` writes it).
+- `ATTRIBUTION.md`, `CHANGELOG.md`, `public/changelog.json`: credits, What's new (`mw next` writes it).
 
 ## Rules
 
