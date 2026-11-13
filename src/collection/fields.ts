@@ -1,5 +1,3 @@
-// src/collection/fields.ts: what Edit offers and how it reads what was typed.
+// src/collection/fields.ts: what Edit offers. How it reads what was typed (a year, the tags) is edit-coin's: src/tutor/formCommands.ts.
 
 export { GRADES } from '../data/grades';
-
-export const parseTags = (text: string): string[] => [...new Set(text.split(',').map((t) => t.trim()).filter(Boolean))];

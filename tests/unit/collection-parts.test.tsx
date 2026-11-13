@@ -4,7 +4,7 @@ import { cleanup, render, screen, waitFor, within } from '@testing-library/react
 import userEvent from '@testing-library/user-event';
 import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 import { ItemView } from '../../src/collection';
-import { parseTags } from '../../src/collection/fields';
+import { parseTags } from '../../src/tutor/formCommands';
 import { pickThumb, type ThumbPhoto } from '../../src/collection/thumbs';
 import { db } from '../../src/data/db';
 import { getItem } from '../../src/data/repositories';

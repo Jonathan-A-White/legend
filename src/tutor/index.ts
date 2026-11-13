@@ -6,4 +6,4 @@ export { FormDoor } from './FormDoor';
 export type { AskAbout } from './request';
 export type { OnAnswer } from './useAsk';
 export { SUGGESTIONS } from './suggestions';
-export { CONFIRM_COMMAND, EDIT_COMMAND, confirmCoinCommand, countryLabel, countryOfLabel, gradeLabel, gradeOfLabel } from './formCommands';
+export { CONFIRM_COMMAND, EDIT_COMMAND, confirmCoinCommand, countryLabel, countryOfLabel, editCoinCommand, gradeLabel, gradeOfLabel, kindLabel, kindOfLabel } from './formCommands';

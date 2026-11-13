@@ -3,8 +3,7 @@
 // label, the year as text) into the changes updateItem takes. The choice lists are the sheets' own: the countries they draw and GRADES.
 import { formCommand, type FormArgs, type FormSpec } from 'voice-kit/forms';
 import type { Command } from 'voice-kit/talks';
-import type { CountryOption } from '../capture/useCountries';
-import { parseTags } from '../collection/fields';
+import type { CountryOption } from '../capture';
 import type { ItemKind } from '../data/db';
 import { GRADES } from '../data/grades';
 import { KINDS, KIND_ORDER } from '../data/kinds';
@@ -40,6 +39,9 @@ export function yearOfText(text: string | undefined): number | null {
   if (!/^\d{1,4}$/.test(year)) throw new Error(`"${year}" is not a year: use up to four digits, such as 1932`);
   return Number(year);
 }
+
+/** The tags the form holds: the words between commas, trimmed, each once. */
+export const parseTags = (text: string): string[] => [...new Set(text.split(',').map((t) => t.trim()).filter(Boolean))];
 
 const orNull = (text: string | undefined): string | null => text?.trim() || null;
 
