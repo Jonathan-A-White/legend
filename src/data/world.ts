@@ -11,6 +11,13 @@ export interface CountryInfo {
   continent: string;
 }
 
+/** A country as the lists show it: the Confirm sheet's pick, the tutor's form commands, the Collection's edit form. */
+export interface CountryOption {
+  code: string;
+  name: string;
+  flag: string;
+}
+
 interface CountryGeometryBase {
   /** The ISO alpha-2 code (XK for Kosovo). */
   id: string;

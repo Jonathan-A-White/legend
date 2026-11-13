@@ -3,7 +3,7 @@
 // label, the year as text) into the changes updateItem takes. The choice lists are the sheets' own: the countries they draw and GRADES.
 import { formCommand, type FormArgs, type FormSpec } from 'voice-kit/forms';
 import type { Command } from 'voice-kit/talks';
-import type { CountryOption } from '../capture';
+import type { CountryOption } from '../data/world';
 import type { ItemKind } from '../data/db';
 import { GRADES } from '../data/grades';
 import { KINDS, KIND_ORDER } from '../data/kinds';

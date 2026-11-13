@@ -8,7 +8,7 @@ import { countryName, flagOf, loadCountries, loadCurrencies, type CurrencyRow } 
 import { askHash, countryHash, isAsking, itemHash, navigate, useAddress } from '../nav/route';
 import { AskSheet } from '../tutor';
 import { moneyNowAndBefore, yearsOf } from './money';
-import { useLoaded } from './useLoaded';
+import { useLoaded } from '../ui/useLoaded';
 
 const CONTINENT: Record<string, string> = {
   AF: 'Africa',

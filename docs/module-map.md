@@ -13,7 +13,7 @@ A module is a folder under `src/` with one job and one entry; import that.
 | data/repositories | The only way UI reaches Dexie: a file per family, `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, mintages, the states map) and its loaders | `src/data/us.ts` | built |
 | rarity | How rare a coin is: pure rules (`findRow`, `placeInSeries`, `years.ts`), `rarityWords` (for the tutor), `RarityLine`, `Strip`; `TutorRarity` asks on a tap (`item.rarity`) | `src/rarity/index.ts` | built |
-| services | What leaves the phone: `grist.ts`, `feedback.ts`, tutor `ask.ts`, licence, device key, app update, photo reader `nameItem.ts` (worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time), `itemAnswer.ts`, `value.ts`, `rarity.ts` | `src/UpdateBanner.tsx` | built |
+| services | What leaves the phone: `grist.ts`, `feedback.ts`, tutor `ask.ts`, licence, device key, app update, photo reader `nameItem.ts` (worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time), `itemAnswer.ts`, `value.ts`, `rarity.ts` | `src/services/` | built |
 | events | The typed bus screens use; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry, the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |

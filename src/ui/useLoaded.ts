@@ -1,5 +1,5 @@
-// src/ui/useLoaded.ts: one of the US reference files for a page (Learn's pages, the rarity line): undefined until it loads, `failed` when it could not, `retry`
-// to try again. The files are precached, so this works offline.
+// src/ui/useLoaded.ts: one of the reference files a screen reads (the world's countries and currencies, the US files for Learn's pages and the
+// rarity line): undefined until it loads, `failed` when it could not, `retry` to try again. The files are precached, so this works offline.
 import { useEffect, useState } from 'react';
 
 export interface Loaded<T> {

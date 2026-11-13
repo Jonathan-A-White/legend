@@ -15,7 +15,7 @@ import { centreOf, countryFeatures } from './geo';
 import { NotYet } from './NotYet';
 import { DEFAULT_PALETTE, readPalette } from './palette';
 import { createRenderer, type Rotation } from './render';
-import { useLoaded } from './useLoaded';
+import { useLoaded } from '../ui/useLoaded';
 import { view } from './view';
 
 const NOT_YET = '#/globe?not-yet';

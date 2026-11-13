@@ -1,13 +1,7 @@
 // src/capture/useCountries.ts: the world's countries by name with their flags, loaded once from the files the app ships, for the
 // Confirm sheet's country list. Empty until loaded; a country is then drawn as its code.
 import { useEffect, useState } from 'react';
-import { loadCountries } from '../data/world';
-
-export interface CountryOption {
-  code: string;
-  name: string;
-  flag: string;
-}
+import { loadCountries, type CountryOption } from '../data/world';
 
 export function useCountries(): CountryOption[] {
   const [list, setList] = useState<CountryOption[]>([]);

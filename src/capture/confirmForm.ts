@@ -5,7 +5,7 @@ import type { FormField, FormSpec } from 'voice-kit/forms';
 import type { Item } from '../data/db';
 import { GRADES } from '../data/grades';
 import { CONFIRM_COMMAND, countryLabel, gradeLabel } from '../tutor';
-import type { CountryOption } from './useCountries';
+import type { CountryOption } from '../data/world';
 
 export { CONFIRM_COMMAND };
 export const YEAR_MAX = 4;

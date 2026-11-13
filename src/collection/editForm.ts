@@ -3,7 +3,8 @@
 // Inscription, Tags); Subtype, Series, Design and Material stay his by hand, and edit-coin (src/tutor/formCommands.ts) saves them as the sheet
 // holds them. Kind, Country and Grade guess are choices among the sheet's own lists.
 import type { FormSpec } from 'voice-kit/forms';
-import { choiceField, GRADE_OPTIONS, MINT_MARK_MAX, optionsWith, YEAR_MAX, type CountryOption } from '../capture';
+import { choiceField, GRADE_OPTIONS, MINT_MARK_MAX, optionsWith, YEAR_MAX } from '../capture';
+import type { CountryOption } from '../data/world';
 import type { Item } from '../data/db';
 import { KINDS, KIND_ORDER } from '../data/kinds';
 import { countryLabel, EDIT_COMMAND, gradeLabel } from '../tutor';
