@@ -10,19 +10,19 @@ A module is a folder under `src/` with one job and one entry; import that.
 | gate | Shut until the key holds a licence: `Gate` wraps the shell | `src/gate/index.ts` | built |
 | data | The local store (Dexie: items, photos, settings, meta, asks, values, outbox, usage, savings, folders) and types; `kinds.ts` the kinds' words | `src/data/db.ts` | built |
 | data/world | Countries (TopoJSON, names, flags) and currencies by date, in `public/data/world/` | `src/data/world.ts` | built |
-| data/repositories | The only way UI reaches Dexie: a file per family, with `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
+| data/repositories | The only way UI reaches Dexie: a file per family, `useLiveQuery` hooks beside them | `src/data/repositories/index.ts` | built |
 | data/us | The US reference data (quarters, mints, grades, key dates, mintages, the states map) and its loaders | `src/data/us.ts` | built |
-| rarity | How rare a coin is: pure rules (`findRow`, `placeInSeries`), `rarityWords` (for the tutor), `RarityLine`, `Strip`; `TutorRarity` asks on a tap (`item.rarity`) | `src/rarity/index.ts` | built |
+| rarity | How rare a coin is: pure rules (`findRow`, `placeInSeries`, `years.ts`), `rarityWords` (for the tutor), `RarityLine`, `Strip`; `TutorRarity` asks on a tap (`item.rarity`) | `src/rarity/index.ts` | built |
 | services | What leaves the phone: `grist.ts`, `feedback.ts`, tutor `ask.ts`, licence, device key, app update, photo reader `nameItem.ts` (worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time), `itemAnswer.ts`, `value.ts`, `rarity.ts` | `src/UpdateBanner.tsx` | built |
 | events | The typed bus screens use; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry, the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
 | nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
-| ui | Shared: scroll guard, build stamp, `HoldBar`, `legendComposer.ts` (Composer settings), `useSheetBack`, `useObjectUrl` | `src/ui/` | built |
+| ui | Shared: scroll guard, build stamp, `HoldBar`, `legendComposer.ts` (Composer settings), `useSheetBack`, `useObjectUrl`, `useLoaded` | `src/ui/` | built |
 | globe | The Globe (`#/globe`), Country sheet (`#/country/<cc>`): `render.ts` draws, `controller.ts` loops, `pick.ts` picks | `src/globe/index.ts` | built |
-| quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist; `match.ts` (pure) names an item's design, `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
+| quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist; `match.ts` groups items by design (`data/quarterDesign.ts`), `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |
 | collection | The Collection (`#/collection`: count, search, filters, Looking at, Folders, Select: `Choose.tsx`; `#/folder/<id>`) and an item (`#/item/<id>`: photos, facts, rarity, notes, Edit, Remove); `search.ts`, `view.ts` pure | `src/collection/index.ts` | built |
 | share | Share: a globe picture or item card, else Save picture; `text.ts` says what a card may say | `src/share/index.ts` | built |
-| learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`); pure: `grading.ts`, `mints.ts`, `years.ts`, `path.ts` | `src/learn/index.ts` | built |
+| learn | Learn (`#/learn`, `/grading`, `/mints`, `/years`, `/path`); pure: `grading.ts`, `mints.ts`, `path.ts` | `src/learn/index.ts` | built |
 | feedback | Tell the maker: `FeedbackButton`, `TellTheMakerButton` open `FeedbackSheet`; `outbox.ts` sends; `docs/feedback.md` | `src/feedback/index.ts` | built |
 | tips | One-time `HintCard` tips (`hints.ts`), the usage log (`usageLog.ts`) | `src/tips/index.ts` | built |
 | tutor | The Ask sheet over an item or country (`?ask`): `AskBox`, `suggestions.ts`, answers kept in asks, settings cards; `request.ts` says what goes; `FormDoor`: Let the tutor do it on a form (`docs/feedback.md`) | `src/tutor/index.ts` | built |
@@ -30,7 +30,7 @@ A module is a folder under `src/` with one job and one entry; import that.
 | worth | A rough worth, never a price (an Other's guess counts at medium+): `WorthLine`, `RoughWorth`, `format.ts` (`worthOf` adds a set's ranges); Show values hides it | `src/worth/index.ts` | built |
 | wishlist | The Wish list (`#/wishlist`): goal card, wished coins, Got it!, Let it go; `WishSheet` is Wish for it on the Confirm sheet; `tally.ts` the money | `src/wishlist/index.ts` | built |
 | bulk | Add many (`#/add/many`, `BulkScreen`: Fronts, Flip, Backs, `Review`): `findCoins`, `cutCoins`, `pairCoins`, `saveBatch`; `docs/design/bulk-add.md` | `src/bulk/index.ts` | built |
-| screens | One folder per screen, entry `index.ts` | `src/screens/<name>/index.ts` | `home` |
+| screens | One folder per screen | `src/screens/<name>/index.ts` | `home` |
 
 ## Grinds
 
