@@ -6,6 +6,7 @@ import type { Item } from '../../src/data/db';
 import { cardFacts, cardText, globeCaption, looksLikeSerial } from '../../src/share/text';
 import { CARD_SIZE, GLOBE_SIZE, renderGlobePicture, renderItemCard } from '../../src/share/picture';
 import { countryFeatures } from '../../src/globe/geo';
+import { createRenderer } from '../../src/globe/render';
 import { DEFAULT_PALETTE } from '../../src/globe/palette';
 import { globeCountries } from '../support/globe-fixtures';
 import { FakePictureContext, installPictureCanvas } from '../support/fake-picture';
@@ -116,6 +117,7 @@ describe('the pictures', () => {
 
   it('the globe picture is 1080 by 1080 and a JPEG, with the caption, the mark and the date on it', async () => {
     const picture = await renderGlobePicture({
+      renderer: createRenderer(),
       features: countryFeatures(globeCountries),
       lit: new Map([['DE', 2], ['US', 1]]),
       rotation: [-10, -50, 0],

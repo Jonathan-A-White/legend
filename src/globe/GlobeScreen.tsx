@@ -14,7 +14,7 @@ import { GlobeController } from './controller';
 import { centreOf, countryFeatures } from './geo';
 import { NotYet } from './NotYet';
 import { DEFAULT_PALETTE, readPalette } from './palette';
-import type { Rotation } from './render';
+import { createRenderer, type Rotation } from './render';
 import { useLoaded } from './useLoaded';
 import { view } from './view';
 
@@ -278,7 +278,7 @@ function Controls({ countries, lit, controllerRef, onSearch }: { countries: Coun
           which="globe"
           make={() => {
             const globe = controllerRef.current;
-            return shareGlobe({ features: countryFeatures(countries), lit, rotation: globe?.currentRotation() ?? view.rotation ?? FIRST_VIEW, palette: DEFAULT_PALETTE });
+            return shareGlobe({ renderer: createRenderer(), features: countryFeatures(countries), lit, rotation: globe?.currentRotation() ?? view.rotation ?? FIRST_VIEW, palette: DEFAULT_PALETTE });
           }}
           className="h-12 rounded-full border border-accent px-4 text-lg font-semibold text-accent active:bg-surface"
         />

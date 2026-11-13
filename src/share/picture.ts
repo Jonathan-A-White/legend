@@ -2,8 +2,7 @@
 // The globe picture is 1080 x 1080: the globe as he left it, the caption, the Legend mark and the date. The item card is
 // 1080 x 1350: both photos and the facts of cardFacts (text.ts). The drawing goes through PictureContext, the canvas calls used,
 // so a test can read every word written on a picture.
-import { createRenderer, type DrawContext, type Palette, type Rotation } from '../globe/render';
-import type { CountryFeature } from '../globe/geo';
+import type { CountryFeature, DrawContext, Palette, Renderer, Rotation } from '../globe';
 import { globeCaption, type CardFacts } from './text';
 
 export const GLOBE_SIZE = 1080;
@@ -114,6 +113,8 @@ function foot(ctx: PictureContext, width: number, y: number, today: Date): void 
 }
 
 export interface GlobePictureInput {
+  /** the globe's own renderer, handed over by the Globe: share draws no globe itself, so it imports only types from src/globe */
+  renderer: Renderer;
   features: readonly CountryFeature[];
   /** alpha-2 -> how many items he has from there */
   lit: ReadonlyMap<string, number>;
@@ -128,7 +129,7 @@ export interface GlobePictureInput {
 export async function renderGlobePicture(input: GlobePictureInput): Promise<Picture> {
   const { canvas, ctx } = begin(GLOBE_SIZE, GLOBE_SIZE);
   const globeHeight = 800;
-  createRenderer().draw(ctx, { width: GLOBE_SIZE, height: globeHeight, dpr: 1, rotation: input.rotation, features: input.features, lit: input.lit, picked: null, palette: input.palette });
+  input.renderer.draw(ctx, { width: GLOBE_SIZE, height: globeHeight, dpr: 1, rotation: input.rotation, features: input.features, lit: input.lit, picked: null, palette: input.palette });
   groundBehind(ctx, GLOBE_SIZE, GLOBE_SIZE);
   text(ctx, globeCaption(input.name, input.lit.size), GLOBE_SIZE / 2, 890, 56, INK, { weight: 600, align: 'center', fit: 960 });
   foot(ctx, GLOBE_SIZE, 1020, input.today ?? new Date());
