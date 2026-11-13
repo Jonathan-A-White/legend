@@ -25,16 +25,16 @@
   "dependencies": {
     "@bsv/sdk": "^2.8.11",
     "ajv": "^8.20.0",
-    "bsv-kit": "github:Jonathan-A-White/bsv-kit#24a5e297c48175fafaefa399772a15f316ab365f",
+    "bsv-kit": "github:Jonathan-A-White/bsv-kit#4dbd874edc1f5d6c151b0980ccaa9fcc60799d6a",
     "d3-geo": "^3.1.1",
     "dexie": "^4.3.0",
     "dexie-react-hooks": "^4.4.0",
-    "pwa-kit": "github:Jonathan-A-White/pwa-kit#7ad2a9dac500c495648291102e9c613e60a3277d",
+    "pwa-kit": "github:Jonathan-A-White/pwa-kit#182d2890c5d57c93d5b978da2981276d8f3f3e80",
     "qrcode": "^1.5.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "topojson-client": "^3.1.0",
-    "voice-kit": "github:Jonathan-A-White/voice-kit#d87188227886ec15e7c34f674992f4a63ea69215",
+    "voice-kit": "github:Jonathan-A-White/voice-kit#c5f76b2b7044d00eaecc827a7cbdce5b802768b0",
     "workbox-precaching": "7.4.1",
     "workbox-routing": "^7.4.1",
     "workbox-strategies": "7.4.1"
@@ -71,8 +71,8 @@
     "vitest": "^4.0.18"
   },
   "allowScripts": {
-    "github:Jonathan-A-White/bsv-kit#24a5e297c48175fafaefa399772a15f316ab365f": true,
-    "github:Jonathan-A-White/pwa-kit#7ad2a9dac500c495648291102e9c613e60a3277d": true,
-    "github:Jonathan-A-White/voice-kit#d87188227886ec15e7c34f674992f4a63ea69215": true
+    "github:Jonathan-A-White/bsv-kit#4dbd874edc1f5d6c151b0980ccaa9fcc60799d6a": true,
+    "github:Jonathan-A-White/pwa-kit#182d2890c5d57c93d5b978da2981276d8f3f3e80": true,
+    "github:Jonathan-A-White/voice-kit#c5f76b2b7044d00eaecc827a7cbdce5b802768b0": true
   }
 }
