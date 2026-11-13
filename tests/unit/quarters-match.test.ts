@@ -2,7 +2,8 @@ import { readFileSync } from 'node:fs';
 import { describe, expect, it } from 'vitest';
 import type { Item } from '../../src/data/db';
 import type { QuarterDesign } from '../../src/data/us';
-import { matchDesign, matchItems, normalise } from '../../src/quarters/match';
+import { matchDesign, normalise } from '../../src/data/quarterDesign';
+import { matchItems } from '../../src/quarters/match';
 
 const designs = JSON.parse(readFileSync('public/data/us/quarters.json', 'utf8')) as QuarterDesign[];
 

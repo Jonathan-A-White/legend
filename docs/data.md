@@ -96,7 +96,7 @@ hand-written from public facts: no catalogue (Numista, PCGS, NGC, ucoin, Colnect
 
 ### Matching items to designs (the Quarters screen)
 
-`src/quarters/match.ts` (pure) decides which design an item is. The item must be `country` US with a denomination containing
+`src/data/quarterDesign.ts` (pure) decides which design an item is. The item must be `country` US with a denomination containing
 "quarter"; case, accents and punctuation are ignored. A programme in `series` ("America the Beautiful quarters, Yosemite",
 "50 State Quarters") narrows the designs, and `year` must equal the design's year when the item has one. Then, in order: (1)
 the `design` field is exactly a design's name ("Yosemite", "Yosemite National Park") or its look: this is the hand override,

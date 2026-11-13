@@ -1,4 +1,4 @@
-// src/learn/years.ts: which of his coins are a key date. Pure. A coin matches a key date when it is that series and its year is in
+// src/rarity/years.ts: which of his coins are a key date (Learn's Special years reads it by rarity's entry). Pure. A coin matches a key date when it is that series and its year is in
 // the date's years; where the date names a mint mark the coin must carry it, and where the date is "plain" or a "doubled die" the
 // coin must carry none (it is the Philadelphia coin of that year).
 import type { Item } from '../data/db';

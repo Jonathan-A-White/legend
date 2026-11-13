@@ -3,10 +3,10 @@
 import { useMemo } from 'react';
 import { loadGrades } from '../data/us';
 import { useItems, useThumbs } from '../data/repositories';
+import { useLoaded } from '../ui/useLoaded';
 import { GradeWalk } from './GradeWalk';
 import { bandsOf, placeGuess } from './grading';
 import { CoinLinks, Failed, Page } from './Page';
-import { useLoaded } from './useLoaded';
 
 export function GradingPage() {
   const grades = useLoaded(loadGrades);

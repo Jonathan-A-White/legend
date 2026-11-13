@@ -1,11 +1,10 @@
 // src/learn/YearsPage.tsx: #/learn/years. The key dates of each series (cent, nickel, dime, quarter) with the one-line why; a date he has
 // a coin for says 'You have one!' and shows it, the others say 'Keep an eye out'.
 import { loadKeyDates, loadMintages } from '../data/us';
-import { keyDateStruck } from '../rarity/rarity';
+import { keyDateMatches, keyDateStruck, needsLook } from '../rarity';
 import { useItems, useThumbs } from '../data/repositories';
+import { useLoaded } from '../ui/useLoaded';
 import { CoinLinks, Failed, Page } from './Page';
-import { keyDateMatches, needsLook } from './years';
-import { useLoaded } from './useLoaded';
 
 export function YearsPage() {
   const dates = useLoaded(loadKeyDates);

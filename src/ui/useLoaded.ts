@@ -1,4 +1,4 @@
-// src/learn/useLoaded.ts: one of the US reference files for a page: undefined until it loads, `failed` when it could not, `retry`
+// src/ui/useLoaded.ts: one of the US reference files for a page (Learn's pages, the rarity line): undefined until it loads, `failed` when it could not, `retry`
 // to try again. The files are precached, so this works offline.
 import { useEffect, useState } from 'react';
 

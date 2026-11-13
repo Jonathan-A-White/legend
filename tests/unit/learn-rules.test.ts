@@ -4,7 +4,7 @@ import type { Item } from '../../src/data/db';
 import type { Grade, KeyDateSeries, MintsFile } from '../../src/data/us';
 import { bandsOf, placeGuess, walkBand } from '../../src/learn/grading';
 import { mintOf, yearsText } from '../../src/learn/mints';
-import { keyDateMatches, seriesOf } from '../../src/learn/years';
+import { keyDateMatches, seriesOf } from '../../src/rarity/years';
 
 const grades = JSON.parse(readFileSync('public/data/us/grades.json', 'utf8')) as Grade[];
 const { mints } = JSON.parse(readFileSync('public/data/us/mints.json', 'utf8')) as MintsFile;

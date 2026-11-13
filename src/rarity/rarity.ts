@@ -3,7 +3,7 @@
 // year's place among its series are worked out here. Nothing is guessed: a coin with no row gets no word.
 import type { Item } from '../data/db';
 import type { KeyDate, KeyDateSeries, MintageRow, Mintages, Mint, QuarterDesign } from '../data/us';
-import { keyDateMatches, needsLook, seriesOf } from '../learn/years';
+import { keyDateMatches, needsLook, seriesOf } from './years';
 
 export type RarityWord = 'Very common' | 'Common' | 'Less common' | 'Scarce' | 'Rare';
 

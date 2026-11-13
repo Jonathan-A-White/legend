@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import type { Item } from '../../src/data/db';
 import type { KeyDateSeries, Mint, Mintages, QuarterDesign } from '../../src/data/us';
 import { findRow, keyDateFor, keyDateStruck, noRowReason, placeInSeries, rarityWord, struckSentence } from '../../src/rarity';
-import { matchDesign } from '../../src/quarters/match';
+import { matchDesign } from '../../src/data/quarterDesign';
 
 const table = JSON.parse(readFileSync('public/data/us/mintages.json', 'utf8')) as Mintages;
 const quarters = JSON.parse(readFileSync('public/data/us/quarters.json', 'utf8')) as QuarterDesign[];

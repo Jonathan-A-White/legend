@@ -2,10 +2,10 @@
 // (rarityWords, handed to it as a fact so it never has to guess). Pure: the tables are passed in.
 import type { Item, ItemRarity } from '../data/db';
 import type { KeyDate, KeyDateSeries, Mint, Mintages, QuarterDesign } from '../data/us';
-import { needsLook } from '../learn/years';
-import { matchDesign } from '../quarters/match';
+import { matchDesign } from '../data/quarterDesign';
 import { hasRarity, wordText } from '../services/rarity';
 import { findRow, keyDateFor, placeInSeries, rarityWord, struckSentence, type FoundRow, type Place, type RarityWord } from './rarity';
+import { needsLook } from './years';
 
 /** The four US files the rarity line reads. */
 export interface RarityTables {

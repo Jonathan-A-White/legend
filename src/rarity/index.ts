@@ -3,4 +3,5 @@ export type { FoundRow, NoRowReason, Place, PlaceVerdict, RarityWord } from './r
 export { RarityLine } from './RarityLine';
 export { Strip } from './Strip';
 export { estimateStruck, rarityWords, tableLine } from './words';
+export { keyDateMatches, needsLook, seriesOf } from './years';
 export type { RarityTables, TableLine } from './words';

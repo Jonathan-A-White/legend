@@ -3,9 +3,9 @@
 import { useMemo } from 'react';
 import { loadQuarters } from '../data/us';
 import { useAskCount, useItems } from '../data/repositories';
+import { useLoaded } from '../ui/useLoaded';
 import { Page } from './Page';
 import { monthsSince, skillsOf } from './path';
-import { useLoaded } from './useLoaded';
 
 const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const SHOWN_MONTHS = 12;

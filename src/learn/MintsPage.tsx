@@ -3,10 +3,10 @@
 import { useMemo } from 'react';
 import { loadMintPlacement, loadMints } from '../data/us';
 import { useItems, useThumbs } from '../data/repositories';
+import { useLoaded } from '../ui/useLoaded';
 import { MarkDiagram } from './MarkDiagram';
 import { mintOf, yearsText } from './mints';
 import { CoinLinks, Failed, Page } from './Page';
-import { useLoaded } from './useLoaded';
 
 export function MintsPage() {
   const mints = useLoaded(loadMints);

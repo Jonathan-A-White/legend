@@ -6,12 +6,12 @@
 import { useState } from 'react';
 import type { Item } from '../data/db';
 import { loadKeyDates, loadMintages, loadMints, loadQuarters } from '../data/us';
-import { needsLook } from '../learn/years';
-import { useLoaded } from '../learn/useLoaded';
+import { useLoaded } from '../ui/useLoaded';
 import { noRowReason, seriesPool, struckSentence, type NoRowReason } from './rarity';
 import { Strip } from './Strip';
 import { TutorRarity } from './TutorRarity';
 import { tableLine } from './words';
+import { needsLook } from './years';
 
 const HONESTY =
   "Legend's word is about how many the Mint made, which is reported. How many are left, and in what condition, is not known: coins are spent, lost and melted.";
