@@ -378,9 +378,13 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
   });
 
   Scenario('a network failure retries and the item stays pending', ({ Given, When, And, Then }) => {
+    // The retry is held at its send until the step has seen the item waiting: the backoff is only 30 ms of real clock,
+    // and a host far over its cores can let it pass before the read.
+    const seenWaiting = deferred<void>();
     Given('the camera is open on Add and the first send fails on the network', async () => {
       factory.onSend(async (_params, n) => {
         if (n === 1) throw new TypeError('Failed to fetch');
+        if (n === 2) await seenWaiting.promise;
         return `direct:tx${n}`;
       });
       await openAdd();
@@ -390,6 +394,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     Then('the item stays pending and the send is tried again after a pause and goes through', async () => {
       await waitFor(() => expect(factory.sent).toHaveLength(1));
       expect(await onlyItem()).toMatchObject({ status: 'pending', reading: { state: 'waiting', txid: null } });
+      seenWaiting.resolve();
       await waitFor(() => expect(factory.sent).toHaveLength(2));
       await waitFor(async () => expect((await onlyItem()).reading).toMatchObject({ state: 'sent', txid: 'direct:tx2' }));
     });
