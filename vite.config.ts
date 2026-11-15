@@ -2,12 +2,11 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
-import { readFileSync } from 'node:fs';
 import { pwaManifest } from './pwa-manifest';
 import { injectManifestOptions } from './pwa-precache';
-import { buildVersion, shortCommit } from './build-version';
+import { buildVersion, packageVersion, shortCommit } from './build-version';
 
-const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
+const version = packageVersion();
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -28,8 +27,8 @@ export default defineConfig({
     }),
   ],
   define: {
-    __APP_VERSION__: JSON.stringify(buildVersion(pkg.version, new Date(), shortCommit())),
+    __APP_VERSION__: JSON.stringify(buildVersion(version, new Date(), shortCommit())),
     // The plain version number (what changelog.json's versions are compared with), without the build's time and commit.
-    __APP_SEMVER__: JSON.stringify(pkg.version),
+    __APP_SEMVER__: JSON.stringify(version),
   },
 });

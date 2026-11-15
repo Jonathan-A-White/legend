@@ -1,17 +1,16 @@
 import { configDefaults, defineConfig } from 'vitest/config';
 import { timingFilter, vitestTimeouts } from 'pwa-kit/test-preset';
 import react from '@vitejs/plugin-react';
-import { readFileSync } from 'fs';
-import { buildVersion, shortCommit } from './build-version';
+import { buildVersion, packageVersion, shortCommit } from './build-version';
 
-const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
+const version = packageVersion();
 
 export default defineConfig({
   plugins: [react()],
   define: {
-    __APP_VERSION__: JSON.stringify(buildVersion(pkg.version, new Date(), shortCommit())),
+    __APP_VERSION__: JSON.stringify(buildVersion(version, new Date(), shortCommit())),
     // The plain version number (what changelog.json's versions are compared with), without the build's time and commit.
-    __APP_SEMVER__: JSON.stringify(pkg.version),
+    __APP_SEMVER__: JSON.stringify(version),
   },
   test: {
     globals: true,
