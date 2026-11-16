@@ -58,9 +58,10 @@ const TAB_FACE: Record<Tab, { label: string; icon: ReactElement }> = {
 export function BottomBar() {
   const active = tabOf(routeOf(useAddress()));
   return (
-    // The floor under the nav: Android Chrome with three-button navigation draws its 48 px bar over the page's foot and reports
-    // no inset for it (mw-jpxyd3; the same floor as Lampas's --lp-bar-inset), so the page keeps that room clear itself.
-    <div className="shrink-0 bg-surface pb-[max(env(safe-area-inset-bottom),48px)]">
+    // The floor under the nav: Android Chrome with three-button navigation draws its 48 px bar over the installed app's foot and
+    // reports no inset for it (mw-jpxyd3), so the page keeps that room clear itself; --lg-bar-floor is 48 px only where a bar can
+    // be drawn over the page and 0 in a browser tab (src/nav/barFloor.ts, mw-6ww.148.51).
+    <div className="shrink-0 bg-surface pb-[max(env(safe-area-inset-bottom),var(--lg-bar-floor))]">
       <nav aria-label="Screens" className="select-none border-t border-line">
         <ul className="flex">
           {TABS.map((tab) => {

@@ -27,6 +27,18 @@
   --lg-bad-fg: #1f0b07;
 }
 
+/* The floor under the bottom bar: Android Chrome with three-button navigation draws its 48 px bar over the foot of the installed app and
+ * reports no inset for it (mw-jpxyd3), so there the bar pads by 48 px. In a browser tab, or a window shorter than the screen, nothing is
+ * drawn over the page and that floor was an empty band, so it is 0. src/nav/barFloor.ts reads which it is and sets data-bar-overlap on
+ * <html> (mw-6ww.148.51): a media query cannot tell, as it does not know the window against the screen nor whether an inset is 0. */
+:root {
+  --lg-bar-floor: 0px;
+}
+
+:root[data-bar-overlap] {
+  --lg-bar-floor: 48px;
+}
+
 /* voice-kit's Composer (the tutor box, Tell the maker) wears the app's colours. */
 :root {
   --bk-composer-surface: var(--lg-surface);

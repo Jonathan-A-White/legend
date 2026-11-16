@@ -66,6 +66,22 @@ const SCREENS: Array<[string, string]> = [
   ['Home', '#/'],
 ];
 
+/** The page is the installed app (display-mode: standalone), which draws edge to edge under the system bar. Chromium cannot emulate the
+ * display-mode media feature (Emulation.setEmulatedMedia ignores it), so matchMedia answers for it, as the page reads it (src/nav/barFloor.ts). */
+async function installed(page: Page): Promise<void> {
+  await page.addInitScript(() => {
+    const real = window.matchMedia.bind(window);
+    window.matchMedia = (query: string) => {
+      const m = /^\(display-mode:\s*([\w-]+)\)$/.exec(query);
+      if (!m) return real(query);
+      const list = real('all');
+      Object.defineProperty(list, 'matches', { value: m[1] === 'standalone' });
+      Object.defineProperty(list, 'media', { value: query });
+      return list;
+    };
+  });
+}
+
 /** The page is told about the system bar through the safe-area inset (what Chrome does when it does report it). */
 async function reportInset(page: Page, bottom: number): Promise<void> {
   const cdp = await page.context().newCDPSession(page);
@@ -75,6 +91,7 @@ async function reportInset(page: Page, bottom: number): Promise<void> {
 for (const reported of [0, SYSTEM_BAR]) {
   test(`the Screens bar is wholly above the phone navigation bar on every screen that shows it, with ${reported} px of bottom inset reported`, async ({ page }) => {
     await windowFor(page);
+    await installed(page);
     if (reported > 0) await reportInset(page, reported);
     await seed(page);
     for (const [name, hash] of SCREENS) {
@@ -87,3 +104,19 @@ for (const reported of [0, SYSTEM_BAR]) {
     if (reported === 0) await shot(page, 'bottom-bar');
   });
 }
+
+// A browser tab keeps its own bars outside the page, so nothing is drawn over the page's foot: the bar stands on the window's foot with
+// no empty band under its labels (mw-6ww.148.51). Here the display mode is 'browser' (headless's own); the window-against-screen reading is held by tests/unit/bar-floor.test.ts.
+test('in a browser tab with no inset reported, the Screens bar is only its own height and ends at the window foot', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await seed(page);
+  for (const [name, hash] of SCREENS) {
+    await page.goto(`/${hash}`);
+    const nav = page.getByRole('navigation', { name: 'Screens' });
+    await expect(nav).toBeVisible();
+    const box = (await nav.boundingBox())!;
+    expect(844 - (box.y + box.height), `${name}: the empty band (px) under the bar`).toBeLessThanOrEqual(1);
+  }
+  await page.goto('/#/collection');
+  await shot(page, 'bottom-bar-tab');
+});

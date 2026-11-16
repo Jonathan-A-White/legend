@@ -16,7 +16,7 @@ A module is a folder under `src/` with one job and one entry; import that.
 | services | What leaves the phone: `grist.ts`, `feedback.ts`, tutor `ask.ts`, licence, device key, app update, photo reader `nameItem.ts` (worker: `sendOffThread.ts`), `nameQueue.ts` (one at a time), `itemAnswer.ts`, `value.ts`, `rarity.ts` | `src/services/` | built |
 | events | The typed bus screens use; every kind is in `docs/events.md` | `src/events/bus.ts` | built |
 | settings | The registry, the rows, the screen, theme, text size | `src/settings/registry.ts`, `rows.ts`, `SettingsScreen.tsx` | built |
-| nav | Hash routes, the bottom bar, reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `BottomBar.tsx` | built |
+| nav | Hash routes, the bottom bar (48 px floor only where the system bar can cover it), reopen where they left | `src/nav/route.ts`, `lastRoute.ts`, `barFloor.ts`, `BottomBar.tsx` | built |
 | ui | Shared: scroll guard, build stamp, `HoldBar`, `legendComposer.ts` (Composer settings), `useSheetBack`, `useObjectUrl`, `useLoaded` | `src/ui/` | built |
 | globe | The Globe (`#/globe`), Country sheet (`#/country/<cc>`): `render.ts` draws, `controller.ts` loops, `pick.ts` picks | `src/globe/index.ts` | built |
 | quarters | Quarters (`#/quarters`): the US map lit by his quarters, State sheet, Checklist; `match.ts` groups items by design (`data/quarterDesign.ts`), `summary.ts` counts, `topo.ts` draws | `src/quarters/index.ts` | built |

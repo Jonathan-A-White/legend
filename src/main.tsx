@@ -10,8 +10,11 @@ import { startAppUpdates } from 'pwa-kit/app-update';
 import { fetchChangelog, hasNewsSince } from 'pwa-kit/whats-new';
 import { APP_SEMVER } from './config';
 import { installScrollGuard } from './ui/scrollGuard';
+import { watchBarFloor } from './nav/barFloor';
 
 installScrollGuard();
+// Whether the phone's own navigation bar can cover the foot of the page, read before the first paint of the bottom bar (src/nav/barFloor.ts).
+watchBarFloor();
 // A bare open reopens where they left off, before the first render reads the address.
 restoreLastRoute();
 
