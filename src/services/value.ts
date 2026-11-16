@@ -4,14 +4,15 @@
 import Ajv from 'ajv';
 import answerSchema from '../../schemas/item-value-answer-1.0.schema.json';
 import type { Confidence, Item, ItemValue } from '../data/db';
+import type { MetalPrices } from './metalPrice';
 
 export const VALUE_KIND = 'item-value';
-/** Sent at 1.1 (an Other and its subtype); a 1.0 answer is the same shape and is still read. */
-export const VALUE_VERSION = '1.1';
+/** Sent at 1.2 (1.1: an Other and its subtype; 1.2: the day's silver and gold price); a 1.0 answer is the same shape and is still read. */
+export const VALUE_VERSION = '1.2';
 /** How long a value is kept before it is asked for again. */
 export const VALUE_REFRESH_MS = 30 * 24 * 60 * 60 * 1000;
 
-/** What the grind is sent (schemas/item-value-input-1.1.schema.json). */
+/** What the grind is sent (schemas/item-value-input-1.2.schema.json). */
 export interface ValueInput {
   kind: 'coin' | 'note' | 'other';
   /** what an Other piece is ('Subway token'); null for a coin or a banknote */
@@ -29,6 +30,8 @@ export interface ValueInput {
   gradeNotes: string;
   /** the local date, 'YYYY-MM-DD' */
   today: string;
+  /** the day's silver and gold price and the day it is from (src/services/metalPrice.ts); null when the app has none, and the grind says it uses its own estimate */
+  metalPrices: MetalPrices | null;
 }
 
 /** One answer of the grind (schemas/item-value-answer-1.0.schema.json; 1.1 answers the same shape). An Other piece the grind cannot
@@ -51,7 +54,7 @@ export const isoDay = (at: number): string => {
 
 const clipText = (text: string | null | undefined, max: number): string | null => (text?.trim() ? text.trim().slice(0, max) : null);
 
-export function valueInput(item: Item, now: number): ValueInput {
+export function valueInput(item: Item, now: number, metalPrices: MetalPrices | null): ValueInput {
   return {
     kind: item.kind,
     subtype: item.kind === 'other' ? clipText(item.subtype, 80) : null,
@@ -67,6 +70,7 @@ export function valueInput(item: Item, now: number): ValueInput {
     gradeGuess: item.gradeGuess,
     gradeNotes: item.gradeNotes,
     today: isoDay(now),
+    metalPrices,
   };
 }
 

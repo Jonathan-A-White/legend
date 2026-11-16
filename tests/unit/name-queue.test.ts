@@ -8,6 +8,7 @@ import { db } from '../../src/data/db';
 import { addItem, addItemWithPhotos, getItem, getValue, updateItem } from '../../src/data/repositories';
 import { writeSetting } from '../../src/settings/registry';
 import { setGristPort } from '../../src/services/nameItem';
+import { setMetalPriceSource } from '../../src/services/metalPrice';
 import { nameQueue } from '../../src/services/nameQueue';
 import { quarterAnswer } from '../support/coin-answers';
 import { answered, deferred, fakeGrist, refused, type FakeGrist } from '../support/fake-grist';
@@ -137,8 +138,24 @@ describe('the name queue asks for values', () => {
     await settled(item.id, (reading) => reading === null);
     await valueKept(item.id);
     expect(factory.sent.map((p) => p.kind)).toEqual(['coin-from-photos', 'item-value']);
-    expect(factory.sentOf('item-value')[0]).toMatchObject({ v: '1.1', photos: [] });
+    expect(factory.sentOf('item-value')[0]).toMatchObject({ v: '1.2', photos: [] });
     expect(await getValue(item.id)).toMatchObject({ low: 1, high: 3, forYear: 1944, forGrade: 'AU' });
+  });
+
+  it('gives the appraiser the day\'s silver and gold price with its date, or null when none could be had', async () => {
+    answers();
+    const prices = { silverUsdOz: 31, goldUsdOz: 2600, asOf: '2026-11-16' };
+    setMetalPriceSource(async () => prices);
+    const first = await addItem({ kind: 'coin', status: 'confirmed', denomination: 'Quarter dollar', year: 1964 });
+    nameQueue.start();
+    await valueKept(first.id);
+    expect(factory.sentOf('item-value')[0].input).toMatchObject({ metalPrices: prices });
+    nameQueue.stop();
+    setMetalPriceSource(async () => null);
+    const second = await addItem({ kind: 'coin', status: 'confirmed', denomination: 'Dime', year: 1950 });
+    nameQueue.start();
+    await valueKept(second.id);
+    expect(factory.sentOf('item-value')[1].input).toMatchObject({ metalPrices: null });
   });
 
   it('sends no value request while Show values is off, and sends it once it is turned on', async () => {

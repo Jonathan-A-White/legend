@@ -91,7 +91,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     When('he opens the quarter', openQuarter);
     Then("one item-value grist was sent with the quarter's facts", async () => {
       await waitFor(() => expect(valueSends()).toHaveLength(1));
-      expect(valueSends()[0]).toMatchObject({ app: 'legend', kind: 'item-value', v: '1.1', photos: [] });
+      expect(valueSends()[0]).toMatchObject({ app: 'legend', kind: 'item-value', v: '1.2', photos: [] });
       expect(valueSends()[0].input).toMatchObject({ kind: 'coin', denomination: 'Quarter dollar', year: 1964, mintMark: 'D', series: 'Washington quarter', material: '90% silver', gradeGuess: 'VF' });
     });
     And('the quarter says "About $1 to $3 · rough estimate"', async () => {
@@ -233,7 +233,7 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     When('he opens the token', () => open(`#/item/${token.id}`, 'Item'));
     Then('one item-value grist was sent as an Other with the subtype Subway token', async () => {
       await waitFor(() => expect(valueSends()).toHaveLength(1));
-      expect(valueSends()[0]).toMatchObject({ kind: 'item-value', v: '1.1', photos: [] });
+      expect(valueSends()[0]).toMatchObject({ kind: 'item-value', v: '1.2', photos: [] });
       expect(valueSends()[0].input).toMatchObject({ kind: 'other', subtype: 'Subway token', denomination: 'Fare token', year: 1986 });
     });
     And('the token says "About $1 to $40 · a guess · not counted in the total"', async () => {
