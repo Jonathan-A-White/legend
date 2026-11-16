@@ -26,7 +26,7 @@
     "currency": "USD",
     "low": { "between": [5, 6] },
     "high": { "between": [5.5, 8] },
-    "basis": { "matches": "(?=.*\\b31(\\.00?)?\\b)(?=.*(2026-11-14|14 November|November 14|Nov 14|14 Nov))" },
+    "basis": { "matches": "(\\b31(\\.00?)?\\b.*(2026-11-14|14 November|November 14|Nov 14|14 Nov))|((2026-11-14|14 November|November 14|Nov 14|14 Nov).*\\b31(\\.00?)?\\b)" },
     "asOf": "2026-11-16"
   }
 }
