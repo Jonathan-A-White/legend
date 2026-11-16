@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.79
+_2026-11-16_
+- Fixed: In a browser tab the bottom bar no longer leaves an empty strip under its labels.
+
 ## 0.1.70
 _2026-11-12_
 - New: Add many at once is now a button on the Collection and on each coin folder.

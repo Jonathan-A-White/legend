@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.79",
+    "date": "2026-11-16",
+    "story": "mw-6ww.148.51",
+    "kind": "fixed",
+    "text": "In a browser tab the bottom bar no longer leaves an empty strip under its labels."
+  },
+  {
     "version": "0.1.70",
     "date": "2026-11-12",
     "story": "mw-tmsafpc.7",
