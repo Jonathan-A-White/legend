@@ -1,0 +1,32 @@
+{
+  "description": "A circulated 1964 Washington quarter, 90% silver, priced from the silver price the app hands the appraiser: 31 dollars an ounce as of 2026-11-14 (a made-up price far from the 50 the appraiser guesses on its own, so a guess shows). Melt is 0.1808 troy oz (US Mint figure: 0.18084 oz in a 6.25 g coin of 90% silver) times 31, about 5.60 dollars, so the low is at the melt (5.50 to 5.75), the high a little over, and the basis names the price and its day.",
+  "schemaVersion": "1.2",
+  "request": {
+    "kind": "coin",
+    "subtype": null,
+    "country": "US",
+    "currency": "USD",
+    "denomination": "Quarter dollar",
+    "faceValue": 0.25,
+    "year": 1964,
+    "mintMark": "D",
+    "series": "Washington quarter",
+    "design": "Washington portrait on the front, an eagle with spread wings on the back",
+    "material": "90% silver, 10% copper",
+    "gradeGuess": "VF",
+    "gradeNotes": "Even wear on the high points of the hair, a guess from the photo.",
+    "today": "2026-11-16",
+    "metalPrices": {
+      "silverUsdOz": 31,
+      "goldUsdOz": 2600,
+      "asOf": "2026-11-14"
+    }
+  },
+  "expect": {
+    "currency": "USD",
+    "low": { "between": [5, 6] },
+    "high": { "between": [5.5, 8] },
+    "basis": { "matches": "(?=.*\\b31(\\.00?)?\\b)(?=.*(2026-11-14|14 November|November 14|Nov 14|14 Nov))" },
+    "asOf": "2026-11-16"
+  }
+}

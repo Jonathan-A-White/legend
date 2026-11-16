@@ -1,0 +1,28 @@
+{
+  "description": "The same 1964 Washington quarter when the app has no price for silver (metalPrices null, the fetch failed and none was kept): the appraiser prices the melt, 0.1808 troy oz of silver, at its own estimate and says plainly in the basis that it is an estimate. The range holds for silver from 18 to 110 dollars an ounce: a low from 3.25 to 20, a high to 35.",
+  "schemaVersion": "1.2",
+  "request": {
+    "kind": "coin",
+    "subtype": null,
+    "country": "US",
+    "currency": "USD",
+    "denomination": "Quarter dollar",
+    "faceValue": 0.25,
+    "year": 1964,
+    "mintMark": "D",
+    "series": "Washington quarter",
+    "design": "Washington portrait on the front, an eagle with spread wings on the back",
+    "material": "90% silver, 10% copper",
+    "gradeGuess": "VF",
+    "gradeNotes": "Even wear on the high points of the hair, a guess from the photo.",
+    "today": "2026-11-16",
+    "metalPrices": null
+  },
+  "expect": {
+    "currency": "USD",
+    "low": { "between": [3.25, 20] },
+    "high": { "between": [3.5, 35] },
+    "basis": { "matches": "[Ee]stimate" },
+    "asOf": "2026-11-16"
+  }
+}

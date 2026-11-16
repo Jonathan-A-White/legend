@@ -244,7 +244,9 @@ describe('the appraiser and the tutor have their Other scenarios', () => {
   it('keeps the coin scenarios under 1.0 and still valid there', () => {
     const coins = load('item-value').filter((e) => e.request.kind === 'coin');
     expect(coins.length).toBeGreaterThanOrEqual(2);
-    expect(coins.every((e) => e.schemaVersion === '1.0')).toBe(true);
+    // a scenario that hands the appraiser a price (metalPrices, mw-cuya4td) is 1.2; the others stay under 1.0
+    expect(coins.filter((e) => !('metalPrices' in e.request)).every((e) => e.schemaVersion === '1.0')).toBe(true);
+    expect(coins.filter((e) => 'metalPrices' in e.request).every((e) => e.schemaVersion === '1.2')).toBe(true);
   });
 
   it('asks the tutor about a token, with a subtype and the others counted', () => {
@@ -399,6 +401,52 @@ describe('the item-value scenarios give a price as a range', () => {
     expect(grind).toMatch(/troy/i);
     expect(grind).toMatch(/price of silver (on|for|near) `today`/i);
     expect(grind).toMatch(/`basis`.*(price|ounce)/is);
+  });
+});
+
+// mw-cuya4td: the appraiser guessed silver at about 50 dollars an ounce whatever the date. The app now fetches the day's silver and
+// gold price (src/services/metalPrice.ts) and sends it as `metalPrices` at version 1.2: the grind prices melt from it, names it, and
+// says plainly when it has none and uses its own estimate.
+describe('the appraiser prices melt from the price it is given', () => {
+  const dir = 'grinds/examples/item-value';
+  const load = (f: string) => readJson(`${dir}/${f}`) as unknown as GrindExample;
+  const grind = () => readFileSync('grinds/item-value.md', 'utf8').replace(/\s+/g, ' ');
+
+  it('is a version of the grind with its own input schema', () => {
+    expect(readJson('grinds/item-value.json').versions).toContain('1.2');
+    expect(existsSync('schemas/item-value-input-1.2.schema.json')).toBe(true);
+  });
+
+  it('teaches the appraiser to use the given price and date, to name both in basis, and to say when it uses its own estimate', () => {
+    const text = grind();
+    expect(text).toMatch(/`metalPrices`/);
+    expect(text).toMatch(/silverUsdOz/);
+    expect(text).toMatch(/goldUsdOz/);
+    expect(text).toMatch(/use its `silverUsdOz`[^.]*never your own figure/i);
+    expect(text).toMatch(/name both the price per ounce you were given and the day it is from/i);
+    expect(text).toMatch(/`metalPrices` is `null`[^.]*own (best )?estimate|own estimate[^.]*`null`/i);
+    expect(text, 'no sample sentence carries a price a model would copy').not.toMatch(/at a silver price of about N dollars/);
+  });
+
+  it('prices a 1964 quarter from a fed-in silver price that is not the model\'s own guess, and names the price and its date', () => {
+    const e = load('washington-quarter-1964-silver-fed-price.json');
+    const given = (e.request.metalPrices as { silverUsdOz: number; asOf: string });
+    expect(e.schemaVersion).toBe('1.2');
+    expect(given.silverUsdOz, 'far from the ~50 the appraiser guessed on 2026-11-12').toBeLessThan(40);
+    const melt = Math.round(0.1808 * given.silverUsdOz * 4) / 4;
+    expect(checkExpect({ low: e.expect.low }, { low: melt }), `low holds the melt ${melt}`).toEqual([]);
+    expect(checkExpect({ high: e.expect.high }, { high: melt + 1 }), 'high allows a little over').toEqual([]);
+    expect(checkExpect({ high: e.expect.high }, { high: 9 }), 'a guess at 50 an ounce (9) is refused').not.toEqual([]);
+    expect(checkExpect({ basis: e.expect.basis }, { basis: 'Silver content, about 0.18 oz, at 31 dollars an ounce on 14 November 2026.' })).toEqual([]);
+    expect(checkExpect({ basis: e.expect.basis }, { basis: 'Silver content, about 0.18 oz, at about 50 dollars an ounce.' }), 'a basis that names no given price').not.toEqual([]);
+  });
+
+  it('answers plainly that it is using its own estimate when no price is given', () => {
+    const e = load('washington-quarter-1964-silver-no-price.json');
+    expect(e.schemaVersion).toBe('1.2');
+    expect(e.request.metalPrices).toBeNull();
+    expect(checkExpect({ basis: e.expect.basis }, { basis: 'Silver content, about 0.18 oz, at my own estimate of the silver price, about 50 dollars an ounce.' })).toEqual([]);
+    expect(checkExpect({ basis: e.expect.basis }, { basis: 'Silver content, about 0.18 oz, at 50 dollars an ounce.' })).not.toEqual([]);
   });
 });
 
