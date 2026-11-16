@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.80
+_2026-11-16_
+- Fixed: The rough worth of a silver coin now follows today's silver price, and says which price and day it used.
+
 ## 0.1.79
 _2026-11-16_
 - Fixed: In a browser tab the bottom bar no longer leaves an empty strip under its labels.
