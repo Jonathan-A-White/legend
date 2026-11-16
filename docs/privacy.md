@@ -20,6 +20,10 @@ Nothing is sent anywhere unless he asks for it, and only these things ever leave
 - **A rough worth.** Once an item is named, its facts and grade guess (never its photos, notes or tags) go to the mill to ask
   what it might roughly be worth, once, and again after 30 days or when its grade guess or year changes (`src/services/value.ts`).
   A coin he is only looking at asks at once. Turning Show values off in Settings, Collection, stops the asking and hides the figures.
+- **Today's silver and gold price.** Once a day, when a worth is about to be asked for, the app reads the day's silver and gold price
+  from xaus.com's free price page (`src/services/metalPrice.ts`) and sends it along with the item's facts, so the worth of a silver coin
+  follows the market. The request is a plain GET with no cookies, no key and nothing of his in it (xaus.com sees the phone's address, as any
+  site does); the price is kept on the phone with its date, and when the page cannot be reached the last one kept is used.
 - **How rare it is.** For a coin or note Legend's tables do not cover, tapping How rare is it? sends its facts (never photos,
   notes, tags or grade) to the mill, once per tap (`src/services/rarity.ts`). The estimate is kept on the item.
 - **A picture he shares.** The Share button on the globe and on an item makes one JPEG on the phone and hands it to the phone's
