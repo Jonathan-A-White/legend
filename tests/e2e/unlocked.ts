@@ -9,6 +9,8 @@ export const SEED_PUBLIC_KEY = '0279be667ef9dcbbac55a06295ce870b07029bfcdb2dce28
 
 export async function refuseChain(page: Page): Promise<void> {
   await page.route(/whatsonchain\.com/, (route) => route.abort());
+  // the day's silver and gold price (src/services/metalPrice.ts): no spec goes to the network for it; the appraiser is then sent null
+  await page.route(/xaus\.com/, (route) => route.abort());
 }
 
 export async function seedDeviceKey(page: Page, privateKeyHex: string = SEED_PRIVATE_KEY): Promise<void> {
