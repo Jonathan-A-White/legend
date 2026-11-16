@@ -102,9 +102,7 @@ Nothing from Numista, PCGS, NGC, ucoin or Colnect is copied in.
 
 Legend ships no price data and copies none: those catalogues forbid it. The rough worth on an item is a range the factory's
 model gives from the item's facts and grade guess (`grinds/item-value.json`), labelled a rough estimate for learning and never a
-price, kept with its date and asked for again after 30 days.
-
-The silver and gold price the factory's model prices melt from is read once a day from **[XAUS](https://xaus.com)**'s free
+price, kept with its date and asked for again after 30 days. The silver and gold price the factory's model prices melt from is read once a day from **[XAUS](https://xaus.com)**'s free
 spot-price API (`xaus.com/api/v1/spot`, no key; its terms ask only for fair use, caching and, where prices are quoted,
 credit). The prices are indicative mid-market rates, not tradable quotes. Used as published; changes: none. Only the request
 itself goes, with nothing of his in it (`src/services/metalPrice.ts`).
