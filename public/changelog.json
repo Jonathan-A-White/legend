@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.82",
+    "date": "2026-11-17",
+    "story": "mw-crygrun",
+    "kind": "fixed",
+    "text": "A foreign coin's worth in dollars now uses the day's real exchange rate, and the note says which rate and day."
+  },
+  {
     "version": "0.1.81",
     "date": "2026-11-17",
     "story": "mw-ljrsjsv",

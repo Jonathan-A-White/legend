@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.82
+_2026-11-17_
+- Fixed: A foreign coin's worth in dollars now uses the day's real exchange rate, and the note says which rate and day.
+
 ## 0.1.81
 _2026-11-17_
 - Fixed: the camera buttons no longer hide under the phone's own navigation bar.
