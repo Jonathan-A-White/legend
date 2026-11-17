@@ -167,7 +167,7 @@ export function CaptureScreen() {
 
       <div className="flex-1" />
 
-      <div className="relative z-10 space-y-3 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-4 pt-6 pb-[max(env(safe-area-inset-bottom),1rem)]">
+      <div className="relative z-10 space-y-3 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-4 pt-6 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
         {shots.length > 0 ? (
           <ul aria-label="Photos taken" className="flex gap-3">
             {shots.map((shot, i) => (

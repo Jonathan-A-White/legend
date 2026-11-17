@@ -220,7 +220,7 @@ export function Review({ fronts, backs, folderId, onRetakeBacks, onStartOver, on
         })}
       </ul>
 
-      <div className="relative z-10 space-y-3 border-t border-white/15 bg-black px-4 pt-3 pb-[max(env(safe-area-inset-bottom),1rem)]">
+      <div className="relative z-10 space-y-3 border-t border-white/15 bg-black px-4 pt-3 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
         {problem ? (
           <p role="alert" className="text-base text-amber-300">
             {problem}

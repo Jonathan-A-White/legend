@@ -178,7 +178,7 @@ function Shoot({ step, ghosts, onNext, onClose }: { step: 'fronts' | 'backs'; gh
 
       <div className="flex-1" />
 
-      <div className="relative z-10 space-y-3 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-4 pt-6 pb-[max(env(safe-area-inset-bottom),1rem)]">
+      <div className="relative z-10 space-y-3 bg-gradient-to-t from-black/90 via-black/70 to-transparent px-4 pt-6 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
         {taken ? (
           <div className="flex items-center justify-between gap-3">
             <button type="button" onClick={retake} className="min-h-14 flex-1 rounded-2xl border border-white/50 text-lg font-semibold">
@@ -235,7 +235,7 @@ function Flip({ onBacks, onClose }: { onBacks: () => void; onClose: () => void }
         </svg>
         <p className="text-3xl font-semibold leading-snug">{FLIP_TEXT}</p>
       </div>
-      <div className="relative z-10 px-4 pt-6 pb-[max(env(safe-area-inset-bottom),1rem)]">
+      <div className="relative z-10 px-4 pt-6 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
         <button type="button" onClick={onBacks} className="min-h-16 w-full rounded-2xl bg-accent text-2xl font-semibold text-accent-fg">
           Backs
         </button>
