@@ -14,6 +14,8 @@ const NOON = new Date(2026, 10, 16, 12).getTime();
 
 /** The part of xaus.com's /api/v1/spot answer the app reads (the live shape, checked 2026-11-16). */
 const spot = (extra: Record<string, unknown> = {}) => ({ spot_usd_oz: 3868.25, silver_usd_oz: 47.130001, price_as_of: '2026-11-16T14:23:25.020Z', updated_at: '2026-11-16T14:23:41.279Z', stale: false, ...extra });
+/** The same answer with the exchange table the full (not compact) /api/v1/spot carries: units of each currency to one US dollar. */
+const spotWithFx = (extra: Record<string, unknown> = {}) => spot({ fx_rates: { USD: 1, CAD: 1.42937, EUR: 0.908584, JPY: 154.2 }, fx_stale: false, ...extra });
 const reply = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { 'content-type': 'application/json' } });
 const fakeFetch = (...replies: Array<() => Response | Promise<Response>>) => {
   const calls: string[] = [];
@@ -40,6 +42,17 @@ describe('reading the spot answer', () => {
     expect(parseSpot(spot(), NOON)).toEqual({ silverUsdOz: 47.13, goldUsdOz: 3868.25, asOf: '2026-11-16' });
   });
 
+  // mw-crygrun: the appraiser converted a foreign piece with its own guess of the exchange rate; xaus.com's full answer carries the table
+  it('takes the exchange table too, units of each currency to one dollar, and leaves out a rate that is not one', () => {
+    const got = parseSpot(spotWithFx({ fx_rates: { USD: 1, CAD: 1.42937, XXX: 0, YYY: 'x', ZZ: 2, EUR: -1 } }), NOON);
+    expect(got).toEqual({ silverUsdOz: 47.13, goldUsdOz: 3868.25, asOf: '2026-11-16', fxUnitsPerUsd: { USD: 1, CAD: 1.42937 } });
+  });
+
+  it('takes no exchange table when xaus.com says it is stale or it is not a table', () => {
+    expect(parseSpot(spotWithFx({ fx_stale: true }), NOON)).toEqual({ silverUsdOz: 47.13, goldUsdOz: 3868.25, asOf: '2026-11-16' });
+    expect(parseSpot(spotWithFx({ fx_rates: 'oops' }), NOON)).toEqual({ silverUsdOz: 47.13, goldUsdOz: 3868.25, asOf: '2026-11-16' });
+  });
+
   it.each([
     ['no silver price', spot({ silver_usd_oz: undefined })],
     ['a silver price of zero', spot({ silver_usd_oz: 0 })],
@@ -58,11 +71,11 @@ describe('reading the spot answer', () => {
 });
 
 describe('the price is fetched once a day and kept with its date', () => {
-  it('fetches the compact spot answer from xaus.com and keeps it', async () => {
+  it('fetches the full spot answer (with the exchange table) from xaus.com and keeps it', async () => {
     const net = fakeFetch(() => reply(spot()));
     expect(await metalPricesFor(NOON, { fetch: net.fetch })).toEqual({ silverUsdOz: 47.13, goldUsdOz: 3868.25, asOf: '2026-11-16' });
     expect(net.calls).toEqual([METAL_PRICES_URL]);
-    expect(METAL_PRICES_URL).toBe('https://xaus.com/api/v1/spot?compact=1');
+    expect(METAL_PRICES_URL).toBe('https://xaus.com/api/v1/spot');
     expect(await getMeta('metalPrices')).toMatchObject({ silverUsdOz: 47.13, goldUsdOz: 3868.25, asOf: '2026-11-16' });
   });
 
@@ -122,7 +135,7 @@ describe('when the fetch fails', () => {
 describe('what the pricer is given', () => {
   const prices = { silverUsdOz: 31, goldUsdOz: 2600, asOf: '2026-11-16' };
   const ajv = new Ajv({ allErrors: true, strict: true });
-  const schema = JSON.parse(readFileSync('schemas/item-value-input-1.2.schema.json', 'utf8'));
+  const schema = JSON.parse(readFileSync('schemas/item-value-input-1.3.schema.json', 'utf8'));
   const validate = ajv.compile(schema);
 
   it('sends the price and its date with a 1964 silver quarter, to be priced from, not from the model\'s guess', () => {
@@ -138,9 +151,48 @@ describe('what the pricer is given', () => {
     expect(validate({ ...sent, metalPrices: { silverUsdOz: 31 } })).toBe(false);
   });
 
-  it('is the one request the app sends, at version 1.2', async () => {
+  it('is the one request the app sends, at version 1.3', async () => {
     const { VALUE_VERSION } = await import('../../src/services/value');
-    expect(VALUE_VERSION).toBe('1.2');
-    expect(JSON.parse(readFileSync('grinds/item-value.json', 'utf8')).versions).toContain('1.2');
+    expect(VALUE_VERSION).toBe('1.3');
+    expect(JSON.parse(readFileSync('grinds/item-value.json', 'utf8')).versions).toContain('1.3');
+  });
+
+  // mw-crygrun: a foreign piece is priced from the rate the app was given, with its day, never from the appraiser's own guess
+  describe('the exchange rate for a foreign piece', () => {
+    const market = { ...prices, fxUnitsPerUsd: { USD: 1, CAD: 1.42937, JPY: 154.2 } };
+    const dime = (extra: Partial<Item> = {}) => quarter({ country: 'CA', currency: 'CAD', denomination: 'Ten cents', faceValue: 0.1, year: 1967, mintMark: null, series: null, material: '80% silver', ...extra });
+
+    it('sends the dollars one unit of the piece\'s currency is worth, and the day', () => {
+      const sent = valueInput(dime(), new Date(2026, 10, 16, 9).getTime(), market);
+      expect(sent.fxRate).toEqual({ currency: 'CAD', usdPerUnit: 0.699609, asOf: '2026-11-16' });
+      expect(validate(sent), JSON.stringify(validate.errors)).toBe(true);
+    });
+
+    it('keeps the figures of a currency worth a hundredth of a cent', () => {
+      expect(valueInput(dime({ currency: 'JPY' }), NOON, market).fxRate).toEqual({ currency: 'JPY', usdPerUnit: 0.00648508, asOf: '2026-11-16' });
+    });
+
+    it.each([
+      ['a dollar piece', quarter(), market],
+      ['a piece with no currency', dime({ currency: null }), market],
+      ['a currency the table does not list', dime({ currency: 'XDR' }), market],
+      ['a price with no table', dime(), prices],
+      ['no price at all', dime(), null],
+    ])('sends null for %s', (_, item, given) => {
+      const sent = valueInput(item, NOON, given);
+      expect(sent.fxRate).toBeNull();
+      expect(validate(sent), JSON.stringify(validate.errors)).toBe(true);
+    });
+
+    it('does not send the whole table', () => {
+      expect(JSON.stringify(valueInput(dime(), NOON, market))).not.toMatch(/154\.2|fxUnitsPerUsd/);
+    });
+
+    it('keeps the table with the price, so a failed fetch later still has a rate with its own day', async () => {
+      const net = fakeFetch(() => reply(spotWithFx()), () => reply({ error: 'down' }, 503));
+      await metalPricesFor(NOON, { fetch: net.fetch });
+      const later = await metalPricesFor(NOON + DAY, { fetch: net.fetch });
+      expect(later).toEqual({ silverUsdOz: 47.13, goldUsdOz: 3868.25, asOf: '2026-11-16', fxUnitsPerUsd: { USD: 1, CAD: 1.42937, EUR: 0.908584, JPY: 154.2 } });
+    });
   });
 });

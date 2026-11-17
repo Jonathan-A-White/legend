@@ -138,7 +138,7 @@ describe('the name queue asks for values', () => {
     await settled(item.id, (reading) => reading === null);
     await valueKept(item.id);
     expect(factory.sent.map((p) => p.kind)).toEqual(['coin-from-photos', 'item-value']);
-    expect(factory.sentOf('item-value')[0]).toMatchObject({ v: '1.2', photos: [] });
+    expect(factory.sentOf('item-value')[0]).toMatchObject({ v: '1.3', photos: [] });
     expect(await getValue(item.id)).toMatchObject({ low: 1, high: 3, forYear: 1944, forGrade: 'AU' });
   });
 

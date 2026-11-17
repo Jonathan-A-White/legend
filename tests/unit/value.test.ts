@@ -59,7 +59,7 @@ describe('what is sent and kept', () => {
 
   it('dates the record when it was asked and remembers the year and grade it was for', () => {
     const record = valueRecord(item({ year: 1964, gradeGuess: 'XF' }), { low: 1, high: 3, currency: 'USD', basis: 'x', confidence: 'low', asOf: '2026-10-10' }, NOW);
-    expect(record).toMatchObject({ itemId: 'a', asOf: NOW, forYear: 1964, forGrade: 'XF', confidence: 'low', source: 'item-value 1.2' });
+    expect(record).toMatchObject({ itemId: 'a', asOf: NOW, forYear: 1964, forGrade: 'XF', confidence: 'low', source: 'item-value 1.3' });
   });
 });
 
@@ -81,11 +81,11 @@ describe('the words for a range', () => {
 
 const token = (extra: Partial<Item> = {}): Item =>
   item({ kind: 'other', subtype: 'Subway token', country: 'US', currency: null, denomination: 'Fare token', faceValue: null, year: 1986, mintMark: null, series: null, material: 'brass', gradeGuess: null, gradeNotes: '', ...extra });
-const validInput = new Ajv({ allErrors: true, strict: true }).compile(JSON.parse(readFileSync('schemas/item-value-input-1.2.schema.json', 'utf8')));
+const validInput = new Ajv({ allErrors: true, strict: true }).compile(JSON.parse(readFileSync('schemas/item-value-input-1.3.schema.json', 'utf8')));
 const validOldInput = new Ajv({ allErrors: true, strict: true }).compile(JSON.parse(readFileSync('schemas/item-value-input-1.0.schema.json', 'utf8')));
 
 describe('an Other piece', () => {
-  it('is sent as kind other with its subtype, and fits the 1.2 input schema', () => {
+  it('is sent as kind other with its subtype, and fits the 1.3 input schema', () => {
     const sent = valueInput(token(), NOW, null);
     expect(sent).toMatchObject({ kind: 'other', subtype: 'Subway token', denomination: 'Fare token', year: 1986, material: 'brass', gradeGuess: null });
     expect(validInput(sent), JSON.stringify(validInput.errors)).toBe(true);
@@ -104,6 +104,7 @@ describe('an Other piece', () => {
     const old: Partial<typeof sent> = { ...sent };
     delete old.subtype;
     delete old.metalPrices;
+    delete old.fxRate;
     expect(validOldInput(old), JSON.stringify(validOldInput.errors)).toBe(true);
   });
 
@@ -122,7 +123,7 @@ describe('an Other piece', () => {
     const wide = { low: 1, high: 40, currency: 'USD', basis: 'A common transit token is a few dollars or less; a rare old one more. Often not known.', confidence: 'low', asOf: '2026-10-10' } as const;
     expect(parseValueAnswer(wide)).toEqual(wide);
     const record = valueRecord(token(), wide, NOW);
-    expect(record).toMatchObject({ low: 1, high: 40, confidence: 'low', guess: true, forSubtype: 'Subway token', source: 'item-value 1.2' });
+    expect(record).toMatchObject({ low: 1, high: 40, confidence: 'low', guess: true, forSubtype: 'Subway token', source: 'item-value 1.3' });
     expect(valueRecord(item(), old, NOW)).toMatchObject({ guess: false });
   });
 });

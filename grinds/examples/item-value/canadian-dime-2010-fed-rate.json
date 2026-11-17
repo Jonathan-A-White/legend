@@ -1,0 +1,49 @@
+{
+  "description": "A circulated 2010 Canadian dime (ten cents, nickel-plated steel, worth its face value) with the app handing the appraiser the exchange rate: 0.5 US dollars to the Canadian dollar as of 2026-11-14 (a made-up rate far from the 0.70 to 0.75 the appraiser would guess on its own, so a guess shows). Ten Canadian cents at 0.5 is 0.05 US dollars, so the low is 0.05 (0.04 to 0.06), the high a little over, and the basis names the rate and its day.",
+  "schemaVersion": "1.3",
+  "request": {
+    "kind": "coin",
+    "subtype": null,
+    "country": "CA",
+    "currency": "CAD",
+    "denomination": "Ten cents",
+    "faceValue": 0.1,
+    "year": 2010,
+    "mintMark": null,
+    "series": "Canadian dime",
+    "design": "A sailing ship, the Bluenose, on the back and the Queen's portrait on the front",
+    "material": "Nickel-plated steel",
+    "gradeGuess": "VF",
+    "gradeNotes": "Light even wear, a guess from the photo.",
+    "today": "2026-11-16",
+    "metalPrices": {
+      "silverUsdOz": 31,
+      "goldUsdOz": 2600,
+      "asOf": "2026-11-14"
+    },
+    "fxRate": {
+      "currency": "CAD",
+      "usdPerUnit": 0.5,
+      "asOf": "2026-11-14"
+    }
+  },
+  "expect": {
+    "currency": "USD",
+    "low": {
+      "between": [
+        0.04,
+        0.06
+      ]
+    },
+    "high": {
+      "between": [
+        0.05,
+        0.15
+      ]
+    },
+    "basis": {
+      "matches": "(\\b0?\\.50?\\b.*(2026-11-14|14 November|November 14|Nov 14|14 Nov))|((2026-11-14|14 November|November 14|Nov 14|14 Nov).*\\b0?\\.50?\\b)"
+    },
+    "asOf": "2026-11-16"
+  }
+}

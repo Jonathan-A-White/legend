@@ -2,11 +2,11 @@
   "grind": 1,
   "app": "legend",
   "kind": "item-value",
-  "versions": ["1.0", "1.1", "1.2"],
+  "versions": ["1.0", "1.1", "1.2", "1.3"],
   "model": "sonnet",
   "effort": "low",
   "instructions": "grinds/item-value.md",
-  "inputSchema": "schemas/item-value-input-1.2.schema.json",
+  "inputSchema": "schemas/item-value-input-1.3.schema.json",
   "answerSchema": "schemas/item-value-answer-1.0.schema.json",
   "attachments": {
     "min": 0,

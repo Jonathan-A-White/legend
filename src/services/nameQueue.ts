@@ -8,7 +8,7 @@ import type { Item, Photo } from '../data/db';
 import { getItem, listItems, listPhotos, listReading, listValues, nameItem, putValue, setReading } from '../data/repositories';
 import { subscribe } from '../events/bus';
 import { readSetting } from '../settings/registry';
-import { currentMetalPrices, type MetalPrices } from './metalPrice';
+import { currentMetalPrices, type MarketPrices } from './metalPrice';
 import { mapAnswerToItem, itemChanges, nothingNamed, parseCoinAnswer } from './itemAnswer';
 import { VALUE_KIND, VALUE_VERSION, needsValue, parseValueAnswer, valueInput, valueKey, valueRecord } from './value';
 import { NO_PHOTO, TOOK_TOO_LONG, UNUSABLE_ANSWER, currentNameClient, notAnsweredWords, sendRefusalWords, unreadableWords, type NameClient, type NameInput } from './nameItem';
@@ -201,7 +201,7 @@ export class NameQueue {
     const now = Date.now();
     const values = new Map((await listValues()).map((v) => [v.itemId, v]));
     // the day's metal price is fetched (at most once a day) only when some item is about to be asked, then shared by the whole pass
-    let prices: Promise<MetalPrices | null> | undefined;
+    let prices: Promise<MarketPrices | null> | undefined;
     const metalPrices = () => (prices ??= currentMetalPrices(now));
     for (const item of await listItems({ scope: 'all' })) {
       if (this.stopped || !this.online || generation !== this.valueGeneration) return;
@@ -219,7 +219,7 @@ export class NameQueue {
   }
 
   /** Sends one value request; false when the queue should stop for now (a network failure, backing off). */
-  private async askValue(client: NameClient, item: Item, key: string, generation: number, metalPrices: MetalPrices | null): Promise<boolean> {
+  private async askValue(client: NameClient, item: Item, key: string, generation: number, metalPrices: MarketPrices | null): Promise<boolean> {
     try {
       const txid = await client.send({ grind: { kind: VALUE_KIND, v: VALUE_VERSION }, input: valueInput(item, Date.now(), metalPrices), photos: [], clientId: crypto.randomUUID() });
       if (generation !== this.valueGeneration) return false;

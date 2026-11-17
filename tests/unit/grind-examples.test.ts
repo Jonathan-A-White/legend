@@ -244,9 +244,10 @@ describe('the appraiser and the tutor have their Other scenarios', () => {
   it('keeps the coin scenarios under 1.0 and still valid there', () => {
     const coins = load('item-value').filter((e) => e.request.kind === 'coin');
     expect(coins.length).toBeGreaterThanOrEqual(2);
-    // a scenario that hands the appraiser a price (metalPrices, mw-cuya4td) is 1.2; the others stay under 1.0
+    // a scenario that hands the appraiser a price (metalPrices, mw-cuya4td) is 1.2, one that adds an exchange rate (fxRate, mw-crygrun) 1.3; the others stay under 1.0
     expect(coins.filter((e) => !('metalPrices' in e.request)).every((e) => e.schemaVersion === '1.0')).toBe(true);
-    expect(coins.filter((e) => 'metalPrices' in e.request).every((e) => e.schemaVersion === '1.2')).toBe(true);
+    expect(coins.filter((e) => 'metalPrices' in e.request && !('fxRate' in e.request)).every((e) => e.schemaVersion === '1.2')).toBe(true);
+    expect(coins.filter((e) => 'fxRate' in e.request).every((e) => e.schemaVersion === '1.3')).toBe(true);
   });
 
   it('asks the tutor about a token, with a subtype and the others counted', () => {
@@ -447,6 +448,51 @@ describe('the appraiser prices melt from the price it is given', () => {
     expect(e.request.metalPrices).toBeNull();
     expect(checkExpect({ basis: e.expect.basis }, { basis: 'Silver content, about 0.18 oz, at my own estimate of the silver price, about 50 dollars an ounce.' })).toEqual([]);
     expect(checkExpect({ basis: e.expect.basis }, { basis: 'Silver content, about 0.18 oz, at 50 dollars an ounce.' })).not.toEqual([]);
+  });
+});
+
+// mw-crygrun: a foreign piece was converted to dollars by the appraiser's own guess of the exchange rate, and silver or gold in an Other
+// was floored by its own price. The app now sends `fxRate` (version 1.3) from xaus.com's exchange table.
+describe('the appraiser converts a foreign piece at the rate it is given', () => {
+  const dir = 'grinds/examples/item-value';
+  const load = (f: string) => readJson(`${dir}/${f}`) as unknown as GrindExample;
+  const grind = () => readFileSync('grinds/item-value.md', 'utf8').replace(/\s+/g, ' ');
+
+  it('is a version of the grind with its own input schema', () => {
+    expect(readJson('grinds/item-value.json').versions).toContain('1.3');
+    expect(readJson('grinds/item-value.json').inputSchema).toBe('schemas/item-value-input-1.3.schema.json');
+    expect(existsSync('schemas/item-value-input-1.3.schema.json')).toBe(true);
+  });
+
+  it('teaches the appraiser to convert at the given rate, to name rate and day in basis, and to say when it has none', () => {
+    const text = grind();
+    expect(text).toMatch(/`fxRate`/);
+    expect(text).toMatch(/usdPerUnit/);
+    expect(text).toMatch(/use its `usdPerUnit`[^.]*never your own (figure|rate)/i);
+    expect(text).toMatch(/name both the rate you were given and the day it is from/i);
+    expect(text).not.toMatch(/Convert a foreign piece to dollars roughly/);
+    expect(text).toMatch(/`fxRate` is `null`[^.]*own (best )?estimate|own estimate[^.]*`fxRate`/i);
+  });
+
+  it('sends the metal price to an Other piece too, as the floor of silver or gold content', () => {
+    const text = grind();
+    expect(text).toMatch(/Silver or gold content sets a floor only if the material and a weight or size are given[^.]*`metalPrices`/);
+  });
+
+  it('converts a Canadian dime at a rate that is not the model\'s own guess, and names the rate and its day', () => {
+    const e = load('canadian-dime-2010-fed-rate.json');
+    const given = e.request.fxRate as { currency: string; usdPerUnit: number; asOf: string };
+    expect(e.schemaVersion).toBe('1.3');
+    expect(e.request.currency).toBe('CAD');
+    expect(given.currency).toBe('CAD');
+    expect(given.usdPerUnit, 'far from the 0.70 to 0.75 the appraiser would guess').toBeLessThan(0.6);
+    expect(e.expect.currency).toBe('USD');
+    const value = Math.round(0.1 * given.usdPerUnit * 100) / 100;
+    expect(checkExpect({ low: e.expect.low }, { low: value }), `low holds face value converted, ${value}`).toEqual([]);
+    expect(checkExpect({ low: e.expect.low }, { low: 0.07 }), 'a guess at 0.72 (0.07) is refused').not.toEqual([]);
+    expect(checkExpect({ basis: e.expect.basis }, { basis: 'Face value of ten Canadian cents, converted at 0.5 US dollars to the Canadian dollar on 14 November 2026.' })).toEqual([]);
+    expect(checkExpect({ basis: e.expect.basis }, { basis: 'Face value of ten Canadian cents, converted at 0.50 US dollars on 2026-11-14.' })).toEqual([]);
+    expect(checkExpect({ basis: e.expect.basis }, { basis: 'Face value of ten Canadian cents, converted at about 0.72 US dollars.' }), 'a basis that names no given rate').not.toEqual([]);
   });
 });
 
