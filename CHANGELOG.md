@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.81
+_2026-11-17_
+- Fixed: the camera buttons no longer hide under the phone's own navigation bar.
+
 ## 0.1.80
 _2026-11-16_
 - Fixed: The rough worth of a silver coin now follows today's silver price, and says which price and day it used.

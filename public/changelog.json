@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.81",
+    "date": "2026-11-17",
+    "story": "mw-ljrsjsv",
+    "kind": "fixed",
+    "text": "the camera buttons no longer hide under the phone's own navigation bar."
+  },
+  {
     "version": "0.1.80",
     "date": "2026-11-16",
     "story": "mw-cuya4td",
