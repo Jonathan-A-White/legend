@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.83",
+    "date": "2026-11-21",
+    "story": "mw-tmsafpc.23",
+    "kind": "fixed",
+    "text": "Add many at once now finds every coin laid out on a textured surface like leather, and small coins only get a hint, never a block."
+  },
+  {
     "version": "0.1.82",
     "date": "2026-11-17",
     "story": "mw-crygrun",

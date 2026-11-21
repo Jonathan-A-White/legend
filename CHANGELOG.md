@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.83
+_2026-11-21_
+- Fixed: Add many at once now finds every coin laid out on a textured surface like leather, and small coins only get a hint, never a block.
+
 ## 0.1.82
 _2026-11-17_
 - Fixed: A foreign coin's worth in dollars now uses the day's real exchange rate, and the note says which rate and day.
