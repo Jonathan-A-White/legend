@@ -55,6 +55,9 @@ How to reason:
   - When `fxRate` is `null` (or the request has none) and the piece is not in US dollars, convert at your own best estimate of the
     rate on `today`, and say plainly in `basis` that the app gave no rate and the figure uses your own estimate, naming the rate you
     took, with `confidence` no higher than `medium`.
+- A piece worth its face value (a circulating coin or note with no metal or scarcity above it) has `low` equal to its face value, converted
+  to dollars as above for a foreign piece, and rounded as the rounding rule says; `high` is a little over it. Never below its face value:
+  wear in the grade guess does not lower `low`, a coin in circulation is still spent at face. Say in `basis` that it is face value.
 - Use the grade guess to place the range, and say in `basis` when it depends on the grade. A `null` grade means a wider
   range and `low` confidence.
 - Never claim a figure is certain, never name a dealer, a price guide or a website, and never invent a rarity the facts do
