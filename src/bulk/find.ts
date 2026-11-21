@@ -32,6 +32,8 @@ const ROUND = 0.8; // blob area against its enclosing circle
 const TOO_BIG = 1.6; // blob area against the median coin's
 const FLOOR = 40; // colour distance (RGB) below which nothing counts as a coin, however Otsu splits noise
 const BORDER_INLIER = 40;
+const MOST = 0.99; // the share of a blob's pixels its roundness is judged on
+const OPEN = 0.01; // of the short side: foreground thinner than twice this (grain stuck to a rim, a thread) is taken off
 
 type Rgb = [number, number, number];
 
@@ -155,6 +157,42 @@ function otsu(hist: Uint32Array): number {
   return best;
 }
 
+/** Distance (3-4 chamfer, three units a pixel) from each pixel to the nearest pixel where `source` is 1; the image's edge is no source. */
+function chamfer(source: Uint8Array, width: number, height: number): Int32Array {
+  const FAR = 1 << 24;
+  const d = new Int32Array(width * height);
+  for (let i = 0; i < d.length; i++) d[i] = source[i] ? 0 : FAR;
+  const at = (x: number, y: number) => (x < 0 || y < 0 || x >= width || y >= height ? FAR : d[y * width + x]);
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const i = y * width + x;
+      d[i] = Math.min(d[i], at(x - 1, y) + 3, at(x, y - 1) + 3, at(x - 1, y - 1) + 4, at(x + 1, y - 1) + 4);
+    }
+  }
+  for (let y = height - 1; y >= 0; y--) {
+    for (let x = width - 1; x >= 0; x--) {
+      const i = y * width + x;
+      d[i] = Math.min(d[i], at(x + 1, y) + 3, at(x, y + 1) + 3, at(x + 1, y + 1) + 4, at(x - 1, y + 1) + 4);
+    }
+  }
+  return d;
+}
+
+/** Morphological opening with a disc of radius `r` pixels: what is thinner than 2r goes, discs wider than that stay as they were.
+ * Pixels past the image's edge count as foreground, so a coin cut off by the edge is not worn away there. */
+function open(mask: Uint8Array, width: number, height: number, r: number): Uint8Array {
+  if (r < 1) return mask;
+  const limit = 3 * r;
+  const gap = chamfer(mask.map((v) => 1 - v), width, height);
+  // the edge counts as foreground: a pixel's gap is only the distance to a background pixel inside the image
+  const core = new Uint8Array(mask.length);
+  for (let i = 0; i < mask.length; i++) core[i] = gap[i] > limit ? 1 : 0;
+  const reach = chamfer(core, width, height);
+  const out = new Uint8Array(mask.length);
+  for (let i = 0; i < mask.length; i++) out[i] = reach[i] <= limit ? 1 : 0;
+  return out;
+}
+
 /** Mark the pixels that are not background: further from the background than Otsu's threshold, holes filled. */
 function foreground(img: Pixels): Uint8Array {
   const { width, height, data } = img;
@@ -171,10 +209,11 @@ function foreground(img: Pixels): Uint8Array {
       hist[Math.min(255, Math.round(d * SCALE))]++;
     }
   }
+  const short = Math.min(width, height);
   const t = Math.max(FLOOR, (otsu(hist) + 0.5) / SCALE);
   const mask = new Uint8Array(width * height);
   for (let i = 0; i < mask.length; i++) mask[i] = dist[i] > t ? 1 : 0;
-  return fillHoles(mask, width, height);
+  return open(fillHoles(mask, width, height), width, height, Math.round(short * OPEN));
 }
 
 /** A silver coin on white has a face as pale as the sheet: everything the outside cannot reach is part of the blob. */
@@ -213,6 +252,8 @@ interface Blob {
   y: number;
   /** Radius of the circle that holds every pixel, centred on the centroid. */
   hold: number;
+  /** Radius of the circle that holds 99% of the pixels: a few grains stuck to the rim do not count against the blob's shape. */
+  most: number;
   minX: number;
   maxX: number;
   minY: number;
@@ -262,17 +303,22 @@ function labelBlobs(mask: Uint8Array, width: number, height: number): Blob[] {
     const cx = sx / pixels.length;
     const cy = sy / pixels.length;
     let far = 0;
+    const reach: number[] = [];
     for (const i of pixels) {
       const x = i % width;
       const y = (i - x) / width;
-      far = Math.max(far, Math.hypot(x + 0.5 - cx, y + 0.5 - cy) + 0.5);
+      const away = Math.hypot(x + 0.5 - cx, y + 0.5 - cy) + 0.5;
+      far = Math.max(far, away);
+      reach.push(away);
     }
-    blobs.push({ area: pixels.length, x: cx, y: cy, hold: far, minX, maxX, minY, maxY, pixels });
+    reach.sort((p, q) => p - q);
+    const most = reach[Math.min(reach.length - 1, Math.floor(reach.length * MOST))];
+    blobs.push({ area: pixels.length, x: cx, y: cy, hold: far, most, minX, maxX, minY, maxY, pixels });
   }
   return blobs;
 }
 
-const roundness = (b: Blob) => b.area / (Math.PI * b.hold * b.hold);
+const roundness = (b: Blob) => b.area / (Math.PI * b.most * b.most);
 
 /**
  * How many coins a blob is, when it is coins touching: the distance from each pixel to the blob's edge (3-4 chamfer),
