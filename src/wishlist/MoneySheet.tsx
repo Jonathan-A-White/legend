@@ -34,7 +34,7 @@ export function MoneySheet({ title, label, initial = '', extra, keepLabel, onKee
   return (
     <div role="dialog" aria-modal="true" aria-label={title} className="fixed inset-0 z-40 flex flex-col justify-end bg-black/50">
       <form
-        className="space-y-4 rounded-t-3xl bg-canvas px-4 pt-4 pb-[max(env(safe-area-inset-bottom),1rem)]"
+        className="space-y-4 rounded-t-3xl bg-canvas px-4 pt-4 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]"
         onSubmit={(e) => {
           e.preventDefault();
           void keep();

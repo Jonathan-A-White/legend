@@ -28,7 +28,7 @@ export function CountrySheet({ counts, chosen, flag, onChoose, onClose }: {
             Done
           </button>
         </div>
-        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(env(safe-area-inset-bottom),0.5rem)]">
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
           <button type="button" aria-pressed={chosen === null} onClick={() => onChoose(null)} className={`${option} ${chosen === null ? 'text-accent' : ''}`}>
             <span aria-hidden="true" className="w-8 text-center text-2xl">🌍</span>
             <span className="flex-1">All countries</span>

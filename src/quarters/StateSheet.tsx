@@ -21,7 +21,7 @@ export function StateSheet({ name, designs, owned, onClose }: { name: string; de
   return (
     <div className="fixed inset-0 z-30 flex flex-col justify-end">
       <button type="button" aria-label="Close" tabIndex={-1} onClick={onClose} className="absolute inset-0 bg-black/60" />
-      <section role="dialog" aria-modal="true" aria-label={name} className="relative max-h-[78dvh] overflow-y-auto rounded-t-2xl border-t border-line bg-canvas pb-[max(env(safe-area-inset-bottom),1rem)]">
+      <section role="dialog" aria-modal="true" aria-label={name} className="relative max-h-[78dvh] overflow-y-auto rounded-t-2xl border-t border-line bg-canvas pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
         <header className="sticky top-0 flex items-start gap-3 border-b border-line bg-canvas px-4 py-3">
           <div className="flex-1">
             <h2 className="text-2xl font-semibold text-accent">{name}</h2>

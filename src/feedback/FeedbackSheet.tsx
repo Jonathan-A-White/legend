@@ -189,7 +189,7 @@ export function FeedbackSheet({ screen, onClose }: { screen: string; onClose: ()
               onPicker={() => picker.current?.click()}
               disabled={phase !== 'editing'}
             />
-            <div className="shrink-0 border-t border-line px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
+            <div className="shrink-0 border-t border-line px-4 pt-3 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
               <button type="button" disabled={!ready} onClick={() => void send()} className="min-h-14 w-full rounded-2xl bg-accent text-xl font-semibold text-accent-fg disabled:opacity-50">
                 {phase === 'sending' ? 'Sending…' : 'Send'}
               </button>

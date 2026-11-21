@@ -84,7 +84,7 @@ export function PhotoViewer({ url, label, onClose }: { url: string; label: strin
           className="max-h-full max-w-full select-none object-contain"
         />
       </div>
-      <p className="px-4 pt-2 pb-[max(env(safe-area-inset-bottom),0.75rem)] text-center text-base text-white/70">Pinch to zoom, double-tap to zoom in and out</p>
+      <p className="px-4 pt-2 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))] text-center text-base text-white/70">Pinch to zoom, double-tap to zoom in and out</p>
     </div>
   );
 }

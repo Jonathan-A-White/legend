@@ -76,7 +76,7 @@ export function WishSheet({ item, onBack, onClose }: { item: Item; onBack: () =>
         command={WISH_COMMAND}
         disabled={busy}
       />
-      <div className="flex shrink-0 flex-col gap-2 border-t border-line px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
+      <div className="flex shrink-0 flex-col gap-2 border-t border-line px-4 pt-3 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
         <button type="button" disabled={asking === null || busy} onClick={keep} className={`${big} bg-accent text-accent-fg`}>
           Add to Wish list
         </button>

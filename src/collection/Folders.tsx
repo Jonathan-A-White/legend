@@ -31,7 +31,7 @@ function FolderNameSheet({ title, initial, action, onSave, onClose }: { title: s
   };
   return (
     <div className="fixed inset-0 z-20 flex items-end bg-black/60" onClick={onClose}>
-      <form role="dialog" aria-modal="true" aria-label={title} onSubmit={save} className="w-full rounded-t-3xl border-t border-line bg-surface px-4 pt-3 pb-[max(env(safe-area-inset-bottom),1rem)]" onClick={(e) => e.stopPropagation()}>
+      <form role="dialog" aria-modal="true" aria-label={title} onSubmit={save} className="w-full rounded-t-3xl border-t border-line bg-surface px-4 pt-3 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]" onClick={(e) => e.stopPropagation()}>
         <div className="flex items-center justify-between pb-2">
           <h2 className="text-xl font-semibold text-accent">{title}</h2>
           <button type="button" onClick={onClose} className="min-h-12 rounded-xl px-4 text-base font-medium text-muted">

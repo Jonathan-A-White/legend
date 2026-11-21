@@ -102,7 +102,7 @@ export function EditSheet({ item, reference, onClose }: { item: Item; reference:
         </button>
       </div>
       <form
-        className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-4 py-4 pb-[max(env(safe-area-inset-bottom),1rem)]"
+        className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto overscroll-contain px-4 py-4"
         onSubmit={(e) => {
           e.preventDefault();
           void save();
@@ -187,7 +187,10 @@ export function EditSheet({ item, reference, onClose }: { item: Item; reference:
           </p>
         ) : null}
       </form>
-      <FormDoor form={form} values={values} onFill={fill} registry={registry} command={EDIT_COMMAND} disabled={saving} />
+      {/* the tutor's door is the sheet's foot here: it keeps clear of the phone's own bar (mw-swgvhwo) */}
+      <div className="shrink-0 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
+        <FormDoor form={form} values={values} onFill={fill} registry={registry} command={EDIT_COMMAND} disabled={saving} />
+      </div>
     </div>
   );
 }

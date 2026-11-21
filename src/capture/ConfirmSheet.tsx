@@ -280,7 +280,7 @@ export function ConfirmSheet({ item, onClose, onLetGo }: { item: Item; onClose: 
       </div>
 
       {editing ? <FormDoor form={form} values={values} onFill={fill} registry={registry} command={CONFIRM_COMMAND} disabled={busy} /> : null}
-      <div className="flex shrink-0 flex-col gap-2 border-t border-line px-4 pt-3 pb-[max(env(safe-area-inset-bottom),0.75rem)]">
+      <div className="flex shrink-0 flex-col gap-2 border-t border-line px-4 pt-3 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
         {editing ? (
           <>
             <button type="button" disabled={busy} onClick={() => void save()} className={`${big} bg-accent text-accent-fg`}>

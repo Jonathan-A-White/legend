@@ -54,7 +54,7 @@ export function AskSheet({ about, onClose, onAnswer }: { about: AskAbout; onClos
             Done
           </button>
         </div>
-        <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-5 pt-1 pb-[max(env(safe-area-inset-bottom),1.5rem)]">
+        <div className="min-h-0 flex-1 space-y-4 overflow-y-auto overscroll-contain px-5 pt-1 pb-[max(env(safe-area-inset-bottom),calc(var(--lg-bar-floor)+1rem))]">
           <HintCard event={TUTOR_OPENED} />
           <AskBox questions={suggestionsFor(topicOf(about))} state={state} onAsk={ask} />
           {answered.length > 0 ? (
