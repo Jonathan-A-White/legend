@@ -135,6 +135,105 @@ describe('findCoins on drawn pictures', () => {
   });
 });
 
+/** Smooth random noise on a grid `cell` pixels apart (bilinear), from a seed: the grain of leather or the weave of cloth. */
+function noiseField(width: number, height: number, cell: number, seed: number): (x: number, y: number) => number {
+  let s = seed;
+  const next = () => {
+    s = (s * 1103515245 + 12345) & 0x7fffffff;
+    return (s / 0x7fffffff) * 2 - 1;
+  };
+  const gw = Math.ceil(width / cell) + 2;
+  const gh = Math.ceil(height / cell) + 2;
+  const grid = Array.from({ length: gw * gh }, next);
+  return (x, y) => {
+    const fx = x / cell;
+    const fy = y / cell;
+    const ix = Math.floor(fx);
+    const iy = Math.floor(fy);
+    const tx = fx - ix;
+    const ty = fy - iy;
+    const at = (i: number, j: number) => grid[j * gw + i];
+    return at(ix, iy) * (1 - tx) * (1 - ty) + at(ix + 1, iy) * tx * (1 - ty) + at(ix, iy + 1) * (1 - tx) * ty + at(ix + 1, iy + 1) * tx * ty;
+  };
+}
+
+/**
+ * Coins lying on a textured surface (blue leather, cloth): the surface's colour is roughened by grain of `grain` levels at two scales
+ * and a slow swell of light, each coin has a face that darkens to its rim and a soft shadow round it. The picture goes through a JPEG
+ * and back, as a photo does.
+ */
+function onLeather(circles: Circle[], base: [number, number, number], coin: [number, number, number], grain: number, shadow = 0.4): Pixels {
+  const width = 640;
+  const height = 480;
+  const fine = noiseField(width, height, 3, 3);
+  const coarse = noiseField(width, height, 9, 5);
+  const swell = noiseField(width, height, 60, 11);
+  const data = new Uint8ClampedArray(width * height * 4);
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      const o = (y * width + x) * 4;
+      const texture = grain * (0.6 * fine(x, y) + 0.8 * coarse(x, y)) + 25 * swell(x, y);
+      let colour: number[] = base.map((v, c) => v * (1 + (texture / 255) * (c === 2 ? 1 : 1.2)) + texture * 0.3);
+      for (const k of circles) {
+        const d = Math.hypot(x + 0.5 - k.x, y + 0.5 - k.y);
+        if (d <= k.r) {
+          const shade = 1 - 0.25 * (d / k.r) ** 2;
+          colour = coin.map((v) => v * shade + 10 * fine(x, y));
+        } else if (d < k.r + 12) {
+          const dim = 1 - shadow * (1 - (d - k.r) / 12);
+          colour = colour.map((v) => v * dim);
+        }
+      }
+      data[o] = colour[0];
+      data[o + 1] = colour[1];
+      data[o + 2] = colour[2];
+      data[o + 3] = 255;
+    }
+  }
+  const back = jpeg.decode(jpeg.encode({ width, height, data }, 85).data, { useTArray: true });
+  return { width, height, data: new Uint8ClampedArray(back.data) };
+}
+
+const FOUR: Circle[] = [
+  { x: 150, y: 120, r: 55 },
+  { x: 440, y: 130, r: 55 },
+  { x: 180, y: 340, r: 55 },
+  { x: 470, y: 350, r: 55 },
+];
+
+describe('findCoins on a textured surface', () => {
+  const BLUE_LEATHER: [number, number, number] = [40, 70, 130];
+  it.each([
+    ['copper', [180, 120, 80]],
+    ['silver', [170, 175, 180]],
+    ['silver that takes the leather\'s blue', [120, 140, 170]],
+    ['dark', [70, 60, 55]],
+  ] as const)('finds all four %s coins laid out on blue leather, however coarse its grain', (_name, coin) => {
+    for (const grain of [20, 40, 70]) {
+      const found = findCoins(onLeather(FOUR, BLUE_LEATHER, [...coin], grain));
+      expect(found.coins, `grain ${grain}`).toHaveLength(4);
+      expect(found.touching).toEqual([]);
+      FOUR.forEach((t, i) => {
+        expect(Math.abs(found.coins[i].x - t.x)).toBeLessThan(0.1 * t.r);
+        expect(Math.abs(found.coins[i].y - t.y)).toBeLessThan(0.1 * t.r);
+        // the soft shadow round a coin may add a few pixels to its circle
+        expect(found.coins[i].r).toBeGreaterThan(0.95 * t.r);
+        expect(found.coins[i].r).toBeLessThan(1.25 * t.r);
+      });
+    }
+  });
+
+  it('finds six coins on a cloth that is pale, and on one that is dark', () => {
+    const six = [...FOUR, { x: 320, y: 240, r: 55 }, { x: 320, y: 60, r: 40 }];
+    expect(findCoins(onLeather(six, [225, 215, 195], [170, 120, 80], 40)).coins).toHaveLength(6);
+    expect(findCoins(onLeather(six, [35, 38, 45], [190, 150, 70], 40)).coins).toHaveLength(6);
+  });
+
+  it('still gives no circle for the leather alone', () => {
+    expect(findCoins(onLeather([], BLUE_LEATHER, [180, 120, 80], 70))).toEqual({ coins: [], touching: [] });
+  });
+});
+
 function photo(name: string): Pixels {
   const jpg = jpeg.decode(readFileSync(`grinds/examples/coin-from-photos/${name}`), { useTArray: true });
   return { width: jpg.width, height: jpg.height, data: new Uint8ClampedArray(jpg.data) };
