@@ -1,5 +1,12 @@
 [
   {
+    "version": "0.1.84",
+    "date": "2026-11-21",
+    "story": "mw-swgvhwo",
+    "kind": "fixed",
+    "text": "Buttons at the bottom of pop-up sheets no longer hide behind the phone's three navigation buttons."
+  },
+  {
     "version": "0.1.83",
     "date": "2026-11-21",
     "story": "mw-tmsafpc.23",

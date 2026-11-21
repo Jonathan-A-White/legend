@@ -1,5 +1,9 @@
 # What's new
 
+## 0.1.84
+_2026-11-21_
+- Fixed: Buttons at the bottom of pop-up sheets no longer hide behind the phone's three navigation buttons.
+
 ## 0.1.83
 _2026-11-21_
 - Fixed: Add many at once now finds every coin laid out on a textured surface like leather, and small coins only get a hint, never a block.
