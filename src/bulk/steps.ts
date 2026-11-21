@@ -1,5 +1,5 @@
 // The steps of Add many at once and what each photo of coins may say. Pure: a Look in, a line to show out.
-import { COIN_SMALL_MESSAGE, COIN_TOO_SMALL_MESSAGE, coinSize } from './cut';
+import { coinSize } from './cut';
 import type { Look } from './look';
 
 /** Fronts, then Flip (a card, no camera), then Backs, then Review (the next story builds it; for now a stub that stores nothing). */
@@ -31,11 +31,10 @@ export function judge(look: Look, fronts: number | null): Verdict {
   if (look.touching.length > 0) return { line: TOUCHING, note: null, canGo: false };
   if (look.coins.length === 0) return { line: NO_COINS, note: null, canGo: false };
   const size = coinSize(look.diameter);
-  if (size.verdict === 'refuse') return { line: COIN_TOO_SMALL_MESSAGE, note: null, canGo: false };
   const n = look.coins.length;
   if (fronts === null && n > MOST_COINS) return { line: `${coins(n)} found. ${MOST_COINS} is the most at once: use fewer.`, note: null, canGo: false };
   if (fronts !== null && n !== fronts) {
     return { line: `${fronts} ${fronts === 1 ? 'front' : 'fronts'} but ${n} ${n === 1 ? 'back' : 'backs'}`, note: null, canGo: false };
   }
-  return { line: `${coins(n)} found`, note: size.verdict === 'small' ? COIN_SMALL_MESSAGE : null, canGo: true };
+  return { line: `${coins(n)} found`, note: size.message, canGo: true };
 }

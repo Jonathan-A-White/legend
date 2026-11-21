@@ -9,7 +9,7 @@ import { afterAll, beforeAll, expect, vi } from 'vitest';
 import { loadFeature, describeFeature } from '@amiceli/vitest-cucumber';
 import { App } from '../../src/App';
 import { pairCoins, SIZE_SMALLER, CLOSE_TO_ANOTHER, type Circle, type Pixels } from '../../src/bulk';
-import { COIN_SMALL_MESSAGE, COIN_TOO_SMALL_MESSAGE } from '../../src/bulk/cut';
+import { COIN_SMALL_MESSAGE } from '../../src/bulk/cut';
 import { FLIP_TEXT, TOUCHING } from '../../src/bulk/steps';
 import { LEAVE_WORDS } from '../../src/bulk/Review';
 import { db } from '../../src/data/db';
@@ -325,19 +325,21 @@ describeFeature(feature, ({ Scenario, BeforeEachScenario, AfterEachScenario }) =
     And('only Retake is offered and there is no way to continue', onlyRetake);
   });
 
-  Scenario('coins too small to read a date are refused, and small ones carry a warning', ({ Given, When, Then, And }) => {
+  Scenario('small coins carry a warning and are never refused', ({ Given, When, Then, And }) => {
     Given('Add many at once is open on Fronts with the camera', () => open());
     When('he photographs coins under 500 px across', () => photograph(grid(12, TINY)));
-    Then('the line says Too small to read a date and only Retake is offered', () => {
-      expect(line()).toHaveTextContent(COIN_TOO_SMALL_MESSAGE);
-      onlyRetake();
+    Then('the line says 12 coins found, Coins look small is the note, and Next is offered', () => {
+      expect(line()).toHaveTextContent('12 coins found');
+      expect(screen.getByTestId('note')).toHaveTextContent(COIN_SMALL_MESSAGE);
+      expect(button('Next')).toBeEnabled();
     });
-    And('a photo of coins 560 px across says Coins look small and still offers Next', async () => {
+    And('a photo of coins 560 px across says the same', async () => {
       await userEvent.click(button('Retake'));
       await waitFor(() => expect(shutter()).toBeEnabled(), { timeout: 5000 });
       await photograph(grid(12, SMALL));
+      expect(line()).toHaveTextContent('12 coins found');
       expect(screen.getByTestId('note')).toHaveTextContent(COIN_SMALL_MESSAGE);
-      button('Next');
+      expect(button('Next')).toBeEnabled();
     });
   });
 

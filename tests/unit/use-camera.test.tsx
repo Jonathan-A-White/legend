@@ -64,6 +64,62 @@ describe('useCamera', () => {
     expect(await hook.takePhoto!()).toBe(sensor);
   });
 
+  it("asks the sensor's biggest picture of ImageCapture, and any picture it can give when the phone will not say", async () => {
+    const asked: unknown[] = [];
+    const big = new Blob(['big'], { type: 'image/jpeg' });
+    (window as unknown as { ImageCapture: unknown }).ImageCapture = class {
+      getPhotoCapabilities = async () => ({ imageWidth: { min: 80, max: 4000, step: 1 }, imageHeight: { min: 60, max: 3000, step: 1 } });
+      takePhoto = async (settings?: unknown) => {
+        asked.push(settings);
+        return big;
+      };
+    };
+    await open('sensor');
+    expect(await hook.takePhoto!()).toBe(big);
+    expect(asked).toEqual([{ imageWidth: 4000, imageHeight: 3000 }]);
+    cleanup();
+    asked.length = 0;
+    (window as unknown as { ImageCapture: unknown }).ImageCapture = class {
+      getPhotoCapabilities = async () => {
+        throw new Error('no');
+      };
+      takePhoto = async (settings?: unknown) => {
+        asked.push(settings);
+        return big;
+      };
+    };
+    await open('sensor');
+    expect(await hook.takePhoto!()).toBe(big);
+    expect(asked).toEqual([undefined]);
+  });
+
+  it('asks the group camera to keep focus where the phone can, and goes on where it cannot', async () => {
+    const applied: unknown[] = [];
+    camera.track.getCapabilities = () => ({ focusMode: ['manual', 'continuous'] });
+    camera.track.applyConstraints = async (c) => void applied.push(c);
+    await open('sensor');
+    expect(applied).toEqual([{ advanced: [{ focusMode: 'continuous' }] }]);
+    cleanup();
+    applied.length = 0;
+    camera.track.getCapabilities = () => ({ focusMode: ['manual'] });
+    await open('sensor');
+    expect(applied).toEqual([]);
+    cleanup();
+    camera.track.getCapabilities = () => ({ focusMode: ['continuous'] });
+    camera.track.applyConstraints = async () => {
+      throw new Error('refused');
+    };
+    await open('sensor');
+  });
+
+  it('leaves the focus alone on the default camera', async () => {
+    const applied: unknown[] = [];
+    camera.track.getCapabilities = () => ({ focusMode: ['continuous'] });
+    camera.track.applyConstraints = async (c) => void applied.push(c);
+    await open();
+    expect(applied).toEqual([]);
+  });
+
   it('gives no sensor picture on the default camera, whatever the browser has', async () => {
     (window as unknown as { ImageCapture: unknown }).ImageCapture = class {
       takePhoto = async () => new Blob(['sensor']);

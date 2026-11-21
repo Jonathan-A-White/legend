@@ -1,7 +1,7 @@
 // Cut one coin out of a full-size group photo: the square of 2.08 r round the circle, everything outside the circle painted a neutral
 // dark grey (so a neighbour's rim never peeks into a corner and the picture looks like just one front, one back), then shrunk the way
 // every kept photo is (captureStill.ts: the long side at most the Photo size limit, under 1 MB, plus the 320 px thumbnail).
-// The size rule for the coins of a whole photo (the median diameter, good, small or refused) is here too, as pure functions.
+// The size rule for the coins of a whole photo (the median diameter, good or small: a hint, never a refusal) is here too, as pure functions.
 import { MAX_LONG_SIDE, THUMB_LONG_SIDE, fitWithin, shrinkToLimit, type Still, type StillOptions } from '../capture';
 import type { Circle } from './find';
 
@@ -12,14 +12,12 @@ export const CUT_GREY = '#333333';
 
 const THUMB_QUALITY = 0.6;
 
-/** A coin photo whose median coin is at least this many pixels across (in the full-size picture) is good. */
+/** A coin photo whose median coin is at least this many pixels across (in the full-size picture) is good; under it he is told the coins
+ * look small. It is only a hint: the coin goes on to the reader whatever its size, and the reader says when a date cannot be read. */
 export const COIN_GOOD_PX = 700;
-/** Under this the coins are too small to read a date, and the photo is refused. */
-export const COIN_REFUSE_PX = 500;
 export const COIN_SMALL_MESSAGE = 'Coins look small. Move closer or use fewer coins';
-export const COIN_TOO_SMALL_MESSAGE = 'Too small to read a date';
 
-export type CoinSize = { verdict: 'good'; message: null } | { verdict: 'small'; message: string } | { verdict: 'refuse'; message: string };
+export type CoinSize = { verdict: 'good'; message: null } | { verdict: 'small'; message: string };
 
 /** The middle diameter of the circles, in their own pixels; 0 when there are none. */
 export function medianDiameter(circles: Circle[]): number {
@@ -29,11 +27,10 @@ export function medianDiameter(circles: Circle[]): number {
   return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
 }
 
-/** What to do with a photo whose median coin is `diameter` pixels across: go on, go on with a word of warning, or stop. */
+/** What to say of a photo whose median coin is `diameter` pixels across: nothing, or a word of warning. Never a refusal. */
 export function coinSize(diameter: number): CoinSize {
   if (diameter >= COIN_GOOD_PX) return { verdict: 'good', message: null };
-  if (diameter >= COIN_REFUSE_PX) return { verdict: 'small', message: COIN_SMALL_MESSAGE };
-  return { verdict: 'refuse', message: COIN_TOO_SMALL_MESSAGE };
+  return { verdict: 'small', message: COIN_SMALL_MESSAGE };
 }
 
 /** Draws the cut square at `size` by `size` and encodes it; the canvas is let go at once, whatever happens. */

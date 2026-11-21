@@ -19,8 +19,20 @@ export const constraintsFor = (resolution: CameraResolution): MediaStreamConstra
   audio: false,
 });
 
+/** A group photo of small coins must be sharp: where the phone offers continuous focus, ask for it. Any refusal is ignored. */
+async function keepFocus(live: MediaStreamTrack | null): Promise<void> {
+  try {
+    const modes = (live?.getCapabilities?.() as { focusMode?: string[] } | undefined)?.focusMode;
+    if (!modes?.includes('continuous')) return;
+    await live?.applyConstraints({ advanced: [{ focusMode: 'continuous' } as MediaTrackConstraintSet] });
+  } catch {
+    // the phone keeps the focus it has
+  }
+}
+
 interface ImageCaptureLike {
-  takePhoto(): Promise<Blob>;
+  takePhoto(settings?: { imageWidth: number; imageHeight: number }): Promise<Blob>;
+  getPhotoCapabilities?(): Promise<{ imageWidth?: { max: number }; imageHeight?: { max: number } }>;
 }
 type ImageCaptureConstructor = new (track: MediaStreamTrack) => ImageCaptureLike;
 
@@ -57,6 +69,7 @@ export function useCamera(
         }
         stream = opened;
         track.current = opened.getVideoTracks?.()[0] ?? null;
+        if (resolution === 'sensor') void keepFocus(track.current);
         video.srcObject = opened;
         await video.play();
         setError(null);
@@ -88,7 +101,19 @@ export function useCamera(
     const live = track.current;
     if (resolution !== 'sensor' || !ImageCapture || !live) return null;
     try {
-      return await new ImageCapture(live).takePhoto();
+      const capture = new ImageCapture(live);
+      // the sensor's biggest picture where the phone says what that is: the phone's own default is often smaller
+      const caps = await capture.getPhotoCapabilities?.().catch(() => undefined);
+      const imageWidth = caps?.imageWidth?.max;
+      const imageHeight = caps?.imageHeight?.max;
+      if (imageWidth && imageHeight) {
+        try {
+          return await capture.takePhoto({ imageWidth, imageHeight });
+        } catch {
+          // a size the phone would not take: whatever it gives by default
+        }
+      }
+      return await capture.takePhoto();
     } catch {
       return null;
     }

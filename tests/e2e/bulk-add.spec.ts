@@ -16,8 +16,8 @@ const WIDTH = 4000;
 const HEIGHT = 3000;
 const COLUMNS = 4;
 const GOOD = 380; // a 760 px coin: above the 700 px that reads well
-const SMALL = 280; // 560 px: a warning, not a refusal
-const TINY = 200; // 400 px: too small to read a date
+const SMALL = 280; // 560 px: a warning
+const TINY = 200; // 400 px: a warning too, never a refusal
 
 interface Disc {
   x: number;
@@ -260,11 +260,12 @@ test('two coins touching are not gone on with', async ({ page }) => {
   await shot(page, 'bulk-touching');
 });
 
-test('coins under 500 px are refused, and 560 px ones are gone on with a warning', async ({ page }) => {
+test('coins under 500 px are not refused: a warning, and Next stays on', async ({ page }) => {
   await openBulk(page);
   await usePhoto(page, layout(12, TINY));
-  await expect(line(page)).toHaveText('Too small to read a date');
-  await expectOnlyRetake(page);
+  await expect(line(page)).toHaveText('12 coins found');
+  await expect(page.getByTestId('note')).toHaveText('Coins look small. Move closer or use fewer coins');
+  await expect(page.getByRole('button', { name: 'Next' })).toBeEnabled();
   await shot(page, 'bulk-too-small');
 
   await page.getByRole('button', { name: 'Retake' }).click();

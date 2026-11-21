@@ -15,6 +15,8 @@ export interface FakeCamera {
   encodes: Encode[];
   /** what getUserMedia was asked for, each time */
   asked: MediaStreamConstraints[];
+  /** the one video track: a test may give it getCapabilities and applyConstraints, as a phone's has */
+  track: { stop: () => void; getCapabilities?: () => unknown; applyConstraints?: (constraints: unknown) => Promise<void> };
   /** how many tracks have been stopped */
   stops: () => number;
   /** the size the video reports; change it to make the next frame a different one */
@@ -37,7 +39,7 @@ export function installFakeCamera(size = { width: 1280, height: 720 }): FakeCame
   let held: (() => void)[] | null = null;
   let stopped = 0;
   const gallery = { width: 4000, height: 3000 };
-  const track = { stop: () => void stopped++ };
+  const track: FakeCamera['track'] = { stop: () => void stopped++ };
   const asked: MediaStreamConstraints[] = [];
   const stream = { getTracks: () => [track], getVideoTracks: () => [track] } as unknown as MediaStream;
 
@@ -71,6 +73,7 @@ export function installFakeCamera(size = { width: 1280, height: 720 }): FakeCame
   return {
     encodes,
     asked,
+    track,
     stops: () => stopped,
     video,
     gallery,

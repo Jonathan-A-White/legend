@@ -5,9 +5,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { MAX_STILL_BYTES, THUMB_LONG_SIDE } from '../../src/capture/captureStill';
 import {
   COIN_GOOD_PX,
-  COIN_REFUSE_PX,
   COIN_SMALL_MESSAGE,
-  COIN_TOO_SMALL_MESSAGE,
   CUT_GREY,
   CUT_MARGIN,
   coinSize,
@@ -173,21 +171,21 @@ describe('cutting every coin of a group photo', () => {
 });
 
 describe('the coin size rule', () => {
-  it('is good at 700 px or more, small from 500 to under 700, and refused under 500', () => {
-    expect([COIN_GOOD_PX, COIN_REFUSE_PX]).toEqual([700, 500]);
+  it('is good at 700 px or more and small under it, and never refuses a photo, however small the coins', () => {
+    expect(COIN_GOOD_PX).toBe(700);
     expect(coinSize(1200).verdict).toBe('good');
     expect(coinSize(700).verdict).toBe('good');
     expect(coinSize(699.9).verdict).toBe('small');
     expect(coinSize(500).verdict).toBe('small');
-    expect(coinSize(499.9).verdict).toBe('refuse');
-    expect(coinSize(0).verdict).toBe('refuse');
+    expect(coinSize(499.9).verdict).toBe('small');
+    expect(coinSize(120).verdict).toBe('small');
+    expect(coinSize(0).verdict).toBe('small');
   });
-  it('says the words the screen will show', () => {
+  it('says the words the screen will show, and the same words under 500 px as above it', () => {
     expect(coinSize(800).message).toBeNull();
     expect(coinSize(600).message).toBe('Coins look small. Move closer or use fewer coins');
-    expect(coinSize(400).message).toBe('Too small to read a date');
+    expect(coinSize(400).message).toBe(COIN_SMALL_MESSAGE);
     expect(COIN_SMALL_MESSAGE).toBe(coinSize(600).message);
-    expect(COIN_TOO_SMALL_MESSAGE).toBe(coinSize(400).message);
   });
 });
 

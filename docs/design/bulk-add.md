@@ -105,9 +105,9 @@ bitmap is decoded once and each crop released before the next (a four-year-old S
 **Camera size.** The in-app viewfinder must ask for more than the default: `getUserMedia` with `width: { ideal: 4096 }`,
 `height: { ideal: 3072 }` (the phone gives what it can), and where the browser has `ImageCapture`, `takePhoto()` for the full
 sensor picture. `Use a photo` (the file picker with the phone's own camera app) always gives the full picture and is the
-fallback. After the photo the app measures the median coin diameter: **700 px or more** is good, **500 to 700** shows "Coins
-look small. Move closer or use fewer coins" but continues, **under 500** refuses ("Too small to read a date"). These numbers
-are a first estimate; slice 2 checks the reader against a 600 px coin before they are fixed.
+fallback. After the photo the app measures the median coin diameter: **700 px or more** is good, **under 700** shows "Coins
+look small. Move closer or use fewer coins" but always continues: the phone never blocks a coin the reader could have read, and
+the reader's own answer says when a date cannot be read (a 600 px coin read well on the live mill).
 
 **The grist alternative, and why not.** A vision request could return boxes for the coins. It needs the network, takes
 several seconds up to a minute through Postern and the mill, costs a request per group photo (a sonnet read with one image

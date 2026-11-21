@@ -40,11 +40,11 @@ Feature: Bulk add: many fronts in one photo, then many backs in one
     Then the line says Two coins touch: move them apart
     And only Retake is offered and there is no way to continue
 
-  Scenario: coins too small to read a date are refused, and small ones carry a warning
+  Scenario: small coins carry a warning and are never refused
     Given Add many at once is open on Fronts with the camera
     When he photographs coins under 500 px across
-    Then the line says Too small to read a date and only Retake is offered
-    And a photo of coins 560 px across says Coins look small and still offers Next
+    Then the line says 12 coins found, Coins look small is the note, and Next is offered
+    And a photo of coins 560 px across says the same
 
   Scenario: a photo from the gallery is read the same way
     Given Add many at once is open on Fronts with the camera
