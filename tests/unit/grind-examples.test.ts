@@ -474,6 +474,21 @@ describe('the appraiser converts a foreign piece at the rate it is given', () =>
     expect(text).toMatch(/`fxRate` is `null`[^.]*own (best )?estimate|own estimate[^.]*`fxRate`/i);
   });
 
+  // mw-bd1iiba: the smoke saw the 2010 Canadian dime answered low 0.03 (rate 0.5 and its day named right) against a face value of 0.05:
+  // the grind let a worn coin's range sit under face value. The grind now says a face-value piece's low is its face value.
+  it('teaches that a piece worth its face value has a low that is not below that face value, converted when foreign', () => {
+    const text = grind();
+    expect(text).toMatch(/worth (its )?face value[^.]*`low` (is|equal to) (its|the) face value[^.]*(converted|rounded)/i);
+    expect(text).toMatch(/never (below|under) (its|the) face value/i);
+  });
+
+  it('describes the dime\'s range from the given rate and says why the low is the converted face value', () => {
+    const e = load('canadian-dime-2010-fed-rate.json');
+    expect(e.description).toMatch(/0\.1 .*0\.5|ten Canadian cents at 0\.5/i);
+    expect(e.description).toMatch(/never below/i);
+    expect(checkExpect({ low: e.expect.low }, { low: 0.03 }), 'a low under the converted face value is refused').not.toEqual([]);
+  });
+
   it('sends the metal price to an Other piece too, as the floor of silver or gold content', () => {
     const text = grind();
     expect(text).toMatch(/Silver or gold content sets a floor only if the material and a weight or size are given[^.]*`metalPrices`/);
